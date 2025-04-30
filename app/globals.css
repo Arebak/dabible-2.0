@@ -146,7 +146,15 @@
   padding-top: 2rem; 
   padding-bottom: 2rem;
 }
-
+.l-container {
+  max-width: 1760px; 
+  margin-left: auto; 
+  margin-right: auto;
+  padding-left: 1rem; 
+  padding-right: 1rem;
+  padding-top: 2rem; 
+  padding-bottom: 2rem;
+}
 .m-container {
   max-width: 1000px; 
   margin-left: auto; 

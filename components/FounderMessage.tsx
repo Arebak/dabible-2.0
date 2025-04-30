@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function FounderMessage() {
   return (
     <section className="bg-[#108DA6] py-12 md:py-16 mt-10 mb-36">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
           {/* Founder Image */}
           <div className="w-full md:w-2/5 lg:w-1/3">
@@ -50,7 +50,7 @@ export default function FounderMessage() {
                   <div className="flex items-center justify-end mt-4">
                     <div className="text-right">
                       <p className="text-white font-bold">DEMILADE ADETUBERU</p>
-                      <p className="text-white text-xs">
+                      <p className="text-[#03224A] font-bold text-xs mt-2">
                         CO-FOUNDER & TEAM LEADER
                       </p>
                     </div>
@@ -75,6 +75,13 @@ export default function FounderMessage() {
             </div>
           </div>
         </div>
+        <Image
+          src="/png/heart.png"
+          alt="heart image"
+          width={500}
+          height={500}
+          className="absolute -top-10 right-0"
+        />
       </div>
     </section>
   );

@@ -4,12 +4,22 @@ import DonationCard from "@/components/DonationCard";
 import AlternativeMethods from "@/components/AlternativeMethods";
 import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
+import DonationReceipt from "@/components/DonationReceipt";
+import VerticalCarousel from "@/components/VerticalCarousel";
 
 export default function DonationPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-8 md:py-12 bg-gradient-to-r from-blue-50 to-transparent">
+      <section className="relative bg-white overflow-hidden md:pt-[70px]">
+        {/* Faded oval background */}
+        <div
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[300px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #38A9CF1C 40%, transparent 100%)",
+          }}
+        ></div>
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6">
             <Image
@@ -45,6 +55,14 @@ export default function DonationPage() {
       </section>
 
       {/* Donation Cards Grid */}
+      <div className="flex justify-center">
+        <Image
+          src="/png/frame.png"
+          width={1585}
+          height={598}
+          alt="grid cards"
+        />
+      </div>
 
       {/* Our Causes Section */}
       <section className="container mx-auto px-4 py-8 md:py-12 md:mt-20 mt-16">
@@ -162,6 +180,10 @@ export default function DonationPage() {
       {/* Alternative Methods */}
       <AlternativeMethods />
 
+      {/* Donation Animation Receipt */}
+      <div className=" max-h-[60vh]">
+        <VerticalCarousel />
+      </div>
       {/* Founders Message  */}
       <FounderMessage />
     </div>

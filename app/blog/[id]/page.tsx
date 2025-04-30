@@ -12,17 +12,30 @@ export default function AudioIssuesResolvedPage() {
   return (
     <main className="">
       {/* Hero Section */}
-      <section className=" h-[518px] flex justify-center items-center mx-auto px-4 py-8 md:py-12 bg-gradient-to-r from-blue-50 to-transparent">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="relative bg-white overflow-hidden md:pt-[70px] min-h-[518px]">
+        {/* Faded oval background */}
+        <div
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #38A9CF1C 40%, transparent 100%)",
+          }}
+        />
+        <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-center text-[#1a4b8c] mb-6">
             Audio Issues Resolved – Nahum, Psalm 60, Songs Of Solomon, 1 Kings,
             AndHebrews
           </h1>
 
-          <p className="text-center font-medium mb-4 text-[#121212]">
+          <p className="text-center font-semibold mb-4 text-xl text-[#121212]">
             March 4, 2025
           </p>
 
+          <p className="pb-8 pt-4 md:text-2xl font-medium text-[#121212]">
+            We currently run 4 YouTube channels, each dedicated to Yoruba,
+            Hausa, Pidgin, DaBible Missionary, and Daily Bible Study. Subscribe
+            to watch edifying contents today.
+          </p>
           {/* Social Media Sharing */}
           <div className="flex justify-center gap-3">
             <Link href="#" className="bg-[#1a4b8c] text-white p-2 rounded-full">

@@ -5,9 +5,32 @@ import { Button } from "@/components/ui/button";
 
 export default function Blog() {
   return (
-    <main className=" mx-auto px-4 py-12">
+    <main className=" mx-auto px-4">
       {/* Hero Section */}
-      <section className=" mx-auto px-4 py-8 md:py-12 bg-gradient-to-r from-blue-50 to-transparent">
+      <section className="relative bg-white overflow-hidden md:pt-[70px] min-h-[40vh]">
+        {/* Faded oval background */}
+        <div
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[300px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #38A9CF1C 40%, transparent 100%)",
+          }}
+        />
+
+        <Image
+          src="/png/red-circle.png"
+          alt="heart image"
+          width={200}
+          height={200}
+          className="absolute -top-10 right-0"
+        />
+        <Image
+          src="/png/blue-circle.png"
+          alt="heart image"
+          width={200}
+          height={200}
+          className="absolute -top-10 left-0"
+        />
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6">
             <Image
@@ -76,7 +99,9 @@ export default function Blog() {
           {[1, 2, 3].map((item) => (
             <div
               key={item}
-              className={`flex flex-col md:flex-row items-center gap-6 border-b pb-6 ${item === 3 && 'border-b-0'}`}
+              className={`flex flex-col md:flex-row items-center gap-6 border-b pb-6 ${
+                item === 3 && "border-b-0"
+              }`}
             >
               <div className="md:w-1/4">
                 <Image

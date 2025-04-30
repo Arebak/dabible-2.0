@@ -21,7 +21,7 @@ export function ProductCard({ title, price, imageSrc, imageAlt, onAddToCart, onB
   }).format(price)
 
   return (
-    <div className="max-w-md">
+    <div className="max-w-[380px]">
       <div className="bg-[#f2f2f2] p-6 rounded-2xl mb-4">
         <div className="flex justify-center">
           <Image
