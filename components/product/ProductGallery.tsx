@@ -13,11 +13,14 @@ import Link from "next/link";
 
 const ITEMS_PER_PAGE = 9;
 
-export function ProductGallery({ products }: ProductGalleryProps) {
+export function ProductGallery({ products = [] }: ProductGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(products?.length / ITEMS_PER_PAGE);
+  const safeProducts = Array.isArray(products) ? products : [];
+  const totalPages = Math.ceil(safeProducts.length / ITEMS_PER_PAGE);
 
-  const paginatedProducts = products?.slice(
+  console.log("Products:", safeProducts);
+
+  const paginatedProducts = safeProducts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -40,10 +43,10 @@ export function ProductGallery({ products }: ProductGalleryProps) {
               imageSrc={product.imageSrc}
               imageAlt={product.imageAlt}
               onAddToCart={() => console.log(`Added ${product.title} to cart`)}
-              onBuyNow={() =>
-                console.log(`Buy now clicked for ${product.title}`)
-              }
-            />
+              onBuyNow={() => console.log(`Buy now clicked for ${product.title}`)} name={""} description={""} default_price={{
+                unit_amount: 0,
+                currency: ""
+              }}            />
           </Link>
         ))}
       </div>

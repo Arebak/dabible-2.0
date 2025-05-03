@@ -7,13 +7,19 @@ import { Button } from "../ui/button"
 interface ProductCardProps {
   title: string
   price: number
-  imageSrc: string
+  name: string
+  description: string
+  default_price: {
+    unit_amount: number
+    currency: string
+  }
+  imageSrc: string | (() => Promise<string>)
   imageAlt: string
   onAddToCart?: () => void
   onBuyNow?: () => void
 }
 
-export function ProductCard({ title, price, imageSrc, imageAlt, onAddToCart, onBuyNow }: ProductCardProps) {
+export function ProductCard({ title, price, imageSrc, imageAlt, onAddToCart, onBuyNow, name }: ProductCardProps) {
   const formattedPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -35,7 +41,7 @@ export function ProductCard({ title, price, imageSrc, imageAlt, onAddToCart, onB
       </div>
 
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-base font-bold">{title}</h3>
+        <h3 className="text-base font-bold">{title || name}</h3>
         <span className="text-lg font-bold">{formattedPrice}</span>
       </div>
 

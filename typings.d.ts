@@ -22,7 +22,48 @@ type Size =
   | "4x-large";
 
 interface Product {
+  title: string;
+  price: number;
+  imageSrc: string | (() => Promise<string>);
+  imageAlt: string;
   id: string;
+  name: string;
+  description: string;
+  default_price: {
+    unit_amount: number;
+    currency: string;
+    id: string;
+    product: string;
+    recurring: {
+      interval: string;
+      interval_count: number;
+      usage_type: string;
+      currency: string;
+      billing_scheme: string;
+      aggregate_usage: string;
+      amount: number;
+      amount_decimal: string;
+      created: number;
+      livemode: boolean;
+      metadata: {
+        [key: string]: string;
+      };
+      id: string;
+      object: string;
+      interval: string;
+      interval_count: number;
+      usage_type: string;
+      currency: string;
+      billing_scheme: string;
+      aggregate_usage: string;
+      amount: number;
+      amount_decimal: string;
+      created: number;
+      livemode: boolean;
+      metadata: {
+        [key: string]: string;
+      };
+    };
   title: string;
   price: number;
   imageSrc: string;
@@ -30,6 +71,7 @@ interface Product {
   category: string;
   colors?: Color[]; // optional
   sizes?: Size[];    // required
+  };
 }
 
   
