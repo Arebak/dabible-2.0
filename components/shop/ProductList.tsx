@@ -17,7 +17,8 @@ const ProductList = () => {
   const sources = useMemo(
     () => ({
       stripe: true, // // Fetch products from Stripe
-      local: true,  // // Fetch products from local source
+      local: false,  // // Fetch products from local source
+      printful: true, // // Fetch products from Printful
     }),
     []
   );

@@ -13,9 +13,15 @@ export async function GET() {
       expand: ['data.default_price'],
     });
 
+    console.log("==================================================");
+    console.log("============ STRIPE RAW item DATA =============");
+    console.log("==================================================");
+    console.log('[Stripe Raw Data]', products.data[0]);
+    console.log("==================================================");
+
     const enhancedProducts = await Promise.all(
-      products.data.map(async (product) => {
-        const image = product.images?.[0];
+      products.data.map(async (item) => {
+        const image = item.images?.[0];
         let imageUrl = '';
 
         if (image?.startsWith('file_')) {
@@ -34,12 +40,12 @@ export async function GET() {
         }
 
         return {
-          id: product.id,
-          name: product.name,
-          description: product.description,
+          id: item.id,
+          name: item.name,
+          description: item.description,
           imageSrc: imageUrl,
-          price: product.default_price?.unit_amount ?? 0,
-          currency: product.default_price?.currency ?? 'usd',
+          price: item.default_price ? item.default_price.unit_amount / 100 : 0,
+          currency: item.default_price?.currency ?? 'usd',
         };
       })
     );

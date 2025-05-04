@@ -11,14 +11,14 @@ import {
 } from "@/components/ui/pagination";
 import Link from "next/link";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 24;
 
 export function ProductGallery({ products = [] }: ProductGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const safeProducts = Array.isArray(products) ? products : [];
   const totalPages = Math.ceil(safeProducts.length / ITEMS_PER_PAGE);
 
-  console.log("Products:", safeProducts);
+  // console.log("Products:", safeProducts);
 
   const paginatedProducts = safeProducts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,

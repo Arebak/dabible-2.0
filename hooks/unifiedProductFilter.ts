@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -13,6 +14,7 @@ interface Product {
 interface SourceOptions {
   stripe?: boolean;
   local?: boolean;
+  printful?: boolean;
 }
 
 const useUnifiedProductFilter = (
@@ -33,19 +35,28 @@ const useUnifiedProductFilter = (
 
         try {
             if (sources.stripe) {
-            const res = await fetch("/api/products");
-            if (res.ok) {
-                const data = await res.json();
-                results.push(...(data?.data || data || []));
-            }
+              const res = await fetch("/api/stripe-products");
+              if (res.ok) {
+                  const data = await res.json();
+                  results.push(...(data?.data || data || []));
+              }
             }
 
             if (sources.local) {
-            const res = await fetch("/products.json");
-            if (res.ok) {
-                const data = await res.json();
-                results.push(...(data || []));
+              const res = await fetch("/products.json");
+              if (res.ok) {
+                  const data = await res.json();
+                  results.push(...(data || []));
+              }
             }
+            if (sources.printful) {
+              const res = await fetch("/api/printful-products");
+              if (res.ok) {
+                const data = await res.json();
+                
+                results.push(...(data?.data || []));
+                console.log("Printful products:", data?.data);
+              }
             }
 
             setAllProducts(results);
@@ -78,8 +89,7 @@ const useUnifiedProductFilter = (
 
     setFilteredProducts(result);
   }, [sizes, colors, category, allProducts]);
-  console.log("Filtered Products:", filteredProducts);
-  console.log("All Products:", allProducts);
+
 
   return { products: filteredProducts, loading };
 };
