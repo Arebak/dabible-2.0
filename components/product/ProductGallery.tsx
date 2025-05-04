@@ -34,21 +34,28 @@ export function ProductGallery({ products = [] }: ProductGalleryProps) {
   return (
     <div className="flex flex-col">
       <div className="w-full flex gap-8 flex-wrap justify-center">
-        {paginatedProducts?.map((product) => (
-          <Link href={`/shop/${product.id}`} key={product.id}>
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              imageSrc={product.imageSrc}
-              imageAlt={product.imageAlt}
-              onAddToCart={() => console.log(`Added ${product.title} to cart`)}
-              onBuyNow={() => console.log(`Buy now clicked for ${product.title}`)} name={""} description={""} default_price={{
-                unit_amount: 0,
-                currency: ""
-              }}            />
-          </Link>
-        ))}
+        {paginatedProducts?.map((product) => {
+          const isPrintfulProduct = product.id.startsWith('printful_');
+          const productHref = isPrintfulProduct
+            ? `/shop/${product.id}/design`
+            : `/shop/${product.id}`;
+
+          return (
+            <Link href={productHref} key={product.id}>
+              <ProductCard
+                key={product.id}
+                title={product.title}
+                price={product.price}
+                imageSrc={product.imageSrc}
+                imageAlt={product.imageAlt}
+                onAddToCart={() => console.log(`Added ${product.title} to cart`)}
+                onBuyNow={() => console.log(`Buy now clicked for ${product.title}`)} name={""} description={""} default_price={{
+                  unit_amount: 0,
+                  currency: ""
+                }}            />
+            </Link>
+          );
+        })}
       </div>
 
       <Pagination className="my-8 justify-center">

@@ -25,7 +25,7 @@ export async function GET() {
     // Map just the essentials
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapped = data.result.map((item: any) => ({
-      id: item.id,
+      id: 'printful_' + item.id,
       main_category_id: item.main_category_id,
       type: item.type,
       type_name: item.type_name,
