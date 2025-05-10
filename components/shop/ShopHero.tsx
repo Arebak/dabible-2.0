@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CreditCard, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+// import { Check } from "lucide-react";
 
 export default function ShopHero() {
   const [selectedColor, setSelectedColor] = useState<string>("black");
@@ -15,11 +15,11 @@ export default function ShopHero() {
     console.log(`Added Solar Audio Bible in ${selectedColor} to cart`);
   };
 
-  const handleBuyNow = () => {
-    console.log(
-      `Proceeding to checkout with Solar Audio Bible in ${selectedColor}`
-    );
-  };
+  // const handleBuyNow = () => {
+  //   console.log(
+  //     `Proceeding to checkout with Solar Audio Bible in ${selectedColor}`
+  //   );
+  // };
 
   return (
     <div className="relative bg-white flex justify-center items-end overflow-hidden md:pt-[70px] min-h-[518px] bg-[url(/png/blue.png)] bg-right bg-contain bg-no-repeat mb-20">

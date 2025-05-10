@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronsDown, Heart, ShoppingCart } from "lucide-react";
+import { ChevronDown, Heart, ShoppingCart } from "lucide-react";
 
 import { useState } from "react";
 import MobileMenu from "./mobile-menu";

@@ -4,7 +4,7 @@ import DonationCard from "@/components/DonationCard";
 import AlternativeMethods from "@/components/AlternativeMethods";
 import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
-import DonationReceipt from "@/components/DonationReceipt";
+// import DonationReceipt from "@/components/DonationReceipt";
 import VerticalCarousel from "@/components/VerticalCarousel";
 
 export default function DonationPage() {
