@@ -1,16 +1,16 @@
-// app/api/printful-catalog/[id]/route.ts
-import { NextResponse } from 'next/server';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
-  req: Request,
-  context: { params: { id: string } }
+  req: NextRequest,
+  context: any
 ) {
-  const { params } = context;
+  const { id } = (context.params as { id: string });
+  console.log('[Printful Product API]', context.params);
 
-  console.log('[Printful Product API]', params);
-  
   try {
-    const productId = params.id.replace('printful_', '');
+    const productId = id.replace('printful_', '');
 
     const response = await fetch(`https://api.printful.com/products/${productId}`, {
       headers: {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import DonateButton from "@/components/DonateButton";
 import { Progress } from "@/components/ui/progress";

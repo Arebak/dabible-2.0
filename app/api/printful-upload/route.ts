@@ -1,44 +1,36 @@
 import { NextResponse } from 'next/server';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(req: Request) {
   try {
-    const formData = await req.formData();
-    const file = formData.get('file') as File;
+    const body = await req.json();
+    const { url, filename, type = 'default', visible = true } = body;
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+    if (!url) {
+      return NextResponse.json({ error: 'Missing URL' }, { status: 400 });
     }
 
-    const printfulForm = new FormData();
-    printfulForm.append('file[]', file, file.name);
-    printfulForm.append('purpose', 'default');
-
-    const res = await fetch('https://api.printful.com/files', {
+    const response = await fetch('https://api.printful.com/files', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
+        'Content-Type': 'application/json',
       },
-      body: printfulForm,
+      body: JSON.stringify({
+        type,
+        url,
+        filename,
+        visible,
+      }),
     });
 
-    const text = await res.text();
-    console.log('[Printful Raw Response]', text);
+    const result = await response.json();
 
-    try {
-      const data = JSON.parse(text);
-      if (!res.ok) {
-        return NextResponse.json({ error: data.error?.message || 'Upload failed' }, { status: res.status });
-      }
-      return NextResponse.json(data);
-    } catch (err) {
-      return NextResponse.json({ error: 'Unexpected response format', detail: text, err }, { status: 500 });
+    if (!response.ok) {
+        console.error('[Printful Upload Error]', response.status, result);
+      return NextResponse.json({ error: result?.error?.message || 'Upload failed' }, { status: response.status });
     }
+
+    return NextResponse.json(result);
   } catch (error) {
     console.error('[Printful Upload Error]', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
