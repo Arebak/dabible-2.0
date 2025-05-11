@@ -210,6 +210,8 @@ export default function DesignPage() {
                   <div key={variant.id} className="flex flex-col items-center gap-1">
                     <Image
                       src={variant.image || product?.product?.image}
+                      width={100}
+                      height={150}
                       alt={`${variant.color} - ${variant.size}`}
                       className={`w-full h-30 border rounded object-contain cursor-pointer hover:ring-2 hover:ring-[#A0072F] ${
                         selectedVariant?.id === variant.id ? 'ring-2 ring-[#A0072F]' : ''
@@ -226,10 +228,17 @@ export default function DesignPage() {
             </div>
           ))}
         </div>
-        <div className="w-full aspect-square border rounded-xl overflow-hidden">
-          <Image src={selectedVariant?.image || product?.product?.image} alt={product?.product?.title} className="object-contain w-full h-full" />
-          
-        </div>
+        {(selectedVariant?.image || product?.product?.image) && (
+          <div className="w-full aspect-square border rounded-xl overflow-hidden">
+            <Image
+              width={500}
+              height={500}
+              src={selectedVariant?.image || product?.product?.image}
+              alt={product?.product?.title}
+              className="object-contain w-full h-full"
+            />
+          </div>
+        )}
       </div>
 
       {/* Right Side: Product Info and Selectors */}
@@ -526,7 +535,13 @@ export default function DesignPage() {
                   className={`cursor-pointer border-2 rounded p-1 ${selectedDesignUrl === url ? 'border-blue-500' : 'border-transparent'}`}
                   onClick={() => setSelectedDesignUrl(url)}
                 >
-                  <Image src={url} alt={`Preset ${index + 1}`} className="w-20 h-20 object-contain" />
+                  <Image
+                    src={url}
+                    alt={`Preset ${index + 1}`}
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
                 </div>
               ))}
             </div>
@@ -558,7 +573,9 @@ export default function DesignPage() {
               <Image
                 src={mockupImages[0]}
                 alt="Primary Mockup Preview"
-                className="w-full h-full object-contain"
+                width={800}
+                height={800}
+                className="object-contain w-full h-full"
               />
             </div>
           </section>
@@ -569,7 +586,14 @@ export default function DesignPage() {
             <h3 className="font-medium mb-2">Generated Mockups</h3>
             <div className="flex gap-4 flex-wrap">
               {mockupImages.map((url, index) => (
-                <Image key={index} src={url} alt={`Mockup ${index + 1}`} className="w-40 h-40 object-contain border rounded" />
+                <Image
+                  key={index}
+                  src={url}
+                  alt={`Mockup ${index + 1}`}
+                  width={160}
+                  height={160}
+                  className="object-contain border rounded"
+                />
               ))}
             </div>
           </section>
