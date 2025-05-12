@@ -2,12 +2,8 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-<<<<<<< HEAD
 import { ChevronDown, Heart, ShoppingCart, Menu } from "lucide-react";
-=======
-import { ChevronDown, Heart, ShoppingCart } from "lucide-react";
 
->>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
