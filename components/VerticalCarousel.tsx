@@ -1,6 +1,11 @@
+ 
+
 "use client";
 
+<<<<<<< HEAD
 // import Image from "next/image";
+=======
+>>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";

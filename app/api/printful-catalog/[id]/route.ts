@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // app/api/printful-catalog/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 // type Params = Promise<{ id: string }>;
@@ -11,6 +12,21 @@ export async function GET(
 
   try {
     const productId = id.replace("printful_", "");
+=======
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(
+  req: NextRequest,
+  context: any
+) {
+  const { id } = (context.params as { id: string });
+  console.log('[Printful Product API]', context.params);
+
+  try {
+    const productId = id.replace('printful_', '');
+>>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
 
     const response = await fetch(
       `https://api.printful.com/products/${productId}`,

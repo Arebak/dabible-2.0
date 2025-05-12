@@ -38,14 +38,15 @@ export async function GET() {
         } else if (image?.startsWith('https://')) {
           imageUrl = image;
         }
-
+        // Sanmi, come back here to fix the price that is not displaying.
+        const priceObj = typeof item.default_price === 'string' ? null : item.default_price;
         return {
           id: item.id,
           name: item.name,
           description: item.description,
           imageSrc: imageUrl,
-          price: item.default_price ? item.default_price.unit_amount / 100 : 0,
-          currency: item.default_price?.currency ?? 'usd',
+          price: priceObj && priceObj.unit_amount ? priceObj.unit_amount / 100 : 0,
+          currency: priceObj?.currency ?? 'usd',
         };
       })
     );

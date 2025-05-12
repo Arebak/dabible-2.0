@@ -31,7 +31,7 @@ export function ProductCard({ title, price, imageSrc, imageAlt, onAddToCart, onB
       <div className="bg-[#f2f2f2] p-6 rounded-2xl mb-4">
         <div className="flex justify-center">
           <Image
-            src={imageSrc || "/placeholder.svg"}
+            src={typeof imageSrc === "string" ? imageSrc : "/placeholder.svg"}
             alt={imageAlt}
             width={300}
             height={300}

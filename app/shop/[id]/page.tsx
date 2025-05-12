@@ -1,5 +1,7 @@
-"use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+<<<<<<< HEAD
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { products } from "@/lib/mockData";
@@ -35,9 +37,69 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   //     )
   //   );
   // };
+=======
+"use client";
+ 
+// import ColorSwatch from "@/components/ColorSwatch";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {  CreditCard, ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useState, useEffect, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
 
-  const product = products.find((p) => p.id === params.id);
-  if (!product) return notFound();
+
+type Colors = {
+  name: string;
+  hex: string;
+  selected: boolean;
+};
+// interface Params {
+//   params: {
+//     id: string;
+//   };
+// }
+
+export default function ProductPage() {
+  const { id } = useParams() as { id?: string };
+  const [product, setProduct] = useState<any>(null);
+
+  const [colors, setColors] = useState<Colors[]>([
+    { name: "green", hex: "#00C12B", selected: true },
+    { name: "red", hex: "#F50606", selected: true },
+    { name: "yellow", hex: "#F5DD06", selected: false },
+    { name: "orange", hex: "#F57906", selected: false },
+    { name: "lightblue", hex: "#06CAF5", selected: false },
+    { name: "blue", hex: "#063AF5", selected: false },
+    { name: "purple", hex: "#7D06F5", selected: false },
+    { name: "pink", hex: "#F506A4", selected: false },
+    { name: "white", hex: "#FFFFFF", selected: false },
+    { name: "black", hex: "#000000", selected: false },
+  ]);
+
+  useEffect(() => {
+    if (!id) return;
+    async function fetchProduct() {
+      const res = await fetch(`/api/products/${id}`);
+      if (res.ok) {
+        setProduct(await res.json());
+      }
+    }
+    fetchProduct();
+  }, [id]);
+
+  const updateColors = (name: string, selected: boolean) => {
+    setColors((prev) =>
+      prev.map((color) =>
+        color.name === name ? { ...color, selected } : color
+      )
+    );
+  };
+>>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="d-container grid grid-cols-1 md:grid-cols-2 gap-10 font-mada">
@@ -100,9 +162,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <div className="mt-6">
           <h2 className="mb-2 font-medium">Choose Size</h2>
           <div className="flex gap-2">
-            {product.sizes.map((size) => (
+            {product.sizes.map((size: boolean | Key | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined) => (
               <Button
-                key={size}
+                key={String(size)}
                 variant={"outline"}
                 className="px-4 py-2 border hover:text-gray-100 rounded-full hover:bg-[#023E8A]"
               >
@@ -118,11 +180,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <div className="mt-6">
           <h2 className="mb-2 font-medium">Select Colours</h2>
           <div className="flex flex-wrap gap-2">
-            {product.colors.map((color) => (
+            {product.colors.map((color: Key | null | undefined) => (
               <div
                 key={color}
                 className="w-8 h-8 rounded-full border cursor-pointer relative"
-                style={{ background: color }}
+                style={{ background: color as string }}
               ></div>
             ))}
           </div>
