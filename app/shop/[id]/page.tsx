@@ -1,41 +1,40 @@
 "use client";
 
-import ColorSwatch from "@/components/ColorSwatch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { products } from "@/lib/mockData";
-import { Check, CreditCard, ShoppingCart } from "lucide-react";
+import { CreditCard, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { useState } from "react";
+// import { useState } from "react";
 
-type Colors = {
-  name: string;
-  hex: string;
-  selected: boolean;
-};
+// type Colors = {
+//   name: string;
+//   hex: string;
+//   selected: boolean;
+// };
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const [colors, setColors] = useState<Colors[]>([
-    { name: "green", hex: "#00C12B", selected: true },
-    { name: "red", hex: "#F50606", selected: true },
-    { name: "yellow", hex: "#F5DD06", selected: false },
-    { name: "orange", hex: "#F57906", selected: false },
-    { name: "lightblue", hex: "#06CAF5", selected: false },
-    { name: "blue", hex: "#063AF5", selected: false },
-    { name: "purple", hex: "#7D06F5", selected: false },
-    { name: "pink", hex: "#F506A4", selected: false },
-    { name: "white", hex: "#FFFFFF", selected: false },
-    { name: "black", hex: "#000000", selected: false },
-  ]);
+  // const [colors, setColors] = useState<Colors[]>([
+  //   { name: "green", hex: "#00C12B", selected: true },
+  //   { name: "red", hex: "#F50606", selected: true },
+  //   { name: "yellow", hex: "#F5DD06", selected: false },
+  //   { name: "orange", hex: "#F57906", selected: false },
+  //   { name: "lightblue", hex: "#06CAF5", selected: false },
+  //   { name: "blue", hex: "#063AF5", selected: false },
+  //   { name: "purple", hex: "#7D06F5", selected: false },
+  //   { name: "pink", hex: "#F506A4", selected: false },
+  //   { name: "white", hex: "#FFFFFF", selected: false },
+  //   { name: "black", hex: "#000000", selected: false },
+  // ]);
 
-  const updateColors = (name: string, selected: boolean) => {
-    setColors((prev) =>
-      prev.map((color) =>
-        color.name === name ? { ...color, selected } : color
-      )
-    );
-  };
+  // const updateColors = (name: string, selected: boolean) => {
+  //   setColors((prev) =>
+  //     prev.map((color) =>
+  //       color.name === name ? { ...color, selected } : color
+  //     )
+  //   );
+  // };
 
   const product = products.find((p) => p.id === params.id);
   if (!product) return notFound();
@@ -121,6 +120,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="flex flex-wrap gap-2">
             {product.colors.map((color) => (
               <div
+                key={color}
                 className="w-8 h-8 rounded-full border cursor-pointer relative"
                 style={{ background: color }}
               ></div>
@@ -194,8 +194,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           </Button>
         </div>
       </div>
-
-
     </div>
   );
 }

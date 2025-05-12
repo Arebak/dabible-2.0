@@ -70,9 +70,9 @@ export default function AudioIssuesResolvedPage() {
         {/* Article Content */}
         <article className="prose max-w-none">
           <p>
-            We're thrilled to announce a significant update for our beloved
+            We&apos;re thrilled to announce a significant update for our beloved
             Yoruba Audio Bible app. Version 7.0.0 is set to launch in the first
-            week of November 2024, and we can't wait for you to experience
+            week of November 2024, and we can&apos;t wait for you to experience
             everything it offers. This new release continues our journey to make
             the Word of God accessible to as many people as possible, and it
             comes packed with features designed to enhance your spiritual life.
@@ -83,9 +83,9 @@ export default function AudioIssuesResolvedPage() {
           </h2>
 
           <p>
-            At DaBible Foundation, we've always been driven by the vision of
+            At DaBible Foundation, we&apos;ve always been driven by the vision of
             making the Bible available to all, regardless of location or
-            literacy level. From our humble beginnings, we've worked tirelessly
+            literacy level. From our humble beginnings, we&apos;ve worked tirelessly
             to ensure our audio Bibles resonate deeply with Yoruba, Pidgin, and
             Hausa speakers across the globe. Our Solar Audio Bible Project has
             been a unique part of this mission; once released, it will enable us
@@ -134,7 +134,7 @@ export default function AudioIssuesResolvedPage() {
           </div>
 
           <p>
-            On the iOS front, we're fortunate to have Daniel Jermaine, whose
+            On the iOS front, we&apos;re fortunate to have Daniel Jermaine, whose
             expertise has transformed our app. Known in the iOS community for
             his exceptional skills, Daniel took our legacy app to a new level,
             making it one of the most respected Bible apps available. His
@@ -150,7 +150,7 @@ export default function AudioIssuesResolvedPage() {
           </h2>
 
           <p>
-            In this latest release, we're excited to introduce three distinct
+            In this latest release, we&apos;re excited to introduce three distinct
             audio versions, so you can choose the one that best fits your style
             of listening:
           </p>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useEffect, useState, useMemo } from 'react';
 
@@ -86,10 +87,12 @@ export default function DesignPage() {
       <div className="flex gap-4 md:max-h-[600px]">
         <div id={product?.product?.id} className="flex flex-col gap-4 overflow-y-auto max-h-[600px] w-40 p-1">
           {thumbnailsByColor.map((variant: any) => (
-            <img
+            <Image
               key={variant.id}
               src={variant.image}
               alt={`${variant.color} - ${variant.size}`}
+              width={120}
+              height={120}
               className={`w-full h-30 border rounded object-contain cursor-pointer hover:ring-2 hover:ring-[#A0072F] ${
                 selectedVariant?.id === variant.id ? 'ring-2 ring-[#A0072F]' : ''
               }`}
@@ -101,7 +104,7 @@ export default function DesignPage() {
           ))}
         </div>
         <div className="w-full aspect-square border rounded-xl overflow-hidden">
-          <img src={selectedVariant?.image || product?.product?.image} alt={product?.product?.title} className="object-contain w-full h-full" />
+          <Image src={selectedVariant?.image || product?.product?.image} alt={product?.product?.title} className="object-contain w-full h-full" width={120} height={120} />
           
         </div>
       </div>
@@ -176,11 +179,11 @@ export default function DesignPage() {
             {[...new Set(product?.variants?.map((v: any) => v.color_code))].map((color, idx) => (
               <button
                 key={idx}
-                onClick={() => setSelectedColor(color)}
+                onClick={() => setSelectedColor("#000")}
                 className={`w-8 h-8 rounded-full border-2 relative flex items-center justify-center focus:outline-none ${
                   selectedColor === color ? 'ring-2 ring-blue-500 border-blue-500' : 'border-gray-300'
                 }`}
-                style={{ backgroundColor: color }}
+                // style={{ backgroundColor: color }}
                 aria-label={`Select color ${color}`}
               >
                 {selectedColor === color && (

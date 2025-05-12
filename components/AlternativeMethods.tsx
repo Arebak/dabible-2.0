@@ -20,7 +20,7 @@ export default function AlternativeMethods() {
     }
   };
 
-  const CopyToClipboard = () => {};
+  // const CopyToClipboard = () => {};
   return (
     <section className="container mx-auto py-12 px-4 ">
       <div className="max-w-7xl mx-auto ">

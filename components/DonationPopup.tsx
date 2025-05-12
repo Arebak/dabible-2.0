@@ -44,8 +44,8 @@ export function DonationPopup({
           </h2>
 
           <p className="text-center mb-1 max-w-md">
-            Your generosity is making a real difference. We've received your
-            donation successfully. You'll receive a confirmation email
+            Your generosity is making a real difference. We&apos;ve received
+            your donation successfully. You&apos;ll receive a confirmation email
           </p>
 
           <p className="font-bold mb-8">{email} shortly.</p>
@@ -53,6 +53,7 @@ export function DonationPopup({
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
             <Button
               variant="outline"
+              onClick={handleClose}
               className="flex-1 border-2 font-sm  h-11 border-[#A0072F] text-[#a83244] hover:bg-[#a83244]/10 hover:text-[#a83244] hover:border-[#a83244]"
             >
               SHARE THE CAUSE

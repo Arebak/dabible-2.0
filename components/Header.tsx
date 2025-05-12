@@ -1,22 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronsDown, Heart, ShoppingCart } from "lucide-react";
-
+import { ChevronDown, Heart, ShoppingCart, Menu } from "lucide-react";
 import { useState } from "react";
-import MobileMenu from "./mobile-menu";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [showProductsDropdown, setShowProductsDropdown] = useState(false);
-  const route = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const navigate = (path: string) => {
+    router.push(path);
+    if (showProductsDropdown) {
+      setShowProductsDropdown(false);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="container mx-auto px-4 py-4 relative">
       <div className="flex items-center justify-between">
-        <div className="flex items-center">
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           <Image
             src="/png/Dabible Foundation Logo.png"
             alt="Dabible Logo"
@@ -26,59 +35,168 @@ export default function Header() {
           />
         </div>
 
-        <nav className="hidden md:flex items-center gap-x-12">
-          <Link href="/" className="text-gray-700 hover:text-gray-900">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-x-12">
+          <button
+            onClick={() => navigate("/")}
+            className="text-gray-700 hover:text-gray-900"
+          >
             Home
-          </Link>
-          <Link href="/about" className="text-gray-700 hover:text-gray-900">
+          </button>
+          <button
+            onClick={() => navigate("/about")}
+            className="text-gray-700 hover:text-gray-900"
+          >
             About Us
-          </Link>
+          </button>
           <div className="relative group">
             <button
               className="text-gray-700 hover:text-gray-900 flex items-center"
               onClick={() => setShowProductsDropdown(!showProductsDropdown)}
-              onBlur={() =>
-                setTimeout(() => setShowProductsDropdown(false), 100)
-              }
             >
-              Products <ChevronDown className="ml-1" />
+              Products <ChevronDown className="ml-0.5" />
             </button>
             {showProductsDropdown && (
               <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-10">
                 <div className="py-1">
-                  <Link
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  <button
+                    onClick={() => navigate("/products/solar-audio-bible")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Product Category
-                  </Link>
+                    Solar Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/hausa-audio-bible")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Hausa Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/yoruba-audio-bible")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Yoruba Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/pidgin-audio-bible")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Pidgin Audio Bible
+                  </button>
                 </div>
               </div>
             )}
           </div>
-          <Link href="/blog" className="text-gray-700 hover:text-gray-900">
+          <button
+            onClick={() => navigate("/blog")}
+            className="text-gray-700 hover:text-gray-900"
+          >
             Blog
-          </Link>
-          <Link href="/shop" className="text-gray-700 hover:text-gray-900">
+          </button>
+          <button
+            onClick={() => navigate("/shop")}
+            className="text-gray-700 hover:text-gray-900"
+          >
             Shop
-          </Link>
+          </button>
         </nav>
+
+        {/* Mobile Navigation */}
+        <div className={`lg:hidden fixed inset-0 bg-white z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out`}>
+          <div className="p-4">
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-4 right-4 text-gray-600"
+            >
+              ✕
+            </button>
+            <nav className="mt-12 flex flex-col space-y-4">
+              <button
+                onClick={() => navigate("/")}
+                className="text-gray-700 hover:text-gray-900 py-2"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => navigate("/about")}
+                className="text-gray-700 hover:text-gray-900 py-2"
+              >
+                About Us
+              </button>
+              <button
+                onClick={() => setShowProductsDropdown(!showProductsDropdown)}
+                className="text-gray-700 hover:text-gray-900 py-2 flex items-center"
+              >
+                Products <ChevronDown className="ml-2" />
+              </button>
+              {showProductsDropdown && (
+                <div className="pl-4 space-y-2">
+                  <button
+                    onClick={() => navigate("/products/solar-audio-bible")}
+                    className="block w-full text-left py-2 text-sm text-gray-700"
+                  >
+                    Solar Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/hausa-audio-bible")}
+                    className="block w-full text-left py-2 text-sm text-gray-700"
+                  >
+                    Hausa Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/yoruba-audio-bible")}
+                    className="block w-full text-left py-2 text-sm text-gray-700"
+                  >
+                    Yoruba Audio Bible
+                  </button>
+                  <button
+                    onClick={() => navigate("/products/pidgin-audio-bible")}
+                    className="block w-full text-left py-2 text-sm text-gray-700"
+                  >
+                    Pidgin Audio Bible
+                  </button>
+                </div>
+              )}
+              <button
+                onClick={() => navigate("/blog")}
+                className="text-gray-700 hover:text-gray-900 py-2"
+              >
+                Blog
+              </button>
+              <button
+                onClick={() => navigate("/shop")}
+                className="text-gray-700 hover:text-gray-900 py-2"
+              >
+                Shop
+              </button>
+            </nav>
+          </div>
+        </div>
+
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="flex items-center border-2 border-[#023E8A] text-[#023E8A] "
+            className="flex items-center border-2 border-[#023E8A] text-[#023E8A]"
+            onClick={() => navigate("/shop")}
           >
             <ShoppingCart className="h-4 w-4 mr-1 text-[#023E8A]" />
             <span className="hidden sm:inline">CART</span>
           </Button>
-          <Button onClick={() => route.push("/donation")} className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white">
+          <Button
+            onClick={() => navigate("/donation")}
+            className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white"
+          >
             <span className="hidden sm:inline">DONATE</span>
             <span className="sm:hidden">
               <Heart className="h-4 w-4" />
             </span>
           </Button>
-          {/* Mobile Menu */}
-          <MobileMenu />
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-2"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
       </div>
     </header>

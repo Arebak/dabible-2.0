@@ -1,0 +1,29 @@
+.imageGallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+  }
+  
+  .imageGallery::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .imageGallery::-webkit-scrollbar-track {
+    background: #f7fafc;
+  }
+  
+  .imageGallery::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .imageGallery {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+  

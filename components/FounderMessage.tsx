@@ -25,7 +25,7 @@ export default function FounderMessage() {
               </h2>
 
               <p className="text-white mb-4 text-sm md:text-base">
-                "We are a group of young christians with a lot of technology and
+              &quot;We are a group of young christians with a lot of technology and
                 music industry background. We are not the qualified ones to
                 translate the bible into our native language but God has
                 strengthened our hands to produce this new versions of the
@@ -38,7 +38,7 @@ export default function FounderMessage() {
                     Our team a just a group of youths who volunteered to
                     dedicate our lives to this project. Thank you for supporting
                     us, encouraging us and strengthening our hands into doing
-                    more."
+                    more.&quot;
                   </p>
 
                   <p className="text-white mb-4 text-sm md:text-base">

@@ -4,7 +4,7 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
-import UseCustomFilter from "@/hooks/customFilter";
+// import UseCustomFilter from "@/hooks/customFilter";
 
 type Size = {
   name: string;
@@ -21,13 +21,13 @@ const categories = ["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"];
 interface FilterSidebarProps {
   setSelectedSizes: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedColors: React.Dispatch<React.SetStateAction<string[]>>;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  // setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const FilterSidebar: React.FC<FilterSidebarProps> = ({
   setSelectedSizes,
   setSelectedColors,
-  setCategory,
+  // setCategory,
 }) => {
   const [sizes, setSizes] = useState<Size[]>([
     { name: "XX-Small", selected: true },

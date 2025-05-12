@@ -18,7 +18,7 @@ const ProductList = () => {
     () => ({
       stripe: true, // // Fetch products from Stripe
       local: false,  // // Fetch products from local source
-      printful: true, // // Fetch products from Printful
+      printful: false, // // Fetch products from Printful
     }),
     []
   );

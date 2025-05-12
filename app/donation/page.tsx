@@ -8,55 +8,56 @@ import StaggeredImageSection from "@/components/StaggeredGridImages";
 
 export default function DonationPage() {
   return (
-    <div className=" ">
+    <div className="w-full">
       {/* Header */}
-      <div className="d-container ">
-        <div className="text-center mb-12 flex flex-col items-center justify-center gap-y-8">
-          <h1 className="text-4xl font-bold text-[#023E8A] mb-2 font-domine max-w-2xl">
+      <div className="d-container px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12 flex flex-col items-center justify-center gap-y-4 sm:gap-y-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#023E8A] mb-2 font-domine max-w-2xl px-4">
             Dabible Partners - Bi-Weekly Donations
           </h1>
 
-          <div className="max-w-md  flex flex-col items-center justify-center gap-y-4 mt-8 font-nunito text-2xl">
+          <div className="w-full max-w-md flex flex-col items-center justify-center gap-y-3 sm:gap-y-4 mt-4 sm:mt-8 font-nunito text-xl sm:text-2xl px-4">
             <div className="flex gap-x-1 items-center mb-2 text-[#161515]">
-              <span className="">Goal:</span>
-              <span className="font-bold ">$15,000</span>
+              <span>Goal:</span>
+              <span className="font-bold">$15,000</span>
             </div>
 
             <div className="text-center mb-2">
               <div className="text-sm text-gray-600">Raised money</div>
-              <div className="text-xl font-bold text-red-600">$8,000</div>
+              <div className="text-lg sm:text-xl font-bold text-red-600">$8,000</div>
             </div>
 
-            <Progress value={53} className="w-[527px]" />
+            <Progress value={53} className="w-full sm:w-[527px]" />
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <DonateButton />
             </div>
           </div>
         </div>
       </div>
+
       {/* Image Carousel */}
-      <div className="my-12 ">
+      <div className="my-8 sm:my-12">
         <FixedGridCarousel />
       </div>
 
       {/* Main Content */}
-      <div className="d-container ">
-        <div className="grid md:grid-cols-5 gap-8">
+      <div className="d-container px-4 sm:px-6">
+        <div className="grid md:grid-cols-5 gap-6 sm:gap-8">
           <div className="md:col-span-3">
-            <h2 className="text-3xl font-bold text-[#023E8A] mb-6 font-domine">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#023E8A] mb-4 sm:mb-6 font-domine">
               Project Overview
             </h2>
 
-            <div className="space-y-4 text-gray-700 font-mada">
+            <div className="space-y-3 sm:space-y-4 text-gray-700 font-mada text-sm sm:text-base">
               <p>
-                It is said, "when God starts a thing, he speaks to His people."
+                It is said, &quot;when God starts a thing, he speaks to His people.&quot;
                 This is doubly so for me, because it was my encounter with Baba
                 that bore the Dabible foundation. It was the 25th of March 2015.
                 On this fateful day, I awoke from a shocking dream. I anxiously
                 looked around but saw no one. After calming down, I thought back
-                on the dream and the booming voice I heard saying, "Build me a
-                bible app".
+                on the dream and the booming voice I heard saying, &quot;Build me a
+                bible app&quot;.
               </p>
 
               <p>Half a year ago...</p>
@@ -68,7 +69,7 @@ export default function DonationPage() {
                 escapades. Thankfully I found salvation, and I was now starting
                 my journey with the Lord. I must confess though that en route to
                 the US, I had aimed to run my old ways; I assumed that I
-                wouldn't need God anymore. I was keen on getting drunk and
+                wouldn&apos;t need God anymore. I was keen on getting drunk and
                 finding a lady to keep me company upon arrival. Later on, I
                 would find myself a nice American chick to marry and set myself
                 up for a good life in America.
@@ -87,7 +88,7 @@ export default function DonationPage() {
                 for six months…
               </p>
 
-              <div className="my-8">
+              <div className="my-6 sm:my-8">
                 <Image
                   src="/png/outreach.png"
                   alt="Donation activities"
@@ -97,11 +98,11 @@ export default function DonationPage() {
                 />
               </div>
 
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                 Donor Impact and Transparency
               </h3>
               <p>
-                The success of Chaii's Emergency Fund relies on the generosity
+                The success of Chaii&apos;s Emergency Fund relies on the generosity
                 of donors who understand the critical role of immediate
                 assistance in times of crisis. Chaii maintains a commitment to
                 transparency by providing donors with regular updates on fund
@@ -110,7 +111,7 @@ export default function DonationPage() {
                 on affected communities.
               </p>
 
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                 Components of Assistance
               </h3>
               <p>
@@ -147,12 +148,12 @@ export default function DonationPage() {
       {/* Animated Images  */}
       <StaggeredImageSection />
 
-      <section className="d-container mx-auto px-4 py-8 md:py-12">
-        <h2 className="text-2xl text-center md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-2 md:mb-7 font-domine">
+      <section className="d-container mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold text-[#023E8A] mb-4 sm:mb-7 font-domine">
           Other Causes
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <DonationCard
             imageSrc="/png/cause1.png"
             alt="Donation Project 1"
