@@ -6,6 +6,7 @@ import StarTag from "@/components/StarTag";
 
 export default function SolarBiblePage() {
   const [frameIndex, setFrameIndex] = useState(0);
+  const [redVisibility, setRedVisibility] = useState(false);
   const productFrames = [
     "/png/solar1.png",
     "/png/solar2.png",
@@ -296,7 +297,11 @@ export default function SolarBiblePage() {
           <div className="bg-[#F8F7F7] rounded-xl p-6 md:p-10 flex flex-col items-center">
             <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
               <Image
-                src={productFrames[frameIndex]}
+                src={
+                  !redVisibility
+                    ? productFrames[frameIndex]
+                    : "/png/red-solar.png"
+                }
                 alt="Rotating Solar Audio Bible"
                 fill
                 className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
@@ -308,8 +313,14 @@ export default function SolarBiblePage() {
                 Solar Audio Bible Device
               </p>
               <div className="inline-flex items-center bg-white rounded-full p-1 border">
-                <button className="w-8 h-8 rounded-full bg-gray-300 mx-1"></button>
-                <button className="w-8 h-8 rounded-full bg-red-500 mx-1"></button>
+                <button
+                  className="w-8 h-8 rounded-full bg-gray-300 mx-1 cursor-pointer"
+                  onClick={() => setRedVisibility(false)}
+                ></button>
+                <button
+                  className="w-8 h-8 rounded-full bg-red-500 mx-1 cursor-pointer"
+                  onClick={() => setRedVisibility(true)}
+                ></button>
               </div>
             </div>
           </div>
