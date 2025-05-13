@@ -63,6 +63,7 @@ export default function Header() {
             >
               Home
             </button>
+
             <button
               onClick={() => navigate("/about")}
               className={`${pathname === "/about" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
@@ -203,7 +204,7 @@ export default function Header() {
               <span className="hidden sm:inline">CART</span>
             </Button>
             <Button
-              onClick={() => navigate("/donation")}
+              onClick={() => navigate("/donate")}
               className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white cursor-pointer"
             >
               <span className="hidden sm:inline">DONATE</span>
