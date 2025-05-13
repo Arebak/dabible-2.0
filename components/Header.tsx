@@ -63,6 +63,7 @@ export default function Header() {
             >
               Home
             </button>
+
             <button
               onClick={() => navigate("/about")}
               className={`${pathname === "/about" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
