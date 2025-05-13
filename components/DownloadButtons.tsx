@@ -1,11 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
 
-const DownloadButtons = () => {
+interface DownloadButtonsProps {
+  AppStoreLink?: string;
+  PlayStoreLink?: string;
+}
+
+const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) => {
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 mb-6">
       <Link
-        href="#download"
+        href={AppStoreLink || "#download"}
         className="flex gap-x-3 items-center bg-black text-white py-2 px-4 rounded-lg w-full sm:w-auto"
       >
         <Image
@@ -21,7 +27,7 @@ const DownloadButtons = () => {
         </div>
       </Link>
       <Link
-        href="#download"
+        href={PlayStoreLink || "#download"}
         className="flex gap-x-3 items-center bg-black text-white py-2 px-4 rounded-lg w-full sm:w-auto"
       >
         <Image
