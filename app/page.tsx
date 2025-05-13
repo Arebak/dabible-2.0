@@ -1,62 +1,168 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, Gift, Play, Star } from "lucide-react";
+import { Gift, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import DonationCard from "@/components/DonationCard";
-import AlternativeMethods from "@/components/AlternativeMethods";
-import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
-// import DonationReceipt from "@/components/DonationReceipt";
-import VerticalCarousel from "@/components/VerticalCarousel";
 import DownloadButtons from "@/components/DownloadButtons";
+import { testimonials } from "@/lib/testimony";
+import { use, useEffect, useState } from "react";
 
 export default function DonationPage() {
+  // Hero carousel logic
+  const heroSlides = [
+    {
+      id: 1,
+      title: "AUDIO BIBLE IN YORUBA LANGUAGE",
+      description:
+        "Our mission is to provide the Bible in African languages, support children orphaned by religious terrorism in Nigeria, providing them with shelter, education, and care to rebuild their futures.",
+      highlight: "YORUBA",
+      bgImage: "/png/home-hero-1.png",
+      textColor: "text-[#7B0423]",
+      themeColor: "text-[#7B0423]",
+      gradientColor: "from-[#FFF7FA] via-[#FFF7FA]]/100 to-transparent",
+      showGradient: true
+    },
+    {
+      id: 2,
+      title: "AUDIO BIBLE IN HAUSA LANGUAGE",
+      description:
+        "Listen to the Word of God in Hausa anywhere you are. The complete Old and New Testaments are available offline.",
+      highlight: "HAUSA",
+      bgImage: "/png/home-hero-2.png",
+      textColor: "text-[#19832F]",
+      themeColor: "text-[#19832F]",
+      gradientColor: "from-[#E0FFE4] via-[#E0FFE4]/90 to-transparent",
+      showGradient: true
+    },
+    {
+      id: 3,
+      title: "AUDIO BIBLE IN PIDGIN LANGAUGE",
+      description:
+        "Na God Word wey dey make sense! Download our Pidgin Bible app and hear the message in your heart language.",
+      highlight: "PIDGIN",
+      bgImage: "/png/home-hero-3.png",
+      textColor: "text-[#3EA7F7]",
+      themeColor: "text-[#3EA7F7]",
+      gradientColor: "from-[#E3F2FD] via-[#E3F2FD]/90 to-transparent",
+      showGradient: true
+    }
+  ];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [fadeKey, setFadeKey] = useState(0);
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % heroSlides.length;
+        setFadeKey(next); // trigger re-render with fade
+        return next;
+      });
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [paused]);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-[url('/png/home-hero.png')] bg-no-repeat bg-right bg-contain">
-        {/* Gradient overlay */}
-        <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center">
+      <section
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        key={fadeKey}
+        className="relative bg-no-repeat bg-right bg-contain transition-all duration-1000 animate-fade"
+        style={{ backgroundImage: `url('${heroSlides[currentSlide].bgImage}')` }}
+      >
+        <div className="relative 2xl:max-h-[550px] z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center transition-all duration-700 ease-in-out">
           <div className="w-full md:w-1/2 z-10 bg-transparent">
             <p className="text-navy-800 font-semibold mb-2 text-sm sm:text-base">
               WE PROVIDE
             </p>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4">
-              AUDIO BIBLE IN <span className="text-[#7B0423]">YORUBA</span>{" "}
+              AUDIO BIBLE IN{" "}
+              <span className={heroSlides[currentSlide].textColor}>
+                {heroSlides[currentSlide].highlight}
+              </span>{" "}
               LANGUAGE
             </h1>
             <p className="text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base max-w-lg">
-              Our mission is to provide the Bible in African languages, support
-              children orphaned by religious terrorism in Nigeria, providing
-              them with shelter, education, and care to rebuild their futures.
+              {heroSlides[currentSlide].description}
             </p>
             <DownloadButtons />
-
-            <div className="flex w-full sm:w-fit px-3 sm:px-4 py-1 rounded-full items-center space-x-2 text-xs sm:text-sm bg-[#E7F2FF] mt-4 sm:mt-0">
+            <div className="flex w-full sm:w-fit px-3 sm:px-2 sm:pr-4 py-1 rounded-full items-center space-x-2 text-xs sm:text-sm bg-[#E7F2FF] mt-4 sm:mt-0">
               <div className="flex items-center">
-                {[1, 2, 3, 4, 5].map((_, index) => (
-                  <Image
-                    key={index}
-                    width={24}
-                    height={24}
-                    alt=""
-                    src="/png/user.png"
-                    className="rounded-full -mr-2 sm:w-[30px] sm:h-[30px]"
-                  />
-                ))}
+                {testimonials.slice(0, 5).map((user) =>
+                  user.avatar ? (
+                    <Image
+                      key={user.id}
+                      width={24}
+                      height={24}
+                      alt={user.name}
+                      src={user.avatar}
+                      className="rounded-full -mr-2 sm:w-[30px] sm:h-[30px]"
+                    />
+                  ) : (
+                    <div
+                      key={user.id}
+                      className={`flex items-center justify-center text-white font-semibold text-xs sm:text-sm rounded-full w-[24px] h-[24px] sm:w-[30px] sm:h-[30px] -mr-2 bg-${user.avatarObj.color}-600`}
+                    >
+                      {user.avatarObj.initial}
+                    </div>
+                  )
+                )}
               </div>
-              <div className="flex">
-                <Star
-                  className={`h-3 w-3 sm:h-4 sm:w-4 text-[#023E8A] fill-[#023E8A]`}
-                />
+              <div className="ml-2 flex mr-0">
+                <Star className="h-3 w-3 sm:h-4 sm:w-4 text-[#023E8A] fill-[#023E8A]" />
               </div>
-              <span className="font-semibold">4.6</span>
+              <span className="font-semibold text-[#023E8A]">4.6</span>
               <span className="text-[#023E8A] font-semibold text-xs sm:text-sm">
                 54,138 Happy Users
               </span>
             </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/100 to-transparent z-0"></div>
+          {heroSlides[currentSlide].showGradient && (
+            <div
+              className={`absolute -left-60 inset-0 bg-gradient-to-r ${heroSlides[currentSlide].gradientColor} z-0`}
+            ></div>
+          )}
+          {/* Navigation Buttons and Dots */}
+          <div className="flex justify-between align-middle w-full lg:w-[100%] xl:w-[105%] 2xl:w-[110%] md:left-0 lg:left-0 xl:-left-20 2xl:-left-25 z-10 absolute bottom-1/2  transform mx-auto">
+            <button
+              onClick={() => {
+                const prev = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
+                setCurrentSlide(prev);
+                setFadeKey(prev);
+              }}
+              className="px-4 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
+            >
+              Prev
+            </button>
+            <button
+              onClick={() => {
+                const next = (currentSlide + 1) % heroSlides.length;
+                setCurrentSlide(next);
+                setFadeKey(next);
+              }}
+              className="px-4 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
+            >
+              Next
+            </button>
+          </div>
+          <div className="flex space-x-2 mt-4 absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                className={`w-3 h-3 rounded-full ${
+                  i === currentSlide ? 'bg-blue-600' : 'bg-gray-300'
+                }`}
+                onClick={() => {
+                  setCurrentSlide(i);
+                  setFadeKey(i);
+                }}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -84,14 +190,16 @@ export default function DonationPage() {
                 />
 
                 <Link
-                  href="#"
-                  className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
+                  href="https://apps.apple.com/us/developer/sanmi-ajanaku/id1079050270"
+                  target="_blank"
+                  className="text-[#023E8A] text-xs sm:text-sm underline mb-1 cursor-pointer"
                 >
                   Download for iOS
                 </Link>
                 <Link
-                  href="#"
-                  className="text-[#023E8A] text-xs sm:text-sm underline"
+                  href="https://play.google.com/store/apps/dev?id=6126149451407039432"
+                  target="_blank"
+                  className="text-[#023E8A] text-xs sm:text-sm underline cursor-pointer"
                 >
                   Download for Android
                 </Link>

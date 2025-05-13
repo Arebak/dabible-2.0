@@ -139,6 +139,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade {
+  animation: fade 0.8s ease-in-out;
+}
+
+
 .d-container {
   max-width: 1440px;
   margin-left: auto;
