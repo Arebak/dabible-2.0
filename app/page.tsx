@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, Star } from "lucide-react";
+import { Flame, Gift, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DonationCard from "@/components/DonationCard";
 import AlternativeMethods from "@/components/AlternativeMethods";
@@ -168,8 +168,7 @@ export default function DonationPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {/* Solar Audio Bible */}
-
-            <div className="group relative  bg-[#B42D50] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-white">
+            <div className="group relative bg-[#B42D50] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-white">
               <div className="absolute top-0 -translate-x-1/2 left-1/2">
                 <Image
                   src="/svg/ripple-circle.svg"
@@ -212,7 +211,7 @@ export default function DonationPage() {
               {/* Hidden Content visible on hover */}
               <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
                 <div
-                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  className="relative h-full w-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
                     backgroundImage: "url('/png/empower2.png')",
                     backgroundSize: "cover",
@@ -248,21 +247,39 @@ export default function DonationPage() {
                       {/* Bullet points */}
                       <div className="space-y-2 py-4">
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             The elderly people reside in remote villages
                           </p>
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             They cannot operate mobile phones.
                           </p>
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Even when given a bible, they cannot read due to old
                             age or illiteracy.
@@ -270,7 +287,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Some are labeled as witches and wizards.
                           </p>
@@ -279,7 +302,7 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
@@ -300,6 +323,8 @@ export default function DonationPage() {
                     fill
                     className="object-contain"
                   />
+
+                  <div className="absolute bottom-0 left-3 w-full h-28 bg-gradient-to-t from-[#FEE4EA] via-[#FEE4EA]/100 to-transparent z-0"></div>
                 </div>
               </div>
 
@@ -315,17 +340,14 @@ export default function DonationPage() {
               </div>
 
               <div className="flex justify-end items-center">
-                <Button
-                  variant="outline"
-                  className="mt-4 text-[#B42D50] border-white hover:bg-[#B42D50]/90 cursor-pointer text-xs sm:text-sm"
-                >
+                <Button className="mt-4 text-white bg-[#7B0423] cursor-pointer text-xs sm:text-sm">
                   LEARN MORE →
                 </Button>
               </div>
               {/* Display on hover */}
               <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
                 <div
-                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  className="relative h-full w-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
                     backgroundImage: "url('/png/empower2.png')",
                     backgroundSize: "cover",
@@ -340,8 +362,8 @@ export default function DonationPage() {
                     <div className="space-y-6">
                       {/* Title */}
                       <div>
-                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
-                          YORUBA
+                        <h1 className="text-3xl md:text-5xl font-bold font-montserrat">
+                          YORÙBÁ
                         </h1>
                         <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
                           AUDIO BIBLE
@@ -359,7 +381,13 @@ export default function DonationPage() {
                       {/* Bullet points */}
                       <div className="space-y-2 py-4">
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Listen to old and new testament from Genesis to
                             Revelation.
@@ -367,7 +395,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Enjoy the bible in simplified Yoruba language
                             to make scriptures personal. 
@@ -375,7 +409,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Available for offline usage without
                             internet connection all the time.
@@ -385,7 +425,7 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
@@ -406,6 +446,7 @@ export default function DonationPage() {
                     fill
                     className="object-contain"
                   />
+                  <div className="absolute bottom-0 left-3 w-full h-28 bg-gradient-to-t from-[#E0FFE4] via-[#E0FFE4]/100 to-transparent z-0"></div>
                 </div>
               </div>
 
@@ -429,7 +470,7 @@ export default function DonationPage() {
               {/* Display on hover */}
               <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
                 <div
-                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  className="relative w-full h-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
                     backgroundImage: "url('/png/empower2.png')",
                     backgroundSize: "cover",
@@ -462,7 +503,13 @@ export default function DonationPage() {
                       {/* Bullet points */}
                       <div className="space-y-2 py-4">
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Listen to old and new testament from Genesis to
                             Revelation.
@@ -470,7 +517,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Enjoy the bible in simplified Hausa language to make
                             scriptures personal. 
@@ -478,7 +531,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Available for offline usage without
                             internet connection all the time.
@@ -488,7 +547,7 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
@@ -509,13 +568,15 @@ export default function DonationPage() {
                     fill
                     className="object-contain"
                   />
+
+                  <div className="absolute bottom-0 left-3 w-full h-28 bg-gradient-to-t from-[#E3F2FD] via-[#E3F2FD]/100 to-transparent z-0"></div>
                 </div>
               </div>
 
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-1 font-montserrat">
-                    HAUSA
+                    PIDGIN
                   </h3>
                   <p className="text-sm sm:text-base md:text-lg lg:text-2xl font-montserrat -mt-3 font-semibold">
                     AUDIO BIBLE
@@ -530,10 +591,9 @@ export default function DonationPage() {
               </div>
 
               {/* Display on hover */}
-              {/* Display on hover */}
               <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
                 <div
-                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  className="relative w-full h-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
                     backgroundImage: "url('/png/empower2.png')",
                     backgroundSize: "cover",
@@ -557,7 +617,7 @@ export default function DonationPage() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm md:text-bas">
+                      <p className="text-sm md:text-base">
                         First and ONLY Old & New Testament Bible in Pidgin
                         language available on Android devices. Inspired by God,
                         transcribed and recorded in Jos, Nigeria.
@@ -566,7 +626,13 @@ export default function DonationPage() {
                       {/* Bullet points */}
                       <div className="space-y-2 py-4">
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Listen to old and new testament from Genesis to
                             Revelation.
@@ -574,7 +640,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Enjoy the bible in simplified Pidgin language
                             to make scriptures personal. 
@@ -582,7 +654,13 @@ export default function DonationPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <Image
+                            src="/svg/flames.svg"
+                            alt="Flame"
+                            width={20}
+                            height={20}
+                            className="h-8 w-8"
+                          />
                           <p className="text-xs md:text-base">
                             Available for offline usage without
                             internet connection all the time.
@@ -592,7 +670,7 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
@@ -621,13 +699,13 @@ export default function DonationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button className="bg-[#7B0423] hover:bg-red-900 text-xs sm:text-sm py-2 w-full sm:w-auto">
-                  <span className="mr-2">🎁</span> DONATE
+                    <Gift className="mr-1" />DONATE
                 </Button>
                 <Button
                   variant="outline"
                   className="border-[#7B0423] text-[#7B0423] hover:bg-red-50 text-xs sm:text-sm py-2 w-full sm:w-auto"
                 >
-                  <span className="mr-2">▶️</span> VISIT OUR YOUTUBE CHANNEL
+                  <Play className="mr-1" /> VISIT OUR YOUTUBE CHANNEL
                 </Button>
               </div>
             </div>
