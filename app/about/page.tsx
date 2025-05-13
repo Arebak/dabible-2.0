@@ -277,10 +277,11 @@ export default function OurStoryPage() {
       {/* Red Arrow Section */}
       <section className="py-8 flex justify-center">
         <Image
-          src="/svg/right-down2.svg"
+          src="/svg/red-arrow.svg"
           alt="Red arrow pointing to the story"
-          width={220}
-          height={220}
+          width={120}
+          height={120}
+          className="rotate-[70deg]"
         />
       </section>
 

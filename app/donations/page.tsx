@@ -5,7 +5,6 @@ import AlternativeMethods from "@/components/AlternativeMethods";
 import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
 // import DonationReceipt from "@/components/DonationReceipt";
-import VerticalCarousel from "@/components/VerticalCarousel";
 
 export default function DonationPage() {
   return (
@@ -181,8 +180,40 @@ export default function DonationPage() {
       <AlternativeMethods />
 
       {/* Donation Animation Receipt */}
-      <div className=" max-h-[60vh]">
-        <VerticalCarousel />
+      <div className="d-container py-12">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#023E8A] text-start mb-6 font-domine">
+          Donation Wall
+        </h2>
+
+        <p className="text-start text-[#121212] mb-10 max-w-2xl font-mada">
+          DaBible Foundation is a registered 501 (C)(3) Non Profit both in USA
+          and Nigeria. To donate from Nigeria, use our Nigerian bank account
+          below.
+        </p>
+
+        <div className="flex justify-center">
+          <Image
+            src="/png/donation-3.png"
+            width={1585}
+            height={598}
+            alt="grid cards"
+            className="xl:block hidden"
+          />
+          <Image
+            src="/png/donation-2.png"
+            width={1585}
+            height={598}
+            alt="grid cards"
+            className="xl:hidden sm:block hidden"
+          />
+          <Image
+            src="/png/donation-1.png"
+            width={485}
+            height={598}
+            alt="grid cards"
+            className="xl:hidden sm:hidden block"
+          />
+        </div>
       </div>
       {/* Founders Message  */}
       <FounderMessage />

@@ -2,12 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Flame, Gift, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import DonationCard from "@/components/DonationCard";
-import AlternativeMethods from "@/components/AlternativeMethods";
-import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
-// import DonationReceipt from "@/components/DonationReceipt";
-import VerticalCarousel from "@/components/VerticalCarousel";
 import DownloadButtons from "@/components/DownloadButtons";
 
 export default function DonationPage() {
