@@ -10,7 +10,7 @@ export default function DonationPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-white overflow-hidden md:pt-[70px]">
+      <section className="relative bg-white overflow-hidden pt-[70px]">
         {/* Faded oval background */}
         <div
           className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[300px] rounded-full"
