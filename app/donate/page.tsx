@@ -6,6 +6,7 @@ import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
 // import DonationReceipt from "@/components/DonationReceipt";
 import VerticalCarousel from "@/components/VerticalCarousel";
+import Link from "next/link";
 
 export default function DonationPage() {
   return (
@@ -48,9 +49,11 @@ export default function DonationPage() {
             tax deductible and you can view your donation history from your
             Donors Dashboard.
           </p>
+          <Link href="https://donate.dabible.com" className="cursor-pointer">
           <Button className="bg-[#C8385E] hover:bg-[#C8385E]/90 border-[#A0072F] text-white px-4 md:px-6 py-3  h-fit text-sm md:text-sm">
             GO TO DONOR DASHBOARD
           </Button>
+          </Link>
         </div>
       </section>
 

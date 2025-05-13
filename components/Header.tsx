@@ -204,7 +204,7 @@ export default function Header() {
               <span className="hidden sm:inline">CART</span>
             </Button>
             <Button
-              onClick={() => navigate("/donation")}
+              onClick={() => navigate("/donate")}
               className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white cursor-pointer"
             >
               <span className="hidden sm:inline">DONATE</span>
