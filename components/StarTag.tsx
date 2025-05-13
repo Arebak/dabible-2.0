@@ -1,13 +1,13 @@
 import Image from "next/image";
 interface StarTagProps {
   text?: string;
-  variant?: "white" | "blue" | "rose" | "green" ;
+  variant?: "white" | "blue" | "rose" | "green"  ;
 }
 const StarTag: React.FC<StarTagProps> = ({ text, variant }) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "white":
-        return "start";
+        return "star2";
       case "blue":
         return "start";
       case "green":

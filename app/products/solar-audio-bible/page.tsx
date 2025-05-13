@@ -1,7 +1,26 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import StarTag from "@/components/StarTag";
 
 export default function SolarBiblePage() {
+  const [frameIndex, setFrameIndex] = useState(0);
+  const productFrames = [
+    "/png/solar1.png",
+    "/png/solar2.png",
+    "/png/solar3.png",
+    "/png/solar4.png",
+    "/png/solar5.png",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFrameIndex((prev) => (prev + 1) % productFrames.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -9,23 +28,7 @@ export default function SolarBiblePage() {
         <div className="d-container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row gap-8 items-center font-mada font-medium">
             <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center text-[#023E8A] bg-white px-3 py-1 rounded-full mb-4 md:mb-6">
-                <Image
-                  src="/svg/star2.svg"
-                  alt="star icon"
-                  width={16}
-                  height={16}
-                  className=" mr-1"
-                />{" "}
-                PRODUCTS{" "}
-                <Image
-                  src="/svg/star2.svg"
-                  alt="star icon"
-                  width={16}
-                  height={16}
-                  className=" ml-1"
-                />
-              </div>
+              <StarTag text="PRODUCTS" variant="white" />
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight font-domine">
                 Solar Audio Bible - One Purchase, Double The Impact
               </h1>
@@ -140,23 +143,7 @@ export default function SolarBiblePage() {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6 font-manrope">
-              <Image
-                src="/svg/start.svg"
-                alt="star icon"
-                width={16}
-                height={16}
-                className=" mr-1"
-              />{" "}
-              FEATURES{" "}
-              <Image
-                src="/svg/start.svg"
-                alt="star icon"
-                width={16}
-                height={16}
-                className=" ml-1"
-              />
-            </div>
+            <StarTag text="FEATURES" variant="blue" />
             <h2 className="md:text-4xl text-3xl font-bold text-gray-900 font-domine">
               Get The Highlights
             </h2>
@@ -186,12 +173,13 @@ export default function SolarBiblePage() {
                     Too Complicated.
                   </p>
                 </div>
-                <div className="flex-shrink-0">
+
+                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
                   <Image
-                    src="/png/solar.png"
-                    alt="Solar Audio Bible with Old and New Testament"
-                    width={200}
-                    height={200}
+                    src={productFrames[frameIndex]}
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
                   />
                 </div>
               </div>
@@ -219,12 +207,13 @@ export default function SolarBiblePage() {
                     It In The Sun To Charge And It's Ready To Use.
                   </p>
                 </div>
-                <div className="flex-shrink-0">
+
+                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
                   <Image
-                    src="/png/solar.png"
-                    alt="Solar Audio Bible with battery"
-                    width={200}
-                    height={200}
+                    src={productFrames[frameIndex]}
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
                   />
                 </div>
               </div>
@@ -252,12 +241,13 @@ export default function SolarBiblePage() {
                     Salvation In An Easy-To-Listen Format.
                   </p>
                 </div>
-                <div className="flex-shrink-0">
+
+                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
                   <Image
-                    src="/png/solar.png"
-                    alt="Solar Audio Bible with Old and New Testament"
-                    width={200}
-                    height={200}
+                    src={productFrames[frameIndex]}
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
                   />
                 </div>
               </div>
@@ -283,12 +273,13 @@ export default function SolarBiblePage() {
                     Remote Areas And For Elderly Users.
                   </p>
                 </div>
-                <div className="flex-shrink-0">
+
+                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
                   <Image
-                    src="/png/solar.png"
-                    alt="Solar Audio Bible with flashlight feature"
-                    width={200}
-                    height={200}
+                    src={productFrames[frameIndex]}
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
                   />
                 </div>
               </div>
@@ -305,13 +296,12 @@ export default function SolarBiblePage() {
           </h2>
 
           <div className="bg-[#F8F7F7] rounded-xl p-6 md:p-10 flex flex-col items-center">
-            <div className="max-w-md mx-auto mb-8">
+            <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
               <Image
-                src="/png/solar-big.png"
-                alt="Solar Audio Bible Device"
-                width={400}
-                height={400}
-                className="mx-auto"
+                src={productFrames[frameIndex]}
+                alt="Rotating Solar Audio Bible"
+                fill
+                className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
               />
             </div>
 
@@ -329,7 +319,7 @@ export default function SolarBiblePage() {
       </section>
 
       {/* The Forgotten Generation Section */}
-      <section className=" px-4 bg-[#C8385E] mb-20 md:max-h-[764px] h-full relative  yoruba-download-bg py-5">
+      <section className=" px-4 bg-[#C8385E] mb-20 md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5">
         {/* curve yoruba  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%]">
           <Image
@@ -346,7 +336,7 @@ export default function SolarBiblePage() {
                 The Forgotten Generation
               </h2>
 
-              <div className="space-y-4 text-white/90 font-mada max-w-3/4">
+              <div className="space-y-4 text-white/90 font-mada md:max-w-3/4 w-full">
                 <p>
                   A Heavy Burden Rests On Our Hearts For The Elderly Who Reside
                   In Remote Villages That Do Not Have Access To The Gospel Of
