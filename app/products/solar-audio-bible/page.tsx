@@ -24,7 +24,7 @@ export default function SolarBiblePage() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8">
+      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.png')] bg-no-repeat bg-right bg-contain">
         <div className="d-container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row gap-8 items-center font-mada font-medium">
             <div className="flex-1 space-y-6">
@@ -122,20 +122,18 @@ export default function SolarBiblePage() {
               </div>
             </div>
 
-            <div className="flex-1 flex justify-center">
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl"></div>
-                <Image
-                  src="/png/right-hand.png"
-                  alt="Solar Audio Bible device"
-                  width={400}
-                  height={400}
-                  className="relative z-10"
-                  priority
-                />
-              </div>
-            </div>
+            <div className="flex-1 flex justify-center"></div>
           </div>
+        </div>
+
+        <div className="absolute md:block hidden -right-10 bottom-0 w-[700px] h-[500px] lg:w-[1100px] lg:h-[700px]">
+          <Image
+            src="/png/right-solar-hero.png"
+            alt="Solar Audio Bible device"
+            fill
+            className="relative z-10"
+            priority
+          />
         </div>
       </section>
 
