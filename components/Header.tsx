@@ -58,7 +58,7 @@ export default function Header() {
               Products <ChevronDown className="ml-0.5" />
             </button>
             {showProductsDropdown && (
-              <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-10">
+              <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-100">
                 <div className="py-1">
                   <button
                     onClick={() => navigate("/products/solar-audio-bible")}

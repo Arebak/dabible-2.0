@@ -22,7 +22,9 @@ export default function DonationPage() {
       textColor: "text-[#7B0423]",
       themeColor: "text-[#7B0423]",
       gradientColor: "from-[#FFF7FA] via-[#FFF7FA]]/100 to-transparent",
-      showGradient: true
+      showGradient: true,
+      totalUsers: "54,138",
+      rating: "4.6"
     },
     {
       id: 2,
@@ -34,7 +36,9 @@ export default function DonationPage() {
       textColor: "text-[#19832F]",
       themeColor: "text-[#19832F]",
       gradientColor: "from-[#E0FFE4] via-[#E0FFE4]/90 to-transparent",
-      showGradient: true
+      showGradient: true,
+      totalUsers: "12,098",
+      rating: "4.4"
     },
     {
       id: 3,
@@ -46,23 +50,26 @@ export default function DonationPage() {
       textColor: "text-[#3EA7F7]",
       themeColor: "text-[#3EA7F7]",
       gradientColor: "from-[#E3F2FD] via-[#E3F2FD]/90 to-transparent",
-      showGradient: true
+      showGradient: true,
+      totalUsers: "15,232",
+      rating: "4.5"
     }
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [fadeKey, setFadeKey] = useState(0);
+  const [fade, setFade] = useState(true);
   useEffect(() => {
     if (paused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % heroSlides.length;
-        setFadeKey(next); // trigger re-render with fade
-        return next;
-      });
+      setFade(false);
+      setTimeout(() => {
+        const next = (currentSlide + 1) % heroSlides.length;
+        setCurrentSlide(next);
+        setFade(true);
+      }, 500); // Halfway fade-out, then switch
     }, 6000);
     return () => clearInterval(interval);
-  }, [paused]);
+  }, [currentSlide, paused]);
 
   return (
     <main className="min-h-screen">
@@ -70,12 +77,13 @@ export default function DonationPage() {
       <section
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        key={fadeKey}
-        className="relative bg-no-repeat bg-right bg-contain transition-all duration-1000 animate-fade"
+        // key={fadeKey}
+        // className="relative bg-no-repeat bg-right bg-contain transition-all duration-1000 animate-fade"
+        className={`relative bg-no-repeat bg-right bg-contain transition-all duration-1000 ${fade ? 'opacity-100' : 'opacity-0'}`}
         style={{ backgroundImage: `url('${heroSlides[currentSlide].bgImage}')` }}
       >
         <div className="relative 2xl:max-h-[550px] z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center transition-all duration-700 ease-in-out">
-          <div className="w-full md:w-1/2 z-10 bg-transparent">
+          <div className="w-full md:w-2/5 z-10 bg-transparent">
             <p className="text-navy-800 font-semibold mb-2 text-sm sm:text-base">
               WE PROVIDE
             </p>
@@ -115,9 +123,9 @@ export default function DonationPage() {
               <div className="ml-2 flex mr-0">
                 <Star className="h-3 w-3 sm:h-4 sm:w-4 text-[#023E8A] fill-[#023E8A]" />
               </div>
-              <span className="font-semibold text-[#023E8A]">4.6</span>
+              <span className="font-semibold text-[#023E8A]"> {heroSlides[currentSlide].rating}</span>
               <span className="text-[#023E8A] font-semibold text-xs sm:text-sm">
-                54,138 Happy Users
+                 {heroSlides[currentSlide].totalUsers} Happy Users
               </span>
             </div>
           </div>
@@ -127,26 +135,28 @@ export default function DonationPage() {
             ></div>
           )}
           {/* Navigation Buttons and Dots */}
-          <div className="flex justify-between align-middle w-full lg:w-[100%] xl:w-[105%] 2xl:w-[110%] md:left-0 lg:left-0 xl:-left-20 2xl:-left-25 z-10 absolute bottom-1/2  transform mx-auto">
+          <div className="flex justify-between items-center w-full lg:w-[100%] xl:w-[105%] 2xl:w-[110%] md:left-0 lg:left-0 xl:-left-20 2xl:-left-25 z-10 absolute bottom-1/2 transform mx-auto">
             <button
               onClick={() => {
                 const prev = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
                 setCurrentSlide(prev);
-                setFadeKey(prev);
+                setFade(true);
               }}
-              className="px-4 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 cursor-pointer rounded-full bg-white shadow-md flex items-center justify-center text-gray-800 hover:bg-gray-100 transition"
+              aria-label="Previous slide"
             >
-              Prev
+              ←
             </button>
             <button
               onClick={() => {
                 const next = (currentSlide + 1) % heroSlides.length;
                 setCurrentSlide(next);
-                setFadeKey(next);
+                setFade(true);
               }}
-              className="px-4 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 cursor-pointer rounded-full bg-white shadow-md flex items-center justify-center text-gray-800 hover:bg-gray-100 transition"
+              aria-label="Next slide"
             >
-              Next
+              →
             </button>
           </div>
           <div className="flex space-x-2 mt-4 absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
@@ -158,7 +168,7 @@ export default function DonationPage() {
                 }`}
                 onClick={() => {
                   setCurrentSlide(i);
-                  setFadeKey(i);
+                  setFade(true);
                 }}
               />
             ))}
@@ -190,14 +200,14 @@ export default function DonationPage() {
                 />
 
                 <Link
-                  href="https://apps.apple.com/us/developer/sanmi-ajanaku/id1079050270"
+                  href="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
                   target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline mb-1 cursor-pointer"
                 >
                   Download for iOS
                 </Link>
                 <Link
-                  href="https://play.google.com/store/apps/dev?id=6126149451407039432"
+                  href="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
                   target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline cursor-pointer"
                 >
@@ -215,13 +225,15 @@ export default function DonationPage() {
                 />
 
                 <Link
-                  href="#"
+                  href="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
+                  target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
                 >
                   Download for iOS
                 </Link>
                 <Link
-                  href="#"
+                  href="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
+                  target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline"
                 >
                   Download for Android
@@ -238,13 +250,15 @@ export default function DonationPage() {
                 />
 
                 <Link
-                  href="#"
+                  href="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
+                  target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
                 >
                   Download for iOS
                 </Link>
                 <Link
-                  href="#"
+                  href="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
+                  target="_blank"
                   className="text-[#023E8A] text-xs sm:text-sm underline"
                 >
                   Download for Android
@@ -310,7 +324,7 @@ export default function DonationPage() {
               <div className="flex justify-end items-center">
                 <Button
                   variant="outline"
-                  className="mt-4 text-[#B42D50] border-white hover:bg-[#B42D50]/90 cursor-pointer text-xs sm:text-sm"
+                  className="mt-4 text-[#B42D50] border-white cursor-pointer hover:bg-[#B42D50]/90 cursor-pointer text-xs sm:text-sm"
                 >
                   LEARN MORE →
                 </Button>
@@ -321,7 +335,7 @@ export default function DonationPage() {
                 <div
                   className="relative h-full w-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
-                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundImage: "url('/png/rectangle-blur-bg-1.png')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -410,10 +424,12 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
+                        <Link href="/products/solar-audio-bible" className="cursor-pointer">
+                        <button className="bg-white text-rose-700 cursor-pointer px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -466,7 +482,7 @@ export default function DonationPage() {
                 <div
                   className="relative h-full w-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
-                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundImage: "url('/png/rectangle-blur-bg-2.png')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -542,10 +558,12 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
+                        <Link href="/products/yoruba-audio-bible" className="cursor-pointer">
+                        <button className="bg-white cursor-pointer text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -597,7 +615,7 @@ export default function DonationPage() {
                 <div
                   className="relative w-full h-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
-                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundImage: "url('/png/rectangle-blur-bg-3.png')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -672,10 +690,12 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
+                        <Link href="/products/hausa-audio-bible" className="cursor-pointer">
+                        <button className="bg-white cursor-pointer text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -728,7 +748,7 @@ export default function DonationPage() {
                 <div
                   className="relative w-full h-full max-w-4xl rounded-3xl overflow-hidden"
                   style={{
-                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundImage: "url('/png/rectangle-blur-bg-4.png')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -803,10 +823,12 @@ export default function DonationPage() {
 
                       {/* Learn More Button */}
                       <div className="flex justify-end pt-6">
-                        <button className="bg-white text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
+                         <Link href="/products/pidgin-audio-bible" className="cursor-pointer">
+                        <button className="bg-white cursor-pointer text-rose-700 px-4 py-1.5 rounded-lg font-medium text-base flex items-center gap-2">
                           LEARN MORE
                           <span className="text-xl">→</span>
                         </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -831,19 +853,24 @@ export default function DonationPage() {
                 Subscribe to watch edifying contents today.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                 <Link href="/donate" className="cursor-pointer">
                 <Button className="bg-[#7B0423] hover:bg-red-900 text-xs sm:text-sm py-2 w-full sm:w-auto">
                   <Gift className="mr-1" />
                   DONATE
                 </Button>
+                </Link>
+                 <Link href="https://www.youtube.com/@dabible-foundation" target="_blank" className="cursor-pointer">
                 <Button
                   variant="outline"
-                  className="border-[#7B0423] text-[#7B0423] hover:bg-red-50 text-xs sm:text-sm py-2 w-full sm:w-auto"
+                  className="border-[#7B0423] cursor-pointer text-[#7B0423] hover:bg-red-50 text-xs sm:text-sm py-2 w-full sm:w-auto"
                 >
                   <Play className="mr-1" /> VISIT OUR YOUTUBE CHANNEL
                 </Button>
+                </Link>
               </div>
             </div>
             <div className="w-full md:w-1/2 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px]">
+             <Link href="#" className="cursor-pointer">
               <Image
                 src="/png/watch.png"
                 alt="Hands praying over Bible"
@@ -851,10 +878,13 @@ export default function DonationPage() {
                 className="object-cover rounded-4xl"
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <Button className="bg-white text-[#7B0423] hover:bg-white/90 rounded-full px-4 sm:px-6 text-xs sm:text-sm">
+                <Link href="#" className="cursor-pointer">
+                <Button className="bg-white cursor-pointer text-[#7B0423] hover:bg-white/90 rounded-full px-4 sm:px-6 text-xs sm:text-sm">
                   <span className="mr-2 text-[#7B0423]">▶</span> WATCH VIDEO
                 </Button>
+                </Link>
               </div>
+              </Link>
             </div>
           </div>
         </div>
