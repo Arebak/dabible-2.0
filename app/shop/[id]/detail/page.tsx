@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useEffect, useState, useMemo } from 'react';
 
-export default function DesignPage() {
+export default function ProductDetailPage() {
   const params = useParams();
   const productId = params?.id;
 
@@ -31,7 +31,7 @@ export default function DesignPage() {
 
   useEffect(() => {
     if (productId) {
-      fetch(`/api/printful-catalog/${productId}`)
+      fetch(`/api/printful-dabible-store/${productId}`)
         .then(res => res.json())
         .then(data => {
           setProduct(data);
