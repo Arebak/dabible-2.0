@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { Flame, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DonationCard from "@/components/DonationCard";
 import AlternativeMethods from "@/components/AlternativeMethods";
@@ -14,9 +14,8 @@ export default function DonationPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-[url('/png/home-hero.png')] bg-no-repeat bg-right bg-contain home-hero-section">
+      <section className="relative bg-[url('/png/home-hero.png')] bg-no-repeat bg-right bg-contain">
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent z-0"></div>
         <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 z-10 bg-transparent">
             <p className="text-navy-800 font-semibold mb-2 text-sm sm:text-base">
@@ -57,6 +56,7 @@ export default function DonationPage() {
               </span>
             </div>
           </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/100 to-transparent z-0"></div>
         </div>
       </section>
 
@@ -145,7 +145,7 @@ export default function DonationPage() {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center teal-gradient rounded-2xl overflow-y-hidden p-4">
+          <div className="w-full  md:w-1/2 flex justify-center teal-gradient rounded-2xl overflow-y-hidden px-4">
             <div className="relative w-36 sm:w-48 md:w-56 lg:w-64 h-auto mt-10">
               <Image
                 src="/png/preview.png"
@@ -162,13 +162,22 @@ export default function DonationPage() {
       {/* Products Section */}
       <section className="py-8 sm:py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center font-mada mb-8 sm:mb-12">
             Our Products
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {/* Solar Audio Bible */}
-            <div className="relative bg-[#B42D50] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-white">
+
+            <div className="group relative  bg-[#B42D50] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-white">
+              <div className="absolute top-0 -translate-x-1/2 left-1/2">
+                <Image
+                  src="/svg/ripple-circle.svg"
+                  alt="Solar Audio Bible Device"
+                  width={400}
+                  height={400}
+                />
+              </div>
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -199,10 +208,90 @@ export default function DonationPage() {
                   LEARN MORE →
                 </Button>
               </div>
+
+              {/* Hidden Content visible on hover */}
+              <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                <div
+                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  style={{
+                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  {/* Overlay with blur and color */}
+                  <div className="absolute inset-0 hover:bg-[#B42D50]/90 backdrop-blur-md"></div>
+
+                  {/* Content */}
+                  <div className="relative p-8 md:p-12 text-white">
+                    <div className="space-y-6">
+                      {/* Title */}
+                      <div>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          SOLAR
+                        </h1>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          AUDIO BIBLE
+                        </h1>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm md:text-bas">
+                        The Solar Audio Bible is for elderly people who cannot
+                        use mobile apps. We invite you to join us in funding
+                        this project to provide this elderly-friendly device at
+                        no cost to elderly people living in remote villages;
+                        leading many souls into a growing relationship with
+                        Jesus Christ.
+                      </p>
+
+                      {/* Bullet points */}
+                      <div className="space-y-2 py-4">
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            The elderly people reside in remote villages
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            They cannot operate mobile phones.
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Even when given a bible, they cannot read due to old
+                            age or illiteracy.
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Some are labeled as witches and wizards.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Learn More Button */}
+                      <div className="flex justify-end pt-6">
+                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                          LEARN MORE
+                          <span className="text-xl">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Yoruba Audio Bible */}
-            <div className="bg-[#FEE4EA] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#7B0423] flex flex-col">
+            <div className="bg-[#FEE4EA] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#7B0423] flex flex-col">
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -233,10 +322,82 @@ export default function DonationPage() {
                   LEARN MORE →
                 </Button>
               </div>
+              {/* Display on hover */}
+              <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                <div
+                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  style={{
+                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  {/* Overlay with blur and color */}
+                  <div className="absolute inset-0 hover:bg-[#B42D50]/90 backdrop-blur-md"></div>
+
+                  {/* Content */}
+                  <div className="relative p-8 md:p-12 text-white">
+                    <div className="space-y-6">
+                      {/* Title */}
+                      <div>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          YORUBA
+                        </h1>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          AUDIO BIBLE
+                        </h1>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm md:text-bas">
+                        Inspired by God, recorded in Ibadan, Nigeria. The first
+                        and only old & new testament bible in the Yoruba
+                        language. You can easily switch between Yoruba and
+                        English without affecting the audio player.
+                      </p>
+
+                      {/* Bullet points */}
+                      <div className="space-y-2 py-4">
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Listen to old and new testament from Genesis to
+                            Revelation.
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Enjoy the bible in simplified Yoruba language
+                            to make scriptures personal. 
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Available for offline usage without
+                            internet connection all the time.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Learn More Button */}
+                      <div className="flex justify-end pt-6">
+                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                          LEARN MORE
+                          <span className="text-xl">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Hausa Audio Bible */}
-            <div className="bg-[#E0FFE4] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#19832F] flex flex-col">
+            <div className="bg-[#E0FFE4] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#19832F] flex flex-col">
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -264,10 +425,82 @@ export default function DonationPage() {
                   LEARN MORE →
                 </Button>
               </div>
+
+              {/* Display on hover */}
+              <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                <div
+                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  style={{
+                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  {/* Overlay with blur and color */}
+                  <div className="absolute inset-0 hover:bg-[#B42D50]/90 backdrop-blur-md"></div>
+
+                  {/* Content */}
+                  <div className="relative p-8 md:p-12 text-white">
+                    <div className="space-y-6">
+                      {/* Title */}
+                      <div>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          HAUSA
+                        </h1>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          AUDIO BIBLE
+                        </h1>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm md:text-bas">
+                        First and ONLY Old & New Testament Bible in Hausa
+                        language available on Android devices. Inspired by God,
+                        transcribed and recorded in Jos, Nigeria.
+                      </p>
+
+                      {/* Bullet points */}
+                      <div className="space-y-2 py-4">
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Listen to old and new testament from Genesis to
+                            Revelation.
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Enjoy the bible in simplified Hausa language to make
+                            scriptures personal. 
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Available for offline usage without
+                            internet connection all the time.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Learn More Button */}
+                      <div className="flex justify-end pt-6">
+                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                          LEARN MORE
+                          <span className="text-xl">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Pidgin Audio Bible */}
-            <div className="bg-[#E3F2FD] h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#3EA7F7] flex flex-col">
+            <div className="bg-[#E3F2FD] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#3EA7F7] flex flex-col">
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -294,6 +527,79 @@ export default function DonationPage() {
                 <Button className="mt-4 text-white border-white hover:bg-[#19832F]/90 bg-[#3EA7F7] cursor-pointer text-xs sm:text-sm">
                   LEARN MORE →
                 </Button>
+              </div>
+
+              {/* Display on hover */}
+              {/* Display on hover */}
+              <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                <div
+                  className="relative w-full max-w-4xl rounded-3xl overflow-hidden"
+                  style={{
+                    backgroundImage: "url('/png/empower2.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  {/* Overlay with blur and color */}
+                  <div className="absolute inset-0 hover:bg-[#B42D50]/90 backdrop-blur-md"></div>
+
+                  {/* Content */}
+                  <div className="relative p-8 md:p-12 text-white">
+                    <div className="space-y-6">
+                      {/* Title */}
+                      <div>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          PIDGIN
+                        </h1>
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-wide">
+                          AUDIO BIBLE
+                        </h1>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm md:text-bas">
+                        First and ONLY Old & New Testament Bible in Pidgin
+                        language available on Android devices. Inspired by God,
+                        transcribed and recorded in Jos, Nigeria.
+                      </p>
+
+                      {/* Bullet points */}
+                      <div className="space-y-2 py-4">
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Listen to old and new testament from Genesis to
+                            Revelation.
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Enjoy the bible in simplified Pidgin language
+                            to make scriptures personal. 
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <Flame className="h-8 w-8 text-white shrink-0" />
+                          <p className="text-xs md:text-base">
+                            Available for offline usage without
+                            internet connection all the time.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Learn More Button */}
+                      <div className="flex justify-end pt-6">
+                        <button className="bg-white text-rose-700 px-6 py-3 rounded-lg font-medium text-lg flex items-center gap-2">
+                          LEARN MORE
+                          <span className="text-xl">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

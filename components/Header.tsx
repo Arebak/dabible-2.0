@@ -111,7 +111,7 @@ export default function Header() {
             >
               ✕
             </button>
-            <nav className="mt-12 flex flex-col space-y-4">
+            <nav className="mt-12 flex flex-col space-y-4 items-center">
               <button
                 onClick={() => navigate("/")}
                 className="text-gray-700 hover:text-gray-900 py-2"

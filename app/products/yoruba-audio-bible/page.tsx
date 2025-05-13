@@ -226,7 +226,7 @@ export default function YorubaBiblePage() {
         <div className="d-container !py-0">
           <div className="flex flex-col md:flex-row items-center gap-8 font-mada">
             <div className="md:w-1/2 text-white">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-domine">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-domine pt-10">
                 Download The Yoruba Audio Bible And Stay Connected To God's Word
               </h2>
               <p className="mb-6">

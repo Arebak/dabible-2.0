@@ -55,7 +55,7 @@ export default function OurStoryPage() {
       ],
     },
     {
-      title: "Pidgin Bible Crew",
+      title: "Pidgin Bible Crew", 
       members: [
         {
           name: "Kolawole Oduremi",
@@ -124,7 +124,7 @@ export default function OurStoryPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header Section */}
-      <section className="py-6 sm:py-8 md:py-12 text-center px-4">
+      <section className="py-6 sm:py-8 md:py-12 text-center px-4 sm:px-6 md:px-8">
         <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-3 sm:mb-4 md:mb-6">
           <Image
             src="/svg/start.svg"
@@ -192,11 +192,11 @@ export default function OurStoryPage() {
             ].map((image, index) => (
               <div
                 key={index}
-                className="flex-none w-48 sm:w-56 md:w-64 lg:w-[272px] relative bg-[#FAEDED] p-3 sm:p-4 rounded-lg"
+                className="flex-none w-[250px] sm:w-[280px] md:w-[300px] relative bg-[#FAEDED] p-3 sm:p-4 rounded-lg"
               >
                 <div className="relative">
                   <div className="absolute -top-6 sm:-top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#C8385E] w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center rounded-sm z-10">
-                    <Clipboard className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Clipboard className="w-4 sm:w-5 h-4 sm:h-5" />
                   </div>
 
                   <div className="h-28 sm:h-32 md:h-36 relative rounded-md overflow-hidden">
@@ -208,7 +208,7 @@ export default function OurStoryPage() {
                     />
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm mt-2 text-gray-700">{image.caption}</p>
+                <p className="text-xs sm:text-sm mt-2 text-gray-700 line-clamp-2">{image.caption}</p>
               </div>
             ))}
           </div>
@@ -216,122 +216,330 @@ export default function OurStoryPage() {
       </section>
 
       {/* Our True Simple Story Section */}
-      <section className="py-8 sm:py-12 md:py-16">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-            <div className="w-full md:w-2/3">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-4 sm:mb-6 font-domine">
-                Our True Simple Story
-              </h2>
-              <div className="text-gray-700 space-y-3 sm:space-y-4 text-sm sm:text-base font-inter">
-                <p>
-                  When we say &quot;our story,&quot; we are not merely putting pleasing
-                  words together to gain credibility or seek gratification. No, it
-                  is much deeper than that, a lot more personal, and of course
-                  very spiritual. This adventure recounts raw, unbroken
-                  testimonies of real people, actual situations, and of God&apos;s
-                  divine empowerment. We are narrating the story of how God used a
-                  few individuals collectively to make this platform you have here
-                  today. Consequently, we are thankful to God for His direction,
-                  we acknowledge God&apos;s sovereignty and His ultimate hand in making
-                  this vision a reality.
-                </p>
-                <p>
-                  Before we get on with the story, first, introductions. We of
-                  &quot;The DaBible Foundation&quot; are a team of energetic youths doing
-                  the work of God. We are glad to have brought you the Yoruba
-                  Audio Bible app and the Pidgin Audio Bible app. As mere workers
-                  in His vineyard, we&apos;ve worked tirelessly to make these projects
-                  possible. Many among us are not professionals, some are even
-                  college students, but we are all people who God ordained to
-                  accomplish His task. A quick note: we are not a church, as our
-                  DaBible foundation leader once said, &quot;When God commits you to do
-                  something, He will empower you to do it.&quot; This is our belief in
-                  the DaBible foundation. You will come to know some of our team
-                  members, in fact, we have listed a few of our team members
-                  below. On that note, there are also quite a several people that
-                  have been pivotal to the success of our project that may not
-                  appear on this list. We haven&apos;t forgotten, and indeed God has
-                  not either; we appreciate all you have done and continue to do.
-                  Finally, we are particularly grateful to our crew that brought
-                  us the Hausa bible audio. You all are remarkable. Your
-                  consistency and zeal have significantly expedited the future
-                  release of the Hausa audio bible app. Thank you.
-                </p>
-              </div>
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row">
+          <div className="w-full md:w-2/3 pr-0 md:pr-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6 font-domine">
+              Our True Simple Story
+            </h2>
+            <div className="text-gray-700 space-y-4 text-sm md:text-base font-inter">
+              <p>
+                When we say &quot;our story,&quot; we are not merely putting pleasing
+                words together to gain credibility or seek gratification. No, it
+                is much deeper than that, a lot more personal, and of course
+                very spiritual. This adventure recounts raw, unbroken
+                testimonies of real people, actual situations, and of God&apos;s
+                divine empowerment. We are narrating the story of how God used a
+                few individuals collectively to make this platform you have here
+                today. Consequently, we are thankful to God for His direction,
+                we acknowledge God&apos;s sovereignty and His ultimate hand in making
+                this vision a reality.
+              </p>
+              <p>
+                Before we get on with the story, first, introductions. We of
+                &quot;The DaBible Foundation&quot; are a team of energetic youths doing
+                the work of God. We are glad to have brought you the Yoruba
+                Audio Bible app and the Pidgin Audio Bible app. As mere workers
+                in His vineyard, we&apos;ve worked tirelessly to make these projects
+                possible. Many among us are not professionals, some are even
+                college students, but we are all people who God ordained to
+                accomplish His task. A quick note: we are not a church, as our
+                DaBible foundation leader once said, &quot;When God commits you to do
+                something, He will empower you to do it.&quot; This is our belief in
+                the DaBible foundation. You will come to know some of our team
+                members, in fact, we have listed a few of our team members
+                below. On that note, there are also quite a several people that
+                have been pivotal to the success of our project that may not
+                appear on this list. We haven&apos;t forgotten, and indeed God has
+                not either; we appreciate all you have done and continue to do.
+                Finally, we are particularly grateful to our crew that brought
+                us the Hausa bible audio. You all are remarkable. Your
+                consistency and zeal have significantly expedited the future
+                release of the Hausa audio bible app. Thank you.
+              </p>
             </div>
-            <div className="w-full md:w-1/3 mt-6 md:mt-0">
-              <div className="bg-blue-500 h-full rounded-lg min-h-[200px] sm:min-h-[300px]"></div>
-            </div>
+          </div>
+          <div className="w-full md:w-1/3 mt-8 md:mt-0">
+            <div className="bg-blue-500 h-full rounded-lg"></div>
           </div>
         </div>
       </section>
 
       {/* Red Arrow Section */}
-      <section className="py-6 sm:py-8 flex justify-center">
+      <section className="py-8 flex justify-center">
         <Image
           src="/png/right-down2.png"
           alt="Red arrow pointing to the story"
-          width={160}
-          height={160}
-          className="w-40 sm:w-48 md:w-56"
+          width={220}
+          height={220}
         />
       </section>
 
       {/* The Story Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center font-domine font-bold text-[#023E8A] mb-6">
+      <section className="py-12 md:py-16 bg-white">
+        <div className="m-container mx-auto px-4">
+          <h2 className="text-2xl text-center font-domine md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6">
             The Story
           </h2>
 
-          <div className="max-w-4xl font-inter mx-auto text-[#121212] space-y-4 sm:space-y-6 text-sm sm:text-base">
-            {/* ... Rest of the story content remains the same ... */}
+          <div className="max-w-4xl font-inter mx-auto text-[#121212] space-y-6 text-sm md:text-base">
+            <p>
+              When we say &quot;our story,&quot; we are not merely putting pleasing words
+              together for credibility or gratification. This adventure recounts
+              true stories of real people and God&apos;s faithfulness. Reinhard&apos;s
+              journey began with a divine encounter, which led him to pray and
+              intercede for souls. Little did he know that God was already
+              working with another person on the other side of the world, who
+              would join hands to give birth to the DaBible Foundation.
+            </p>
+
+            <p>
+              Before we get started with the story, let&apos;s do some introductions.
+              We at &quot;The DaBible Foundation&quot; are a team of energetic, young
+              people. Some members of the team are college students, and others
+              have accepted Christ as their savior and are working for His
+              kingdom. You&apos;ll get to know some of our team members listed on
+              this page. Several people have also been pivotal to the project&apos;s
+              success, who may not be listed here. We haven&apos;t forgotten, and
+              indeed, God hasn&apos;t either; we appreciate all the members of our
+              crew for all that they continue to do.
+            </p>
+
+            <h3 className="text-xl font-bold mt-8 mb-4">2013 - 2014</h3>
+
+            <p className="italic">
+              Two weeks before arriving in the United States, I, Sanmi, got
+              saved. Before this, I lived an unholy lifestyle; I was a drunk, a
+              chronic womanizer, and most sickening of all were my fraudulent
+              escapades. Thankfully, I found salvation, and I began my journey
+              with the Lord. I must confess, though, that en route to the US, I
+              intended to return to my old ways. I dreamed that I wouldn&apos;t need
+              God anymore. I was keen on getting drunk and womanizing my way
+              into the future. I had set my life to start all over again. I can
+              as well take it back sincerely, it&apos;s not something I&apos;m proud of.
+            </p>
+
+            <p className="italic">
+              Upon arrival the hospitable family had a place in their library
+              for me to sleep. Surrounded by books, I forgot my plans and
+              started studying Christian books frequently. I especially studied
+              the word. Which gradually exposed to me I knew little. The Bible
+              was this interesting; I was hungry for the word of God. I found
+              that I lost the urge to drink alcohol, and for the first time in
+              my life, the once overwhelming lust for the opposite sex was
+              killed. All I wanted now was to know more about God. So, I kept
+              reading and learning, guided only by the Holy Spirit. This went on
+              for six months...
+            </p>
+
+            <p>
+              I started living victoriously after I had undergone a total life
+              change. I got the counsel of my brother, Jembola, who had always
+              been chastity and holy-judgment. Strongly, we reconnected, and he
+              began to provide answers, scriptures, and expressions that made
+              sense. Little did I know that Damascus was also praying for the
+              salvation of my soul in Nigeria. Back in Nigeria, I was incredibly
+              selfish, ruthless, and employed every crooked method to make
+              money. Besides, I was a hip-hop artist during the week and a
+              backup vocalist of a live band on weekends. I&apos;m often in the
+              studio, singing, and producing for multiple ladies. Now that I
+              have no idea what to do with my life, I was praying earnestly for
+              God to give me a purpose.
+            </p>
+
+            <p>
+              The King James Bible was complicated for me to understand. I love
+              my KJV because it forces me to study using several translations,
+              which has been key to understanding, but it was still difficult.
+              How can I keep reading even when I tend to yawn? I went online and
+              found an audio narration of the Bible. Oh, what a blessing! So,
+              I&apos;ll listen to the audio first, then read! My friend and disciple
+              Demilade was also leading me to pray earnestly every night. One of
+              those nights, I was praying saying, &quot;God, give me an idea that
+              would turn my life around!&quot; And He did. To my surprise, I wasn&apos;t
+              given just one idea but three. I had heard a clear, audible voice,
+              &quot;Build me an Audio Bible!&quot;
+            </p>
+
+            <h3 className="text-xl font-bold mt-8 mb-4">2015</h3>
+
+            <p>
+              Being recently converted, I was pretty skeptical. It was my first
+              such experience, and I needed to be sure it was the voice of the
+              Lord. Then the Holy Spirit ministered to me in the form of a
+              question, &quot;What will Satan gain from you building a bible app?&quot;
+              That put an end to my doubts. Though I felt quite inadequate - I
+              hadn&apos;t even thoroughly read the Bible. How was I going to create a
+              Bible app? That was the challenge. I recalled the personal
+              testimony of the late evangelist Reinhard Bonnke about how God
+              showed him a map of Africa covered in blood and the voice crying
+              &quot;Africa must be saved.&quot; I thought of the mighty works God wrought
+              through Reinhard Bonnke and felt instantly invigorated.
+            </p>
+
+            <p>
+            &quot;God said I should do it.&quot; &quot;I am all for it.&quot; &quot;So far He says it,
+              I am up on my feet!&quot; I told myself.
+            </p>
+
+            <p>
+              The first thing I did was research how many people were searching
+              for a Yoruba Audio Bible app. Using my SEO skills, I quickly found
+              the numbers. They were only about 55 searches.
+            </p>
+
+            <p>
+              Once again, I became discouraged, but quickly recovered, trusting
+              that God had a plan. And yes, He did. I was led to call a friend;
+              I felt sure he was the one I needed to speak to about this
+              project. I reached for my phone and quickly dialed Abide Olumide,
+              and the rest is history. We recorded the Yoruba Bible in Ibadan,
+              Nigeria, over the course of about a year and released the app in
+              early 2016.
+            </p>
+
+            <p>
+              We have not created the Yoruba Audio Bible mobile app, which has
+              over 196,584 users in the last 4 years. But we have gone on to
+              make similar apps for the Pidgin and Hausa languages. We thank God
+              for how far we have come. Despite the challenges we face, we keep
+              growing each time. We are currently releasing a Solar Audio
+              Device, which will be distributed to remote parts of Africa where
+              mobile app penetration is low. Apart from the technological side
+              of things, we have been heavily involved in evangelism through our
+              team of missionaries, who take the gospel to villages and
+              communities. We are grateful to God that He&apos;s enabled us to reach
+              so many people through our platform.
+            </p>
+
+            <p>
+              Today, the DaBible Foundation stands as a beacon of hope.
+              Administered by the transformative power of faith and the
+              boundless potential of collaboration. As they continue to expand
+              their reach and impact, they invite like-minded individuals to
+              join them on their journey. Whether you&apos;re a seasoned
+              professional, a passionate volunteer, or simply someone eager to
+              make a difference, the DaBible Foundation welcomes you with open
+              arms. Together, let&apos;s write the next chapter of our story, united
+              in our mission to empower missionaries, enrich communities, and
+              illuminate hearts with the timeless power of God&apos;s Word.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Our Achievements Section */}
-      <section className="py-8 sm:py-12 md:py-16">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-domine font-bold text-[#023E8A] mb-6 sm:mb-8">
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-domine font-bold text-[#023E8A] mb-8">
             Our Achievements
           </h2>
 
-          <div className="teal-gradient rounded-xl p-4 sm:p-6 md:p-10 text-white">
+          <div className="teal-gradient rounded-xl p-6 md:p-10 text-white">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               <div className="flex flex-col items-center">
-                <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-montserrat">
+                <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
                   239k+
                 </h3>
-                <p className="text-base sm:text-lg md:text-xl font-mada max-w-[250px]">
+                <p className=" md:text-xl font-mada max-w-[250px] text-lg ">
                   Downloads across all our apps as of 2020
                 </p>
               </div>
 
-              {/* ... Other achievement items with similar responsive classes ... */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-4xl md:text-5xl font-bold font-montserrat mb-2">
+                  11k+
+                </h3>
+                <p className="md:text-xl font-mada max-w-[250px] text-lg">
+                  Active monthly users served across all our apps
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
+                  $50k+
+                </h3>
+                <p className="md:text-xl font-mada max-w-[250px] text-lg">
+                  Raised from donations
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
+                  7 Years
+                </h3>
+                <p className=" md:text-xl font-mada max-w-[250px] text-lg">
+                  Building and deploying
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Expectations Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-1/2">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-4 sm:mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6">
                 Our Expectations At DaBible Foundation
               </h2>
 
-              <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700">
-                {/* ... Expectations content remains the same ... */}
+              <div className="space-y-4 text-sm md:text-base text-gray-700">
+                <p className="font-semibold">
+                  DaBible Foundation welcomes entrepreneurs, techies, and
+                  developers who want to contribute to our mission. Our project
+                  is open source and available on GitHub—visit our developer
+                  page to learn more.
+                </p>
+
+                <p>
+                  We&apos;re deeply grateful to our patrons for their generous
+                  support. Your help powers ongoing projects, including new
+                  language recordings. We&apos;re always looking for passionate
+                  individuals to join us in spreading God&apos;s Word globally.
+                </p>
+
+                <p>
+                  A special burden on our hearts is reaching elderly people in
+                  remote villages who struggle with mobile apps. We&apos;re working
+                  with Chinese partners to create easy-to-use audio Bible
+                  devices—completely free for the elderly.
+                </p>
+
+                <p>
+                  To support this, we&apos;re launching the &quot;Empower 5,000&quot; Device
+                  Evangelism Campaign. With your help, we aim to distribute
+                  5,000 devices through our village evangelism teams. We trust
+                  God to provide, just as He has through your continued
+                  encouragement.
+                </p>
               </div>
             </div>
 
             <div className="w-full md:w-1/2 relative">
-              <div className="relative h-[250px] sm:h-[300px] md:h-[400px] overflow-hidden">
-                {/* ... Image layout remains the same ... */}
+              <div className="relative h-[300px] md:h-[400px] overflow-hidden">
+                <div className="absolute inset-0 border-[16px] border-blue-100 border-dashed rounded-lg transform rotate-3 z-10"></div>
+                <div className="absolute inset-0 border-[16px] border-red-100 border-dashed rounded-lg transform -rotate-2 z-20"></div>
+
+                <div className="absolute top-8 left-8 w-3/4 h-3/4 z-30">
+                  <Image
+                    src="/mission-field.png"
+                    alt="Mission field"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+
+                <div className="absolute bottom-8 right-8 w-1/2 h-1/2 z-40">
+                  <Image
+                    src="/village-outreach.png"
+                    alt="Village outreach"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -339,9 +547,9 @@ export default function OurStoryPage() {
       </section>
 
       {/* Meet The Team Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-8 sm:mb-12 text-center">
+      <section className="py-12 md:py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-12 text-center">
             Meet The Team
           </h2>
 
