@@ -315,6 +315,15 @@ export default function DonationPage() {
 
             {/* Yoruba Audio Bible */}
             <div className="bg-[#FEE4EA] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#7B0423] flex flex-col">
+              <div className="absolute top-0 -translate-x-1/2 left-1/2">
+                <Image
+                  src="/svg/ripple-circle2.svg"
+                  alt="Solar Audio Bible Device"
+                  width={400}
+                  height={400}
+                />
+              </div>
+
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -438,6 +447,14 @@ export default function DonationPage() {
 
             {/* Hausa Audio Bible */}
             <div className="bg-[#E0FFE4] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#19832F] flex flex-col">
+                        <div className="absolute top-0 -translate-x-1/2 left-1/2">
+                <Image
+                  src="/svg/ripple-circle2.svg"
+                  alt="Solar Audio Bible Device"
+                  width={400}
+                  height={400}
+                />
+              </div>
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -560,6 +577,14 @@ export default function DonationPage() {
 
             {/* Pidgin Audio Bible */}
             <div className="bg-[#E3F2FD] group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 text-[#3EA7F7] flex flex-col">
+                        <div className="absolute top-0 -translate-x-1/2 left-1/2">
+                <Image
+                  src="/svg/ripple-circle2.svg"
+                  alt="Solar Audio Bible Device"
+                  width={400}
+                  height={400}
+                />
+              </div>
               <div className="flex justify-center items-center">
                 <div className="relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]">
                   <Image
@@ -699,7 +724,8 @@ export default function DonationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button className="bg-[#7B0423] hover:bg-red-900 text-xs sm:text-sm py-2 w-full sm:w-auto">
-                    <Gift className="mr-1" />DONATE
+                  <Gift className="mr-1" />
+                  DONATE
                 </Button>
                 <Button
                   variant="outline"

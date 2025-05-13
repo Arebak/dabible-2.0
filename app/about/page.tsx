@@ -11,7 +11,7 @@ export default function OurStoryPage() {
         { name: "Demilade Adetuberu", role: "Founder", image: "/png/demi.png" },
         { name: "Sanmi Ayotunde", role: "Co-Founder", image: "/png/sanmi.png" },
         {
-          name: "Chineye Chidebelu", 
+          name: "Chineye Chidebelu",
           role: "Senior Manager",
           image: "/png/nenye.png",
         },
@@ -55,7 +55,7 @@ export default function OurStoryPage() {
       ],
     },
     {
-      title: "Pidgin Bible Crew", 
+      title: "Pidgin Bible Crew",
       members: [
         {
           name: "Kolawole Oduremi",
@@ -148,11 +148,11 @@ export default function OurStoryPage() {
 
         <div className="max-w-3xl mx-auto">
           <p className="text-base sm:text-lg md:text-xl font-medium text-gray-700 mb-4 sm:mb-6 md:mb-8 font-mada px-4 sm:px-6">
-            &quot;Just recently converted, and I was quite skeptical. It was my first
-            such experience, and I needed to be sure it was the voice of the
-            Lord. The Holy Spirit ministered to me in the form of a question
-            &quot;What will Satan gain from you building a bible app?&quot; That put an
-            end to my doubts.&quot;
+            &quot;Just recently converted, and I was quite skeptical. It was my
+            first such experience, and I needed to be sure it was the voice of
+            the Lord. The Holy Spirit ministered to me in the form of a question
+            &quot;What will Satan gain from you building a bible app?&quot; That
+            put an end to my doubts.&quot;
           </p>
         </div>
       </section>
@@ -208,7 +208,9 @@ export default function OurStoryPage() {
                     />
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm mt-2 text-gray-700 line-clamp-2">{image.caption}</p>
+                <p className="text-xs sm:text-sm mt-2 text-gray-700 line-clamp-2">
+                  {image.caption}
+                </p>
               </div>
             ))}
           </div>
@@ -216,7 +218,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* Our True Simple Story Section */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16 bg-[url('/png/blue-pattern.png')] bg-no-repeat bg-contain bg-right">
         <div className="container mx-auto px-4 flex flex-col md:flex-row">
           <div className="w-full md:w-2/3 pr-0 md:pr-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6 font-domine">
@@ -224,43 +226,50 @@ export default function OurStoryPage() {
             </h2>
             <div className="text-gray-700 space-y-4 text-sm md:text-base font-inter">
               <p>
-                When we say &quot;our story,&quot; we are not merely putting pleasing
-                words together to gain credibility or seek gratification. No, it
-                is much deeper than that, a lot more personal, and of course
-                very spiritual. This adventure recounts raw, unbroken
-                testimonies of real people, actual situations, and of God&apos;s
-                divine empowerment. We are narrating the story of how God used a
-                few individuals collectively to make this platform you have here
-                today. Consequently, we are thankful to God for His direction,
-                we acknowledge God&apos;s sovereignty and His ultimate hand in making
-                this vision a reality.
+                When we say &quot;our story,&quot; we are not merely putting
+                pleasing words together to gain credibility or seek
+                gratification. No, it is much deeper than that, a lot more
+                personal, and of course very spiritual. This adventure recounts
+                raw, unbroken testimonies of real people, actual situations, and
+                of God&apos;s divine empowerment. We are narrating the story of
+                how God used a few individuals collectively to make this
+                platform you have here today. Consequently, we are thankful to
+                God for His direction, we acknowledge God&apos;s sovereignty and
+                His ultimate hand in making this vision a reality.
               </p>
               <p>
                 Before we get on with the story, first, introductions. We of
-                &quot;The DaBible Foundation&quot; are a team of energetic youths doing
-                the work of God. We are glad to have brought you the Yoruba
-                Audio Bible app and the Pidgin Audio Bible app. As mere workers
-                in His vineyard, we&apos;ve worked tirelessly to make these projects
-                possible. Many among us are not professionals, some are even
-                college students, but we are all people who God ordained to
-                accomplish His task. A quick note: we are not a church, as our
-                DaBible foundation leader once said, &quot;When God commits you to do
-                something, He will empower you to do it.&quot; This is our belief in
-                the DaBible foundation. You will come to know some of our team
-                members, in fact, we have listed a few of our team members
-                below. On that note, there are also quite a several people that
-                have been pivotal to the success of our project that may not
-                appear on this list. We haven&apos;t forgotten, and indeed God has
-                not either; we appreciate all you have done and continue to do.
-                Finally, we are particularly grateful to our crew that brought
-                us the Hausa bible audio. You all are remarkable. Your
-                consistency and zeal have significantly expedited the future
-                release of the Hausa audio bible app. Thank you.
+                &quot;The DaBible Foundation&quot; are a team of energetic
+                youths doing the work of God. We are glad to have brought you
+                the Yoruba Audio Bible app and the Pidgin Audio Bible app. As
+                mere workers in His vineyard, we&apos;ve worked tirelessly to
+                make these projects possible. Many among us are not
+                professionals, some are even college students, but we are all
+                people who God ordained to accomplish His task. A quick note: we
+                are not a church, as our DaBible foundation leader once said,
+                &quot;When God commits you to do something, He will empower you
+                to do it.&quot; This is our belief in the DaBible foundation.
+                You will come to know some of our team members, in fact, we have
+                listed a few of our team members below. On that note, there are
+                also quite a several people that have been pivotal to the
+                success of our project that may not appear on this list. We
+                haven&apos;t forgotten, and indeed God has not either; we
+                appreciate all you have done and continue to do. Finally, we are
+                particularly grateful to our crew that brought us the Hausa
+                bible audio. You all are remarkable. Your consistency and zeal
+                have significantly expedited the future release of the Hausa
+                audio bible app. Thank you.
               </p>
             </div>
           </div>
-          <div className="w-full md:w-1/3 mt-8 md:mt-0">
-            <div className="bg-blue-500 h-full rounded-lg"></div>
+          <div className="w-full flex items-center justify-center md:w-1/3 mt-8 md:mt-0">
+            <Image
+              src={"/png/story.png"}
+              alt="Our Story"
+              width={400}
+              height={400}
+              className="rounded-lg shadow-lg"
+            />
           </div>
         </div>
       </section>
@@ -268,7 +277,7 @@ export default function OurStoryPage() {
       {/* Red Arrow Section */}
       <section className="py-8 flex justify-center">
         <Image
-          src="/png/right-down2.png"
+          src="/svg/right-down2.svg"
           alt="Red arrow pointing to the story"
           width={220}
           height={220}
@@ -284,25 +293,27 @@ export default function OurStoryPage() {
 
           <div className="max-w-4xl font-inter mx-auto text-[#121212] space-y-6 text-sm md:text-base">
             <p>
-              When we say &quot;our story,&quot; we are not merely putting pleasing words
-              together for credibility or gratification. This adventure recounts
-              true stories of real people and God&apos;s faithfulness. Reinhard&apos;s
-              journey began with a divine encounter, which led him to pray and
-              intercede for souls. Little did he know that God was already
-              working with another person on the other side of the world, who
-              would join hands to give birth to the DaBible Foundation.
+              When we say &quot;our story,&quot; we are not merely putting
+              pleasing words together for credibility or gratification. This
+              adventure recounts true stories of real people and God&apos;s
+              faithfulness. Reinhard&apos;s journey began with a divine
+              encounter, which led him to pray and intercede for souls. Little
+              did he know that God was already working with another person on
+              the other side of the world, who would join hands to give birth to
+              the DaBible Foundation.
             </p>
 
             <p>
-              Before we get started with the story, let&apos;s do some introductions.
-              We at &quot;The DaBible Foundation&quot; are a team of energetic, young
-              people. Some members of the team are college students, and others
-              have accepted Christ as their savior and are working for His
-              kingdom. You&apos;ll get to know some of our team members listed on
-              this page. Several people have also been pivotal to the project&apos;s
-              success, who may not be listed here. We haven&apos;t forgotten, and
-              indeed, God hasn&apos;t either; we appreciate all the members of our
-              crew for all that they continue to do.
+              Before we get started with the story, let&apos;s do some
+              introductions. We at &quot;The DaBible Foundation&quot; are a team
+              of energetic, young people. Some members of the team are college
+              students, and others have accepted Christ as their savior and are
+              working for His kingdom. You&apos;ll get to know some of our team
+              members listed on this page. Several people have also been pivotal
+              to the project&apos;s success, who may not be listed here. We
+              haven&apos;t forgotten, and indeed, God hasn&apos;t either; we
+              appreciate all the members of our crew for all that they continue
+              to do.
             </p>
 
             <h3 className="text-xl font-bold mt-8 mb-4">2013 - 2014</h3>
@@ -313,10 +324,11 @@ export default function OurStoryPage() {
               chronic womanizer, and most sickening of all were my fraudulent
               escapades. Thankfully, I found salvation, and I began my journey
               with the Lord. I must confess, though, that en route to the US, I
-              intended to return to my old ways. I dreamed that I wouldn&apos;t need
-              God anymore. I was keen on getting drunk and womanizing my way
-              into the future. I had set my life to start all over again. I can
-              as well take it back sincerely, it&apos;s not something I&apos;m proud of.
+              intended to return to my old ways. I dreamed that I wouldn&apos;t
+              need God anymore. I was keen on getting drunk and womanizing my
+              way into the future. I had set my life to start all over again. I
+              can as well take it back sincerely, it&apos;s not something
+              I&apos;m proud of.
             </p>
 
             <p className="italic">
@@ -353,12 +365,12 @@ export default function OurStoryPage() {
               which has been key to understanding, but it was still difficult.
               How can I keep reading even when I tend to yawn? I went online and
               found an audio narration of the Bible. Oh, what a blessing! So,
-              I&apos;ll listen to the audio first, then read! My friend and disciple
-              Demilade was also leading me to pray earnestly every night. One of
-              those nights, I was praying saying, &quot;God, give me an idea that
-              would turn my life around!&quot; And He did. To my surprise, I wasn&apos;t
-              given just one idea but three. I had heard a clear, audible voice,
-              &quot;Build me an Audio Bible!&quot;
+              I&apos;ll listen to the audio first, then read! My friend and
+              disciple Demilade was also leading me to pray earnestly every
+              night. One of those nights, I was praying saying, &quot;God, give
+              me an idea that would turn my life around!&quot; And He did. To my
+              surprise, I wasn&apos;t given just one idea but three. I had heard
+              a clear, audible voice, &quot;Build me an Audio Bible!&quot;
             </p>
 
             <h3 className="text-xl font-bold mt-8 mb-4">2015</h3>
@@ -367,19 +379,20 @@ export default function OurStoryPage() {
               Being recently converted, I was pretty skeptical. It was my first
               such experience, and I needed to be sure it was the voice of the
               Lord. Then the Holy Spirit ministered to me in the form of a
-              question, &quot;What will Satan gain from you building a bible app?&quot;
-              That put an end to my doubts. Though I felt quite inadequate - I
-              hadn&apos;t even thoroughly read the Bible. How was I going to create a
-              Bible app? That was the challenge. I recalled the personal
-              testimony of the late evangelist Reinhard Bonnke about how God
-              showed him a map of Africa covered in blood and the voice crying
-              &quot;Africa must be saved.&quot; I thought of the mighty works God wrought
-              through Reinhard Bonnke and felt instantly invigorated.
+              question, &quot;What will Satan gain from you building a bible
+              app?&quot; That put an end to my doubts. Though I felt quite
+              inadequate - I hadn&apos;t even thoroughly read the Bible. How was
+              I going to create a Bible app? That was the challenge. I recalled
+              the personal testimony of the late evangelist Reinhard Bonnke
+              about how God showed him a map of Africa covered in blood and the
+              voice crying &quot;Africa must be saved.&quot; I thought of the
+              mighty works God wrought through Reinhard Bonnke and felt
+              instantly invigorated.
             </p>
 
             <p>
-            &quot;God said I should do it.&quot; &quot;I am all for it.&quot; &quot;So far He says it,
-              I am up on my feet!&quot; I told myself.
+              &quot;God said I should do it.&quot; &quot;I am all for it.&quot;
+              &quot;So far He says it, I am up on my feet!&quot; I told myself.
             </p>
 
             <p>
@@ -408,8 +421,8 @@ export default function OurStoryPage() {
               mobile app penetration is low. Apart from the technological side
               of things, we have been heavily involved in evangelism through our
               team of missionaries, who take the gospel to villages and
-              communities. We are grateful to God that He&apos;s enabled us to reach
-              so many people through our platform.
+              communities. We are grateful to God that He&apos;s enabled us to
+              reach so many people through our platform.
             </p>
 
             <p>
@@ -420,9 +433,9 @@ export default function OurStoryPage() {
               join them on their journey. Whether you&apos;re a seasoned
               professional, a passionate volunteer, or simply someone eager to
               make a difference, the DaBible Foundation welcomes you with open
-              arms. Together, let&apos;s write the next chapter of our story, united
-              in our mission to empower missionaries, enrich communities, and
-              illuminate hearts with the timeless power of God&apos;s Word.
+              arms. Together, let&apos;s write the next chapter of our story,
+              united in our mission to empower missionaries, enrich communities,
+              and illuminate hearts with the timeless power of God&apos;s Word.
             </p>
           </div>
         </div>
@@ -481,7 +494,7 @@ export default function OurStoryPage() {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8">
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 md:flex-[0.4]">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6">
                 Our Expectations At DaBible Foundation
               </h2>
@@ -503,43 +516,29 @@ export default function OurStoryPage() {
 
                 <p>
                   A special burden on our hearts is reaching elderly people in
-                  remote villages who struggle with mobile apps. We&apos;re working
-                  with Chinese partners to create easy-to-use audio Bible
-                  devices—completely free for the elderly.
+                  remote villages who struggle with mobile apps. We&apos;re
+                  working with Chinese partners to create easy-to-use audio
+                  Bible devices—completely free for the elderly.
                 </p>
 
                 <p>
-                  To support this, we&apos;re launching the &quot;Empower 5,000&quot; Device
-                  Evangelism Campaign. With your help, we aim to distribute
-                  5,000 devices through our village evangelism teams. We trust
-                  God to provide, just as He has through your continued
-                  encouragement.
+                  To support this, we&apos;re launching the &quot;Empower
+                  5,000&quot; Device Evangelism Campaign. With your help, we aim
+                  to distribute 5,000 devices through our village evangelism
+                  teams. We trust God to provide, just as He has through your
+                  continued encouragement.
                 </p>
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 relative">
-              <div className="relative h-[300px] md:h-[400px] overflow-hidden">
-                <div className="absolute inset-0 border-[16px] border-blue-100 border-dashed rounded-lg transform rotate-3 z-10"></div>
-                <div className="absolute inset-0 border-[16px] border-red-100 border-dashed rounded-lg transform -rotate-2 z-20"></div>
-
-                <div className="absolute top-8 left-8 w-3/4 h-3/4 z-30">
-                  <Image
-                    src="/mission-field.png"
-                    alt="Mission field"
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </div>
-
-                <div className="absolute bottom-8 right-8 w-1/2 h-1/2 z-40">
-                  <Image
-                    src="/village-outreach.png"
-                    alt="Village outreach"
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </div>
+            <div className="w-full md:w-1/2 relative md:flex-[0.6]">
+              <div className="relative h-[300px] md:h-[600px] ">
+                <Image
+                  src="/png/expectations.png"
+                  alt="Village outreach"
+                  fill
+                  className="object-contain rounded-lg"
+                />
               </div>
             </div>
           </div>
