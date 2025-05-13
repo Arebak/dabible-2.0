@@ -6,11 +6,13 @@ import { ChevronDown, Heart, ShoppingCart, Menu } from "lucide-react";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [showProductsDropdown, setShowProductsDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const navigate = (path: string) => {
     router.push(path);
@@ -40,47 +42,47 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-x-12">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-700 hover:text-gray-900"
+            className={`${pathname === "/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
           >
             Home
           </button>
           <button
             onClick={() => navigate("/about")}
-            className="text-gray-700 hover:text-gray-900"
+            className={`${pathname === "/about" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
           >
             About Us
           </button>
           <div className="relative group">
             <button
-              className="text-gray-700 hover:text-gray-900 flex items-center"
+              className={`${pathname.includes("/products") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 flex items-center cursor-pointer`}
               onClick={() => setShowProductsDropdown(!showProductsDropdown)}
             >
-              Products <ChevronDown className="ml-0.5" />
+              Products <ChevronDown className={`ml-0.5 ${pathname.includes("/products") ? "text-[#6B051F]" : ""}`} />
             </button>
             {showProductsDropdown && (
-              <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-10">
+              <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-50">
                 <div className="py-1">
                   <button
                     onClick={() => navigate("/products/solar-audio-bible")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/solar-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                   >
                     Solar Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/hausa-audio-bible")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                   >
                     Hausa Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/yoruba-audio-bible")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/yoruba-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                   >
                     Yoruba Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/pidgin-audio-bible")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/pidgin-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                   >
                     Pidgin Audio Bible
                   </button>
@@ -90,13 +92,13 @@ export default function Header() {
           </div>
           <button
             onClick={() => navigate("/blog")}
-            className="text-gray-700 hover:text-gray-900"
+            className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
           >
             Blog
           </button>
           <button
             onClick={() => navigate("/shop")}
-            className="text-gray-700 hover:text-gray-900"
+            className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
           >
             Shop
           </button>
@@ -107,52 +109,52 @@ export default function Header() {
           <div className="p-4">
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-4 right-4 text-gray-600"
+              className="absolute top-4 right-4 text-gray-600 cursor-pointer"
             >
               ✕
             </button>
             <nav className="mt-12 flex flex-col space-y-4 items-center">
               <button
                 onClick={() => navigate("/")}
-                className="text-gray-700 hover:text-gray-900 py-2"
+                className={`${pathname === "/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
               >
                 Home
               </button>
               <button
                 onClick={() => navigate("/about")}
-                className="text-gray-700 hover:text-gray-900 py-2"
+                className={`${pathname === "/about" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
               >
                 About Us
               </button>
               <button
                 onClick={() => setShowProductsDropdown(!showProductsDropdown)}
-                className="text-gray-700 hover:text-gray-900 py-2 flex items-center"
+                className={`${pathname.includes("/products") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 flex items-center cursor-pointer`}
               >
-                Products <ChevronDown className="ml-2" />
+                Products <ChevronDown className={`ml-2 ${pathname.includes("/products") ? "text-[#6B051F]" : ""}`} />
               </button>
               {showProductsDropdown && (
                 <div className="pl-4 space-y-2">
                   <button
                     onClick={() => navigate("/products/solar-audio-bible")}
-                    className="block w-full text-left py-2 text-sm text-gray-700"
+                    className={`block w-full text-left py-2 text-sm ${pathname === "/products/solar-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
                   >
                     Solar Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/hausa-audio-bible")}
-                    className="block w-full text-left py-2 text-sm text-gray-700"
+                    className={`block w-full text-left py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
                   >
                     Hausa Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/yoruba-audio-bible")}
-                    className="block w-full text-left py-2 text-sm text-gray-700"
+                    className={`block w-full text-left py-2 text-sm ${pathname === "/products/yoruba-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
                   >
                     Yoruba Audio Bible
                   </button>
                   <button
                     onClick={() => navigate("/products/pidgin-audio-bible")}
-                    className="block w-full text-left py-2 text-sm text-gray-700"
+                    className={`block w-full text-left py-2 text-sm ${pathname === "/products/pidgin-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
                   >
                     Pidgin Audio Bible
                   </button>
@@ -160,13 +162,13 @@ export default function Header() {
               )}
               <button
                 onClick={() => navigate("/blog")}
-                className="text-gray-700 hover:text-gray-900 py-2"
+                className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
               >
                 Blog
               </button>
               <button
                 onClick={() => navigate("/shop")}
-                className="text-gray-700 hover:text-gray-900 py-2"
+                className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
               >
                 Shop
               </button>
@@ -177,7 +179,7 @@ export default function Header() {
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="flex items-center border-2 border-[#023E8A] text-[#023E8A]"
+            className="flex items-center border-2 border-[#023E8A] text-[#023E8A] cursor-pointer"
             onClick={() => navigate("/shop")}
           >
             <ShoppingCart className="h-4 w-4 mr-1 text-[#023E8A]" />
@@ -185,7 +187,7 @@ export default function Header() {
           </Button>
           <Button
             onClick={() => navigate("/donation")}
-            className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white"
+            className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white cursor-pointer"
           >
             <span className="hidden sm:inline">DONATE</span>
             <span className="sm:hidden">
@@ -194,7 +196,7 @@ export default function Header() {
           </Button>
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 cursor-pointer"
           >
             <Menu className="h-6 w-6" />
           </button>

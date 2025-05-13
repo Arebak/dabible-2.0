@@ -23,7 +23,7 @@ export default function Footer() {
 
             {/* App Store Buttons */}
             <div className="flex flex-wrap gap-2">
-              <Link href="#" className="inline-block">
+              <Link href="#" className="inline-block hover:underline">
                 <Image
                   src="/png/store.png"
                   alt="Download on the App Store"
@@ -32,7 +32,7 @@ export default function Footer() {
                   className="border border-gray-600 rounded"
                 />
               </Link>
-              <Link href="#" className="inline-block">
+              <Link href="#" className="inline-block hover:underline">
                 <Image
                   src="/png/play.png"
                   alt="Get it on Google Play"
@@ -47,19 +47,19 @@ export default function Footer() {
             <div className="flex gap-4 mt-6">
               <Link
                 href="#"
-                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors"
+                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors hover:underline"
               >
                 <Facebook size={18} />
               </Link>
               <Link
                 href="#"
-                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors"
+                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors hover:underline"
               >
                 <Youtube size={18} />
               </Link>
               <Link
                 href="#"
-                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors"
+                className="bg-white text-blue-950 p-2 rounded-full hover:bg-gray-200 transition-colors hover:underline"
               >
                 <Instagram size={18} />
               </Link>
@@ -73,7 +73,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center text-white hover:text-white transition-colors"
+                  className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Youtube size={18} className="mr-2" />
                   YouTube Channel
@@ -82,7 +82,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center text-white hover:text-white transition-colors"
+                  className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Facebook size={18} className="mr-2" />
                   Facebook Page
@@ -91,7 +91,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="flex items-center text-white hover:text-white transition-colors"
+                  className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Instagram size={18} className="mr-2" />
                   Instagram
@@ -100,7 +100,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="tel:1-509-339-4854"
-                  className="flex items-center text-white hover:text-white transition-colors"
+                  className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Phone size={18} className="mr-2" />
                   1-509-339-4854
@@ -116,7 +116,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Blog
                 </Link>
@@ -124,7 +124,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Shop
                 </Link>
@@ -132,7 +132,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Support
                 </Link>
@@ -147,7 +147,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   About Us
                 </Link>
@@ -155,7 +155,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Privacy Policy
                 </Link>
@@ -163,7 +163,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Terms & Conditions
                 </Link>
