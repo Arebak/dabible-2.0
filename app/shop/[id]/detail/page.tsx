@@ -2,16 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-<<<<<<< HEAD
-=======
 'use client';
 import { Button } from '@/components/ui/button';
->>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useEffect, useState, useMemo } from 'react';
 
-export default function DesignPage() {
+export default function ProductDetailPage() {
   const params = useParams();
   const productId = params?.id;
 
@@ -34,7 +31,7 @@ export default function DesignPage() {
 
   useEffect(() => {
     if (productId) {
-      fetch(`/api/printful-catalog/${productId}`)
+      fetch(`/api/printful-dabible-store/${productId}`)
         .then(res => res.json())
         .then(data => {
           setProduct(data);
@@ -200,29 +197,6 @@ export default function DesignPage() {
       {/* Left Side: Vertical Gallery */}
       <div className="flex gap-4 md:max-h-[600px]">
         <div id={product?.product?.id} className="flex flex-col gap-4 overflow-y-auto max-h-[600px] w-40 p-1">
-<<<<<<< HEAD
-          {thumbnailsByColor.map((variant: any) => (
-            <Image
-              key={variant.id}
-              src={variant.image}
-              alt={`${variant.color} - ${variant.size}`}
-              width={120}
-              height={120}
-              className={`w-full h-30 border rounded object-contain cursor-pointer hover:ring-2 hover:ring-[#A0072F] ${
-                selectedVariant?.id === variant.id ? 'ring-2 ring-[#A0072F]' : ''
-              }`}
-              onClick={() => {
-                setSelectedSize(variant.size);
-                setSelectedColor(variant.color_code);
-              }}
-            />
-          ))}
-        </div>
-        <div className="w-full aspect-square border rounded-xl overflow-hidden">
-          <Image src={selectedVariant?.image || product?.product?.image} alt={product?.product?.title} className="object-contain w-full h-full" width={120} height={120} />
-          
-        </div>
-=======
           {thumbnailsByColor.map((group: any, idx: number) => (
             <div key={group.view || idx} className="mb-2">
               {/* Only label if more than one group or view is not Default */}
@@ -265,7 +239,6 @@ export default function DesignPage() {
             />
           </div>
         )}
->>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
       </div>
 
       {/* Right Side: Product Info and Selectors */}
@@ -344,31 +317,6 @@ export default function DesignPage() {
           <h2 className="font-medium mb-2 font-nunito">Select Colour</h2>
           <div className="flex gap-3">
             {[...new Set(product?.variants?.map((v: any) => v.color_code))].map((color, idx) => (
-<<<<<<< HEAD
-              <button
-                key={idx}
-                onClick={() => setSelectedColor("#000")}
-                className={`w-8 h-8 rounded-full border-2 relative flex items-center justify-center focus:outline-none ${
-                  selectedColor === color ? 'ring-2 ring-blue-500 border-blue-500' : 'border-gray-300'
-                }`}
-                // style={{ backgroundColor: color }}
-                aria-label={`Select color ${color}`}
-              >
-                {selectedColor === color && (
-                  <svg
-                    className="w-4 h-4"
-                    fill={color === '#ffffff' ? 'black' : 'white'}
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                )}
-              </button>
-=======
               <div key={idx} className="relative group">
                 <Button
                   onClick={() => setSelectedColor(color as string)}
@@ -396,7 +344,6 @@ export default function DesignPage() {
                   {product?.variants?.find((v: { color_code: unknown; }) => v.color_code === color)?.color || color}
                 </div>
               </div>
->>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
             ))}
           </div>
         </div>

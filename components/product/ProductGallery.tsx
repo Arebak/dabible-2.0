@@ -35,9 +35,10 @@ export function ProductGallery({ products = [] }: ProductGalleryProps) {
     <div className="flex flex-col">
       <div className="w-full flex gap-8 flex-wrap justify-center">
         {paginatedProducts?.map((product) => {
-          const isPrintfulProduct = product.id.startsWith('printful_');
+          // const isPrintfulProduct = product.id.startsWith('printful_');
+          const isPrintfulProduct = product.id;
           const productHref = isPrintfulProduct
-            ? `/shop/${product.id}/design`
+            ? `/shop/${product.id}/detail`
             : `/shop/${product.id}`;
 
           return (

@@ -11,14 +11,17 @@ const ProductList = () => {
   const [FilterVisible, setFilterVisible] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [category, setCategory] = useState<string>("");
+  // const [category, setCategory] = useState<string>("");
+  const category = "all"; //replace with above line when category is implemented
 
   // SET EITHER STRIPE OR LOCAL PRODUCTS TO TRUE OR FALSE.
   const sources = useMemo(
     () => ({
-      stripe: true, // // Fetch products from Stripe
+      stripe: false, // // Fetch products from Stripe
       local: false,  // // Fetch products from local source
       printful: false, // // Fetch products from Printful
+      printful_dabible_store: true, // // Fetch products from Printful Dabible Store
+
     }),
     []
   );
@@ -57,19 +60,20 @@ const ProductList = () => {
           <FilterSidebar
             setSelectedSizes={setSelectedSizes}
             setSelectedColors={setSelectedColors}
-            setCategory={setCategory}
+            // setCategory={setCategory}
           />
         )}
 
         <ProductGallery
           products={filteredProducts.products.map((product) => ({
             ...product,
-            title: product.name || product.title ||  "Untitled Product",
+            title: product.name || product.title || "Untitled Product",
             price: product.price || 0,
-            imageSrc: product.imageSrc || "/placeholder-image.png",
+            imageSrc: product.imageSrc || product.thumbnail_url || "/placeholder-image.png",
             imageAlt: product.imageAlt || "Product image",
             description: product.description || "",
             default_price: product.default_price || 0,
+            thumbnail_url: product.thumbnail_url || "/placeholder-image.png",
           }))}
         />
       </div>

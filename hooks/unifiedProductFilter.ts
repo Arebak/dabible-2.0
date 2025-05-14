@@ -15,6 +15,7 @@ interface SourceOptions {
   stripe?: boolean;
   local?: boolean;
   printful?: boolean;
+  printful_dabible_store?: boolean;
 }
 
 const useUnifiedProductFilter = (
@@ -56,6 +57,16 @@ const useUnifiedProductFilter = (
                 
                 results.push(...(data?.data || []));
                 console.log("Printful products:", data?.data);
+              }
+            }
+            if (sources.printful_dabible_store) {
+              // Fetch from the Printful Dabible Store
+              const res = await fetch("/api/printful-dabible-store");
+              if (res.ok) {
+                const data = await res.json();
+                
+                results.push(...(data?.data || []));
+                console.log("Printful DaBible products:", data?.data);
               }
             }
 
