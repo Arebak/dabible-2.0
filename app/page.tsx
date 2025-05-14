@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import "animate.css";
 import DownloadButtons from "@/components/DownloadButtons";
 import { testimonials } from "@/lib/testimony";
-import { use, useEffect, useState } from "react";
+import { 
+  // use,
+   useEffect, useState } from "react";
 
 export default function DonationPage() {
   // Hero carousel logic
@@ -81,6 +83,16 @@ export default function DonationPage() {
     }, 6000);
     return () => clearInterval(interval);
   }, [currentSlide, paused]);
+
+  const [showVideoModal, setShowVideoModal] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowVideoModal(false);
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -916,13 +928,42 @@ export default function DonationPage() {
                   className="object-cover rounded-4xl"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Link href="#" className="cursor-pointer">
+                  <div
+                    onClick={() => setShowVideoModal(true)}
+                  >
                     <Button className="bg-white cursor-pointer text-[#7B0423] hover:bg-white/90 rounded-full px-4 sm:px-6 text-xs sm:text-sm">
                       <span className="mr-2 text-[#7B0423]">▶</span> WATCH VIDEO
                     </Button>
-                  </Link>
+                  </div>
                 </div>
               </Link>
+              {showVideoModal && (
+                <div
+                  className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out animate-fadeIn"
+                  role="dialog"
+                  aria-modal="true"
+                >
+                  <div className="relative w-full max-w-4xl p-4 sm:p-6 bg-white rounded-lg">
+                    <button
+                      onClick={() => setShowVideoModal(false)}
+                      className="absolute bg-white cursor-pointer rounded-full top-2 right-2 text-black text-xl font-bold  w-10 h-10 border border-2"
+                    >
+                      <span className="text-2xl">×</span>
+                    </button>
+                    <div className="w-full aspect-[4/3] sm:aspect-video">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/ZD-2IKVCOfI?autoplay=1"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -942,13 +983,14 @@ export default function DonationPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Mission Field Card */}
+            <Link href="https://donate.dabible.com/agantaram-mission-field/" className="cursor-pointer">
             <div className="bg-[#F7F9FC] rounded-lg sm:rounded-xl overflow-hidden shadow-md px-4 sm:px-5">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#023E8A] text-center py-3 sm:py-4">
-                Mission Field
+                Agantaram Mission Field
               </h3>
               <div className="relative h-40 sm:h-48 md:h-56 lg:h-64">
                 <Image
-                  src="/png/empower1.png"
+                  src="/png/agantaram-1.jpg"
                   alt="Mission Field"
                   fill
                   className="object-cover rounded-xl"
@@ -956,19 +998,21 @@ export default function DonationPage() {
               </div>
               <div className="p-3 sm:p-4 md:p-6 text-center">
                 <p className="text-[#023E8A] text-xs sm:text-sm md:text-base">
-                  You can donate to support missionaries in Northern Nigeria
+                  Agantaram is a community in Northern Kaduna with over 150 children who have never been to school.
                 </p>
               </div>
             </div>
+            </Link>
 
             {/* School Fee Card */}
+            <Link href="https://donate.dabible.com/dabible-partners/" className="cursor-pointer">
             <div className="bg-[#F7F9FC] rounded-lg sm:rounded-xl overflow-hidden shadow-md px-4 sm:px-5">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#023E8A] text-center py-3 sm:py-4">
-                School Fee
+                DaBible Monthly Partners
               </h3>
               <div className="relative h-40 sm:h-48 md:h-56 lg:h-64">
                 <Image
-                  src="/png/empower2.png"
+                  src="/png/agantaram-2.jpg"
                   alt="School Fee"
                   fill
                   className="object-cover rounded-xl"
@@ -976,19 +1020,21 @@ export default function DonationPage() {
               </div>
               <div className="p-3 sm:p-4 md:p-6 text-center">
                 <p className="text-[#023E8A] text-xs sm:text-sm md:text-base">
-                  We need donors to sponsor one child to school.
+                  Your donations to our organization as a partner will enable us to record more languages in different languages.
                 </p>
               </div>
             </div>
+            </Link>
 
             {/* Crusade Card */}
+            <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
             <div className="bg-[#F7F9FC] rounded-lg sm:rounded-xl overflow-hidden shadow-md px-4 sm:px-5">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#023E8A] text-center py-3 sm:py-4">
-                Crusade
+                Solar Audio Bible Cause
               </h3>
               <div className="relative h-40 sm:h-48 md:h-56 lg:h-64">
                 <Image
-                  src="/png/empower4.png"
+                  src="/png/solar-banner.png"
                   alt="Crusade"
                   fill
                   className="object-cover rounded-xl"
@@ -996,10 +1042,12 @@ export default function DonationPage() {
               </div>
               <div className="p-3 sm:p-4 md:p-6 text-center">
                 <p className="text-[#023E8A] text-xs sm:text-sm md:text-base">
-                  Sponsor village crusades in remote parts of the world.
+                  Join us to distribute free solar audio bibles for elderly people in remote villages.
                 </p>
               </div>
             </div>
+            </Link>
+
           </div>
         </div>
       </section>

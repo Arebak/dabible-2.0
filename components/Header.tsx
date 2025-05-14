@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Heart, ShoppingCart, Menu } from "lucide-react";
+import { ChevronDown, Heart,
+  //  ShoppingCart, 
+   Menu } from "lucide-react";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -108,7 +110,7 @@ export default function Header() {
                 </div>
               )}
             </div>
-            <button
+            {/* <button
               onClick={() => navigate("/blog")}
               className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
             >
@@ -119,7 +121,7 @@ export default function Header() {
               className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
             >
               Shop
-            </button>
+            </button> */}
           </nav>
 
           {/* Mobile Navigation */}
@@ -178,7 +180,7 @@ export default function Header() {
                     </button>
                   </div>
                 )}
-                <button
+                {/* <button
                   onClick={() => navigate("/blog")}
                   className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
@@ -189,22 +191,22 @@ export default function Header() {
                   className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
                   Shop
-                </button>
+                </button> */}
               </nav>
             </div>
           </div>
 
           <div className="flex items-center space-x-2">
-            <Button
+            {/* <Button
               variant="outline"
               className="flex items-center border-2 border-[#023E8A] text-[#023E8A] cursor-pointer"
               onClick={() => navigate("/shop")}
             >
               <ShoppingCart className="h-4 w-4 mr-1 text-[#023E8A]" />
               <span className="hidden sm:inline">CART</span>
-            </Button>
+            </Button> */}
             <Button
-              onClick={() => navigate("/donate")}
+              onClick={() => navigate("https://donate.dabible.com")}
               className="bg-[#C8385E] hover:bg-[#C8385E]/90 text-white cursor-pointer"
             >
               <span className="hidden sm:inline">DONATE</span>
