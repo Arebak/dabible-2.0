@@ -22,6 +22,7 @@ type Size =
   | "4x-large";
 
 interface Product {
+  thumbnail_url: string | (() => Promise<string>);
   title: string;
   price: number;
   imageSrc: string | (() => Promise<string>);
