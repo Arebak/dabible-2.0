@@ -899,7 +899,7 @@ export default function DonationPage() {
                 Subscribe to watch edifying contents today.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link href="/donate" className="cursor-pointer">
+                <Link href="https://donate.dabible.com" className="cursor-pointer">
                   <Button className="bg-[#7B0423] hover:bg-red-900 text-xs sm:text-sm py-2 w-full sm:w-auto">
                     <Gift className="mr-1" />
                     DONATE

@@ -12,7 +12,7 @@ export default function hausaBiblePage() {
           <div className="l-container">
             <div className="text-center flex flex-col justify-center items-center">
               <p className="text-sm text-gray-600 mb-2 font-mada">
-                Listen to God's Word in Pidgin
+                Listen to God&apos;s Word in Pidgin
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl w-full sm:w-[90%] md:w-[800px] font-bold text-[#3EA7F7] mb-3 sm:mb-4 font-domine">
                 God Word No Far—Listen to Am for Pidgin
@@ -43,7 +43,10 @@ export default function hausaBiblePage() {
                   <span className="text-xs sm:text-sm">Offline Usage</span>
                 </div>
               </div>
-              <DownloadButtons />
+              <DownloadButtons
+              AppStoreLink="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
+            />
             </div>
           </div>
         </section>
@@ -188,7 +191,7 @@ export default function hausaBiblePage() {
             <div className="text-center flex flex-col justify-center items-center mb-8 sm:mb-12">
               <StarTag text="Testimonials" variant="blue" />
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-domine mb-3 sm:mb-4 text-[#161515] max-w-xl sm:max-w-3xl px-2">
-                Don't Take Our Word For It. Hear What Our Community Has To Say
+                Don&apos;t Take Our Word For It. Hear What Our Community Has To Say
               </h2>
             </div>
 
@@ -220,7 +223,7 @@ export default function hausaBiblePage() {
             <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 font-mada">
               <div className="md:w-1/2 text-white">
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-domine pt-10">
-                  Download The Pidgin Audio Bible And Stay Connected To God's
+                  Download The Pidgin Audio Bible And Stay Connected To God&apos;s
                   Word
                 </h2>
                 <p className="mb-4 sm:mb-6 text-sm sm:text-base">
@@ -229,10 +232,9 @@ export default function hausaBiblePage() {
                 </p>
                 <p className="mb-6 sm:mb-8 text-white/80 text-xs sm:text-sm">
                   The pidgin Audio Bible App is available for Google Play and
-                  Apple Play Store. Search for "pidgin Audio Bible, Download it,
+                  Apple Play Store. Search for &quot;pidgin Audio Bible&quot;, Download it,
                   and You Will Be Able To Listen To The Audio Bible.
-                </p>
-                <DownloadButtons />
+                </p>app/products/pidgin-audio-bible/page.tsx
               </div>
 
               <div className="md:w-1/2 relative mt-8 md:mt-0">

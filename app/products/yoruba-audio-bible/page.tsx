@@ -11,7 +11,7 @@ export default function YorubaBiblePage() {
         <div className="l-container ">
           <div className="text-center flex flex-col justify-center items-center">
             <p className="text-sm text-gray-600 mb-2 font-mada">
-              Listen To God's Word In Yoruba
+              Listen To God&apos;s Word In Yoruba
             </p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#9b2242] mb-4 font-domine">
               Gbọ Ọrọ Ọlọrun Ní Èdè Yorùbá
@@ -43,7 +43,10 @@ export default function YorubaBiblePage() {
                 <span className="text-sm">Offline Usage</span>
               </div>
             </div>
-            <DownloadButtons />
+            <DownloadButtons
+              AppStoreLink="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
+            />
           </div>
           {/* hand  */}{" "}
         </div>
@@ -187,7 +190,7 @@ export default function YorubaBiblePage() {
           <div className="text-center flex flex-col justify-center items-center mb-12">
             <StarTag text="Testimonials" variant="rose" />
             <h2 className="text-2xl md:text-3xl font-bold font-domine mb-4 text-[#161515] max-w-3xl">
-              Don't Take Our Word For It. Hear What Our Community Has To Say
+              Don&apos;t Take Our Word For It. Hear What Our Community Has To Say
             </h2>
           </div>
 
@@ -205,7 +208,7 @@ export default function YorubaBiblePage() {
       </section>
 
       {/* Download Section */}
-      <section className=" px-4 bg-[#C8385E] mb-20 md:max-h-[764px] h-full relative  yoruba-download-bg">
+      <section className=" px-4 bg-[#C8385E] md:max-h-[764px] h-full relative  yoruba-download-bg">
         {/* curve yoruba  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%]">
           <Image
@@ -227,7 +230,7 @@ export default function YorubaBiblePage() {
           <div className="flex flex-col md:flex-row items-center gap-8 font-mada">
             <div className="md:w-1/2 text-white">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 font-domine pt-10">
-                Download The Yoruba Audio Bible And Stay Connected To God's Word
+                Download The Yoruba Audio Bible And Stay Connected To God&apos;s Word
               </h2>
               <p className="mb-6">
                 Experience The Bible In Your Language - Listen, Read, And Grow
@@ -235,7 +238,7 @@ export default function YorubaBiblePage() {
               </p>
               <p className="mb-8 text-white/80 text-sm">
                 The Yoruba Audio Bible App is available for Google Play and
-                Apple Play Store. Search for "Yoruba Audio Bible, Download it,
+                Apple Play Store. Search for &quot;Yoruba Audio Bible, Download it,
                 and You Will Be Able To Listen To The Audio Bible.
               </p>
               <DownloadButtons />

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import StarTag from "@/components/StarTag";
+import Link from "next/link";
 
 export default function SolarBiblePage() {
   const [frameIndex, setFrameIndex] = useState(0);
@@ -41,9 +42,9 @@ export default function SolarBiblePage() {
               </p>
 
               <p className="text-lg opacity-90">
-                When you buy one, you're not just receiving this life-changing
-                device — you're also donating one to an elderly person in a
-                remote village who otherwise wouldn't have access to God's Word.
+                When you buy one, you&apos;re not just receiving this life-changing
+                device — you&apos;re also donating one to an elderly person in a
+                remote village who otherwise wouldn&apos;t have access to God&apos;s Word.
               </p>
 
               <div className="space-y-3">
@@ -57,7 +58,7 @@ export default function SolarBiblePage() {
                   />
                   <p className="md:text-xl text-lg">
                     {" "}
-                    Built for those who can't operate mobile phones
+                    Built for those who can&apos;t operate mobile phones
                   </p>
                 </div>
                 <div className="flex items-center gap-x-3">
@@ -101,6 +102,7 @@ export default function SolarBiblePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
                   className="bg-white text-[#0a3170] hover:bg-gray-100 border-none md:w-[230px] w-fit h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
@@ -114,12 +116,16 @@ export default function SolarBiblePage() {
                   />
                   Donate
                 </Button>
+                </Link>
+
+                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant={"outline"}
-                  className="bg-[#0a3170] hover:bg-[#0a3170]/90 text-white border-white w-fit h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
+                  className="bg-[#0a3170] hover:bg-[#0a3170]/10 hover:text-white text-white border-white w-fit h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
                 >
                   Buy Now - Give One Too
                 </Button>
+                </Link>
               </div>
             </div>
 
@@ -167,7 +173,7 @@ export default function SolarBiblePage() {
                   <p className="text-gray-700">
                     Designed With Simplicity In Mind — No Tech Knowledge Needed.
                     The Solar Audio Bible Fits Comfortably In One Hand And
-                    Features Large, Easy-To-Press Buttons. It's The Perfect
+                    Features Large, Easy-To-Press Buttons. It&apos;s The Perfect
                     Solution For Elderly Users Or Anyone Who Finds Smartphones
                     Too Complicated.
                   </p>
@@ -203,7 +209,7 @@ export default function SolarBiblePage() {
                     Say Goodbye To Power Worries. This Device Runs On AA
                     Batteries And Comes With A Built-In Solar Panel, Making It
                     Ideal For Rural Areas With Limited Electricity. Just Leave
-                    It In The Sun To Charge And It's Ready To Use.
+                    It In The Sun To Charge And It&apos;s Ready To Use.
                   </p>
                 </div>
 
@@ -234,7 +240,7 @@ export default function SolarBiblePage() {
                     Old & New Testament
                   </h3>
                   <p className="text-gray-700">
-                    From Genesis To Revelation — It's All Here. The Solar Audio
+                    From Genesis To Revelation — It&apos;s All Here. The Solar Audio
                     Bible Contains A Complete Recording Of Both The Old And New
                     Testament, Providing The Full Message Of Hope, Love, And
                     Salvation In An Easy-To-Listen Format.
@@ -266,7 +272,7 @@ export default function SolarBiblePage() {
                   </div>
                   <h3 className="text-xl font-bold mb-2">Flash Light</h3>
                   <p className="text-gray-700">
-                    More Than Just A Bible — It's Also A Practical Tool. The
+                    More Than Just A Bible — It&apos;s Also A Practical Tool. The
                     Built-In Flashlight Comes In Handy For Navigating In The
                     Dark Or During Power Outages, Making It Especially Useful In
                     Remote Areas And For Elderly Users.
@@ -328,7 +334,7 @@ export default function SolarBiblePage() {
       </section>
 
       {/* The Forgotten Generation Section */}
-      <section className=" px-4 bg-[#C8385E] mb-20 md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5">
+      <section className=" px-4 bg-[#C8385E] md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5">
         {/* curve yoruba  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%]">
           <Image
@@ -352,7 +358,7 @@ export default function SolarBiblePage() {
                   Christ. Many Of Them Alone For Various Reasons Such As: Their
                   Children Have Relocated To Bigger Cities In Pursuit Of
                   Education And/Or Economic Opportunities. Some Are As Such An
-                  Old Age That They're Unable To Walk To Church. Many Of Them
+                  Old Age That They&apos;re Unable To Walk To Church. Many Of Them
                   Are Illiterate (Some Are Unable To Understand The National
                   Language, And Can Only Speak Their Local Dialect, Which Is Not
                   Spoken In These Churches). Many Of Them Cannot Read Or Write,
@@ -375,7 +381,8 @@ export default function SolarBiblePage() {
                 <h3 className="text-xl font-bold mb-4">
                   Ready To Donate Now? Give & Receive A Solar Audio Bible
                 </h3>
-
+                
+                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
                   className="bg-white text-[#C8385E] hover:bg-white/90 border-none px-10 py-2 h-fit"
@@ -389,6 +396,7 @@ export default function SolarBiblePage() {
                   />
                   Donate
                 </Button>
+                </Link>
               </div>
             </div>
 

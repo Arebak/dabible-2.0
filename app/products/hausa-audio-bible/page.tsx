@@ -11,7 +11,7 @@ export default function hausaBiblePage() {
         <div className="l-container">
           <div className="text-center flex flex-col justify-center items-center">
             <p className="text-xs sm:text-sm text-gray-600 mb-2 font-mada">
-              Listen to God's Word in Hausa
+              Listen to God&apos;s Word in Hausa
             </p>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#19832F] mb-3 sm:mb-4 font-domine px-4">
               Saurari Kalmar Allah da Hausa
@@ -42,7 +42,10 @@ export default function hausaBiblePage() {
               </div>
             </div>
             <div className="px-4">
-              <DownloadButtons />
+              <DownloadButtons
+              AppStoreLink="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
+            />
             </div>
           </div>
         </div>
@@ -187,7 +190,7 @@ export default function hausaBiblePage() {
           <div className="text-center flex flex-col justify-center items-center mb-8 sm:mb-12">
             <StarTag text="Testimonials" variant="rose" />
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-domine mb-3 sm:mb-4 text-[#161515] max-w-3xl px-4">
-              Don't Take Our Word For It. Hear What Our Community Has To Say
+              Don&apos;t Take Our Word For It. Hear What Our Community Has To Say
             </h2>
           </div>
 
@@ -205,7 +208,7 @@ export default function hausaBiblePage() {
       </section>
 
       {/* Download Section */}
-      <section className="px-4 bg-[#19832F] mb-16 sm:mb-20 md:max-h-[764px] h-full relative yoruba-download-bg">
+      <section className="px-4 bg-[#19832F] sm:mb-20= md:max-h-[764px] h-full relative yoruba-download-bg">
         {/* curve hausa  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%] hidden sm:block">
           <Image
@@ -220,7 +223,7 @@ export default function hausaBiblePage() {
           <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 font-mada">
             <div className="md:w-1/2 text-white py-6">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-domine">
-                Download The Hausa Audio Bible And Stay Connected To God's Word
+                Download The Hausa Audio Bible And Stay Connected To God&apos;s Word
               </h2>
               <p className="mb-4 sm:mb-6 text-sm sm:text-base">
                 Experience The Bible In Your Language - Listen, Read, And Grow
@@ -228,7 +231,7 @@ export default function hausaBiblePage() {
               </p>
               <p className="mb-6 sm:mb-8 text-white/80 text-xs sm:text-sm">
                 The hausa Audio Bible App is available for Google Play and Apple
-                Play Store. Search for "hausa Audio Bible, Download it, and You
+                Play Store. Search for &quot;hausa Audio Bible&quot;, Download it, and You
                 Will Be Able To Listen To The Audio Bible.
               </p>
               <DownloadButtons />
