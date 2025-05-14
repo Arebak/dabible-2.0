@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'developers.dabible.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc'
+      }
     ],
   },
 };

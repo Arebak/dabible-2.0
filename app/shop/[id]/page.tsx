@@ -218,8 +218,6 @@ export default function ProductPage() {
           </Button>
         </div>
       </div>
-
-
     </div>
   );
 }

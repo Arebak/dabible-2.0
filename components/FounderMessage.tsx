@@ -21,38 +21,38 @@ export default function FounderMessage() {
 
           {/* Message Content */}
           <div className="w-full max-w-[667px] relative">
-            <div className="border-8 border-white p-6 md:p-10 relative">
-              <h2 className="text-white text-2xl md:text-3xl font-bold mb-4">
+            <div className="border-4 sm:border-6 md:border-8 border-white p-4 sm:p-6 md:p-10 relative">
+              <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">
                 Message From Founder
               </h2>
 
-              <p className="text-white mb-4 text-sm md:text-base">
-                "We are a group of young christians with a lot of technology and
+              <p className="text-white mb-3 md:mb-4 text-xs sm:text-sm md:text-base">
+              &quot;We are a group of young christians with a lot of technology and
                 music industry background. We are not the qualified ones to
                 translate the bible into our native language but God has
                 strengthened our hands to produce this new versions of the
                 bible.
               </p>
 
-              <div className="flex items-start mt-6">
+              <div className="flex items-start mt-4 sm:mt-5 md:mt-6">
                 <div>
-                  <p className="text-white mb-4 text-sm md:text-base">
+                  <p className="text-white mb-3 md:mb-4 text-xs sm:text-sm md:text-base">
                     Our team a just a group of youths who volunteered to
                     dedicate our lives to this project. Thank you for supporting
                     us, encouraging us and strengthening our hands into doing
-                    more."
+                    more.&quot;
                   </p>
 
-                  <p className="text-white mb-4 text-sm md:text-base">
+                  <p className="text-white mb-3 md:mb-4 text-xs sm:text-sm md:text-base">
                     DaBible Foundation is an open source project, which means
                     anyone can become a participate. If you wish to join us,
                     contact us directly at support@dabible.com
                   </p>
 
-                  <div className="flex items-center justify-end mt-4">
+                  <div className="flex items-center justify-end mt-3 sm:mt-4">
                     <div className="text-right">
-                      <p className="text-white font-bold">DEMILADE ADETUBERU</p>
-                      <p className="text-[#03224A] font-bold text-xs mt-2">
+                      <p className="text-white font-bold text-sm sm:text-base">DEMILADE ADETUBERU</p>
+                      <p className="text-[#03224A] font-bold text-[10px] sm:text-xs mt-1 sm:mt-2">
                         CO-FOUNDER & TEAM LEADER
                       </p>
                     </div>
@@ -65,14 +65,14 @@ export default function FounderMessage() {
                 alt="quote icon"
                 width={67}
                 height={67}
-                className="absolute top-[40%] -left-10"
+                className="absolute top-[40%] -left-4 sm:-left-6 md:-left-10 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
               />
               <Image
                 src="/png/quote2.png"
                 alt="quote icon"
                 width={67}
                 height={67}
-                className="absolute top-[40%] -right-10"
+                className="absolute top-[40%] -right-4 sm:-right-6 md:-right-10 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
               />
             </div>
           </div>
