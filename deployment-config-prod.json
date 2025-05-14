@@ -1,0 +1,11 @@
+[
+    {
+      "name": "digital-ocean-server",
+      "ip": "137.184.20.178",
+      "username": "qadr",
+      "port": 22,
+      "beforeHooks": "",
+      "afterHooks": "",
+      "path": "/var/www/dabible"
+    }
+  ]
