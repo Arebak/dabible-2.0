@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(
-  _req: Request,
-  { params }: { params: { id: string } }
+  // req: NextRequest,
+  // { params }: { params: { id: string } }
 ) {
+  // const { id } = params;
+
+  // console.log('[Printful Product Detail API]', id);
+
   try {
     const response = await fetch(
-      `https://api.printful.com/store/products/${params.id}`,
+      `https://api.printful.com/store/products/`,
       {
         headers: {
           Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
