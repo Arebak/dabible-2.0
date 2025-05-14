@@ -92,7 +92,7 @@ export default function DonationPage() {
     };
     document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
-  }, []);
+  });
 
   return (
     <main className="min-h-screen">

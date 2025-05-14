@@ -1,43 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-<<<<<<< HEAD
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { products } from "@/lib/mockData";
-import { CreditCard, ShoppingCart } from "lucide-react";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-// import { useState } from "react";
-
-// type Colors = {
-//   name: string;
-//   hex: string;
-//   selected: boolean;
-// };
-
-export default function ProductPage({ params }: { params: { id: string } }) {
-  // const [colors, setColors] = useState<Colors[]>([
-  //   { name: "green", hex: "#00C12B", selected: true },
-  //   { name: "red", hex: "#F50606", selected: true },
-  //   { name: "yellow", hex: "#F5DD06", selected: false },
-  //   { name: "orange", hex: "#F57906", selected: false },
-  //   { name: "lightblue", hex: "#06CAF5", selected: false },
-  //   { name: "blue", hex: "#063AF5", selected: false },
-  //   { name: "purple", hex: "#7D06F5", selected: false },
-  //   { name: "pink", hex: "#F506A4", selected: false },
-  //   { name: "white", hex: "#FFFFFF", selected: false },
-  //   { name: "black", hex: "#000000", selected: false },
-  // ]);
-
-  // const updateColors = (name: string, selected: boolean) => {
-  //   setColors((prev) =>
-  //     prev.map((color) =>
-  //       color.name === name ? { ...color, selected } : color
-  //     )
-  //   );
-  // };
-=======
 "use client";
  
 // import ColorSwatch from "@/components/ColorSwatch";
@@ -95,7 +58,6 @@ export default function ProductPage() {
       )
     );
   };
->>>>>>> 3c99f780b2b3dc879b02338693fc8c07f1140826
 
   if (!product) {
     return <div>Loading...</div>;
