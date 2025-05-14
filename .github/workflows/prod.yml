@@ -102,7 +102,6 @@ jobs:
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,NEXT_ENV
           script: |
             echo "$NEXT_ENV" >> "${RELEASE_PATH}/.env"
-
             cd $RELEASE_PATH && npm install
             cd $RELEASE_PATH && npm run build
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
