@@ -7,7 +7,7 @@ const StarTag: React.FC<StarTagProps> = ({ text, variant }) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "white":
-        return "star2";
+        return "start";
       case "blue":
         return "start";
       case "green":

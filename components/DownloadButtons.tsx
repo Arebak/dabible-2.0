@@ -12,6 +12,9 @@ const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) 
     <div className="flex flex-col sm:flex-row gap-4 mb-6">
       <Link
         href={AppStoreLink || "#download"}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download on the App Store"
         className="flex gap-x-3 items-center bg-black text-white py-2 px-4 rounded-lg w-full sm:w-auto"
       >
         <Image
@@ -28,6 +31,9 @@ const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) 
       </Link>
       <Link
         href={PlayStoreLink || "#download"}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Get it on Google Play"
         className="flex gap-x-3 items-center bg-black text-white py-2 px-4 rounded-lg w-full sm:w-auto"
       >
         <Image
