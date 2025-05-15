@@ -24,9 +24,9 @@ const FixedGridCarousel = () => {
           <Image
             src={`/png/${img}`}
             alt={`Donation activity ${index + 1}`}
-            width={300}
-            height={300}
-            className="w-full h-[452px] object-cover rounded-lg"
+            width={200}
+            height={200}
+            className="w-full h-[250px] object-cover rounded-lg"
           />
         </SwiperSlide>
       ))}
