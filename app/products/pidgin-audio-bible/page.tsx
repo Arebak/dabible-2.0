@@ -43,10 +43,11 @@ export default function hausaBiblePage() {
                   <span className="text-xs sm:text-sm">Offline Usage</span>
                 </div>
               </div>
+
               <DownloadButtons
-              AppStoreLink="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
-              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
-            />
+                AppStoreLink="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
+                PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
+              />
             </div>
           </div>
         </section>
@@ -89,7 +90,7 @@ export default function hausaBiblePage() {
                       alt="Search feature screenshot"
                       width={200}
                       height={320}
-                      className="rounded-lg shadow-lg mx-auto rotate-[330deg] sm:w-[250px] sm:h-[400px]"
+                      className="rounded-lg shadow-lg mx-auto rotate-[330deg] sm:w-[250px]"
                     />
                   </div>
                 </div>
@@ -113,7 +114,7 @@ export default function hausaBiblePage() {
                       alt="Daily inspiration feature screenshot"
                       width={200}
                       height={320}
-                      className="rounded-lg shadow-lg mx-auto sm:w-[250px] sm:h-[400px]"
+                      className="rounded-lg shadow-lg mx-auto sm:w-[250px]"
                     />
                   </div>
                 </div>
@@ -125,7 +126,7 @@ export default function hausaBiblePage() {
                       alt="Daily inspiration feature screenshot" 
                       width={200}
                       height={320}
-                      className="rounded-lg shadow-lg mx-auto mr-0 sm:mr-4 sm:w-[250px] sm:h-[400px]"
+                      className="rounded-lg shadow-lg mx-auto mr-0 sm:mr-4 sm:w-[250px]"
                     />
                   </div>
 
@@ -209,7 +210,7 @@ export default function hausaBiblePage() {
         </section>
 
         {/* Download Section */}
-        <section className="px-4 bg-[#3EA7F7] mb-16 sm:mb-20 md:max-h-[764px] h-full relative yoruba-download-bg">
+        <section className="px-4 bg-[#3EA7F7]  md:max-h-[764px] h-full relative yoruba-download-bg">
           {/* curve pidgin  */}
           <div className="absolute top-0 left-0 right-0 transform translate-x-[40%] hidden sm:block">
             <Image
@@ -234,7 +235,12 @@ export default function hausaBiblePage() {
                   The pidgin Audio Bible App is available for Google Play and
                   Apple Play Store. Search for &quot;pidgin Audio Bible&quot;, Download it,
                   and You Will Be Able To Listen To The Audio Bible.
-                </p>app/products/pidgin-audio-bible/page.tsx
+                </p>
+
+              <DownloadButtons
+                AppStoreLink="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
+                PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
+              />
               </div>
 
               <div className="md:w-1/2 relative mt-8 md:mt-0">
@@ -245,7 +251,7 @@ export default function hausaBiblePage() {
                       alt="pidgin Bible App Screenshot - Genesis"
                       width={180}
                       height={360}
-                      className="rounded-2xl sm:w-[250px] sm:h-[500px]"
+                      className="rounded-2xl sm:w-[250px]"
                     />
                   </div>
                   <div className="flex flex-col gap-y-[45px] sm:gap-y-[75px]">
@@ -254,14 +260,14 @@ export default function hausaBiblePage() {
                       alt="pidgin Bible App Screenshot - Chapter Selection"
                       width={180}
                       height={360}
-                      className="rounded-2xl sm:w-[250px] sm:h-[500px]"
+                      className="rounded-2xl sm:w-[250px]"
                     />
                     <Image
                       src="/png/phone-mockups/p-download-bottom.png"
                       alt="pidgin Bible App Screenshot - Verse Reading"
                       width={180}
                       height={360}
-                      className="rounded-2xl sm:w-[250px] sm:h-[500px]"
+                      className="rounded-2xl sm:w-[250px]"
                     />
                   </div>
                 </div>

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dabible",
+  title: "DaBible Foundation",
   description: "Yoruba, Igbo, Hausa Audio and Written Bible App",
 };
 
@@ -26,6 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

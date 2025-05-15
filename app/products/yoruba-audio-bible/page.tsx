@@ -110,7 +110,7 @@ export default function YorubaBiblePage() {
                 </div>
                 <div className="">
                   <Image
-                    src="/png/y-topright.png"
+                    src="/png/phone-mockups/y-topright.png"
                     alt="Daily inspiration feature screenshot"
                     width={250}
                     height={400}
@@ -241,7 +241,10 @@ export default function YorubaBiblePage() {
                 Apple Play Store. Search for &quot;Yoruba Audio Bible, Download it,
                 and You Will Be Able To Listen To The Audio Bible.
               </p>
-              <DownloadButtons />
+            <DownloadButtons
+              AppStoreLink="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
+            />
             </div>
 
             <div className="md:w-1/2 relative">

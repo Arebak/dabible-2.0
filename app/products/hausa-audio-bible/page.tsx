@@ -43,8 +43,8 @@ export default function hausaBiblePage() {
             </div>
             <div className="px-4">
               <DownloadButtons
-              AppStoreLink="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
-              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
+              AppStoreLink="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
             />
             </div>
           </div>
@@ -234,7 +234,10 @@ export default function hausaBiblePage() {
                 Play Store. Search for &quot;hausa Audio Bible&quot;, Download it, and You
                 Will Be Able To Listen To The Audio Bible.
               </p>
-              <DownloadButtons />
+              <DownloadButtons
+              AppStoreLink="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
+              PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
+            />
             </div>
 
             <div className="md:w-1/2 relative mt-8 sm:mt-0">

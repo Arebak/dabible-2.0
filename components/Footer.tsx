@@ -23,7 +23,8 @@ export default function Footer() {
 
             {/* App Store Buttons */}
             <div className="flex flex-wrap gap-2">
-              <Link href="#" className="inline-block hover:underline">
+              
+              <Link href="https://apps.apple.com/us/developer/sanmi-ajanaku/id1079050270" className="inline-block hover:underline">
                 <Image
                   src="/png/store.png"
                   alt="Download on the App Store"
@@ -32,7 +33,7 @@ export default function Footer() {
                   className="border border-gray-600 rounded"
                 />
               </Link>
-              <Link href="#" className="inline-block hover:underline">
+              <Link href="https://play.google.com/store/apps/dev?id=6126149451407039432" className="inline-block hover:underline">
                 <Image
                   src="/png/play.png"
                   alt="Get it on Google Play"
@@ -72,7 +73,8 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="https://www.youtube.com/@dabible-foundation"
+                  target="_blank"
                   className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Youtube size={18} className="mr-2" />
@@ -81,7 +83,8 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="https://www.facebook.com/dabiblefoundation/"
+                  target="_blank"
                   className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Facebook size={18} className="mr-2" />
@@ -90,7 +93,8 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/dabiblefoundation/"
+                  target="_blank"
                   className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Instagram size={18} className="mr-2" />
@@ -99,7 +103,8 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="tel:1-509-339-4854"
+                  href="https://wa.me/15093394854"
+                  target="_blank"
                   className="flex items-center text-white hover:text-white transition-colors hover:underline"
                 >
                   <Phone size={18} className="mr-2" />
@@ -113,25 +118,25 @@ export default function Footer() {
           <div className="col-span-1">
             <h3 className="text-lg font-bold mb-4">RESOURCES</h3>
             <ul className="space-y-3">
-              <li>
+              {/* <li>
                 <Link
                   href="#"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Blog
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link
                   href="#"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Shop
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
-                  href="#"
+                  href="https://support.dabible.com"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Support
@@ -146,7 +151,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="/about-us"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   About Us
