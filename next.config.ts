@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: ' /product/solar-audio-bible-device/',
+        source: '/product/solar-audio-bible-device/',
         destination: ' /products/solar-audio-bible-device/',
         permanent: true,
       },
