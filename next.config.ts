@@ -39,6 +39,17 @@ const nextConfig: NextConfig = {
         destination: 'https://dabible.com/#products',
         permanent: true,
       },
+      {
+        source: ' /product/solar-audio-bible-device/',
+        destination: ' /products/solar-audio-bible-device/',
+        permanent: true,
+      },
+      {
+        source: '/donor-dashboard/',
+        destination: 'https://donate.dabible.com/donor-dashboard',
+        permanent: true,
+        
+      }
     ];
   },
 };
