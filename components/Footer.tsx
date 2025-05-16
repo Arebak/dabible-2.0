@@ -151,7 +151,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/about-us"
+                  href="/about"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   About Us
@@ -159,7 +159,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/privacy-policy"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Privacy Policy
@@ -167,7 +167,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/terms-conditions"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Terms & Conditions

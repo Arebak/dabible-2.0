@@ -27,9 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
       <Header />
         {children}
         <Footer />

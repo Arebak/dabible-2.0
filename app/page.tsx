@@ -317,7 +317,7 @@ export default function DonationPage() {
       </section>
 
       {/* Products Section */}
-      <section className="py-8 sm:py-12 md:py-16">
+      <section id="products" className="py-8 sm:py-12 md:py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center font-mada mb-8 sm:mb-12">
             Our Products
