@@ -22,6 +22,25 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/donate',
+        destination: 'https://donate.dabible.com',
+        permanent: true,
+      },
+      {
+        source: '/donate/:path*',
+        destination: 'https://donate.dabible.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/products',
+        destination: 'https://dabible.com/#products',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
