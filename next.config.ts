@@ -80,6 +80,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/shop',
+        destination: 'https://donate.dabible.com/shop',
+        permanent: true,
+      },
+      {
         source: '/project/hausa-audio-bible',
         destination: '/products/yoruba-audio-bible',
         permanent: true,
