@@ -133,7 +133,7 @@ export default function SolarBiblePage() {
           </div>
         </div>
 
-        <div className="absolute md:block hidden sm:right-[-250px] lg:right-[-240px] xl:right-[-240px]  bottom-[-250px] z-0">
+        <div className="absolute md:block hidden sm:right-[-230px] lg:right-[-240px] xl:right-[-200px]  bottom-[-250px] z-0">
           {/* <Image
             src="/png/right-solar-hero.png"
             alt="Solar Audio Bible device"
