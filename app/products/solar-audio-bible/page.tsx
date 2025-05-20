@@ -26,8 +26,8 @@ export default function SolarBiblePage() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.png')] bg-no-repeat bg-right bg-contain">
-        <div className="d-container mx-auto max-w-6xl">
+      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.pngs')] bg-no-repeat bg-right bg-contain overflow-hidden">
+        <div className="d-container mx-auto max-w-6xl relative z-1">
           <div className="flex flex-col md:flex-row gap-8 items-center font-mada font-medium">
             <div className="flex-1 space-y-6">
               <StarTag text="PRODUCTS" variant="white" />
@@ -133,14 +133,40 @@ export default function SolarBiblePage() {
           </div>
         </div>
 
-        <div className="absolute md:block hidden -right-10 bottom-0 w-[700px] h-[500px] lg:w-[1100px] lg:h-[700px]">
-          <Image
+        <div className="absolute md:block hidden sm:right-[-250px] lg:right-[-240px] xl:right-[-240px]  bottom-[-250px] z-0">
+          {/* <Image
             src="/png/right-solar-hero.png"
             alt="Solar Audio Bible device"
             fill
             className="relative z-10"
             priority
-          />
+          /> */}
+          <video
+            autoPlay
+            muted
+            playsInline
+            onEnded={(e) => {
+              e.currentTarget.style.display = 'none';
+              const nextVideo = document.getElementById('intro_2');
+              if (nextVideo) nextVideo.style.display = 'block';
+              nextVideo?.play();
+            }}
+            className="w-full h-full p-0 m-0"
+          >
+            <source src="/videos/intro_1.1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video
+            id="intro_2"
+            loop
+            muted
+            playsInline
+            style={{ display: 'none' }}
+            className="w-full h-full p-0 m-0"
+          >
+            <source src="/videos/intro_1.2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
 
