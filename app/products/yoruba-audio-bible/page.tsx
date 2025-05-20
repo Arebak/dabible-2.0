@@ -139,7 +139,7 @@ export default function YorubaBiblePage() {
                     videoSrc="/videos/offline_1.mp4"
                     fallbackImgSrc="/png/phone-mockups/y-bottomright.png"
                     videoId="video-yoruba-2"
-                    imageId="fallback-image-yoruba-2"
+                    imageId="fallback-image-yoruba-3"
                     className="rotate-[0deg]"
                   />
                 </div>
