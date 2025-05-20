@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import DownloadButtons from "@/components/DownloadButtons";
 import StarTag from "@/components/StarTag";
+import VideoAppWithFallback from "@/components/VideoAppWithFallback";
 
 export default function YorubaBiblePage() {
   return (
@@ -84,13 +85,13 @@ export default function YorubaBiblePage() {
               </p>
 
               <div className="relative ">
-                <div className="absolute right-0 top-0">
-                  <Image
-                    src="/png/phone-mockups/y-left.png"
-                    alt="Search feature screenshot"
-                    width={250}
-                    height={400}
-                    className="rounded-lg shadow-lg mx-auto rotate-[330deg]"
+                <div className="absolute right-0 top-0 w-[250px]">
+                  <VideoAppWithFallback
+                    videoSrc="/videos/search_1.mp4"
+                    fallbackImgSrc="/png/phone-mockups/y-left.png"
+                    videoId="video-yoruba-1"
+                    imageId="fallback-image-yoruba-1"
+                    className="rotate-[330deg]"
                   />
                 </div>
               </div>
@@ -108,24 +109,38 @@ export default function YorubaBiblePage() {
                     scriptures, and easily share verses with your loved ones.
                   </p>
                 </div>
-                <div className="">
-                  <Image
+                <div className="w-[250px] h-[250px] overflow-hidden">
+                  {/* <Image
                     src="/png/phone-mockups/y-topright.png"
                     alt="Daily inspiration feature screenshot"
                     width={250}
                     height={400}
                     className="rounded-lg shadow-lg mx-auto"
+                  /> */}
+                  <VideoAppWithFallback
+                    videoSrc="/videos/daily_1.mp4"
+                    fallbackImgSrc="/png/phone-mockups/y-topright.png"
+                    videoId="video-yoruba-2"
+                    imageId="fallback-image-yoruba-2"
+                    className="rotate-[0deg]"
                   />
                 </div>
               </div>
               <div className="bg-[#DAEEFF] rounded-xl pt-6 px-6 md:px-8 flex items-center overflow-hidden w-fit">
-                <div className="">
-                  <Image
+                <div className="w-[250px] h-[300px] overflow-hidden mr-2">
+                  {/* <Image
                     src="/png/phone-mockups/y-bottomright.png"
                     alt="Daily inspiration feature screenshot"
                     width={250}
                     height={400}
                     className="rounded-lg shadow-lg mx-auto mr-4"
+                  /> */}
+                  <VideoAppWithFallback
+                    videoSrc="/videos/offline_1.mp4"
+                    fallbackImgSrc="/png/phone-mockups/y-bottomright.png"
+                    videoId="video-yoruba-2"
+                    imageId="fallback-image-yoruba-2"
+                    className="rotate-[0deg]"
                   />
                 </div>
 
