@@ -134,22 +134,32 @@ export default function SolarBiblePage() {
         </div>
 
         <div className="absolute md:block hidden sm:right-[-230px] lg:right-[-240px] xl:right-[-200px]  bottom-[-250px] z-0">
-          {/* <Image
-            src="/png/right-solar-hero.png"
-            alt="Solar Audio Bible device"
-            fill
-            className="relative z-10"
-            priority
-          /> */}
+          <div id="fallback-image" style={{ display: 'none' }}>
+            <Image
+              src="/png/right-solar-hero.png"
+              alt="Solar Audio Bible device"
+              fill
+              className="z-10 absolute !h-auto !left-[unset] !top-[unset] !right-[180px] !bottom-[250px]"
+              priority
+            />
+          </div>
           <video
             autoPlay
             muted
             playsInline
+            onError={() => {
+              const fallback = document.getElementById('fallback-image');
+              const vid1 = document.querySelector('video');
+              const vid2 = document.getElementById('solar_intro_2');
+              if (vid1) vid1.style.display = 'none';
+              if (vid2) vid2.style.display = 'none';
+              if (fallback) fallback.style.display = 'block';
+            }}
             onEnded={(e) => {
               e.currentTarget.style.display = 'none';
-              const nextVideo = document.getElementById('intro_2');
+              const nextVideo = document.getElementById('solar_intro_2');
               if (nextVideo) nextVideo.style.display = 'block';
-              nextVideo?.play();
+              (nextVideo as HTMLVideoElement | null)?.play();
             }}
             className="w-full h-full p-0 m-0"
           >
@@ -157,7 +167,7 @@ export default function SolarBiblePage() {
             Your browser does not support the video tag.
           </video>
           <video
-            id="intro_2"
+            id="solar_intro_2"
             loop
             muted
             playsInline
