@@ -267,7 +267,7 @@ export default function Blog() {
   return (
     <main className="mx-auto px-4">
       {/* Hero Section */}
-      <section className="relative bg-white overflow-hidden md:pt-[70px] min-h-[40vh]">
+      <section className="relative bg-white overflow-hidden pt-10 md:pt-[70px] min-h-[40vh]">
         {/* Faded oval background */}
         <div
           className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[300px] rounded-full"
@@ -381,7 +381,7 @@ export default function Blog() {
         </Button>
       </div> */}
 
-      <section className="mb-20 d-container flex flex-col lg:flex-row justify-center items-start gap-x-10 gap-y-8 font-mada sm:mt-0 md:-mt-18 relative z-1">
+      <section className="mb-20 d-container flex flex-col lg:flex-row justify-center items-start gap-x-10 gap-y-8 font-mada -mt-24 relative z-1">
       {/* Featured Article */}
       {blogs[0] && (
         <div className="flex flex-col gap-y-6 w-full lg:w-1/2">
@@ -503,7 +503,7 @@ export default function Blog() {
       )}
 
       {/* Recent Posts Section */}
-      <section className="d-container px-4">
+      <section className="d-container px-4 mb-18">
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center text-[#1a4b8c] mb-8 sm:mb-12 font-domine">
           Recent Posts
         </h2>

@@ -25,7 +25,7 @@ const VideoModal: FC<VideoModalProps> = ({ videoUrl, backgroundImageUrl }) => {
           className="object-cover rounded-4xl"
         />
         <div className="absolute inset-0 flex items-center justify-center z-1">
-          <Button className="bg-white cursor-pointer text-[#7B0423] hover:bg-white/90 rounded-full px-4 sm:px-6 text-xs sm:text-sm">
+          <Button className="bg-white cursor-pointer text-[#7B0423] hover:bg-white/90 rounded-full py-6 px-8 text-xl">
             <span className="mr-2 text-[#7B0423]">▶</span> WATCH VIDEO
           </Button>
         </div>
@@ -40,7 +40,7 @@ const VideoModal: FC<VideoModalProps> = ({ videoUrl, backgroundImageUrl }) => {
           <div className="relative w-full max-w-4xl p-4 sm:p-6 bg-white rounded-lg">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute bg-white cursor-pointer rounded-full top-2 right-2 text-black text-xl font-bold w-10 h-10 border border-2"
+              className="absolute bg-white cursor-pointer rounded-full top-2 right-2 text-black text-xl font-bold w-10 h-10 border-2"
             >
               <span className="text-2xl">×</span>
             </button>
