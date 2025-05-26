@@ -104,15 +104,15 @@ export default function DonationPage() {
         onMouseLeave={() => setPaused(false)}
         // key={fadeKey}
         // className="relative bg-no-repeat bg-right bg-contain transition-all duration-1000 animate-fade"
-        className={`relative bg-no-repeat bg-right bg-contain transition-all duration-1000 ${
+        className={`relative bg-no-repeat bg-right transition-all duration-1000 bg-cover overflow-hidden ${
           fade ? "opacity-100" : "opacity-0"
         }`}
         style={{
           backgroundImage: `url('${heroSlides[currentSlide].bgImage}')`,
         }}
       >
-        <div className="relative 2xl:max-h-[550px] z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center transition-all duration-700 ease-in-out">
-          <div className="w-full md:w-2/5 z-10 bg-transparent">
+        <div className="relative 2xl:max-h-[550px] z-10 lg:container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24 flex flex-col md:flex-row items-center transition-all duration-700 ease-in-out">
+          <div className="w-full md:w-1/2 lg:2/5 z-10 bg-transparent text-center md:text-left">
             <p className="text-navy-800 font-semibold mb-2 text-sm sm:text-base">
               WE PROVIDE
             </p>
@@ -126,11 +126,14 @@ export default function DonationPage() {
             <p className="text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base max-w-lg">
               {heroSlides[currentSlide].description}
             </p>
-            <DownloadButtons
-              AppStoreLink={heroSlides[currentSlide].appleLink}
-              PlayStoreLink={heroSlides[currentSlide].playstoreLink}
-            />
-            <div className="flex w-full sm:w-fit px-3 sm:px-2 sm:pr-4 py-1 rounded-full items-center space-x-2 text-xs sm:text-sm bg-[#E7F2FF] mt-4 sm:mt-0">
+            <div className="text-left md:text-center">
+              <DownloadButtons
+                AppStoreLink={heroSlides[currentSlide].appleLink}
+                PlayStoreLink={heroSlides[currentSlide].playstoreLink}
+              />
+            </div>
+            
+            <div className="flex w-fit px-3 sm:px-2 sm:pr-4 py-1 rounded-full items-center space-x-2 text-xs sm:text-sm bg-[#E7F2FF] mt-4 sm:mt-0 mx-auto md:mx-0">
               <div className="flex items-center">
                 {testimonials.slice(0, 5).map((user) =>
                   user.avatar ? (
@@ -166,7 +169,7 @@ export default function DonationPage() {
           </div>
           {heroSlides[currentSlide].showGradient && (
             <div
-              className={`absolute -left-60 inset-0 bg-gradient-to-r ${heroSlides[currentSlide].gradientColor} z-0`}
+              className={`absolute lg:-left-60 inset-0 bg-white/80 md:bg-transparent md:bg-gradient-to-r ${heroSlides[currentSlide].gradientColor} z-0`}
             ></div>
           )}
           {/* Navigation Buttons and Dots */}
@@ -195,7 +198,7 @@ export default function DonationPage() {
               →
             </button>
           </div>
-          <div className="flex space-x-2 mt-4 absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="flex space-x-2 mt-4 absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
             {heroSlides.map((_, i) => (
               <button
                 key={i}
@@ -214,8 +217,8 @@ export default function DonationPage() {
 
       {/* Download Section */}
       <section className="py-8 sm:py-12 md:py-16" id="download">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-start gap-8 gap-x-12">
-          <div className="w-full md:w-1/2 max-w-[780px] mb-8 md:mb-0 py-6">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-start gap-8 gap-x-12 align-center">
+          <div className="w-full md:w-1/2 max-w-[780px] mb-0 pt-6 order-2 md:order-1">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gradient-blue mb-4">
               Download The App And Enjoy Full Access On Offline Mode.
             </h2>
@@ -225,85 +228,98 @@ export default function DonationPage() {
               listen to the audio anymore.
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8">
+            <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 sm:gap-8">
               <div className="flex flex-col items-start">
-                <Image
-                  src="/png/yoruba-card.jpg"
+
+                <div className="text-left mb-2">
+                  <Image
+                  src="/svg/app-card-1.svg"
                   alt="Yoruba Audio Bible"
                   width={180}
                   height={180}
-                  className="w-full max-w-[120px] sm:max-w-[140px] md:max-w-[180px] h-auto mb-2"
+                  className="w-full"
                 />
-
-                <Link
-                  href="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
-                  target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline mb-1 cursor-pointer"
-                >
-                  Download for iOS
-                </Link>
-                <Link
-                  href="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
-                  target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline cursor-pointer"
-                >
-                  Download for Android
-                </Link>
+                </div>
+                <div className="flex flex-col text-center md:text-left w-full">
+                  <Link
+                    href="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
+                    target="_blank"
+                    className="text-[#023E8A] text-xs sm:text-sm underline mb-1 cursor-pointer"
+                  >
+                    Download for iOS
+                  </Link>
+                  <Link
+                    href="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
+                    target="_blank"
+                    className="text-[#023E8A] text-xs sm:text-sm underline cursor-pointer"
+                  >
+                    Download for Android
+                  </Link>
+                </div>
+               
               </div>
 
               <div className="flex flex-col items-start">
-                <Image
-                  src="/png/hausa-card.jpg"
+
+                <div className="text-left mb-2">
+                  <Image
+                  src="/svg/app-card-2.svg"
                   alt="Hausa Audio Bible"
                   width={180}
                   height={180}
-                  className="w-full max-w-[120px] sm:max-w-[140px] md:max-w-[180px] h-auto mb-2"
+                  className="w-full"
                 />
-
-                <Link
-                  href="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
-                  target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
-                >
-                  Download for iOS
-                </Link>
-                <Link
-                  href="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
-                  target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline"
-                >
-                  Download for Android
-                </Link>
+                </div>
+                <div className="flex flex-col text-center md:text-left w-full">
+                  <Link
+                    href="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
+                    target="_blank"
+                    className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
+                  >
+                    Download for iOS
+                  </Link>
+                  <Link
+                    href="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
+                    target="_blank"
+                    className="text-[#023E8A] text-xs sm:text-sm underline"
+                  >
+                    Download for Android
+                  </Link>
+                </div>
               </div>
 
               <div className="flex flex-col items-start">
-                <Image
-                  src="/png/pidgin-card.jpg"
+                
+                <div className="text-left mb-2">
+                  <Image
+                  src="/svg/app-card-3.svg"
                   alt="Pidgin Audio Bible"
                   width={180}
                   height={180}
-                  className="w-full max-w-[120px] sm:max-w-[140px] md:max-w-[180px] h-auto mb-2"
+                  className="w-full"
                 />
-
+                </div>
+              <div className="flex flex-col text-center md:text-left w-full">
                 <Link
                   href="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
                   target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline mb-1"
+                  className="text-[#023E8A] text-center lg:text-left text-xs sm:text-sm underline mb-1"
                 >
                   Download for iOS
                 </Link>
                 <Link
                   href="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
                   target="_blank"
-                  className="text-[#023E8A] text-xs sm:text-sm underline"
+                  className="text-[#023E8A] text-center lg:text-left text-xs sm:text-sm underline"
                 >
                   Download for Android
                 </Link>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="w-full  md:w-1/2 flex justify-center teal-gradient rounded-2xl overflow-y-hidden px-4">
+          <div className="w-full  md:w-1/2 flex justify-center teal-gradient rounded-2xl overflow-y-hidden px-4 order-1 md:order-2">
             <div className="relative w-36 sm:w-48 md:w-56 lg:w-64 h-auto mt-10">
               <Image
                 src="/png/preview.png"
@@ -320,7 +336,7 @@ export default function DonationPage() {
       {/* Products Section */}
       <section id="products" className="py-8 sm:py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center font-mada mb-8 sm:mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-center font-mada mb-8 sm:mb-12">
             Our Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
@@ -413,7 +429,7 @@ export default function DonationPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8 rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden font-mada">
             <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">
                 Support Our Mission
               </h2>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-4 sm:mb-6 md:mb-8">
@@ -421,7 +437,7 @@ export default function DonationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="https://donate.dabible.com" className="cursor-pointer">
-                  <Button className="bg-[#7B0423] hover:bg-red-900 text-xs sm:text-sm py-2 w-full sm:w-auto">
+                  <Button className="bg-[#7B0423] hover:bg-red-900 text-xl py-6 w-full sm:w-auto">
                     <Gift className="mr-1" />
                     DONATE
                   </Button>
@@ -433,14 +449,14 @@ export default function DonationPage() {
                 >
                   <Button
                     variant="outline"
-                    className="border-[#7B0423] cursor-pointer text-[#7B0423] hover:bg-red-50 text-xs sm:text-sm py-2 w-full sm:w-auto"
+                    className="border-[#7B0423] cursor-pointer text-xl text-[#7B0423] hover:bg-red-50  py-6 w-full sm:w-auto"
                   >
                     <Play className="mr-1" /> VISIT OUR YOUTUBE CHANNEL
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px]">
+            <div className="w-full md:w-1/2 relative h-[300px] md:h-[400px] lg:h-[600px]">
               <VideoModal
                 videoUrl="https://www.youtube.com/embed/ZD-2IKVCOfI"
                 backgroundImageUrl="/png/watch.png"
@@ -460,7 +476,7 @@ export default function DonationPage() {
             <h3 className="text-base sm:text-lg md:text-xl font-medium mb-1 sm:mb-2">
               Join Us To
             </h3>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
+            <h2 className="text-3xl lg:text-4xl font-bold">
               Empower Missionaries
             </h2>
           </div>

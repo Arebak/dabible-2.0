@@ -79,8 +79,6 @@ export async function generateStaticParams() {
   return [];
 }
 
-
-
 export default async function BlogDetail(props: any) {
   const { params } = props;
   const blog = await getBlog(params.slug);

@@ -53,9 +53,9 @@ const ProductHoverCard = ({
   return (
     <div
       style={{ background: BackgroundColor, color: TextPrimaryColor }}
-      className="group relative h-[400px] sm:h-[500px] md:h-[600px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 flex flex-col"
+      className="group relative h-[300px] md:h-[500px] rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 flex flex-col"
     >
-      <div className="absolute top-0 -translate-x-1/2 left-1/2">
+      <div className="absolute -top-4 -translate-x-1/2 left-1/2 animate-spin-slow">
         <Image src={Image1} alt={Alt1} width={400} height={400} />
       </div>
 
@@ -72,7 +72,7 @@ const ProductHoverCard = ({
       </div>
 
       <div className="flex justify-between items-center">
-        <div>
+        <div className="md:absolute left-8 bottom-8">
           <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-1 font-montserrat uppercase">
             {ProductName}
           </h3>
@@ -82,7 +82,7 @@ const ProductHoverCard = ({
         </div>
       </div>
 
-      <div className="flex justify-end items-center absolute right-8 bottom-8">
+      <div className="flex justify-end items-center absolute right-4 bottom-4 md:right-8 md:bottom-8">
         <Link href={LearnMoreLink} className="cursor-pointer">
           <Button style={{ color: ButtonTextColor, background: ButtonBackgroundColor }} 
             className="mt-4 text-white text-xs sm:text-sm">
@@ -112,18 +112,18 @@ const ProductHoverCard = ({
 
           <div className="relative p-4 md:p-8 text-white h-full">
             <div className="space-y-4 h-full">
-              <div>
+              <div className="">
                 <h1 className="text-3xl md:text-4xl font-bold font-montserrat uppercase">{ProductName}</h1>
                 <h1 className="text-3xl md:text-xl font-bold tracking-wide uppercase">{ProductTag}</h1>
               </div>
 
-              <p className="text-sm md:text-sm">{ProductionDescription}</p>
+              <p className="text-md">{ProductionDescription}</p>
 
               <div className="space-y-2 py-4 h-full">
                 {features.map((feature, index) => feature ? (
                   <div key={index} className="flex items-center gap-4">
                     <FlamesIcon />
-                    <p className="text-xs md:text-sm">{feature}</p>
+                    <p className="text-md">{feature}</p>
                   </div>
                 ): null)}
               </div>

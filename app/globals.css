@@ -153,6 +153,12 @@
   animation: fade 0.8s ease-in-out;
 }
 
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+}
+
 
 .d-container {
   max-width: 1440px;
