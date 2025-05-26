@@ -1,4 +1,5 @@
 "use client"
+export const dynamic = 'force-dynamic';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -6,16 +7,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
-  // Utility: highlight keyword in text with <mark>
-  const highlightSearch = (text: string, keyword: string) => {
-    if (!keyword) return text;
-    // Escape regex special chars in keyword
-    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
-    return text.replace(regex, '<mark>$1</mark>');
-  };
+// Utility: highlight keyword in text with <mark>
+const highlightSearch = (text: string, keyword: string) => {
+  if (!keyword) return text;
+  // Escape regex special chars in keyword
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`(${escaped})`, 'gi');
+  return text.replace(regex, '<mark>$1</mark>');
+};
 
 export default function Blog() {
   type Blog = {
@@ -56,7 +58,7 @@ export default function Blog() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   async function fetchFilters() {
     try {
@@ -106,21 +108,14 @@ export default function Blog() {
     fetchFilters();
   }, []);
 
-  // Refactored: Initialize selected filters from URL on first mount only
+  // Minimal initialization on first mount only
   useEffect(() => {
-    // Only run on first mount
-    if (!initialized && searchParams) {
-      const cat = searchParams.get('category') || '';
-      const tag = searchParams.get('tag') || '';
-      const author = searchParams.get('author') || '';
-      setSelectedCategory(cat);
-      setSelectedTag(tag);
-      setSelectedAuthor(author);
-      setBlogs([]); // Ensure previous state is cleared
-      setPage(1);   // This will trigger fetchBlogs via [page] effect
+    if (!initialized) {
+      setBlogs([]);
+      setPage(1);
       setInitialized(true);
     }
-  }, [searchParams, initialized]);
+  }, [initialized]);
 
   // Enhance: Listen for browser back/forward navigation and update filters
   useEffect(() => {
