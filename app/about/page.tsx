@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import TeamSection from "@/components/TeamSection";
 import { Clipboard } from "lucide-react";
 import Image from "next/image";
@@ -218,7 +219,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* Our True Simple Story Section */}
-      <section className="py-12 md:py-16 bg-[url('/png/blue-pattern.png')] bg-no-repeat bg-contain bg-right">
+      <section className="py-12 md:py-16 lg:bg-[url('/png/blue-pattern.png')] bg-no-repeat bg-contain bg-right">
         <div className="container mx-auto px-4 flex flex-col md:flex-row">
           <div className="w-full md:w-2/3 pr-0 md:pr-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-6 font-domine">
@@ -294,149 +295,53 @@ export default function OurStoryPage() {
 
           <div className="max-w-4xl font-inter mx-auto text-[#121212] space-y-6 text-sm md:text-base">
             <p>
-              When we say &quot;our story,&quot; we are not merely putting
-              pleasing words together for credibility or gratification. This
-              adventure recounts true stories of real people and God&apos;s
-              faithfulness. Reinhard&apos;s journey began with a divine
-              encounter, which led him to pray and intercede for souls. Little
-              did he know that God was already working with another person on
-              the other side of the world, who would join hands to give birth to
-              the DaBible Foundation.
+              When we say “our story,” we are not merely putting pleasing words together for credibility or gratification. This adventure recounts true stories of real people and God’s faithfulness. Demilade began with skepticism, uncertainty, and a yearning for purpose. She found herself at a crossroads, which led her to pray and intercede for souls. Little did she know that God was already working with another person on the other side of the world, who would join hands to give birth to the DaBible Foundation. 
             </p>
 
             <p>
-              Before we get started with the story, let&apos;s do some
-              introductions. We at &quot;The DaBible Foundation&quot; are a team
-              of energetic, young people. Some members of the team are college
-              students, and others have accepted Christ as their savior and are
-              working for His kingdom. You&apos;ll get to know some of our team
-              members listed on this page. Several people have also been pivotal
-              to the project&apos;s success, who may not be listed here. We
-              haven&apos;t forgotten, and indeed, God hasn&apos;t either; we
-              appreciate all the members of our crew for all that they continue
-              to do.
+              Before we get started with the story, let's do some introductions. We at “The DaBible Foundation” are a team of energetic young people. Some team members are college students; others had just accepted Jesus as their savior when this project started. You'll get to know some of our team members on this page. Several people have also been pivotal to the project's success, who may not be listed here. We haven’t forgotten, and indeed, God hasn't either; we appreciate all our crew members for all they continue to do. 
             </p>
 
-            <h3 className="text-xl font-bold mt-8 mb-4">2013 - 2014</h3>
+            <h3 className="text-2xl font-bold mt-8 mb-4 font-domine text-[#023E8A]">2013 - 2014</h3>
 
             <p className="italic">
-              Two weeks before arriving in the United States, I, Sanmi, got
-              saved. Before this, I lived an unholy lifestyle; I was a drunk, a
-              chronic womanizer, and most sickening of all were my fraudulent
-              escapades. Thankfully, I found salvation, and I began my journey
-              with the Lord. I must confess, though, that en route to the US, I
-              intended to return to my old ways. I dreamed that I wouldn&apos;t
-              need God anymore. I was keen on getting drunk and womanizing my
-              way into the future. I had set my life to start all over again. I
-              can as well take it back sincerely, it&apos;s not something
-              I&apos;m proud of.
+              Two weeks before arriving in the United States, I, Sanmi, got saved. Before this, I lived an unruly lifestyle; I was a drunk, a chronic womanizer, and most sickening of all were my fraudulent street-hustling escapades. Thankfully, I found salvation, and I began my journey with the Lord. I must confess, though, that en route to the US, I intended to return to my old ways; I assumed that I wouldn’t need God anymore. I was keen on getting drunk and womanizing my way into the future. If I just gave my life to Jesus two weeks ago, I can as well take it back instantly, it's my life anyway! … not knowing that God already has an eternal plan waiting to be unveiled.
             </p>
 
             <p className="italic">
-              Upon arrival the hospitable family had a place in their library
-              for me to sleep. Surrounded by books, I forgot my plans and
-              started studying Christian books frequently. I especially studied
-              the word. Which gradually exposed to me I knew little. The Bible
-              was this interesting; I was hungry for the word of God. I found
-              that I lost the urge to drink alcohol, and for the first time in
-              my life, the once overwhelming lust for the opposite sex was
-              killed. All I wanted now was to know more about God. So, I kept
-              reading and learning, guided only by the Holy Spirit. This went on
-              for six months...
+              Upon arrival the hospitable family had a place in their library for me to sleep. Surrounded by books, I forgot my plans and started studying Christian books ferociously. I primarily studied the bible, which strangely opened to me! I never knew the Bible was this interesting. I was hungry for the word of God. I found that I lost the urge to drink alcohol, and for the first time in my life, the prior overwhelming lust for the opposite sex was killed. All I wanted now was to know more about God. So, I kept reading and learning, guided only by the Holy Spirit. This went on for six months… 
             </p>
 
             <p>
-              I started living victoriously after I had undergone a total life
-              change. I got the counsel of my brother, Jembola, who had always
-              been chastity and holy-judgment. Strongly, we reconnected, and he
-              began to provide answers, scriptures, and expressions that made
-              sense. Little did I know that Damascus was also praying for the
-              salvation of my soul in Nigeria. Back in Nigeria, I was incredibly
-              selfish, ruthless, and employed every crooked method to make
-              money. Besides, I was a hip-hop artist during the week and a
-              backup vocalist of a live band on weekends. I&apos;m often in the
-              studio, singing, and producing for multiple ladies. Now that I
-              have no idea what to do with my life, I was praying earnestly for
-              God to give me a purpose.
+             I started having questions about what I was reading, what I saw in my dreams, and the visions of the night. Then I remembered a lady, Demilade, who had always been churchy and non-judgmental. Strangely, we reconnected, and she began to provide answers, scriptures, and explanations that made sense. Little did I know that Demilade was also praying for the salvation of my soul in Nigeria. Back in Nigeria, I was incredibly selfish, ruthless, and employed every crooked method to make money. Besides, I was a hip-hop artist during the week and a backup vocalist of a live band on weekends. I'm either in the club, drinking, and picking up strange ladies. Now that I have no idea what to do with my life, I turn to prayer and studying the Word, but I still have a problem…
             </p>
 
             <p>
-              The King James Bible was complicated for me to understand. I love
-              my KJV because it forces me to study using several translations,
-              which has been key to understanding, but it was still difficult.
-              How can I keep reading even when I tend to yawn? I went online and
-              found an audio narration of the Bible. Oh, what a blessing! So,
-              I&apos;ll listen to the audio first, then read! My friend and
-              disciple Demilade was also leading me to pray earnestly every
-              night. One of those nights, I was praying saying, &quot;God, give
-              me an idea that would turn my life around!&quot; And He did. To my
-              surprise, I wasn&apos;t given just one idea but three. I had heard
-              a clear, audible voice, &quot;Build me an Audio Bible!&quot;
+              ... The King James Bible was complicated for me to understand. I love my KJV because it forces me to study using parallel translations, which has expanded my understanding, but it was still tricky. How can I keep reading even when I need to sleep? I went online and found an audio narration of the Bible. Oh, what a blessing! So, I'll listen to the audio first, then read! My friend and discipler, Demilade, was also loading me with prayers I must pray earnestly every night. One of those nights, I found myself saying, “God, give me an idea that would turn my life around!” And He did. To my surprise, I wasn’t given just one idea but three. I had heard a clear, audible voice, “Build me an Audio Bible!”.
             </p>
 
-            <h3 className="text-xl font-bold mt-8 mb-4">2015</h3>
+            <h3 className="text-2xl font-bold mt-8 mb-4 font-domine text-[#023E8A]">2015</h3>
 
             <p>
-              Being recently converted, I was pretty skeptical. It was my first
-              such experience, and I needed to be sure it was the voice of the
-              Lord. Then the Holy Spirit ministered to me in the form of a
-              question, &quot;What will Satan gain from you building a bible
-              app?&quot; That put an end to my doubts. Though I felt quite
-              inadequate - I hadn&apos;t even thoroughly read the Bible. How was
-              I going to create a Bible app? That was the challenge. I recalled
-              the personal testimony of the late evangelist Reinhard Bonnke
-              about how God showed him a map of Africa covered in blood and the
-              voice crying &quot;Africa must be saved.&quot; I thought of the
-              mighty works God wrought through Reinhard Bonnke and felt
-              instantly invigorated.
+              Being recently converted, I was skeptical. It was my first such experience, and I needed to be sure it was the voice of the Lord. Then the Holy Spirit ministered to me in the form of a question: “What will Satan gain from you by building a bible app?” That put an end to my doubts. Though I felt pretty inadequate - I hadn't even thoroughly read the Bible. How was I going to create a Bible app? That was the challenge. I recalled the personal testimony of the late evangelist Reinhard Bonnke about how God showed him a map of Africa covered in blood and a voice crying, “Africa must be saved.” I thought of the mighty works God wrought through Reinhard Bonnke and felt instantly invigorated.
             </p>
 
             <p>
-              &quot;God said I should do it.&quot; &quot;I am all for it.&quot;
-              &quot;So far He says it, I am up on my feet!&quot; I told myself.
+               “God said I should do it.” “I am all for it. “So far, He says it, I am up on my feet!” I told myself. 
             </p>
 
             <p>
-              The first thing I did was research how many people were searching
-              for a Yoruba Audio Bible app. Using my SEO skills, I quickly found
-              the numbers. They were only about 55 searches.
+              The first thing I did was research how many people were searching for a Yoruba Audio Bible app. Using my SEO skills, I quickly found the numbers. They were only about 50 searches; Once again, I became discouraged, but quickly recovered, trusting that God had a plan. And yes, He did. I was led to call a friend. He was the one I needed to speak to about this project. I reached for my phone and quickly dialed Abiola Oduremi, and the rest is history. We recorded the Yoruba Bible in Ibadan, Nigeria, over about a year and released the app in early 2016.
+            </p>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 font-domine text-[#023E8A]">Going Forward </h3>
+
+            <p>
+              We have not only created the Yoruba Audio Bible mobile app, which has over 196,584 users in the last 4 years. But we have gone on to make similar apps for the Pidgin and Hausa languages. We thank God for how far we’ve come. Despite the challenges we face, we keep growing each time. We are currently releasing a Solar Audio Device, which will be distributed to remote parts of Africa where mobile app penetration is low. Apart from the technological side of things, we have been heavily involved in evangelism through our team of missionaries, who take delight in winning souls and raising disciples across villages and cities in Africa. The rest of the story will be made available on a separate platform. 
             </p>
 
             <p>
-              Once again, I became discouraged, but quickly recovered, trusting
-              that God had a plan. And yes, He did. I was led to call a friend;
-              I felt sure he was the one I needed to speak to about this
-              project. I reached for my phone and quickly dialed Abide Olumide,
-              and the rest is history. We recorded the Yoruba Bible in Ibadan,
-              Nigeria, over the course of about a year and released the app in
-              early 2016.
-            </p>
-
-            <p>
-              We have not created the Yoruba Audio Bible mobile app, which has
-              over 196,584 users in the last 4 years. But we have gone on to
-              make similar apps for the Pidgin and Hausa languages. We thank God
-              for how far we have come. Despite the challenges we face, we keep
-              growing each time. We are currently releasing a Solar Audio
-              Device, which will be distributed to remote parts of Africa where
-              mobile app penetration is low. Apart from the technological side
-              of things, we have been heavily involved in evangelism through our
-              team of missionaries, who take the gospel to villages and
-              communities. We are grateful to God that He&apos;s enabled us to
-              reach so many people through our platform.
-            </p>
-
-            <p>
-              Today, the DaBible Foundation stands as a beacon of hope.
-              Administered by the transformative power of faith and the
-              boundless potential of collaboration. As they continue to expand
-              their reach and impact, they invite like-minded individuals to
-              join them on their journey. Whether you&apos;re a seasoned
-              professional, a passionate volunteer, or simply someone eager to
-              make a difference, the DaBible Foundation welcomes you with open
-              arms. Together, let&apos;s write the next chapter of our story,
-              united in our mission to empower missionaries, enrich communities,
-              and illuminate hearts with the timeless power of God&apos;s Word.
+              Today, the DaBible Foundation stands as a beacon of hope, a testament to the transformative power of faith and the boundless potential of collaboration. As they continue to expand their reach and impact, they invite like-minded individuals to join them on their journey. Whether you're a seasoned professional, a passionate volunteer, or simply someone eager to make a difference, the DaBible Foundation welcomes you with open arms. Together, let's write the next chapter of our story, united in our mission to empower missionaries, enrich communities, and illuminate hearts with the timeless power of God's Word.
             </p>
           </div>
         </div>
@@ -450,7 +355,7 @@ export default function OurStoryPage() {
           </h2>
 
           <div className="teal-gradient rounded-xl p-6 md:p-10 text-white">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 text-center">
               <div className="flex flex-col items-center">
                 <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
                   239k+
@@ -469,18 +374,18 @@ export default function OurStoryPage() {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center">
+              {/* <div className="flex flex-col items-center">
                 <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
                   $50k+
                 </h3>
                 <p className="md:text-xl font-mada max-w-[250px] text-lg">
                   Raised from donations
                 </p>
-              </div>
+              </div> */}
 
               <div className="flex flex-col items-center">
                 <h3 className="text-4xl md:text-5xl font-bold mb-2 font-montserrat">
-                  7 Years
+                  8 Years +
                 </h3>
                 <p className=" md:text-xl font-mada max-w-[250px] text-lg">
                   Building and deploying
@@ -504,8 +409,7 @@ export default function OurStoryPage() {
                 <p className="font-semibold">
                   DaBible Foundation welcomes entrepreneurs, techies, and
                   developers who want to contribute to our mission. Our project
-                  is open source and available on GitHub—visit our developer
-                  page to learn more.
+                  is open source and available on GitHub, contact us to learn more.
                 </p>
 
                 <p>
@@ -519,7 +423,7 @@ export default function OurStoryPage() {
                   A special burden on our hearts is reaching elderly people in
                   remote villages who struggle with mobile apps. We&apos;re
                   working with Chinese partners to create easy-to-use audio
-                  Bible devices—completely free for the elderly.
+                  Bible devices, completely free for the elderly.
                 </p>
 
                 <p>
