@@ -10,6 +10,7 @@ import { testimonials } from "@/lib/testimony";
 import { 
   // use,
    useEffect, useState } from "react";
+import VideoModal from "@/components/VideoModal";
 import ProductHoverCard from "@/components/ProductHoverCard";
 
 export default function DonationPage() {
@@ -85,11 +86,11 @@ export default function DonationPage() {
     return () => clearInterval(interval);
   }, [currentSlide, paused]);
 
-  const [showVideoModal, setShowVideoModal] = useState(false);
+  // const [setShowVideoModal] = useState(false);
 
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShowVideoModal(false);
+    const handleEsc = () => {
+  
     };
     document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
@@ -440,51 +441,14 @@ export default function DonationPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px]">
-              <Link href="#" className="cursor-pointer">
-                <Image
-                  src="/png/watch.png"
-                  alt="Hands praying over Bible"
-                  fill
-                  className="object-cover rounded-4xl"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    onClick={() => setShowVideoModal(true)}
-                  >
-                    <Button className="bg-white cursor-pointer text-[#7B0423] hover:bg-white/90 rounded-full px-4 sm:px-6 text-xs sm:text-sm">
-                      <span className="mr-2 text-[#7B0423]">▶</span> WATCH VIDEO
-                    </Button>
-                  </div>
-                </div>
-              </Link>
-              {showVideoModal && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out animate-fadeIn"
-                  role="dialog"
-                  aria-modal="true"
-                >
-                  <div className="relative w-full max-w-4xl p-4 sm:p-6 bg-white rounded-lg">
-                    <button
-                      onClick={() => setShowVideoModal(false)}
-                      className="absolute bg-white cursor-pointer rounded-full top-2 right-2 text-black text-xl font-bold  w-10 h-10 border border-2"
-                    >
-                      <span className="text-2xl">×</span>
-                    </button>
-                    <div className="w-full aspect-[4/3] sm:aspect-video">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/ZD-2IKVCOfI?autoplay=1"
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <VideoModal
+                videoUrl="https://www.youtube.com/embed/ZD-2IKVCOfI"
+                backgroundImageUrl="/png/watch.png"
+              />
             </div>
+            
+            
+            
           </div>
         </div>
       </section>

@@ -1,10 +1,268 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client"
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+  // Utility: highlight keyword in text with <mark>
+  const highlightSearch = (text: string, keyword: string) => {
+    if (!keyword) return text;
+    // Escape regex special chars in keyword
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  };
 
 export default function Blog() {
+  type Blog = {
+    id: number;
+    slug: string;
+    title: string;
+    content: string;
+    featured_image: string;
+    published_at: string;
+    author: { id: number; name: string; photo_url?: string; image_url?: string };
+    categories: { id: number; name: string }[];
+    tags: { id: number; name: string }[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  };
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  type Category = { id: string | number; name: string };
+  type Tag = { id: string | number; name: string };
+  type Author = { id: string | number; name: string };
+
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [authors, setAuthors] = useState<Author[]>([]);
+
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
+  const [selectedAuthor, setSelectedAuthor] = useState('');
+  const [initialized, setInitialized] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  // IntersectionObserver for infinite scroll
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  async function fetchFilters() {
+    try {
+      const [catRes, tagRes, authRes] = await Promise.all([
+        fetch('/api/blogs/categories'),
+        fetch('/api/blogs/tags'),
+        fetch('/api/blogs/authors'),
+      ]);
+
+      const [catData, tagData, authData] = await Promise.all([
+        catRes.json(),
+        tagRes.json(),
+        authRes.json(),
+      ]);
+
+      if (Array.isArray(catData?.data)) setCategories(catData.data);
+      if (Array.isArray(tagData?.data)) setTags(tagData.data);
+      if (Array.isArray(authData?.data)) setAuthors(authData.data);
+    } catch (err) {
+      console.error('Error fetching filters:', err);
+    }
+  }
+
+
+  // Format date utility function that handles ISO strings and Unix timestamps
+  function formatDate(dateInput: string | number): string {
+    if (!dateInput) return '';
+    let date: Date;
+    if (typeof dateInput === 'number') {
+      date = new Date(dateInput * 1000); // Unix timestamp (seconds)
+    } else {
+      date = new Date(dateInput); // ISO string
+    }
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    };
+    return date.toLocaleString('en-US', options);
+  }
+
+  useEffect(() => {
+    fetchFilters();
+  }, []);
+
+  // Refactored: Initialize selected filters from URL on first mount only
+  useEffect(() => {
+    // Only run on first mount
+    if (!initialized && searchParams) {
+      const cat = searchParams.get('category') || '';
+      const tag = searchParams.get('tag') || '';
+      const author = searchParams.get('author') || '';
+      setSelectedCategory(cat);
+      setSelectedTag(tag);
+      setSelectedAuthor(author);
+      setBlogs([]); // Ensure previous state is cleared
+      setPage(1);   // This will trigger fetchBlogs via [page] effect
+      setInitialized(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, initialized]);
+
+  // Enhance: Listen for browser back/forward navigation and update filters
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('category') || '';
+      const tag = params.get('tag') || '';
+      const author = params.get('author') || '';
+      setSelectedCategory(cat);
+      setSelectedTag(tag);
+      setSelectedAuthor(author);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Refactored: Sync selected filters to the URL, but only if changed
+  const [prevFilters, setPrevFilters] = useState<{category: string; tag: string; author: string}>({
+    category: '',
+    tag: '',
+    author: ''
+  });
+  useEffect(() => {
+    if (!initialized) return;
+    const params = new URLSearchParams();
+    if (selectedCategory) params.set('category', selectedCategory);
+    if (selectedTag) params.set('tag', selectedTag);
+    if (selectedAuthor) params.set('author', selectedAuthor);
+    // Only push if filters changed
+    if (
+      prevFilters.category !== selectedCategory ||
+      prevFilters.tag !== selectedTag ||
+      prevFilters.author !== selectedAuthor
+    ) {
+      router.push(`/blog?${params.toString()}`);
+      setPrevFilters({
+        category: selectedCategory,
+        tag: selectedTag,
+        author: selectedAuthor
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, selectedTag, selectedAuthor, initialized]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [searchTerm]);
+
+  // Reset blogs and page to 1 when filters/search change
+  useEffect(() => {
+    setBlogs([]);
+    setHasMore(true);
+    setPage(1);
+  }, [selectedCategory, selectedTag, selectedAuthor, debouncedSearch]);
+
+  // Wrap fetchBlogs in useCallback to avoid stale closure
+  const fetchBlogs = React.useCallback(async (pageNumber: number) => {
+    try {
+      setLoading(true);
+      const query = new URLSearchParams({
+        page: String(pageNumber),
+        per_page: '6',
+        ...(selectedCategory ? { category: selectedCategory } : {}),
+        ...(selectedTag ? { tag: selectedTag } : {}),
+        ...(selectedAuthor ? { author: selectedAuthor } : {}),
+        ...(debouncedSearch ? { search: debouncedSearch } : {}),
+      });
+
+      const response = await fetch(`/api/blogs?${query.toString()}`);
+      const data = await response.json();
+      console.log("Blogs data:", data);
+      if (response.ok && Array.isArray(data?.data)) {
+        setBlogs(prev => [...prev, ...data.data]);
+        if (data.data.length < 6) setHasMore(false);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedCategory, selectedTag, selectedAuthor, debouncedSearch]);
+
+  // Keep a ref to the latest fetchBlogs function
+  const fetchBlogsRef = useRef(fetchBlogs);
+  useEffect(() => {
+    fetchBlogsRef.current = fetchBlogs;
+  }, [fetchBlogs]);
+
+  useEffect(() => {
+    if (!initialized) return;
+    fetchBlogs(page);
+  }, [page, fetchBlogs, initialized]);
+
+  const loadMore = () => {
+    if (hasMore && !loading) setPage(prev => prev + 1);
+  };
+
+  // Infinite scroll: IntersectionObserver to trigger loading more blogs
+  useEffect(() => {
+    if (loading || !hasMore || !loadMoreRef.current) return;
+
+    const observer = new window.IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        setPage(prev => prev + 1);
+      }
+    });
+
+    observer.observe(loadMoreRef.current);
+    observerRef.current = observer;
+
+    return () => observer.disconnect();
+  }, [loading, hasMore]);
+  // Skeleton loader for blog cards
+  const SkeletonCard = () => (
+    <div className="animate-pulse bg-gray-100 rounded-2xl p-4 h-full flex flex-col gap-3">
+      <div className="bg-gray-300 h-[220px] rounded-xl w-full"></div>
+      <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+      <div className="h-3 bg-gray-100 rounded w-1/2 mt-auto"></div>
+    </div>
+  );
+
+  // Sort filters alphabetically by name for better UX
+  const sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedTags = [...tags].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedAuthors = [...authors].sort((a, b) => a.name.localeCompare(b.name));
+
+  // Move the call to formatDate for blogs[0]?.published_at outside of JSX
+  const featuredUpdatedAt = formatDate(blogs[0]?.published_at ?? '');
+  // Create a map of blog IDs to their formatted update dates
+  const formattedDates = blogs.map(blog => ({
+    id: blog.id,
+    updatedAt: formatDate(blog.published_at),
+  }));
+
   return (
     <main className="mx-auto px-4">
       {/* Hero Section */}
@@ -61,32 +319,102 @@ export default function Blog() {
         </div>
       </section>
 
+      {/* Filter UI */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {/* Search input with clear icon */}
+        <div className="relative w-full max-w-xs">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            className="border rounded px-3 py-2 text-sm w-full pr-10"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              aria-label="Clear search"
+              type="button"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <select
+          className="border rounded px-3 py-2 text-sm"
+          value={selectedCategory}
+          onChange={e => setSelectedCategory(e.target.value)}
+        >
+          <option value="">All Categories</option>
+          {sortedCategories.map((cat) => (
+            <option key={cat.id} value={cat.id}>{cat.name}</option>
+          ))}
+        </select>
+        <select
+          className="border rounded px-3 py-2 text-sm"
+          value={selectedTag}
+          onChange={e => setSelectedTag(e.target.value)}
+        >
+          <option value="">All Tags</option>
+          {sortedTags.map((tag) => (
+            <option key={tag.id} value={tag.id}>{tag.name}</option>
+          ))}
+        </select>
+        <select
+          className="border rounded px-3 py-2 text-sm"
+          value={selectedAuthor}
+          onChange={e => setSelectedAuthor(e.target.value)}
+        >
+          <option value="">All Authors</option>
+          {sortedAuthors.map((auth) => (
+            <option key={auth.id} value={auth.id}>{auth.name}</option>
+          ))}
+        </select>
+        <Button onClick={() => {
+          setSelectedCategory('');
+          setSelectedTag('');
+          setSelectedAuthor('');
+          setSearchTerm('');
+        }}>
+          View All
+        </Button>
+      </div>
+
       <section className="mb-20 d-container flex flex-col lg:flex-row justify-center items-start gap-x-10 gap-y-8 font-mada">
-        {/* Featured Article */}
+      {/* Featured Article */}
+      {blogs[0] && (
         <div className="flex flex-col gap-y-6 w-full lg:w-auto">
           <div className="relative">
             <Image
-              src="/png/outreachb.png"
-              alt="Humanitarian work"
+              src={`https://api.dabible.com/storage/${blogs[0].featured_image}` || "/png/outreachb.png"}
+              alt={blogs[0].title || "Featured blog"}
               width={775}
               height={475}
               className="w-full lg:w-[775px] h-[250px] sm:h-[300px] md:h-[375px] object-cover object-top rounded-lg"
             />
           </div>
           <div className="flex flex-col justify-center px-2">
-            <div className="text-sm text-gray-500 mb-2">Mar 4, 2025</div>
+            <div className="text-sm text-gray-500 mb-2">{featuredUpdatedAt || "N/A"}</div>
             <h2 className="text-lg sm:text-xl font-bold mb-2">
-              Audio Issues Resolved – Nahum, Psalm 60, Songs Of Solomon, 1
-              Kings, AndHebrews
+              {blogs[0].title}
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 mb-4">
-              We currently run 4 YouTube channels, each dedicated to Yoruba,
-              Hausa, Pidgin, Dabible Missionary, and Daily Bible Study.
-              Subscribe to watch edifying contents today.
-            </p>
-            <div className="flex justify-end items-center">
+            <p
+              className="text-sm sm:text-base text-gray-600 mb-4"
+              dangerouslySetInnerHTML={{
+                __html: highlightSearch(
+                  (blogs[0].content || '').slice(0, 180) +
+                    ((blogs[0].content?.length || 0) > 180 ? '...' : ''),
+                  debouncedSearch
+                )
+              }}
+            />
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-gray-500">
+                {blogs[0].author?.name ? `By ${blogs[0].author.name}` : ""}
+              </span>
               <Link
-                href="/blog/id"
+                href={`/blog/${blogs[0].slug || blogs[0].id}`}
                 className="flex items-center text-base sm:text-lg text-[#A0072F] font-bold"
               >
                 Read post <ArrowRight className="ml-2 h-4 w-4" />
@@ -94,41 +422,84 @@ export default function Blog() {
             </div>
           </div>
         </div>
+      )}
 
         {/* Article List */}
         <div className="space-y-6 w-full lg:w-auto">
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-6 border-b pb-6 ${
-                item === 3 && "border-b-0"
-              }`}
-            >
-              <div className="w-full sm:w-1/4">
-                <Image
-                  src="/png/version-sample.png"
-                  alt="Version 7.0"
-                  width={338}
-                  height={220}
-                  className="w-full rounded-lg"
-                />
+          {blogs.slice(1, 4).map((blog, index) => {
+            const updatedAt = formattedDates.find(d => d.id === blog.id)?.updatedAt ?? 'N/A';
+            return (
+              <div
+                key={blog.id || blog.slug || index}
+                className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-6 border-b pb-6 ${
+                  index === 2 && "border-b-0"
+                }`}
+              >
+                <div className="w-full sm:w-1/4">
+                  <Image
+                    src={`https://api.dabible.com/storage/${blog.featured_image}` || "/png/version-sample.png"}
+                    alt={blog.title || "Blog Post"}
+                    width={338}
+                    height={220}
+                    className="w-full rounded-lg"
+                  />
+                </div>
+                <div className="w-full sm:w-3/4 mt-4 sm:mt-0">
+                  <div className="text-sm text-gray-500 mb-1">{updatedAt || "N/A"}</div>
+                  <h3
+                    className="text-base sm:text-lg font-bold mb-2"
+                    dangerouslySetInnerHTML={{ __html: highlightSearch(blog.title || '', debouncedSearch) }}
+                  />
+                  <p
+                    className="text-xs sm:text-sm text-gray-600 mb-2"
+                    dangerouslySetInnerHTML={{
+                      __html: highlightSearch(
+                        (blog.content || '').slice(0, 180) +
+                          ((blog.content?.length || 0) > 180 ? '...' : ''),
+                        debouncedSearch
+                      )
+                    }}
+                  />
+                  {/* Categories and Tags badges */}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {blog.categories?.map(cat => (
+                      <span key={cat.id} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                        {cat.name}
+                      </span>
+                    ))}
+                    {blog.tags?.map(tag => (
+                      <span key={tag.id} className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">
+                      {blog.author?.name ? `By ${blog.author.name}` : ""}
+                    </span>
+                    <Link
+                      href={`/blog/${blog.slug || blog.id}`}
+                      className="flex items-center text-xs sm:text-sm text-[#A0072F] font-bold"
+                    >
+                      Read post <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <div className="w-full sm:w-3/4 mt-4 sm:mt-0">
-                <div className="text-sm text-gray-500 mb-1">Mar 4, 2025</div>
-                <h3 className="text-base sm:text-lg font-bold mb-2">
-                  Audio Issues Resolved – Nahum, Psalm 60, Songs Of Solomon, 1
-                  Kings, AndHebrews
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 mb-2">
-                  We currently run 4 YouTube channels, each dedicated to Yoruba,
-                  Hausa, Pidgin, Dabible Missionary, and Daily Bible Study.
-                  Subscribe to watch edifying contents today.
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
+
+      {/* Active Filter Summary */}
+      {(selectedCategory || selectedTag || selectedAuthor) && (
+        <div className="text-sm text-gray-600 mb-4 text-center">
+          Showing posts
+          {selectedCategory && ` in category: ${categories.find(c => c.id == selectedCategory)?.name}`}
+          {selectedTag && ` with tag: ${tags.find(t => t.id == selectedTag)?.name}`}
+          {selectedAuthor && ` by author: ${authors.find(a => a.id == selectedAuthor)?.name}`}
+        </div>
+      )}
 
       {/* Recent Posts Section */}
       <section className="d-container px-4">
@@ -136,49 +507,83 @@ export default function Blog() {
           Recent Posts
         </h2>
 
+        {/* No Results Fallback */}
+        {!blogs.slice(4).length && !loading && (
+          <div className="text-center text-gray-500 py-12">
+            No blog posts found. Try adjusting your filters.
+          </div>
+        )}
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {Array.from({ length: 18 }).map((_, index) => (
-            <div
-              key={index}
-              className="bg-[#F6F6F6] border rounded-2xl !overflow-hidden shadow-sm"
-            >
-              <Image
-                src="/png/version-sample.png"
-                alt="Version 7.0"
-                width={338}
-                height={220}
-                className="w-full"
-              />
-              <div className="p-4 sm:p-6">
-                <div className="text-xs sm:text-sm text-gray-500 mb-2">Mar 4, 2025</div>
-                <h3 className="text-base sm:text-lg text-[#051D3B] font-bold mb-2 sm:mb-3">
-                  Audio Issues Resolved – Nahum, Psalm 60, Songs Of Solomon, 1
-                  Kings, AndHebrews
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-5">
-                  We currently run 4 YouTube channels, each dedicated to Yoruba,
-                  Hausa, Pidgin, Dabible Missionary, and Daily Bible Study.
-                  Subscribe to watch edifying contents today.
-                </p>
-
-                <div className="flex justify-end items-center">
-                  <Link
-                    href="/blog/id"
-                    className="flex items-center text-xs sm:text-sm text-[#A0072F] font-bold"
-                  >
-                    Read post <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
-                  </Link>
+          {blogs.slice(4).map((blog, index) => {
+            const updatedAt = formattedDates.find(d => d.id === blog.id)?.updatedAt ?? 'N/A';
+            return (
+              <Link
+                key={blog.id || index}
+                href={`/blog/${blog.slug || blog.id}`}
+                className="relative group bg-[#F6F6F6] border round rounded-2xl !overflow-hidden shadow-sm p-4 h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:scale-[1.01] hover:bg-[#f0f0f0] cursor-pointer tap-highlight-transparent overflow-hidden"
+              >
+                <span className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
+                <Image
+                  src={`https://api.dabible.com/storage/${blog.featured_image}` || "/png/version-sample.png"}
+                  alt={blog.title || "Blog Post"}
+                  width={338}
+                  height={220}
+                  className="w-full rounded-2xl overflow-hidden max-h-[336px] object-cover object-top"
+                />
+                <div className="pt-4 flex flex-col flex-1">
+                  <div className="text-xs sm:text-sm text-gray-500 mb-2">{updatedAt || "N/A"}</div>
+                  <h3
+                    className="text-base sm:text-lg text-[#051D3B] font-bold mb-2 sm:mb-3"
+                    dangerouslySetInnerHTML={{ __html: highlightSearch(blog.title || '', debouncedSearch) }}
+                  />
+                  <p
+                    className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-5"
+                    dangerouslySetInnerHTML={{
+                      __html: highlightSearch(
+                        (blog.content || '').slice(0, 90) +
+                          ((blog.content?.length || 0) > 90 ? '...' : ''),
+                        debouncedSearch
+                      )
+                    }}
+                  />
+                  {/* Categories and Tags badges */}
+                  <div className="flex flex-wrap gap-2">
+                    {blog.categories?.map(cat => (
+                      <span key={cat.id} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                        {cat.name}
+                      </span>
+                    ))}
+                    {blog.tags?.map(tag => (
+                      <span key={tag.id} className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center mt-auto">
+                    <span className="text-xs text-gray-500">
+                      {blog.author?.name ? `By ${blog.author.name}` : ""}
+                    </span>
+                    <span className="flex items-center text-xs sm:text-sm text-[#A0072F] font-bold">
+                      Read post <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </Link>
+            );
+          })}
+          {/* Skeletons for loading state */}
+          {loading && (
+            Array.from({ length: 3 }).map((_, idx) => (
+              <SkeletonCard key={`skeleton-${idx}`} />
+            ))
+          )}
         </div>
 
-        <div className="flex justify-center items-center my-8 sm:my-12 lg:my-16">
-          <Button className="bg-[#A0072F] w-[140px] sm:w-[168px] h-[38px] sm:h-[43px] text-sm sm:text-base">
-            Load More
-          </Button>
-        </div>
+        {/* Sentinel div for infinite scroll */}
+        {hasMore && (
+          <div ref={loadMoreRef} className="h-10" />
+        )}
       </section>
     </main>
   );

@@ -110,13 +110,13 @@ export default function Header() {
                 </div>
               )}
             </div>
-            {/* <button
+            <button
               onClick={() => navigate("/blog")}
               className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
             >
               Blog
             </button>
-            <button
+            {/* <button
               onClick={() => navigate("/shop")}
               className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
             >

@@ -2,6 +2,8 @@ import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import DownloadButtons from "@/components/DownloadButtons";
 import StarTag from "@/components/StarTag";
+import VideoAppWithFallback from "@/components/VideoAppWithFallback";
+import VideoModal from "@/components/VideoModal";
 
 export default function hausaBiblePage() {
   return (
@@ -44,10 +46,17 @@ export default function hausaBiblePage() {
                 </div>
               </div>
 
+              <VideoModal
+                videoUrl="https://www.youtube.com/embed/ZD-2IKVCOfI"
+                backgroundImageUrl=""
+              />
+
               <DownloadButtons
                 AppStoreLink="https://apps.apple.com/us/app/pidgin-audio-bible/id1492872631?ls=1"
                 PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.pidgin"
               />
+
+              
             </div>
           </div>
         </section>
@@ -84,13 +93,13 @@ export default function hausaBiblePage() {
                 </p>
 
                 <div className="relative">
-                  <div className="absolute right-0 top-0">
-                    <Image
-                      src="/png/phone-mockups/p-left.png"
-                      alt="Search feature screenshot"
-                      width={200}
-                      height={320}
-                      className="rounded-lg shadow-lg mx-auto rotate-[330deg] sm:w-[250px]"
+                  <div className="absolute right-0 top-0 w-[250px]">
+                    <VideoAppWithFallback
+                      videoSrc="/videos/search_3.mp4"
+                      fallbackImgSrc="/png/phone-mockups/p-left.png"
+                      videoId="video-pidgin-1"
+                      imageId="fallback-image-pidgin-1"
+                      className="rotate-[330deg]"
                     />
                   </div>
                 </div>
@@ -108,25 +117,25 @@ export default function hausaBiblePage() {
                       scriptures, and easily share verses with your loved ones.
                     </p>
                   </div>
-                  <div className="mt-4 sm:mt-0">
-                    <Image
-                      src="/png/phone-mockups/p-topright.png"
-                      alt="Daily inspiration feature screenshot"
-                      width={200}
-                      height={320}
-                      className="rounded-lg shadow-lg mx-auto sm:w-[250px]"
+                  <div className="w-[250px] h-[250px] overflow-hidden">
+                    <VideoAppWithFallback
+                      videoSrc="/videos/daily_3.mp4"
+                      fallbackImgSrc="/png/phone-mockups/p-topright.png"
+                      videoId="video-pidgin-2"
+                      imageId="fallback-image-pidgin-2"
+                      className="rotate-[0deg]"
                     />
                   </div>
                 </div>
 
                 <div className="bg-[#DAEEFF] rounded-xl pt-5 sm:pt-6 px-4 sm:px-6 md:px-8 flex flex-col-reverse sm:flex-row items-center overflow-hidden w-full sm:w-fit">
-                  <div className="mt-4 sm:mt-0">
-                    <Image
-                      src="/png/phone-mockups/p-bottomright.png"
-                      alt="Daily inspiration feature screenshot" 
-                      width={200}
-                      height={320}
-                      className="rounded-lg shadow-lg mx-auto mr-0 sm:mr-4 sm:w-[250px]"
+                  <div className="w-[250px] h-[300px] overflow-hidden mr-2">
+                    <VideoAppWithFallback
+                      videoSrc="/videos/offline_3.mp4"
+                      fallbackImgSrc="/png/phone-mockups/p-bottomright.png"
+                      videoId="video-pidgin-3"
+                      imageId="fallback-image-pidgin-3"
+                      className="rotate-[0deg]"
                     />
                   </div>
 

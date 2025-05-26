@@ -3,6 +3,7 @@ import { CheckCircle } from "lucide-react";
 import DownloadButtons from "@/components/DownloadButtons";
 import StarTag from "@/components/StarTag";
 import VideoAppWithFallback from "@/components/VideoAppWithFallback";
+import VideoModal from "@/components/VideoModal";
 
 export default function YorubaBiblePage() {
   return (
@@ -44,12 +45,19 @@ export default function YorubaBiblePage() {
                 <span className="text-sm">Offline Usage</span>
               </div>
             </div>
+            
+            <VideoModal
+              videoUrl="https://www.youtube.com/embed/a5HLa_zgDwg"
+              backgroundImageUrl=""
+            />
+            
             <DownloadButtons
               AppStoreLink="https://apps.apple.com/us/app/yoruba-audio-bible/id1079050631"
               PlayStoreLink="https://play.google.com/store/apps/details?id=net.yorubabible.audiobible"
             />
           </div>
           {/* hand  */}{" "}
+
         </div>
       </section>
 
