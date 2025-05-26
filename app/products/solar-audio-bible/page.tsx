@@ -26,28 +26,28 @@ export default function SolarBiblePage() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.pngs')] bg-no-repeat bg-right bg-contain overflow-hidden">
+      <section className="bg-[#0a3170] text-white px-4 py-0 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.pngs')] bg-no-repeat bg-right bg-contain overflow-hidden">
         <div className="d-container mx-auto max-w-6xl relative z-1">
           <div className="flex flex-col md:flex-row gap-8 items-center font-mada font-medium">
-            <div className="flex-1 space-y-6">
+            <div className="flex-1 space-y-2 md:space-y-6">
               <StarTag text="PRODUCTS" variant="white" />
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight font-domine">
+              <h1 className="text-lg md:text-3xl lg:text-5xl font-bold leading-tight font-domine">
                 Solar Audio Bible - One Purchase, Double The Impact
               </h1>
 
-              <p className="text-lg opacity-90 ">
+              <p className="text-sm md:text-md lg:text-lg opacity-90 ">
                 The Solar Audio Bible is designed especially for the elderly and
                 others who cannot use mobile phones — simple, solar-powered, and
                 preloaded with the Word of God.
               </p>
 
-              <p className="text-lg opacity-90">
+              <p className="text-sm md:text-md lg:text-lg opacity-90">
                 When you buy one, you&apos;re not just receiving this life-changing
                 device — you&apos;re also donating one to an elderly person in a
                 remote village who otherwise wouldn&apos;t have access to God&apos;s Word.
               </p>
 
-              <div className="space-y-3">
+              <div className="space-y-1 md:space-y-3">
                 <div className="flex items-center gap-x-3">
                   <Image
                     src="/svg/flames.svg"
@@ -56,7 +56,7 @@ export default function SolarBiblePage() {
                     height={24}
                     className=" mr-1"
                   />
-                  <p className="md:text-xl text-lg">
+                  <p className="md:text-md text-sm  lg:text-lg">
                     {" "}
                     Built for those who can&apos;t operate mobile phones
                   </p>
@@ -69,7 +69,7 @@ export default function SolarBiblePage() {
                     height={24}
                     className=" mr-1"
                   />
-                  <p className="md:text-xl text-lg">
+                  <p className="md:text-md text-sm  lg:text-lg">
                     {" "}
                     Fully solar-powered — no charging required
                   </p>
@@ -82,7 +82,7 @@ export default function SolarBiblePage() {
                     height={24}
                     className=" mr-1"
                   />
-                  <p className="md:text-xl text-lg">
+                  <p className="md:text-md text-sm  lg:text-lg">
                     {" "}
                     Comes with both Old and New Testament
                   </p>
@@ -95,7 +95,7 @@ export default function SolarBiblePage() {
                     height={24}
                     className=" mr-1"
                   />
-                  <p className="md:text-xl text-lg">
+                  <p className="md:text-md text-sm  lg:text-lg">
                     Given freely to someone in need with every purchase
                   </p>
                 </div>
@@ -105,7 +105,7 @@ export default function SolarBiblePage() {
                 <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
-                  className="bg-white text-[#0a3170] hover:bg-gray-100 border-none md:w-[230px] w-fit h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
+                  className="bg-white text-[#0a3170] hover:bg-gray-100 border-none md:w-[230px] w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
                 >
                   <Image
                     src="/svg/coin.svg"
@@ -121,7 +121,7 @@ export default function SolarBiblePage() {
                 <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant={"outline"}
-                  className="bg-[#0a3170] hover:bg-[#0a3170]/10 hover:text-white text-white border-white w-fit h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
+                  className="bg-[#0a3170] hover:bg-[#0a3170]/10 hover:text-white text-white border-white w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
                 >
                   Buy Now - Give One Too
                 </Button>
@@ -129,11 +129,11 @@ export default function SolarBiblePage() {
               </div>
             </div>
 
-            <div className="flex-1 flex justify-center"></div>
+            <div className="flex-1 flex pb-40 lg:pb-0 justify-center"></div>
           </div>
         </div>
 
-        <div className="absolute md:block hidden sm:right-[-230px] lg:right-[-240px] xl:right-[-200px]  bottom-[-250px] z-0">
+        <div className="absolute md:block sm:right-[-230px] lg:right-[-240px] xl:right-[-200px] bottom-[-100px]  md:bottom-[-250px] z-0">
           <div id="fallback-image" style={{ display: 'none' }}>
             <Image
               src="/png/right-solar-hero.png"
@@ -193,7 +193,7 @@ export default function SolarBiblePage() {
           <div className="flex flex-col gap-6 md:gap-y-10 ">
             {/* Feature 1 */}
             <div className="overflow-hidden card-gradient border-none">
-              <div className="p-6 flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
+              <div className="p-0 md:p-6 flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -228,7 +228,7 @@ export default function SolarBiblePage() {
 
             {/* Feature 2 */}
             <div className="overflow-hidden card-gradient border-none">
-              <div className="p-6 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+              <div className="p-0 md:p-6  flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -262,7 +262,7 @@ export default function SolarBiblePage() {
 
             {/* Feature 3 */}
             <div className="overflow-hidden card-gradient border-none">
-              <div className="p-6 flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
+              <div className="p-0 md:p-6  flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -296,7 +296,7 @@ export default function SolarBiblePage() {
 
             {/* Feature 4 */}
             <div className="overflow-hidden card-gradient border-none">
-              <div className="p-6 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+              <div className="p-0 md:p-6  flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -370,7 +370,7 @@ export default function SolarBiblePage() {
       </section>
 
       {/* The Forgotten Generation Section */}
-      <section className=" px-4 bg-[#C8385E] md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5">
+      <section className=" px-4 bg-[#C8385E] md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5 overflow-hidden">
         {/* curve yoruba  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%]">
           <Image
