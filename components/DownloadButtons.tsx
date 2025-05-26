@@ -9,7 +9,7 @@ interface DownloadButtonsProps {
 const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) => {
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-6">
+    <div className="flex flex-col sm:flex-row gap-4 mb-6 z-2 mx-auto justify-center">
       <Link
         href={AppStoreLink || "#download"}
         target="_blank"

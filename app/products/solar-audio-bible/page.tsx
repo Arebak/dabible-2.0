@@ -22,12 +22,12 @@ export default function SolarBiblePage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [productFrames.length]);
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.png')] bg-no-repeat bg-right bg-contain">
-        <div className="d-container mx-auto max-w-6xl">
+      <section className="bg-[#0a3170] text-white px-4 py-12 md:py-16 lg:px-8 relative md:bg-[url('/png/solar-hero.pngs')] bg-no-repeat bg-right bg-contain overflow-hidden">
+        <div className="d-container mx-auto max-w-6xl relative z-1">
           <div className="flex flex-col md:flex-row gap-8 items-center font-mada font-medium">
             <div className="flex-1 space-y-6">
               <StarTag text="PRODUCTS" variant="white" />
@@ -133,14 +133,50 @@ export default function SolarBiblePage() {
           </div>
         </div>
 
-        <div className="absolute md:block hidden -right-10 bottom-0 w-[700px] h-[500px] lg:w-[1100px] lg:h-[700px]">
-          <Image
-            src="/png/right-solar-hero.png"
-            alt="Solar Audio Bible device"
-            fill
-            className="relative z-10"
-            priority
-          />
+        <div className="absolute md:block hidden sm:right-[-230px] lg:right-[-240px] xl:right-[-200px]  bottom-[-250px] z-0">
+          <div id="fallback-image" style={{ display: 'none' }}>
+            <Image
+              src="/png/right-solar-hero.png"
+              alt="Solar Audio Bible device"
+              fill
+              className="z-10 absolute !h-auto !left-[unset] !top-[unset] !right-[180px] !bottom-[250px]"
+              priority
+            />
+          </div>
+          <video
+            autoPlay
+            muted
+            playsInline
+            onError={() => {
+              const fallback = document.getElementById('fallback-image');
+              const vid1 = document.querySelector('video');
+              const vid2 = document.getElementById('solar_intro_2');
+              if (vid1) vid1.style.display = 'none';
+              if (vid2) vid2.style.display = 'none';
+              if (fallback) fallback.style.display = 'block';
+            }}
+            onEnded={(e) => {
+              e.currentTarget.style.display = 'none';
+              const nextVideo = document.getElementById('solar_intro_2');
+              if (nextVideo) nextVideo.style.display = 'block';
+              (nextVideo as HTMLVideoElement | null)?.play();
+            }}
+            className="w-full h-full p-0 m-0"
+          >
+            <source src="/videos/intro_1.1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video
+            id="solar_intro_2"
+            loop
+            muted
+            playsInline
+            style={{ display: 'none' }}
+            className="w-full h-full p-0 m-0"
+          >
+            <source src="/videos/intro_1.2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
 

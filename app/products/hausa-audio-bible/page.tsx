@@ -2,6 +2,8 @@ import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import DownloadButtons from "@/components/DownloadButtons";
 import StarTag from "@/components/StarTag";
+import VideoAppWithFallback from "@/components/VideoAppWithFallback";
+import VideoModal from "@/components/VideoModal";
 
 export default function hausaBiblePage() {
   return (
@@ -41,13 +43,18 @@ export default function hausaBiblePage() {
                 <span className="text-xs sm:text-sm">Offline Usage</span>
               </div>
             </div>
-            <div className="px-4">
-              <DownloadButtons
+            <VideoModal
+                videoUrl="https://www.youtube.com/embed/ZD-2IKVCOfI"
+                backgroundImageUrl=""
+              />
+          </div>
+            
+            <DownloadButtons
               AppStoreLink="https://apps.apple.com/us/app/hausa-audio-bible/id6739508818"
               PlayStoreLink="https://play.google.com/store/apps/details?id=com.dabible.hausa&hl=en_US"
             />
-            </div>
-          </div>
+          
+            
         </div>
       </section>
 
@@ -83,13 +90,22 @@ export default function hausaBiblePage() {
               </p>
 
               <div className="relative ">
-                <div className="absolute right-0 top-0">
+                {/* <div className="absolute right-0 top-0">
                   <Image
                     src="/png/phone-mockups/h-left.png"
                     alt="Search feature screenshot"
                     width={250}
                     height={400}
                     className="rounded-lg shadow-lg mx-auto rotate-[330deg]"
+                  />
+                </div> */}
+                <div className="absolute right-0 top-0 w-[250px]">
+                  <VideoAppWithFallback
+                    videoSrc="/videos/search_2.mp4"
+                    fallbackImgSrc="/png/phone-mockups/h-left.png"
+                    videoId="video-hausa-1"
+                    imageId="fallback-image-hausa-1"
+                    className="rotate-[330deg]"
                   />
                 </div>
               </div>
@@ -107,7 +123,7 @@ export default function hausaBiblePage() {
                     scriptures, and easily share verses with your loved ones.
                   </p>
                 </div>
-                <div className="transform scale-75 sm:scale-100">
+                {/* <div className="transform scale-75 sm:scale-100">
                   <Image
                     src="/png/phone-mockups/h-topright.png"
                     alt="Daily inspiration feature screenshot"
@@ -115,17 +131,36 @@ export default function hausaBiblePage() {
                     height={400}
                     className="rounded-lg shadow-lg mx-auto"
                   />
+                </div> */}
+                <div className="w-[250px] h-[250px] overflow-hidden">
+                  <VideoAppWithFallback
+                    videoSrc="/videos/daily_2.mp4"
+                    fallbackImgSrc="/png/phone-mockups/h-topright.png"
+                    videoId="video-hausa-2"
+                    imageId="fallback-image-hausa-2"
+                    className="rotate-[0deg]"
+                  />
                 </div>
               </div>
 
               <div className="bg-[#DAEEFF] rounded-xl pt-5 sm:pt-6 px-5 sm:px-6 md:px-8 flex flex-col-reverse sm:flex-row items-center overflow-hidden w-full sm:w-fit">
-                <div className="transform scale-75 sm:scale-100 mt-4 sm:mt-0">
+                {/* <div className="transform scale-75 sm:scale-100 mt-4 sm:mt-0">
                   <Image
                     src="/png/phone-mockups/h-bottomright.png"
                     alt="Daily inspiration feature screenshot"
                     width={250}
                     height={400}
                     className="rounded-lg shadow-lg mx-auto sm:mr-4"
+                  />
+                </div> */}
+
+                <div className="w-[250px] h-[300px] overflow-hidden mr-2">
+                  <VideoAppWithFallback
+                    videoSrc="/videos/offline_2.mp4"
+                    fallbackImgSrc="/png/phone-mockups/h-bottomright.png"
+                    videoId="video-hausa-3"
+                    imageId="fallback-image-hausa-3"
+                    className="rotate-[0deg]"
                   />
                 </div>
 
