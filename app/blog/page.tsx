@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -120,7 +120,6 @@ export default function Blog() {
       setPage(1);   // This will trigger fetchBlogs via [page] effect
       setInitialized(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, initialized]);
 
   // Enhance: Listen for browser back/forward navigation and update filters
@@ -163,8 +162,7 @@ export default function Blog() {
         author: selectedAuthor
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategory, selectedTag, selectedAuthor, initialized]);
+  }, [selectedCategory, selectedTag, selectedAuthor, initialized, prevFilters.category, prevFilters.tag, prevFilters.author, router]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -187,6 +185,7 @@ export default function Blog() {
       const query = new URLSearchParams({
         page: String(pageNumber),
         per_page: '6',
+        sort: 'published_at',
         ...(selectedCategory ? { category: selectedCategory } : {}),
         ...(selectedTag ? { tag: selectedTag } : {}),
         ...(selectedAuthor ? { author: selectedAuthor } : {}),
@@ -320,8 +319,7 @@ export default function Blog() {
       </section>
 
       {/* Filter UI */}
-      <div className="flex flex-wrap justify-center gap-4 mb-8">
-        {/* Search input with clear icon */}
+      {/* <div className="flex flex-wrap justify-center gap-4 mb-8">
         <div className="relative w-full max-w-xs">
           <input
             type="text"
@@ -379,13 +377,14 @@ export default function Blog() {
         }}>
           View All
         </Button>
-      </div>
+      </div> */}
 
-      <section className="mb-20 d-container flex flex-col lg:flex-row justify-center items-start gap-x-10 gap-y-8 font-mada">
+      <section className="mb-20 d-container flex flex-col lg:flex-row justify-center items-start gap-x-10 gap-y-8 font-mada sm:mt-0 md:-mt-18 relative z-1">
       {/* Featured Article */}
       {blogs[0] && (
-        <div className="flex flex-col gap-y-6 w-full lg:w-auto">
+        <div className="flex flex-col gap-y-6 w-full lg:w-1/2">
           <div className="relative">
+            <Link href={`/blog/${blogs[0].slug || blogs[0].id}`} className="cursor-pointer">
             <Image
               src={`https://api.dabible.com/storage/${blogs[0].featured_image}` || "/png/outreachb.png"}
               alt={blogs[0].title || "Featured blog"}
@@ -393,12 +392,15 @@ export default function Blog() {
               height={475}
               className="w-full lg:w-[775px] h-[250px] sm:h-[300px] md:h-[375px] object-cover object-top rounded-lg"
             />
+            </Link>
           </div>
           <div className="flex flex-col justify-center px-2">
             <div className="text-sm text-gray-500 mb-2">{featuredUpdatedAt || "N/A"}</div>
+            <Link href={`/blog/${blogs[0].slug || blogs[0].id}`} className="cursor-pointer">
             <h2 className="text-lg sm:text-xl font-bold mb-2">
               {blogs[0].title}
             </h2>
+            </Link>
             <p
               className="text-sm sm:text-base text-gray-600 mb-4"
               dangerouslySetInnerHTML={{
@@ -425,67 +427,64 @@ export default function Blog() {
       )}
 
         {/* Article List */}
-        <div className="space-y-6 w-full lg:w-auto">
+        <div className="space-y-6 w-full lg:w-1/2">
           {blogs.slice(1, 4).map((blog, index) => {
             const updatedAt = formattedDates.find(d => d.id === blog.id)?.updatedAt ?? 'N/A';
             return (
-              <div
-                key={blog.id || blog.slug || index}
-                className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-6 border-b pb-6 ${
-                  index === 2 && "border-b-0"
-                }`}
+              <Link
+                key={blog.id || index}
+                href={`/blog/${blog.slug || blog.id}`}
+                className={`group block border-b pb-6 ${index === 2 ? 'border-b-0' : ''} hover:bg-gray-50 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#A0072F]`}
               >
-                <div className="w-full sm:w-1/4">
-                  <Image
-                    src={`https://api.dabible.com/storage/${blog.featured_image}` || "/png/version-sample.png"}
-                    alt={blog.title || "Blog Post"}
-                    width={338}
-                    height={220}
-                    className="w-full rounded-lg"
-                  />
-                </div>
-                <div className="w-full sm:w-3/4 mt-4 sm:mt-0">
-                  <div className="text-sm text-gray-500 mb-1">{updatedAt || "N/A"}</div>
-                  <h3
-                    className="text-base sm:text-lg font-bold mb-2"
-                    dangerouslySetInnerHTML={{ __html: highlightSearch(blog.title || '', debouncedSearch) }}
-                  />
-                  <p
-                    className="text-xs sm:text-sm text-gray-600 mb-2"
-                    dangerouslySetInnerHTML={{
-                      __html: highlightSearch(
-                        (blog.content || '').slice(0, 180) +
-                          ((blog.content?.length || 0) > 180 ? '...' : ''),
-                        debouncedSearch
-                      )
-                    }}
-                  />
-                  {/* Categories and Tags badges */}
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {blog.categories?.map(cat => (
-                      <span key={cat.id} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                        {cat.name}
-                      </span>
-                    ))}
-                    {blog.tags?.map(tag => (
-                      <span key={tag.id} className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                        {tag.name}
-                      </span>
-                    ))}
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                  <div className="w-full sm:w-1/4">
+                    <Image
+                      src={`https://api.dabible.com/storage/${blog.featured_image}` || "/png/version-sample.png"}
+                      alt={blog.title || "Blog Post"}
+                      width={338}
+                      height={220}
+                      className="w-full rounded-lg object-cover object-top max-h-[220px]"
+                    />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500">
-                      {blog.author?.name ? `By ${blog.author.name}` : ""}
-                    </span>
-                    <Link
-                      href={`/blog/${blog.slug || blog.id}`}
-                      className="flex items-center text-xs sm:text-sm text-[#A0072F] font-bold"
-                    >
-                      Read post <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
-                    </Link>
+                  <div className="w-full sm:w-3/4 mt-4 sm:mt-0">
+                    <div className="text-sm text-gray-500 mb-1">{updatedAt}</div>
+                    <h3
+                      className="text-base sm:text-lg font-bold mb-2 group-hover:text-[#A0072F] transition-colors"
+                      dangerouslySetInnerHTML={{ __html: highlightSearch(blog.title || '', debouncedSearch) }}
+                    />
+                    <p
+                      className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-3"
+                      dangerouslySetInnerHTML={{
+                        __html: highlightSearch(
+                          (blog.content || '').slice(0, 180) +
+                            ((blog.content?.length || 0) > 180 ? '...' : ''),
+                          debouncedSearch
+                        )
+                      }}
+                    />
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {blog.categories?.map(cat => (
+                        <span key={cat.id} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {cat.name}
+                        </span>
+                      ))}
+                      {blog.tags?.map(tag => (
+                        <span key={tag.id} className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                          {tag.name}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex justify-between items-center mt-2">
+                      <span className="text-xs text-gray-500">
+                        {blog.author?.name ? `By ${blog.author.name}` : ""}
+                      </span>
+                      <span className="flex items-center text-xs sm:text-sm text-[#A0072F] font-bold">
+                        Read post <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -503,7 +502,7 @@ export default function Blog() {
 
       {/* Recent Posts Section */}
       <section className="d-container px-4">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-[#1a4b8c] mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center text-[#1a4b8c] mb-8 sm:mb-12 font-domine">
           Recent Posts
         </h2>
 

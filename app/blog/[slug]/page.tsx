@@ -1,14 +1,18 @@
-/* eslint-disable @next/next/no-async-client-component */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
- 
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+import { type Metadata, type ResolvingMetadata } from 'next';
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const res = await fetch(`https://api.dabible.com/api/v3/blog-post/${params.slug}/slug`, {
     headers: {
       Accept: 'application/json',
     },
   });
+
+  console.log("Here is the response's parent", parent);
 
   const blog = res.ok ? (await res.json()).data : null;
 
@@ -70,11 +74,14 @@ async function getBlog(slug: string) {
   console.log(result);
   return result?.data || null;
 }
+interface BlogDetailProps {
+  params: {
+    slug: string;
+  };
+}
 
-
-
-
-export default async function BlogDetail({ params }: { params: { slug: string } }) {
+export default async function BlogDetail(props: BlogDetailProps) {
+  const { params } = props;
   const blog = await getBlog(params.slug);
   if (!blog) return notFound();
 

@@ -22,7 +22,7 @@ export default function SolarBiblePage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [productFrames.length]);
   return (
     <main className="min-h-screen flex flex-col">
       {/* Hero Section */}

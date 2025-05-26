@@ -1,15 +1,22 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+interface Comment {
+  id: string;
+  author_name: string;
+  comment: string;
+  created_at?: string;
+  parent_id?: string;
+}
+
 export function CommentsSection({ slug }: { slug: string }) {
-  const [comments, setComments] = useState<any[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [replyTo, setReplyTo] = useState<string | null>(null);
   const [replyText, setReplyText] = useState('');
-  const [commentToDelete, setCommentToDelete] = useState<string | null>(null);
 
   const [likes, setLikes] = useState<{ [key: string]: number }>({});
 

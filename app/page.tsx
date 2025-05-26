@@ -84,7 +84,7 @@ export default function DonationPage() {
       }, 500); // Halfway fade-out, then switch
     }, 6000);
     return () => clearInterval(interval);
-  }, [currentSlide, paused]);
+  }, [currentSlide, paused, heroSlides.length]);
 
   // const [setShowVideoModal] = useState(false);
 

@@ -263,6 +263,27 @@
 
 }
 
+.dabible-blog-content ul{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.dabible-blog-content ul li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.dabible-blog-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
 figure.attachment.attachment--preview {
   margin: 0;
   padding: 0;
