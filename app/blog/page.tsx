@@ -190,8 +190,15 @@ export default function Blog() {
       const response = await fetch(`/api/blogs?${query.toString()}`);
       const data = await response.json();
       console.log("Blogs data:", data);
+      // Sort blogs by published_at descending (newest first)
+      const sorted = [...(data?.data || [])].sort(
+        (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+      );
       if (response.ok && Array.isArray(data?.data)) {
-        setBlogs(prev => [...prev, ...data.data]);
+        setBlogs(prev => {
+          const combined = [...prev, ...sorted];
+          return combined.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+        });
         if (data.data.length < 6) setHasMore(false);
       } else {
         setHasMore(false);
