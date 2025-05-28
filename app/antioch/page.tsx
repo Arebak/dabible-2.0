@@ -1,5 +1,3 @@
-
-
 import BibleStudyForm from "@/components/BibleStudyForm";
 import Image from "next/image";
 
@@ -134,27 +132,33 @@ export default function AntiochPage() {
         </section>
 
         <section className="bg-white py-16 px-6 md:px-20">
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-12">
+            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 content-stretch items-center">
                 
                 {/* Form Content */}
                 
                 <BibleStudyForm/>
 
                 {/* Right Poster */}
-                <div className="flex-1 w-full max-w-sm mx-auto">
+                <div className="w-full  mx-auto items-stretch lg:h-full text-center justify-center">
+                <h3 className="text-2xl md:text-4xl text-gray-900 mb-4 font-montserrat font-extrabold">
+                        Currently
+                    </h3>
+                    <p className="text-md md:text-lg text-gray-700 mb-6">
+                    We are studying the book of Hebrews, and its interesting!
+                </p>
                 <Image
                     width={500}
                     height={500}
                     src="/designs/hebrews.jpg"
                     alt="Book of Hebrews Poster"
-                    className="w-full rounded-lg shadow-lg"
+                    className="w-full h-full object-cover rounded-lg shadow-lg"
                 />
                 </div>
             </div>
         </section>
 
         {/* Watch and Join Online Section */}
-        <section className="bg-gray-100 py-16 px-4 text-center">
+        {/* <section className="bg-gray-100 py-16 px-4 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 font-domine">
                 Can’t Attend in Person?
             </h2>
@@ -185,7 +189,7 @@ export default function AntiochPage() {
             <p className="text-sm text-gray-500 mt-6">
                 Streaming begins 10 minutes before each session. Please be on time!
             </p>
-        </section>
+        </section> */}
 
 
     </div>

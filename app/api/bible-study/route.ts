@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
         ctaButtons: [
           {
             label: 'Join WhatsApp Group',
-            url: 'https://chat.whatsapp.com/EXAMPLE_GROUP_LINK',
+            url: 'https://chat.whatsapp.com/FGA9UkTb1mY0MnFGCgHTGc',
           }
         ],
         paragraph3: `We host regular onboarding sessions to help you understand our mission, structure, and what to expect during our weekly studies. You'll also have a chance to introduce yourself and ask questions.`,

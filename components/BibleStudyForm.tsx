@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import PhoneInput from 'react-phone-number-input/input';
@@ -104,6 +105,7 @@ export default function BibleStudyForm() {
         });
         setCharCount(0);
         setRecaptchaToken(null);
+        window.location.href = "/antioch/congratulations";
       } else {
         setStatus("error");
       }
@@ -117,6 +119,12 @@ export default function BibleStudyForm() {
 
   return (
     <div className="bg-white rounded-lg shadow-2xl px-4 py-8 sm:p-10 max-w-xl sm:max-w-2xl w-full mx-auto">
+      <h3 className="text-3xl md:text-5xl text-gray-900 mb-4 font-montserrat font-extrabold">
+            Register
+        </h3>
+        <p className="text-md md:text-lg text-gray-700 mb-6">
+          We look forward to meeting you, register to join our Daily Bible Study
+      </p>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Full Name */}
         <div className='flex flex-col sm:flex-row gap-4 w-full'>
@@ -323,14 +331,10 @@ export default function BibleStudyForm() {
 
         {/* Disclaimer */}
         <p className="text-center text-xs sm:text-sm text-gray-500">
-          By submitting this form you agree to Tetra Energy Sciences{" "}
-          <Link href="/terms" className="text-green-600 hover:underline">
-            Terms of service
-          </Link>{" "}
-          and acknowledge that you have read our{" "}
-          <Link href="/privacy" className="text-green-600 hover:underline">
-            Privacy policy
-          </Link>.
+          By submitting this form you agree to DaBBible Foundation's {" "}
+          <Link href="/privacy-policy" className="text-[#C8385E] hover:underline">
+            Privacy Policy</Link>  {" "}
+          and acknowledge that you have read our the policy.
         </p>
       </form>
     </div>
