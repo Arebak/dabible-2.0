@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
   gender = gender.charAt(0).toUpperCase() + gender.slice(1).toLowerCase();
-  ageGroup = ageGroup.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  ageGroup = ageGroup.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
   const missingFields = [];
   if (!firstName) missingFields.push('First Name');
