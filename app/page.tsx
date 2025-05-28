@@ -12,6 +12,7 @@ import {
    useEffect, useState } from "react";
 import VideoModal from "@/components/VideoModal";
 import ProductHoverCard from "@/components/ProductHoverCard";
+import BlackSolarVideo from "@/components/Black-Solar-Video";
 
 export default function DonationPage() {
   // Hero carousel logic
@@ -424,6 +425,9 @@ export default function DonationPage() {
           </div>
         </div>
       </section>
+
+
+      <BlackSolarVideo />
 
       {/* Support Our Mission Section */}
       <section className="py-8 sm:py-12 md:py-16 bg-white">

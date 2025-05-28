@@ -116,6 +116,12 @@ export default function Header() {
             >
               Blog
             </button>
+            <button
+              onClick={() => navigate("/antioch")}
+              className={`${pathname === "/antioch" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
+            >
+              Bible Study
+            </button>
             {/* <button
               onClick={() => navigate("/shop")}
               className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
@@ -185,6 +191,12 @@ export default function Header() {
                   className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
                   Blog
+                </button>
+                <button
+                  onClick={() => navigate("/antioch")}
+                  className={`${pathname === "/antioch" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
+                >
+                  Bible Study
                 </button>
                 {/* <button
                   onClick={() => navigate("/shop")}

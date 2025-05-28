@@ -167,7 +167,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/terms-conditions"
+                  href="/privacy-policy"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
                   Terms & Conditions

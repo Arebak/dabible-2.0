@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import StarTag from "@/components/StarTag";
 import Link from "next/link";
+import BlackSolarVideo from "@/components/Black-Solar-Video";
 
 export default function SolarBiblePage() {
   const [frameIndex, setFrameIndex] = useState(0);
@@ -130,7 +131,7 @@ const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameR
                 </Button>
                 </Link>
 
-                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
+                <Link href="https://donate.dabible.com/product/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant={"outline"}
                   className="bg-[#0a3170] hover:bg-[#aac9ff] text-white hover:text-[#023E8A] border-white w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
@@ -195,51 +196,7 @@ const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameR
       {/* Features Section */}
       <section className="">
 
-        <div className="bg-black w-full">
-
-          <div className="text-center pt-18 mb-12">
-            <StarTag text="FEATURES" variant="blue" />
-            <h2 className="md:text-4xl text-3xl font-bold text-white font-domine">
-              Get The Highlights
-            </h2>
-          </div>
-
-          <div className="relative overflow-hidden w-full h-full">
-            <div id="fallback-image-solar" style={{ display: 'none' }}>
-            <Image
-              src="/png/right-solar-hero.png"
-              alt="Solar Audio Bible device"
-              fill
-              className="z-10 absolute !h-auto !left-[unset] !top-[unset] !right-[180px] !bottom-[250px]"
-              priority
-            />
-          </div>
-            <video
-            autoPlay
-            id="solar_intro_video_1"
-            muted
-            loop
-            playsInline
-            onError={() => {
-              const fallback = document.getElementById('fallback-image-solar');
-              const vid1 = document.getElementById('solar_intro_video_1');
-              if (vid1) vid1.style.display = 'none';
-              if (fallback) fallback.style.display = 'block';
-            }}
-            // onEnded={(e) => {
-            //   e.currentTarget.style.display = 'none';
-            //   const nextVideo = document.getElementById('solar_intro_2');
-            //   if (nextVideo) nextVideo.style.display = 'block';
-            //   (nextVideo as HTMLVideoElement | null)?.play();
-            // }}
-            className="w-full h-full p-0 m-0"
-          >
-            <source src="/videos/solar_1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-      
-          </div>
-          </div>
+        <BlackSolarVideo buttonDisabled={true} />
 
 
   
@@ -544,7 +501,7 @@ const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameR
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <a
-          href="#customize"
+          href="/support"
           className="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full transition duration-300"
         >
           Customize Now
@@ -557,10 +514,12 @@ const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameR
 
     {/* Image of devices */}
     <div className="flex-1 flex justify-center">
-      <img
+      <Image
         src="/svg/solar-customized.svg"
         alt="Customized Solar Audio Bibles"
         className="w-full max-w-md object-contain"
+        width={500}
+        height={500}
       />
     </div>
   </div>
@@ -614,7 +573,7 @@ const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameR
                   Donate
                 </Button>
                 </Link>
-                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
+                <Link href="https://donate.dabible.com/product/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
                   className="bg-transparent text-white border-2 border-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] px-18 py-4 h-fit"
