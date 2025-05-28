@@ -152,11 +152,11 @@ export default function ContactForm() {
         {/* Disclaimer */}
         <p className="text-center text-xs sm:text-sm text-gray-500">
           By submitting this form you agree to Tetra Energy Sciences{" "}
-          <Link href="/terms" className="text-green-600 hover:underline">
+          <Link href="/privacy-policy" className="text-green-600 hover:underline">
             Terms of service
           </Link>{" "}
           and acknowledge that you have read our{" "}
-          <Link href="/privacy" className="text-green-600 hover:underline">
+          <Link href="/privacy-policy" className="text-green-600 hover:underline">
             Privacy policy
           </Link>.
         </p>

@@ -7,6 +7,7 @@ import Select from 'react-select';
 import ReCAPTCHA from "react-google-recaptcha";
 
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
 export default function BibleStudyForm() {
@@ -29,6 +30,8 @@ export default function BibleStudyForm() {
   const [countries, setCountries] = useState<{ name: string; dialCode: string; flag: string; countryCode: string }[]>([]);
 
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all')
@@ -105,7 +108,7 @@ export default function BibleStudyForm() {
         });
         setCharCount(0);
         setRecaptchaToken(null);
-        window.location.href = "/antioch/congratulations";
+        router.push("/antioch/congratulations");
       } else {
         setStatus("error");
       }
@@ -339,4 +342,4 @@ export default function BibleStudyForm() {
       </form>
     </div>
   );
-}
+} 

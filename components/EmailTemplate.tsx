@@ -47,7 +47,7 @@ return `
                                     .join('')}
                             </div>
                             ${
-                                ctaButtons[0] && ctaButtons[0].url
+                                ctaButtons[0] 
                                     ? `<div style="margin-top: 20px; font-size: 14px; color: #888;">
                                             <p style="margin:0">If you have any issues clicking the button above, feel free click the link here below.</p>
                                             <a href="${ctaButtons[0].url}" style="color: #27ae60; text-decoration: none;">${ctaButtons[0].url}</a>
@@ -55,7 +55,7 @@ return `
                                     : ''
                             }
                             ${
-                                ctaButtons[0] && ctaButtons[1].url
+                                ctaButtons[1]
                                     ? `<div style="margin-top: 20px; font-size: 14px; color: #888;">
                                             <p style="margin:0">If you have any issues clicking the button above, feel free click the link here below.</p>
                                             <a href="${ctaButtons[1].url}" style="color: #27ae60; text-decoration: none;">${ctaButtons[1].url}</a>
