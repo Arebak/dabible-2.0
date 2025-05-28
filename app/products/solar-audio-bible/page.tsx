@@ -7,19 +7,31 @@ import Link from "next/link";
 
 export default function SolarBiblePage() {
   const [frameIndex, setFrameIndex] = useState(0);
-  const [redVisibility, setRedVisibility] = useState(false);
-  const productFrames = [
-    "/png/solar1.png",
-    "/png/solar2.png",
-    "/png/solar3.png",
-    "/png/solar4.png",
-    "/png/solar5.png",
-  ];
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+ 
+  // Frame range manager for different animation contexts
+const frameRanges = {
+  rotationFrames: { start: 50, end: 150 },
+  featureSpinFrames: { start: 80, end: 130 },
+  closerLookFrames: { start: 120, end: 160 },
+};
+
+const generateFrames = (start: number, end: number) =>
+  Array.from({ length: end - start + 1 }, (_, i) => {
+    const frameNumber = (start + i).toString().padStart(4, "0");
+    return `/solar_3d/${frameNumber}.png`;
+  });
+
+const productFrames = generateFrames(frameRanges.rotationFrames.start, frameRanges.rotationFrames.end);
+
+const featureFrames = generateFrames(frameRanges.featureSpinFrames.start, frameRanges.featureSpinFrames.end);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       setFrameIndex((prev) => (prev + 1) % productFrames.length);
-    }, 1000);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [productFrames.length]);
@@ -37,13 +49,13 @@ export default function SolarBiblePage() {
 
               <p className="text-sm md:text-md lg:text-lg opacity-90 ">
                 The Solar Audio Bible is designed especially for the elderly and
-                others who cannot use mobile phones — simple, solar-powered, and
+                others who cannot use mobile phones - simple, solar-powered, and
                 preloaded with the Word of God.
               </p>
 
               <p className="text-sm md:text-md lg:text-lg opacity-90">
                 When you buy one, you&apos;re not just receiving this life-changing
-                device — you&apos;re also donating one to an elderly person in a
+                device - you&apos;re also donating one to an elderly person in a
                 remote village who otherwise wouldn&apos;t have access to God&apos;s Word.
               </p>
 
@@ -71,7 +83,7 @@ export default function SolarBiblePage() {
                   />
                   <p className="md:text-md text-sm  lg:text-lg">
                     {" "}
-                    Fully solar-powered — no charging required
+                    Fully solar-powered - no charging required
                   </p>
                 </div>
                 <div className="flex items-center gap-x-3">
@@ -105,7 +117,7 @@ export default function SolarBiblePage() {
                 <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
-                  className="bg-white text-[#0a3170] hover:bg-gray-100 border-none md:w-[230px] w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
+                  className="bg-white text-[#0a3170] border-white hover:bg-[#aac9ff] hover:text-[#0a3170] md:w-[230px] w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
                 >
                   <Image
                     src="/svg/coin.svg"
@@ -121,9 +133,9 @@ export default function SolarBiblePage() {
                 <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant={"outline"}
-                  className="bg-[#0a3170] hover:bg-[#0a3170]/10 hover:text-white text-white border-white w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
+                  className="bg-[#0a3170] hover:bg-[#aac9ff] text-white hover:text-[#023E8A] border-white w-full h-fit md:text-base text-sm md:px-5 md:py-4 px-4 py-4"
                 >
-                  Buy Now - Give One Too
+                  <span className="mr-1">Pre-order Now</span>-<span className="ml-1">Give One Too</span>
                 </Button>
                 </Link>
               </div>
@@ -181,19 +193,99 @@ export default function SolarBiblePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
+      <section className="">
+
+        <div className="bg-black w-full">
+
+          <div className="text-center pt-18 mb-12">
             <StarTag text="FEATURES" variant="blue" />
-            <h2 className="md:text-4xl text-3xl font-bold text-gray-900 font-domine">
+            <h2 className="md:text-4xl text-3xl font-bold text-white font-domine">
               Get The Highlights
             </h2>
           </div>
 
-          <div className="flex flex-col gap-6 md:gap-y-10 ">
+          <div className="relative overflow-hidden w-full h-full">
+            <div id="fallback-image-solar" style={{ display: 'none' }}>
+            <Image
+              src="/png/right-solar-hero.png"
+              alt="Solar Audio Bible device"
+              fill
+              className="z-10 absolute !h-auto !left-[unset] !top-[unset] !right-[180px] !bottom-[250px]"
+              priority
+            />
+          </div>
+            <video
+            autoPlay
+            id="solar_intro_video_1"
+            muted
+            loop
+            playsInline
+            onError={() => {
+              const fallback = document.getElementById('fallback-image-solar');
+              const vid1 = document.getElementById('solar_intro_video_1');
+              if (vid1) vid1.style.display = 'none';
+              if (fallback) fallback.style.display = 'block';
+            }}
+            // onEnded={(e) => {
+            //   e.currentTarget.style.display = 'none';
+            //   const nextVideo = document.getElementById('solar_intro_2');
+            //   if (nextVideo) nextVideo.style.display = 'block';
+            //   (nextVideo as HTMLVideoElement | null)?.play();
+            // }}
+            className="w-full h-full p-0 m-0"
+          >
+            <source src="/videos/solar_1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+      
+          </div>
+          </div>
+
+
+  
+
+        <div className="bg-black bg-gradient-to-b from-black to-white w-full overflow-hidden">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex flex-col gap-6 md:gap-y-10 px-4 lg:px-4">
             {/* Feature 1 */}
-            <div className="overflow-hidden card-gradient border-none">
-              <div className="p-0 md:p-6 flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
+            <div className="overflow-hidden card-gradientz border-none rounded-3xl bg-gradient-to-tl from-[#c2ccdb]  to-[#575f6d]">
+              <div className="p-8 md:p-6 md:pl-16 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+                <div className="flex-1 order-2">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
+                    <Image
+                      src="/svg/badge.svg"
+                      alt="Hand-held Solar Audio Bible"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <h3 className="text-xl md:text-4xl font-bold text-black mb-2">
+                    Easy To Use & Hand - Held
+                  </h3>
+                  <p className="text-black md:text-lg">
+                    Designed with simplicity in mind - No tech knowledge needed.
+                    The Solar Audio Bible fits comfortably in one hand and
+                    features large, easy-to-press buttons. It&apos;s The perfect
+                    solution for elderly users or anyone who finds smartphones
+                    too complicated.
+                  </p>
+                </div>
+
+                
+                <div className="relative md:w-[415px] w-[300px] md:h-[350px] h-[300px] order-1">
+                  <Image
+                    src="/png/0001_2.png"
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all scale-125"
+                  />
+                </div>
+                
+              </div>
+            </div>
+            
+            {/* <div className="from-10%  card-gradientx border-none  bg-gradient-to-bl from-[#010711] to-[#3e437d] rounded-3xl">
+              <div className="p-6 md:p-8 md:py-18 flex flex-col sm:flex-row gap-2 md:gap-x-[130px] items-stretch">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -203,32 +295,38 @@ export default function SolarBiblePage() {
                       height={30}
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">
+                  <h3 className="text-xl md:text-4xl text-white font-bold mb-2">
                     Easy To Use & Hand - Held
                   </h3>
-                  <p className="text-gray-700">
-                    Designed With Simplicity In Mind — No Tech Knowledge Needed.
-                    The Solar Audio Bible Fits Comfortably In One Hand And
-                    Features Large, Easy-To-Press Buttons. It&apos;s The Perfect
-                    Solution For Elderly Users Or Anyone Who Finds Smartphones
-                    Too Complicated.
+                  <p className="text-white md:text-lg">
+                    Designed with simplicity in mind — No tech knowledge needed.
+                    The Solar Audio Bible fits comfortably in one hand and
+                    features large, easy-to-press buttons. It&apos;s The perfect
+                    solution for elderly users or anyone who finds smartphones
+                    too complicated.
                   </p>
                 </div>
-
-                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
-                  <Image
-                    src={productFrames[frameIndex]}
-                    alt="Rotating Solar Audio Bible"
-                    fill
-                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
-                  />
+                <div className="relative flex-1 py-26">
+                  <div className="absolute
+                    w-[500px] h-[500px] md:w-[700px]
+                    right-[-30%] md:right-[-55%] lg:right-[-20%] xl:right-[-10%]
+                    top-[-70%] sm:top-[-50%] md:top-[-45%] lg:top-[-60%]">
+                    {featureFrames[frameIndex] && (
+                    <Image
+                      src={featureFrames[frameIndex]}
+                      alt="Rotating Solar Audio Bible"
+                      fill
+                      className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
+                    />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Feature 2 */}
-            <div className="overflow-hidden card-gradient border-none">
-              <div className="p-0 md:p-6  flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+            <div className="overflow-hidden card-gradientz border-none rounded-3xl bg-gradient-to-tl from-[#c2ccdb]  to-[#575f6d]">
+              <div className="p-8 md:p-6 md:pr-16 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
                 <div className="flex-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
@@ -238,32 +336,30 @@ export default function SolarBiblePage() {
                       height={30}
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">
+                  <h3 className="text-xl md:text-4xl font-bold text-black mb-2">
                     Internal AA Battery With Solar Panel
                   </h3>
-                  <p className="text-gray-700">
-                    Say Goodbye To Power Worries. This Device Runs On AA
-                    Batteries And Comes With A Built-In Solar Panel, Making It
-                    Ideal For Rural Areas With Limited Electricity. Just Leave
-                    It In The Sun To Charge And It&apos;s Ready To Use.
+                  <p className="text-black md:text-lg">
+                    Say goodbye to power worries. This device runs on AA batteries and comes with a built-in solar panel, making it ideal for rural areas with limited electricity. Just leave it in the sun to charge and it’s ready to use.
                   </p>
                 </div>
-
-                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
+                
+                <div className="relative md:w-[415px] w-[300px] md:h-[350px] h-[300px] md:order-1">
                   <Image
-                    src={productFrames[frameIndex]}
+                    src="/png/0002.png"
                     alt="Rotating Solar Audio Bible"
                     fill
-                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all scale-120  md:scale-150"
                   />
                 </div>
+                
               </div>
             </div>
 
             {/* Feature 3 */}
-            <div className="overflow-hidden card-gradient border-none">
-              <div className="p-0 md:p-6  flex flex-col md:flex-row gap-6 md:gap-x-[130px] items-center">
-                <div className="flex-1">
+            <div className="overflow-hidden card-gradientz border-none rounded-3xl bg-gradient-to-tl from-[#d5dde9]  to-[#828ea3]">
+              <div className="p-8 md:p-6 md:pl-16 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+                <div className="flex-1 md:order-2">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
                       src="/svg/badge3.svg"
@@ -272,32 +368,33 @@ export default function SolarBiblePage() {
                       height={30}
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">
-                    Old & New Testament
+                  <h3 className="text-xl md:text-4xl font-bold text-black mb-2">
+                     Old & New Testament
                   </h3>
-                  <p className="text-gray-700">
-                    From Genesis To Revelation — It&apos;s All Here. The Solar Audio
-                    Bible Contains A Complete Recording Of Both The Old And New
-                    Testament, Providing The Full Message Of Hope, Love, And
-                    Salvation In An Easy-To-Listen Format.
+                  <p className="text-black md:text-lg">
+                    Preloaded with both the Old and New Testaments, the Solar Audio Bible provides a comprehensive listening experience. It&apos;s like having a pastor in your pocket, ready to share God&apos;s Word at any time.
                   </p>
                 </div>
 
-                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
+                
+                <div className="relative md:w-[415px] w-[300px] md:h-[350px] h-[300px] md:order-1">
                   <Image
-                    src={productFrames[frameIndex]}
+                    src="/png/0161.png"
                     alt="Rotating Solar Audio Bible"
                     fill
-                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all md:scale-180"
                   />
                 </div>
+                
               </div>
             </div>
 
+          
+
             {/* Feature 4 */}
-            <div className="overflow-hidden card-gradient border-none">
-              <div className="p-0 md:p-6  flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
-                <div className="flex-1">
+            <div className="overflow-hidden card-gradientz border-none rounded-3xl bg-gradient-to-tr from-[#ffffff]  to-[#cbd9f1]">
+              <div className="p-8 md:p-6 md:pr-16 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+                <div className="flex-1 order-1">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
                     <Image
                       src="/svg/badge4.svg"
@@ -306,62 +403,118 @@ export default function SolarBiblePage() {
                       height={30}
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Flash Light</h3>
-                  <p className="text-gray-700">
-                    More Than Just A Bible — It&apos;s Also A Practical Tool. The
-                    Built-In Flashlight Comes In Handy For Navigating In The
-                    Dark Or During Power Outages, Making It Especially Useful In
-                    Remote Areas And For Elderly Users.
+                  <h3 className="text-xl md:text-4xl font-bold text-black mb-2">
+                     Flash Light
+                  </h3>
+                  <p className="text-black md:text-lg">
+                    Equipped with a built-in flashlight, the Solar Audio Bible
+                    is not just a spiritual tool but also a practical one. It
+                    provides light in dark places, making it useful for reading,
+                    navigating, or simply providing comfort during the night.
                   </p>
                 </div>
 
-                <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
+                
+                <div className="relative md:w-[415px] w-[300px] md:h-[350px] h-[300px] order-2">
                   <Image
-                    src={productFrames[frameIndex]}
+                    src="/png/0000.png"
                     alt="Rotating Solar Audio Bible"
                     fill
-                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all scale-120"
                   />
                 </div>
+                
               </div>
             </div>
+
+            <div className="overflow-hidden card-gradientz border-none rounded-3xl bg-gradient-to-tl from-[#ffffff]  to-[#cbd9f1]">
+              <div className="p-8 md:p-6 md:pl-16 flex flex-col md:flex-row-reverse gap-6 md:gap-x-[130px] items-center">
+                <div className="flex-1 md:order-2">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
+                    <Image
+                      src="/svg/badge4.svg"
+                      alt="Hand-held Solar Audio Bible"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <h3 className="text-xl md:text-4xl font-bold text-black mb-2">
+                     Audio Sermons
+                  </h3>
+                  <p className="text-black md:text-lg">
+                    We have compiled sermons from various pastors and
+                    evangelists, providing a rich source of spiritual nourishment.
+                    These audio sermons are designed to complement the Bible
+                    readings, offering deeper insights and practical applications
+                    of God&apos;s Word.
+                  </p>
+                </div>
+
+                
+                <div className="relative md:w-[415px] w-[300px] md:h-[350px] h-[300px] md:order-1">
+                  <Image
+                    src="/png/0004.png"
+                    alt="Rotating Solar Audio Bible"
+                    fill
+                    className="w-full h-full object-contain duration-1000 ease-in-out transition-all scale-110 md:scale-180"
+                  />
+                </div>
+                
+              </div>
+            </div>
+
+            
           </div>
         </div>
+        </div>
+
       </section>
 
+      
+
+
+
+
+
       {/* Take A Closer Look Section */}
-      <section className="py-12 px-4">
+      <section className="py-12 px-4 overflow-hidden">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0a3170] mb-8">
+          <h2 className="text-2xl mt-16 md:text-3xl font-bold text-[#0a3170] mb-8 font-domine text-center">
             Take A Closer Look
           </h2>
 
           <div className="bg-[#F8F7F7] rounded-xl p-6 md:p-10 flex flex-col items-center">
-            <div className="relative md:w-[415px] w-[300px] md:h-[415px] h-[300px]">
+            
+            <div className="relative md:w-[415px] w-[300px] md:h-[615px] h-[300px] z-0">
+               {featureFrames[frameIndex] && (
               <Image
-                src={
-                  !redVisibility
-                    ? productFrames[frameIndex]
-                    : "/png/red-solar.png"
-                }
+                src={featureFrames[frameIndex]}
                 alt="Rotating Solar Audio Bible"
                 fill
-                className="w-full h-full object-contain duration-1000 ease-in-out transition-all"
+                className={`w-full h-full object-contain transition-all scale-280 duration-500 ${
+                  selectedColor === "gray"
+                    ? "filter grayscale"
+                    : selectedColor === "red"
+                    ? "filter sepia-[140] hue-rotate-[266deg] saturate-[2];"
+                    : ""
+                }`}
               />
+             )}
             </div>
 
-            <div className="text-center">
+
+            <div className="text-center relative z-3">
               <p className="text-sm text-gray-600 mb-3">
                 Solar Audio Bible Device
               </p>
               <div className="inline-flex items-center bg-white rounded-full p-1 border">
                 <button
                   className="w-8 h-8 rounded-full bg-gray-300 mx-1 cursor-pointer"
-                  onClick={() => setRedVisibility(false)}
+                  onClick={() => setSelectedColor("gray")}
                 ></button>
                 <button
                   className="w-8 h-8 rounded-full bg-red-500 mx-1 cursor-pointer"
-                  onClick={() => setRedVisibility(true)}
+                  onClick={() => setSelectedColor("red")}
                 ></button>
               </div>
             </div>
@@ -369,8 +522,52 @@ export default function SolarBiblePage() {
         </div>
       </section>
 
+  <section className="bg-[#f1f7fe] py-6 px-6 md:px-12 rounded-xl">
+  <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+    <div className="flex-1">
+      <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+        Give the Gift of the Word, Your Way.
+      </h2>
+      <p className="text-gray-700 text-base md:text-lg mb-6">
+        Want to bless your church, ministry partners, or loved ones with the Solar Audio Bible? <br />
+        You can now customize the device with your logo or special message and order in bulk for:
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-base font-medium text-[#1e3a8a] mb-6">
+        <div className="flex items-center gap-2"><span>🎁</span> Church Outreach</div>
+        <div className="flex items-center gap-2"><span>🎁</span> Mission Trips</div>
+        <div className="flex items-center gap-2"><span>🎁</span> Weddings & Birthdays</div>
+        <div className="flex items-center gap-2"><span>🎁</span> Community Events</div>
+        <div className="flex items-center gap-2"><span>🎁</span> Corporate Giving</div>
+        <div className="flex items-center gap-2"><span>🎁</span> Holiday Gifts</div>
+      </div>
+
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a
+          href="#customize"
+          className="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-full transition duration-300"
+        >
+          Customize Now
+        </a>
+        <p className="text-sm text-gray-700">
+          Use code <strong>SCOOP15</strong> for 15% off your first order!
+        </p>
+      </div>
+    </div>
+
+    {/* Image of devices */}
+    <div className="flex-1 flex justify-center">
+      <img
+        src="/svg/solar-customized.svg"
+        alt="Customized Solar Audio Bibles"
+        className="w-full max-w-md object-contain"
+      />
+    </div>
+  </div>
+</section>
+
       {/* The Forgotten Generation Section */}
-      <section className=" px-4 bg-[#C8385E] md:max-h-[764px] h-full relative  md:yoruba-download-bg py-5 overflow-hidden">
+      <section className=" px-4 bg-[#C8385E] h-full relative  md:yoruba-download-bg py-5 overflow-hidden">
         {/* curve yoruba  */}
         <div className="absolute top-0 left-0 right-0 transform translate-x-[40%]">
           <Image
@@ -383,56 +580,49 @@ export default function SolarBiblePage() {
         <div className="d-container mx-auto max-w-6xl px-4 text-white">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 font-domine">
+              <h2 className="text-2xl md:text-6xl md:max-w-xs font-bold mb-6 font-domine">
                 The Forgotten Generation
               </h2>
 
-              <div className="space-y-4 text-white/90 font-mada md:max-w-3/4 w-full">
+              <div className="space-y-4 text-white/90 md:text-lg font-mada md:max-w-3/4 w-full">
                 <p>
-                  A Heavy Burden Rests On Our Hearts For The Elderly Who Reside
-                  In Remote Villages That Do Not Have Access To The Gospel Of
-                  Christ. Many Of Them Alone For Various Reasons Such As: Their
-                  Children Have Relocated To Bigger Cities In Pursuit Of
-                  Education And/Or Economic Opportunities. Some Are As Such An
-                  Old Age That They&apos;re Unable To Walk To Church. Many Of Them
-                  Are Illiterate (Some Are Unable To Understand The National
-                  Language, And Can Only Speak Their Local Dialect, Which Is Not
-                  Spoken In These Churches). Many Of Them Cannot Read Or Write,
-                  Thus, Cannot Operate A Mobile App. So, They Are At A Great
-                  Disadvantage In Having Access To The Gospel Of Christ.
+                  A heavy burden rests on our hearts for the elderly who reside in remote villages that do not have access to the gospel of Christ. Many of them are alone for various reasons such as: their children have relocated to bigger cities in pursuit of education and/or economic opportunities. Some are of such an old age that they’re unable to walk to church. Many of them are illiterate (some are unable to understand the national language and can only speak their local dialect, which is not spoken in these churches). Many of them cannot read or write, thus, cannot operate a mobile app. So, they are at a great disadvantage in having access to the gospel of Christ.
                 </p>
 
                 <p>
-                  Many Of These Elders Were Raised In The Era Of Idol
-                  Worshipping, And They Pray With Incantations And Wicked
-                  Proverbs. Some Are Labeled As Witches And Wizards. These
-                  People Are Dying On A Daily Basis Without Knowing The Love Of
-                  Jesus And Believing In His Saving Grace. Where Do They End Up
-                  In Eternity? This Is Why We Are Providing A Solar Audio Bible
-                  Device That Is Elderly Friendly For Them.
+                  Many of these elders were raised in the era of idol worshipping, and they pray with incantations and wicked proverbs. Some are labeled as witches and wizards. These people are dying on a daily basis without knowing the love of Jesus and believing in His saving grace. Where do they end up in eternity? This is why we are providing a solar audio Bible device that is elderly friendly for them.
                 </p>
               </div>
 
               <div className="mt-8">
-                <h3 className="text-xl font-bold mb-4">
-                  Ready To Donate Now? Give & Receive A Solar Audio Bible
+                <h3 className="text-xl md:text-2xl font-domine font-bold mb-4">
+                  Ready to donate now? Give & Receive a Solar Audio Bible
                 </h3>
-                
+                <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
                 <Button
                   variant="outline"
-                  className="bg-white text-[#C8385E] hover:bg-white/90 border-none px-10 py-2 h-fit"
+                  className="bg-white border-2 border-white text-[#C8385E] hover:bg-white border-none px-18 py-4 h-fit"
                 >
                   <Image
                     src="/svg/rose-coin.svg"
                     alt="Elderly person in a remote village"
                     width={15}
                     height={15}
-                    className="rounded-lg shadow-lg "
+                    className="rounded-lg shadow-lg :hover:hidden "
                   />
                   Donate
                 </Button>
                 </Link>
+                <Link href="https://donate.dabible.com/solar-audio-bible/" className="cursor-pointer">
+                <Button
+                  variant="outline"
+                  className="bg-transparent text-white border-2 border-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] px-18 py-4 h-fit"
+                >
+                  Preorder Now - Give One Too
+                </Button>
+                </Link>
+                </div>
               </div>
             </div>
 
@@ -443,7 +633,7 @@ export default function SolarBiblePage() {
                   alt="Elderly person in a remote village"
                   width={400}
                   height={400}
-                  className="rounded-lg shadow-lg"
+                  className="w-full md:scale-140"
                 />
               </div>
             </div>
