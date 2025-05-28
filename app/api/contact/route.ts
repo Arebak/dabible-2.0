@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-// import { appendToSheet } from '@/lib/googleSheets';
+export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -12,21 +12,18 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Store in Google Sheet
-    // await appendToSheet({ fullName, email, company, message });
-
     // Send Emails via Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_APP_PASSWORD,
+        user: process.env.DABIBLE_GMAIL_ADDRESS,
+        pass: process.env.DABIBLE_GMAIL_PASSWORD,
       },
     });
 
     const adminMail = {
-      from: `"Contact Form" <${process.env.EMAIL_USERNAME}>`,
-      to: process.env.EMAIL_TO,
+      from: `"Contact Form" <${process.env.DABIBLE_GMAIL_ADDRESS}>`,
+      to: process.env.DABIBLE_ADMIN_EMAIL,
       subject: `New Contact from ${fullName}`,
       html: `
         <p><strong>Name:</strong> ${fullName}</p>
@@ -37,7 +34,7 @@ export async function POST(req: NextRequest) {
     };
 
     const userMail = {
-      from: `"Your Website" <${process.env.EMAIL_USERNAME}>`,
+      from: `"Your Website" <${process.env.DABIBLE_GMAIL_ADDRESS}>`,
       to: email,
       subject: 'Thanks for contacting us!',
       html: `

@@ -1,5 +1,6 @@
 
 
+import BibleStudyForm from "@/components/BibleStudyForm";
 import ContactForm from "@/components/ContactForm";
 import Image from "next/image";
 
@@ -138,7 +139,7 @@ export default function AntiochPage() {
                 
                 {/* Form Content */}
                 
-                <ContactForm/>
+                <BibleStudyForm/>
 
                 {/* Right Poster */}
                 <div className="flex-1 w-full max-w-sm mx-auto">
