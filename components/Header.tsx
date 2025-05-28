@@ -89,12 +89,6 @@ export default function Header() {
                       Solar Audio Bible
                     </button>
                     <button
-                      onClick={() => navigate("/products/hausa-audio-bible")}
-                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
-                    >
-                      Hausa Audio Bible
-                    </button>
-                    <button
                       onClick={() => navigate("/products/yoruba-audio-bible")}
                       className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/yoruba-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                     >
@@ -105,6 +99,12 @@ export default function Header() {
                       className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/pidgin-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
                     >
                       Pidgin Audio Bible
+                    </button>
+                    <button
+                      onClick={() => navigate("/products/hausa-audio-bible")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Hausa Audio Bible
                     </button>
                   </div>
                 </div>
@@ -161,12 +161,6 @@ export default function Header() {
                       Solar Audio Bible
                     </button>
                     <button
-                      onClick={() => navigate("/products/hausa-audio-bible")}
-                      className={`block w-full text-left py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
-                    >
-                      Hausa Audio Bible
-                    </button>
-                    <button
                       onClick={() => navigate("/products/yoruba-audio-bible")}
                       className={`block w-full text-left py-2 text-sm ${pathname === "/products/yoruba-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
                     >
@@ -178,15 +172,21 @@ export default function Header() {
                     >
                       Pidgin Audio Bible
                     </button>
+                    <button
+                      onClick={() => navigate("/products/hausa-audio-bible")}
+                      className={`block w-full text-left py-2 text-sm ${pathname === "/products/hausa-audio-bible" ? "text-[#6B051F] font-semibold" : "text-gray-700"} cursor-pointer`}
+                    >
+                      Hausa Audio Bible
+                    </button>
                   </div>
                 )}
-                {/* <button
+                <button
                   onClick={() => navigate("/blog")}
                   className={`${pathname === "/blog" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
                   Blog
                 </button>
-                <button
+                {/* <button
                   onClick={() => navigate("/shop")}
                   className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >

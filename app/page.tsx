@@ -217,8 +217,8 @@ export default function DonationPage() {
 
       {/* Download Section */}
       <section className="py-8 sm:py-12 md:py-16" id="download">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-start gap-8 gap-x-12 align-center">
-          <div className="w-full md:w-1/2 max-w-[780px] mb-0 pt-6 order-2 md:order-1">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 gap-x-12 align-center content-stretch">
+          <div className="w-full md:w-1/2 max-w-[780px] mb-0 order-2 md:order-1">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gradient-blue mb-4">
               Download The App And Enjoy Full Access On Offline Mode.
             </h2>
@@ -319,14 +319,15 @@ export default function DonationPage() {
             </div>
           </div>
 
-          <div className="w-full  md:w-1/2 flex justify-center teal-gradient rounded-2xl overflow-y-hidden px-4 order-1 md:order-2">
-            <div className="relative w-36 sm:w-48 md:w-56 lg:w-64 h-auto mt-10">
+          <div className="w-full h-full  md:w-1/2 px-4 order-1 md:order-2">
+            <div className="relative w-auto h-full">
               <Image
-                src="/png/preview.png"
+                src="/videos/solar_home_1.gif"
                 alt="App Interface"
+                unoptimized
                 width={320}
                 height={640}
-                className="rounded-3xl shadow-xl"
+                className="rounded-3xl shadow-xl h-full w-auto"
               />
             </div>
           </div>
