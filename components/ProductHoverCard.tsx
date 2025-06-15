@@ -45,7 +45,7 @@ const ProductHoverCard = ({
   const [hovered, setHovered] = useState(false);
 
   const FlamesIcon = () => (
-    <Image src="/svg/flames.svg" alt="Flame" width={20} height={20} className="h-8 w-8" />
+    <Image src="/svg/flames.svg" alt="Flame" width={20} height={20} className="w-3 h-3 md:w-8 md:h-8" />
   );
 
   const features = [Feature1, Feature2, Feature3, Feature4];
@@ -93,7 +93,7 @@ const ProductHoverCard = ({
 
       <div className="absolute w-full h-full inset-0 text-white transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0">
         <div
-          className="relative h-full w-full max-w-4xl rounded-3xl overflow-hidden"
+          className="relative h-full w-full max-w-4xl rounded-2xl overflow-hidden"
           style={{
             backgroundImage: `url(${Image3})`,
             backgroundSize: "cover",
@@ -113,17 +113,17 @@ const ProductHoverCard = ({
           <div className="relative p-4 md:p-8 text-white h-full">
             <div className="space-y-4 h-full">
               <div className="">
-                <h1 className="text-3xl md:text-4xl font-bold font-montserrat uppercase">{ProductName}</h1>
-                <h1 className="text-3xl md:text-xl font-bold tracking-wide uppercase">{ProductTag}</h1>
+                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-1 font-montserrat uppercase">{ProductName}</h1>
+                <h1 className="text-sm sm:text-base md:text-lg lg:text-2xl font-montserrat -mt-3 font-semibold uppercase">{ProductTag}</h1>
               </div>
 
-              <p className="text-md">{ProductionDescription}</p>
+              <p className="text-xs md:text-md mb-0 md:mb-auto">{ProductionDescription}</p>
 
-              <div className="space-y-2 py-4 h-full">
+              <div className="space-y-1 md:space-y-2 py-2 md:py-4 h-full">
                 {features.map((feature, index) => feature ? (
                   <div key={index} className="flex items-center gap-4">
                     <FlamesIcon />
-                    <p className="text-md">{feature}</p>
+                    <p className="text-xs md:text-md">{feature}</p>
                   </div>
                 ): null)}
               </div>
