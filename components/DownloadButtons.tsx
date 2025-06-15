@@ -8,13 +8,13 @@ interface DownloadButtonsProps {
 const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) => {
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-6 z-2 mx-auto text-left justify-start">
+    <div className="flex flex-col sm:flex-row gap-4 mb-6 z-2 mx-auto md:text-left md:justify-start">
       <Link
         href={AppStoreLink || "#download"}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download on the App Store"
-        className="cursor-pointer"
+        className="cursor-pointer mx-auto md:mx-0"
       >
         <svg width="auto" height="70" viewBox="0 0 326 96" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M324.189 84.2282C324.189 89.247 320.039 93.3124 314.906 93.3124H11.1064C5.97569 93.3124 1.81104 89.247 1.81104 84.2282V11.7845C1.81104 6.76807 5.97569 2.68848 11.1064 2.68848H314.903C320.039 2.68848 324.186 6.76807 324.186 11.7845L324.189 84.2282Z" fill="black"/>
@@ -50,7 +50,7 @@ const DownloadButtons = ({ AppStoreLink, PlayStoreLink }: DownloadButtonsProps) 
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Get it on Google Play"
-        className="cursor-pointer"
+        className="cursor-pointer mx-auto md:mx-0"
       >
        <svg width="auto" height="70" viewBox="0 0 326 94" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M313.926 94H12.0741C5.43635 94 0 88.7096 0 82.25V11.75C0 5.29045 5.43635 1.33514e-05 12.0741 1.33514e-05H313.926C320.564 1.33514e-05 326 5.29045 326 11.75V82.25C326 88.7096 320.564 94 313.926 94Z" fill="black"/>

@@ -320,15 +320,15 @@ export default function DonationPage() {
             </div>
           </div>
 
-          <div className="w-full h-full  md:w-1/2 px-4 order-1 md:order-2">
-            <div className="relative w-auto h-full">
+          <div className="w-full h-70 md:h-70 lg:h-auto  md:w-1/2 px-4 order-1 md:order-2">
+            <div className="relative w-auto h-full text-center">
               <Image
                 src="/videos/solar_home_1.gif"
                 alt="App Interface"
                 unoptimized
                 width={320}
-                height={640}
-                className="rounded-3xl shadow-xl h-full w-auto"
+                height={540}
+                className="rounded-3xl shadow-xl h-full w-auto mx-auto animate__animated animate__fadeIn animate__delay-1s"
               />
             </div>
           </div>
