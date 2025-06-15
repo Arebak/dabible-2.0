@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import StarTag from "@/components/StarTag";
 import Link from "next/link";
-import BlackSolarVideo from "@/components/Black-Solar-Video";
+import BlackSolarVideo from "@/components/Solar-Video-Demo";
 
 export default function SolarBiblePage() {
   const [frameIndex, setFrameIndex] = useState(0);
