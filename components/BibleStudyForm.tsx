@@ -34,7 +34,8 @@ export default function BibleStudyForm() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('https://restcountries.com/v3.1/all')
+    // Updated API request to include all required fields explicitly
+    fetch('https://restcountries.com/v3.1/all?fields=name,idd,cca2')
       .then((res) => res.json())
       .then((data) => {
         const formattedCountries = data
