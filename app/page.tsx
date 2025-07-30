@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Gift, Play, Star } from "lucide-react";
+import { Gift, Icon, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "animate.css";
 import DownloadButtons from "@/components/DownloadButtons";
@@ -488,22 +488,22 @@ export default function DonationPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Mission Field Card */}
-            <Link href="https://donate.dabible.com/agantaram-mission-field/" className="cursor-pointer">
+            <Link href="https://donate.dabible.com/agan-mission-field/" className="cursor-pointer">
             <div className="bg-[#F7F9FC] rounded-lg sm:rounded-xl overflow-hidden shadow-md px-4 sm:px-5">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#023E8A] text-center py-3 sm:py-4">
-                Agantaram Mission Field
+                Zam Mission Field
               </h3>
               <div className="relative h-40 sm:h-48 md:h-56 lg:h-64">
                 <Image
-                  src="/png/agantaram-1.jpg"
+                  src="/png/agan-1.jpg"
                   alt="Mission Field"
                   fill
                   className="object-cover rounded-xl"
                 />
               </div>
-              <div className="p-3 sm:p-4 md:p-6 text-center">
+              <div className="p-3 sm:p-4 md:p-6 md:px-2 text-center">
                 <p className="text-[#023E8A] text-xs sm:text-sm md:text-base">
-                  Agantaram is a community in Northern Kaduna with over 150 children who have never been to school.
+                  Zam <span className="italic text-small font-bold">(real community name is withheld for security reasons)</span> in Northern Nigeria with over 250 children who have never been to school.
                 </p>
               </div>
             </div>
@@ -517,7 +517,7 @@ export default function DonationPage() {
               </h3>
               <div className="relative h-40 sm:h-48 md:h-56 lg:h-64">
                 <Image
-                  src="/png/agantaram-2.jpg"
+                  src="/png/agan-2.jpg"
                   alt="School Fee"
                   fill
                   className="object-cover rounded-xl"
