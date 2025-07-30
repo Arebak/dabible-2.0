@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Gift, Icon, Play, Star } from "lucide-react";
+import { Gift, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "animate.css";
 import DownloadButtons from "@/components/DownloadButtons";
