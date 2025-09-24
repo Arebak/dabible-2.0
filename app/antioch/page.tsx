@@ -1,7 +1,31 @@
-"use client"
+// "use client"
 import BibleStudyForm from "@/components/BibleStudyForm";
 import Image from "next/image";
+import type { Metadata } from 'next'
 import CountryTimeSelector from "@/components/CountryTimeSelector";
+
+export const metadata: Metadata = {
+  title: "Antioch Online Bible Study | DaBible Foundation",
+  description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+  openGraph: {
+    title: "Antioch Online Bible Study | DaBible Foundation",
+    description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+    images: [
+      {
+        url: "https://welcometoantioch.com/png/antioch-large.png",
+        width: 1200,
+        height: 630,
+        alt: "Antioch Online Bible Study",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Antioch Online Bible Study | DaBible Foundation",
+    description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+    images: ["https://welcometoantioch.com/png/antioch-large.png"],
+  },
+};
 
 export default function AntiochPage() {
 
@@ -149,7 +173,7 @@ export default function AntiochPage() {
 
         
 
-        <section className="bg-white py-16 px-6 md:px-20">
+        <section id="register" className="bg-white py-16 px-6 md:px-20">
                 <div className="text-center mb-12">
                     <h1 className="text-5xl md:text-8xl lg:text-6xl xl:text-8xl font-extrabold text-[#1e1e1e] leading-tight font-montserrat">
                         Join <span className="text-white bg-red-500 px-8 py-1 rounded-2xl italic">Us</span>
