@@ -118,14 +118,15 @@ export default function Footer() {
           <div className="col-span-1">
             <h3 className="text-lg font-bold mb-4">RESOURCES</h3>
             <ul className="space-y-3">
-              {/* <li>
+              <li>
                 <Link
-                  href="#"
+                  href="https://drive.google.com/file/d/1QgfuPdbDLT5TcAB9oHZg05lsNzVcsN0S/view?usp=sharing"
+                  target="_blank"
                   className="text-white hover:text-white transition-colors hover:underline"
                 >
-                  Blog
+                  Brand Guideline
                 </Link>
-              </li> */}
+              </li>
               {/* <li>
                 <Link
                   href="#"
