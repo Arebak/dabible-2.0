@@ -1,8 +1,34 @@
+// "use client"
 import BibleStudyForm from "@/components/BibleStudyForm";
 import Image from "next/image";
+import type { Metadata } from 'next'
+import CountryTimeSelector from "@/components/CountryTimeSelector";
+
+export const metadata: Metadata = {
+  title: "Antioch Online Bible Study | DaBible Foundation",
+  description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+  openGraph: {
+    title: "Antioch Online Bible Study | DaBible Foundation",
+    description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+    images: [
+      {
+        url: "https://welcometoantioch.com/png/antioch-large.png",
+        width: 1200,
+        height: 630,
+        alt: "Antioch Online Bible Study",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Antioch Online Bible Study | DaBible Foundation",
+    description: "Join our interactive online Bible Study every weekday. Grow with other believers, study the Word, and experience spiritual transformation.",
+    images: ["https://welcometoantioch.com/png/antioch-large.png"],
+  },
+};
 
 export default function AntiochPage() {
-  
+
   return (
     <div className="w-full">
       <section className="bg-[#fef9f4] py-16 px-6 md:px-20 flex flex-col-reverse lg:flex-row items-center gap-10 relative overflow-hidden">
@@ -14,7 +40,7 @@ export default function AntiochPage() {
 
         <div className="w-full mt-0 lg:mt-18 md:w-2xl lg:w-5xl self-center container mx-auto text-center z-3">
             <h1 className="text-5xl md:text-8xl lg:text-6xl xl:text-8xl font-extrabold text-[#1e1e1e] leading-tight font-montserrat">
-                Just Got <span className="text-white bg-red-500 px-3 py-1 rounded-full">Born</span> Again?
+                Just Got <span className="text-white bg-red-500 px-4 py-1 rounded-4xl italic">Born</span> Again?
             </h1>
             <div className="bg-[url('/svg/line-break.svg')] inset-0 w-full h-[25px]  bg-size-[25px] bg-repeat my-14"></div>
             <p className="text-3xl mx-auto lg:text-6xl mt-6 text-gray-800 font-bold font-montserrat md:max-w-lg">
@@ -92,13 +118,20 @@ export default function AntiochPage() {
             </section>
 
         <section className="bg-[#fff7f2] py-16 px-6 md:px-20">
-            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10">
+            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10">
                 {/* Left Image */}
                 <div className="flex-1">
+                    <h3 className="text-3xl md:text-5xl text-gray-900 mb-4 font-montserrat font-extrabold">
+                    How To Participate
+                </h3>
+                <p className="text-md md:text-lg text-gray-700 mb-6">
+                    We meet together <strong>Monday to Friday</strong> on Google Meet for <strong>1 hour</strong> of interactive Bible Study.
+                </p>
+
                 <Image
                     width={500}
                     height={500}
-                    src="/designs/bible_readers.jpeg"
+                    src="/svg/antioch-participants.svg"
                     alt="Bible Study Participants"
                     className="w-full rounded-lg shadow-md"
                 />
@@ -106,32 +139,47 @@ export default function AntiochPage() {
 
                 {/* Right Content */}
                 <div className="flex-1">
-                <h3 className="text-3xl md:text-5xl text-gray-900 mb-4 font-montserrat font-extrabold">
-                    How To Participate
-                </h3>
-                <p className="text-md md:text-lg text-gray-700 mb-6">
-                    We meet together <strong>Monday to Friday</strong> on Google Meet for <strong>1 hour</strong> at the following time zones:
+                
+                <p className="text-lg max-w-4xl text-gray-600 mx-auto mb-8">
+                    Join our interactive Bible Study live on Google Meet, while the session is also livestreamed on YouTube and Instagram.
                 </p>
-
-                <ul className="text-gray-800 text-sm md:text-lg mb-6 space-y-1">
-                    <li>🇬🇧 UK – 2 AM (WAT)</li>
-                    <li>🇳🇬 Nigeria – 3 AM (WAT)</li>
-                    <li>🇺🇸 USA – 9 PM (EST)</li>
-                    <li>🇺🇸 USA – 6 PM (PST)</li>
+                <ul className="">
+                    <li className="text-lg text-gray-800 mb-4 flex items-start gap-3"><span className="font-semibold">📍 Location:</span> Google Meet</li>
+                    <li className="text-lg text-gray-800 mb-4 flex items-start gap-3"><span className="font-semibold">🕒 Time:</span> 9:00 PM CST</li>
+                    <li className="text-lg text-gray-800 mb-4 flex items-start gap-3"><span className="font-semibold">🌐 Livestream:</span> YouTube & Instagram</li>
                 </ul>
 
-                <p className="text-sm text-gray-600">
-                    The class is also livestreamed on YouTube and Instagram. If you are interested, sign up using the form below. Someone from our team will reach out.
-                </p>
-
-                <p className="text-sm text-gray-600 mt-4">
-                    We are not pastors, reverends, or theologians. We are just a group of hungry Christians who want to transform people through the revelation of God’s word.
-                </p>
+                <div className="mt-8">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Steps to join:</h4>
+                    <ol className="list-decimal list-inside pl-2">
+                        <li className="text-gray-800 mb-2 leading-relaxed">Register for the session on our website.</li>
+                        <li className="text-gray-800 mb-2 leading-relaxed">Join WhatsApp Onboarding group.</li>
+                        <li className="text-gray-800 mb-2 leading-relaxed">Join the Onboarding session.</li>
+                        <li className="text-gray-800 mb-2 leading-relaxed">Join the Bible Study group.</li>
+                    </ol>
+                    <p className="text-gray-600 text-lg mt-8">The online experience is designed to be engaging and participatory!</p>
+                </div>  
                 </div>
             </div>
         </section>
+        
 
-        <section className="bg-white py-16 px-6 md:px-20">
+        <section className="py-16 px-6 md:px-20">
+            <div className="max-w-6xl mx-auto">
+                <CountryTimeSelector />
+                <div className="bg-[url('/svg/line-break.svg')] inset-0 w-full h-[25px]  bg-size-[25px] bg-repeat mt-14"></div>
+            </div>
+        </section>
+
+        
+
+        <section id="register" className="bg-white py-16 px-6 md:px-20">
+                <div className="text-center mb-12">
+                    <h1 className="text-5xl md:text-8xl lg:text-6xl xl:text-8xl font-extrabold text-[#1e1e1e] leading-tight font-montserrat">
+                        Join <span className="text-white bg-red-500 px-8 py-1 rounded-2xl italic">Us</span>
+                    </h1>
+                </div>
+
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 content-stretch items-center">
                 
                 {/* Form Content */}
@@ -141,7 +189,7 @@ export default function AntiochPage() {
                 {/* Right Poster */}
                 <div className="w-full  mx-auto items-stretch lg:h-full text-center justify-center">
                 <h3 className="text-2xl md:text-4xl text-gray-900 mb-4 font-montserrat font-extrabold">
-                        Currently
+                        Current Session:
                     </h3>
                     <p className="text-md md:text-lg text-gray-700 mb-6">
                     We are studying the book of Hebrews, and its interesting!
