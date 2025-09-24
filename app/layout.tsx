@@ -29,8 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
-      <GoogleTagManager gtmId={process.env.GOOGLE_TAG_MANAGER_ID || ''} />
-      <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID || ''} />
+      <GoogleTagManager gtmId="GTM-5S7K5XS" />
+      <GoogleAnalytics gaId="G-V6LG0JJJXY" />
         {/* Google Tag Manager */}
         <script dangerouslySetInnerHTML={{
           __html: `
