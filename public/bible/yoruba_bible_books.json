@@ -1,0 +1,532 @@
+{
+    "main":[{
+        "langServer": "Genesis",
+        "langEnglish": "Genesis",
+        "langYoruba": "Genesisi",
+        "langOldServer" : "Genesisi",
+        "numOfChapters": 50,
+        "fileSize": 72.5
+    },
+
+        {
+            "langServer": "Exodus",
+            "langEnglish": "Exodus",
+            "langYoruba": "Eksodu",
+            "langOldServer" : "Eksodu",
+            "numOfChapters": 40,
+            "fileSize": 64
+        },
+        {
+            "langServer": "Leviticus",
+            "langEnglish": "Leviticus",
+            "langYoruba": "Lefitiku",
+            "langOldServer" : "Lefitiku",
+            "numOfChapters": 27,
+            "fileSize": 43.4
+        },
+        {
+            "langServer": "Numbers",
+            "langEnglish": "Numbers",
+            "langYoruba": "Numeri",
+            "langOldServer" : "Numeri",
+            "numOfChapters": 36,
+            "fileSize": 83.3
+        },
+        {
+            "langServer": "Deuteronomy",
+            "langEnglish": "Deuteronomy",
+            "langYoruba": "Deuteronomi",
+            "langOldServer" : "Deuteronomi",
+            "numOfChapters": 34,
+            "fileSize": 53.4
+        },
+        {
+            "langServer": "Joshua",
+            "langEnglish": "Joshua",
+            "langYoruba": "Joshua",
+            "langOldServer" : "Joshua",
+            "numOfChapters": 24,
+            "fileSize": 69.4
+        },
+        {
+            "langServer": "Judges",
+            "langEnglish": "Judges",
+            "langYoruba": "Onidajo",
+            "langOldServer" : "Onidajo",
+            "numOfChapters": 21,
+            "fileSize": 34.3
+        },
+        {
+            "langServer": "Ruth",
+            "langEnglish": "Ruth",
+            "langYoruba": "Rutu",
+            "langOldServer" : "Rutu",
+            "numOfChapters": 4,
+            "fileSize": 4.7
+        },
+        {
+            "langServer": "1_Samuel",
+            "langEnglish": "1_Samuel",
+            "langYoruba": "1 Samueli",
+            "langOldServer" : "1 Samueli",
+            "numOfChapters": 31,
+            "fileSize": 47.1
+        },
+        {
+            "langServer": "2_Samuel",
+            "langEnglish": "2_Samuel",
+            "langYoruba": "2 Samueli",
+            "langOldServer" : "2 Samueli",
+            "numOfChapters": 24,
+            "fileSize": 38.6
+        },
+        {
+            "langServer": "1_Kings",
+            "langEnglish": "1_Kings",
+            "langYoruba": "1 Awon Oba",
+            "langOldServer" : "1 Awon Oba",
+            "numOfChapters": 22,
+            "fileSize": 44.9
+        },
+        {
+            "langServer": "2_Kings",
+            "langEnglish": "2_Kings",
+            "langYoruba": "2 Awon Oba",
+            "langOldServer" : "2 Awon Oba",
+            "numOfChapters": 25,
+            "fileSize": 44.5
+        },
+        {
+            "langServer": "1_Chronicles",
+            "langEnglish": "1_Chronicles",
+            "langYoruba": "1 Kronika",
+            "langOldServer" : "1 Kronika",
+            "numOfChapters": 29,
+            "fileSize": 44.9
+        },
+        {
+            "langServer": "2_Chronicles",
+            "langEnglish": "2_Chronicles",
+            "langYoruba": "2 Kronika",
+            "langOldServer" : "2 Kronika",
+            "numOfChapters": 36,
+            "fileSize": 50.6
+        },
+        {
+            "langServer": "Ezra",
+            "langEnglish": "Ezra",
+            "langYoruba": "Esra",
+            "langOldServer" : "2 Kronika",
+            "numOfChapters": 10,
+            "fileSize": 15.6
+        },
+        {
+            "langServer": "Nehemiah",
+            "langEnglish": "Nehemiah",
+            "langYoruba": "Nehemiah",
+            "langOldServer" : "Nehemiah",
+            "numOfChapters": 13,
+            "fileSize": 22.4
+        },
+        {
+            "langServer": "Esther",
+            "langEnglish": "Esther",
+            "langYoruba": "Esteri",
+            "langOldServer" : "Esteri",
+            "numOfChapters": 10,
+            "fileSize": 11.1
+        },
+        {
+            "langServer": "Job",
+            "langEnglish": "Job",
+            "langYoruba": "Jobu",
+            "langOldServer" : "Jobu",
+            "numOfChapters": 42,
+            "fileSize": 37.1
+        },
+        {
+            "langServer": "Psalms",
+            "langEnglish": "Psalms",
+            "langYoruba": "Orin Dafidi",
+            "langOldServer" : "Orin Dafidi",
+            "numOfChapters": 150,
+            "fileSize": 82.3
+        },
+        {
+            "langServer": "Proverbs",
+            "langEnglish": "Proverbs",
+            "langYoruba": "Owe",
+            "langOldServer" : "Owe",
+            "numOfChapters": 31,
+            "fileSize": 29.6
+        },
+        {
+            "langServer": "Ecclesiastes",
+            "langEnglish": "Ecclesiastes",
+            "langYoruba": "Oniwaasu",
+            "langOldServer" : "Oniwaasu",
+            "numOfChapters": 12,
+            "fileSize": 8.6
+        },
+        {
+            "langServer": "Songs_of_Solomon",
+            "langEnglish": "Songs of Solomon",
+            "langYoruba": "Orin Solomoni",
+            "langOldServer" : "Oniwaasu",
+            "numOfChapters": 8,
+            "fileSize": 5.0
+        },
+        {
+            "langServer": "Isaiah",
+            "langEnglish": "Isaiah",
+            "langYoruba": "Isaiah",
+            "langOldServer" : "Isaiah",
+            "numOfChapters": 66,
+            "fileSize": 110.9
+        },
+        {
+            "langServer": "Jeremiah",
+            "langEnglish": "Jeremiah",
+            "langYoruba": "Jeremiah",
+            "langOldServer" : "Jeremiah",
+            "numOfChapters": 52,
+            "fileSize": 124.7
+        },
+        {
+            "langServer": "Lamentations",
+            "langEnglish": "Lamentations",
+            "langYoruba": "Ekun Jeremiah",
+            "langOldServer" : "Ekun Jeremiah",
+            "numOfChapters": 5,
+            "fileSize": 6.3
+        },
+        {
+            "langServer": "Ezekiel",
+            "langEnglish": "Ezekiel",
+            "langYoruba": "Esekieli",
+            "langOldServer" : "Esekieli",
+            "numOfChapters": 48,
+            "fileSize": 72.4
+        },
+        {
+            "langServer": "Daniel",
+            "langEnglish": "Daniel",
+            "langYoruba": "Danieli",
+            "langOldServer" : "Danieli",
+            "numOfChapters": 12,
+            "fileSize": 22.4
+        },
+        {
+            "langServer": "Hosea",
+            "langEnglish": "Hosea",
+            "langYoruba": "Hosea",
+            "langOldServer" : "Hosea",
+            "numOfChapters": 14,
+            "fileSize": 9.8
+        },
+        {
+            "langServer": "Joel",
+            "langEnglish": "Joel",
+            "langYoruba": "Joeli",
+            "langOldServer" : "Joeli",
+            "numOfChapters": 3,
+            "fileSize": 3.7
+        },
+        {
+            "langServer": "Amos",
+            "langEnglish": "Amos",
+            "langYoruba": "Amosi",
+            "langOldServer" : "Amosi",
+            "numOfChapters": 9,
+            "fileSize": 7.7
+        },
+        {
+            "langServer": "Obadiah",
+            "langEnglish": "Obadiah",
+            "langYoruba": "Obadiah",
+            "langOldServer" : "Obadiah",
+            "numOfChapters": 1,
+            "fileSize": 1.2
+        },
+        {
+            "langServer": "Jonah",
+            "langEnglish": "Jonah",
+            "langYoruba": "Jona",
+            "langOldServer" : "Jona",
+            "numOfChapters": 4,
+            "fileSize": 2.3
+        },
+        {
+            "langServer": "Micah",
+            "langEnglish": "Micah",
+            "langYoruba": "Mika",
+            "langOldServer" : "Mika",
+            "numOfChapters": 7,
+            "fileSize": 4.9
+        },
+        {
+            "langServer": "Nahum",
+            "langEnglish": "Nahum",
+            "langYoruba": "Nahumu",
+            "langOldServer" : "Nahumu",
+            "numOfChapters": 3,
+            "fileSize": 2.7
+        },
+        {
+            "langServer": "Habakkuk",
+            "langEnglish": "Habakkuk",
+            "langYoruba": "Habakkuku",
+            "langOldServer" : "Habakkuku",
+            "numOfChapters": 3,
+            "fileSize": 3.1
+        },
+        {
+            "langServer": "Zephaniah",
+            "langEnglish": "Zephaniah",
+            "langYoruba": "Sefaniah",
+            "langOldServer" : "Sefaniah",
+            "numOfChapters": 3,
+            "fileSize": 12.2
+        },
+        {
+            "langServer": "Haggai",
+            "langEnglish": "Haggai",
+            "langYoruba": "Haggai",
+            "langOldServer" : "Haggai",
+            "numOfChapters": 2,
+            "fileSize": 2.1
+        },
+        {
+            "langServer": "Zechariah",
+            "langEnglish": "Zechariah",
+            "langYoruba": "Sekariah",
+            "langOldServer" : "Sekariah",
+            "numOfChapters": 14,
+            "fileSize": 11.4
+        },
+        {
+            "langServer": "Malachi",
+            "langEnglish": "Malachi",
+            "langYoruba": "Malaki",
+            "langOldServer" : "Malaki",
+            "numOfChapters": 4,
+            "fileSize": 3.4
+        },
+        {
+            "langServer": "Mathew",
+            "langEnglish": "Mathew",
+            "langYoruba": "Matteu",
+            "langOldServer" : "Matteu",
+            "numOfChapters": 28,
+            "fileSize": 43.5
+        },
+        {
+            "langServer": "Mark",
+            "langEnglish": "Mark",
+            "langYoruba": "Marku",
+            "langOldServer" : "Marku",
+            "numOfChapters": 16,
+            "fileSize": 28.2
+        },
+        {
+            "langServer": "Luke",
+            "langEnglish": "Luke",
+            "langYoruba": "Luku",
+            "langOldServer" : "Luku",
+            "numOfChapters": 24,
+            "fileSize": 47.7
+        },
+        {
+            "langServer": "John",
+            "langEnglish": "John",
+            "langYoruba": "Johannu",
+            "langOldServer" : "Johannu",
+            "numOfChapters": 21,
+            "fileSize": 35.5
+        },
+        {
+            "langServer": "Acts",
+            "langEnglish": "Acts",
+            "langYoruba": "Ise Awọn Aposteli",
+            "langOldServer" : "Ise Awon Aposteli",
+            "numOfChapters": 28,
+            "fileSize": 38.7
+        },
+        {
+            "langServer": "Romans",
+            "langEnglish": "Romans",
+            "langYoruba": "Romu",
+            "langOldServer" : "Romu",
+            "numOfChapters": 16,
+            "fileSize": 16.4
+        },
+        {
+            "langServer": "1_Corinthians",
+            "langEnglish": "1 Corinthians",
+            "langYoruba": "1 Korinti",
+            "langOldServer" : "1 Korinti",
+            "numOfChapters": 16,
+            "fileSize": 17.1
+        },
+        {
+            "langServer": "2_Corinthians",
+            "langEnglish": "2_Corinthians",
+            "langYoruba": "2 Korinti",
+            "langOldServer" : "2 Korinti",
+            "numOfChapters": 13,
+            "fileSize": 10.6
+        },
+        {
+            "langServer": "Galatians",
+            "langEnglish": "Galatians",
+            "langYoruba": "Galatia",
+            "langOldServer" : "Galatia",
+            "numOfChapters": 6,
+            "fileSize": 5.6
+        },
+        {
+            "langServer": "Ephesians",
+            "langEnglish": "Ephesians",
+            "langYoruba": "Efesu",
+            "langOldServer" : "Efesu",
+            "numOfChapters": 6,
+            "fileSize": 5.4
+        },
+        {
+            "langServer": "Philippians",
+            "langEnglish": "Philippians",
+            "langYoruba": "Filippi",
+            "langOldServer" : "Filipi",
+            "numOfChapters": 4,
+            "fileSize": 4.2
+        },
+        {
+            "langServer": "Colossians",
+            "langEnglish": "Colossians",
+            "langYoruba": "Kolose",
+            "langOldServer" : "Kolose",
+            "numOfChapters": 4,
+            "fileSize": 3.5
+        },
+        {
+            "langServer": "1_Thessalonians",
+            "langEnglish": "1_Thessalonians",
+            "langYoruba": "1 Tesalonika",
+            "langOldServer" : "1 Tesalonika",
+            "numOfChapters": 5,
+            "fileSize": 3.3
+        },
+        {
+            "langServer": "2_Thessalonians",
+            "langEnglish": "2_Thessalonians",
+            "langYoruba": "2 Tesalonika",
+            "langOldServer" : "2 Tesalonika",
+            "numOfChapters": 3,
+            "fileSize": 1.9
+        },
+        {
+            "langServer": "1_Timothy",
+            "langEnglish": "1_Timothy",
+            "langYoruba": "1 Timotiu",
+            "langOldServer" : "1 Timotiu",
+            "numOfChapters": 6,
+            "fileSize": 4.2
+        },
+        {
+            "langServer": "2_Timothy",
+            "langEnglish": "2_Timothy",
+            "langYoruba": "2 Timotiu",
+            "langOldServer" : "2 Timotiu",
+            "numOfChapters": 4,
+            "fileSize": 2.9
+        },
+        {
+            "langServer": "Titus",
+            "langEnglish": "Titus",
+            "langYoruba": "Titu",
+            "langOldServer" : "Titu",
+            "numOfChapters": 3,
+            "fileSize": 1.8
+        },
+        {
+            "langServer": "Philemon",
+            "langEnglish": "Philemon",
+            "langYoruba": "Filimoni",
+            "langOldServer" : "Filimoni",
+            "numOfChapters": 1,
+            "fileSize": 0.8
+        },
+        {
+            "langServer": "Hebrews",
+            "langEnglish": "Hebrews",
+            "langYoruba": "Heberu",
+            "langOldServer" : "Heberu",
+            "numOfChapters": 13,
+            "fileSize": 12.2
+        },
+        {
+            "langServer": "James",
+            "langEnglish": "James",
+            "langYoruba": "Jakobu",
+            "langOldServer" : "Jakobu",
+            "numOfChapters": 5,
+            "fileSize": 4.2
+        },
+        {
+            "langServer": "1_Peter",
+            "langEnglish": "1_Peter",
+            "langYoruba": "1 Peteru",
+            "langOldServer" : "1 Peteru",
+            "numOfChapters": 5,
+            "fileSize": 4.7
+        },
+        {
+            "langServer": "2_Peter",
+            "langEnglish": "2_Peter",
+            "langYoruba": "2 Peteru",
+            "langOldServer" : "2 Peteru",
+            "numOfChapters": 3,
+            "fileSize": 2.8
+        },
+        {
+            "langServer": "1_John",
+            "langEnglish": "1_John",
+            "langYoruba": "1 Johannu",
+            "langOldServer" : "1 Johannu",
+            "numOfChapters": 5,
+            "fileSize": 4.7
+        },
+        {
+            "langServer": "2_John",
+            "langEnglish": "2_John",
+            "langYoruba": "2 Johannu",
+            "langOldServer" : "2 Johannu",
+            "numOfChapters": 1,
+            "fileSize": 0.6
+        },
+        {
+            "langServer": "3_John",
+            "langEnglish": "3_John",
+            "langYoruba": "3 Johannu",
+            "langOldServer" : "3 Johannu",
+            "numOfChapters": 1,
+            "fileSize": 0.6
+        },
+        {
+            "langServer": "Jude",
+            "langEnglish": "Jude",
+            "langYoruba": "Juda",
+            "langOldServer" : "Juda",
+            "numOfChapters": 1,
+            "fileSize": 1.3
+        },
+        {
+            "langServer": "Revelations",
+            "langEnglish": "Revelations",
+            "langYoruba": "Ifihan",
+            "langOldServer" : "Ifihan",
+            "numOfChapters": 22,
+            "fileSize": 18.7
+        }
+    ]
+}
