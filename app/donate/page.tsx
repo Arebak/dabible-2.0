@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import DonationCard from "@/components/DonationCard";
-import AlternativeMethods from "@/components/AlternativeMethods";
+import DonationCard from "@/components/donation/DonationCard";
+import AlternativeMethods from "@/components/donation/DonationAlternativeMethods";
 import FounderMessage from "@/components/FounderMessage";
 import "animate.css";
 import Link from "next/link";

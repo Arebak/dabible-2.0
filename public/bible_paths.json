@@ -1,0 +1,466 @@
+{
+  "books": [
+    {
+      "name": "Genesis",
+      "englishFilePath": "/bible/Genesis/Genesis_001_en.txt",
+      "yorubaFilePath": "/bible/Genesis/Genesis_001.txt",
+      "numberOfChapters": 50,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Genesis/Genesis_001.mp3"
+    },
+    {
+      "name": "Exodus",
+      "englishFilePath": "/bible/Exodus/Exodus_001_en.txt",
+      "yorubaFilePath": "/bible/Exodus/Exodus_001.txt",
+      "numberOfChapters": 40,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Exodus/Exodus_001.mp3"
+    },
+    {
+      "name": "Leviticus",
+      "englishFilePath": "/bible/Leviticus/Leviticus_001_en.txt",
+      "yorubaFilePath": "/bible/Leviticus/Leviticus_001.txt",
+      "numberOfChapters": 27,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Leviticus/Leviticus_001.mp3"
+    },
+    {
+      "name": "Numbers",
+      "englishFilePath": "/bible/Numbers/Numbers_001_en.txt",
+      "yorubaFilePath": "/bible/Numbers/Numbers_001.txt",
+      "numberOfChapters": 36,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Numbers/Numbers_001.mp3"
+    },
+    {
+      "name": "Deuteronomy",
+      "englishFilePath": "/bible/Deuteronomy/Deuteronomy_001_en.txt",
+      "yorubaFilePath": "/bible/Deuteronomy/Deuteronomy_001.txt",
+      "numberOfChapters": 34,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Deuteronomy/Deuteronomy_001.mp3"
+    },
+    {
+      "name": "Joshua",
+      "englishFilePath": "/bible/Joshua/Joshua_001_en.txt",
+      "yorubaFilePath": "/bible/Joshua/Joshua_001.txt",
+      "numberOfChapters": 24,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Joshua/Joshua_001.mp3"
+    },
+    {
+      "name": "Judges",
+      "englishFilePath": "/bible/Judges/Judges_001_en.txt",
+      "yorubaFilePath": "/bible/Judges/Judges_001.txt",
+      "numberOfChapters": 21,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Judges/Judges_001.mp3"
+    },
+    {
+      "name": "Ruth",
+      "englishFilePath": "/bible/Ruth/Ruth_001_en.txt",
+      "yorubaFilePath": "/bible/Ruth/Ruth_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Ruth/Ruth_001.mp3"
+    },
+    {
+      "name": "1 Samuel",
+      "englishFilePath": "/bible/1_Samuel/1_Samuel_001_en.txt",
+      "yorubaFilePath": "/bible/1_Samuel/1_Samuel_001.txt",
+      "numberOfChapters": 31,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Samuel/1_Samuel_001.mp3"
+    },
+    {
+      "name": "2 Samuel",
+      "englishFilePath": "/bible/2_Samuel/2_Samuel_001_en.txt",
+      "yorubaFilePath": "/bible/2_Samuel/2_Samuel_001.txt",
+      "numberOfChapters": 24,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Samuel/2_Samuel_001.mp3"
+    },
+    {
+      "name": "1 Kings",
+      "englishFilePath": "/bible/1_Kings/1_Kings_001_en.txt",
+      "yorubaFilePath": "/bible/1_Kings/1_Kings_001.txt",
+      "numberOfChapters": 22,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Kings/1_Kings_001.mp3"
+    },
+    {
+      "name": "2 Kings",
+      "englishFilePath": "/bible/2_Kings/2_Kings_001_en.txt",
+      "yorubaFilePath": "/bible/2_Kings/2_Kings_001.txt",
+      "numberOfChapters": 25,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Kings/2_Kings_001.mp3"
+    },
+    {
+      "name": "1 Chronicles",
+      "englishFilePath": "/bible/1_Chronicles/1_Chronicles_001_en.txt",
+      "yorubaFilePath": "/bible/1_Chronicles/1_Chronicles_001.txt",
+      "numberOfChapters": 29,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Chronicles/1_Chronicles_001.mp3"
+    },
+    {
+      "name": "2 Chronicles",
+      "englishFilePath": "/bible/2_Chronicles/2_Chronicles_001_en.txt",
+      "yorubaFilePath": "/bible/2_Chronicles/2_Chronicles_001.txt",
+      "numberOfChapters": 36,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Chronicles/2_Chronicles_001.mp3"
+    },
+    {
+      "name": "Ezra",
+      "englishFilePath": "/bible/Ezra/Ezra_001_en.txt",
+      "yorubaFilePath": "/bible/Ezra/Ezra_001.txt",
+      "numberOfChapters": 10,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Ezra/Ezra_001.mp3"
+    },
+    {
+      "name": "Nehemiah",
+      "englishFilePath": "/bible/Nehemiah/Nehemiah_001_en.txt",
+      "yorubaFilePath": "/bible/Nehemiah/Nehemiah_001.txt",
+      "numberOfChapters": 13,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Nehemiah/Nehemiah_001.mp3"
+    },
+    {
+      "name": "Esther",
+      "englishFilePath": "/bible/Esther/Esther_001_en.txt",
+      "yorubaFilePath": "/bible/Esther/Esther_001.txt",
+      "numberOfChapters": 10,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Esther/Esther_001.mp3"
+    },
+    {
+      "name": "Job",
+      "englishFilePath": "/bible/Job/Job_001_en.txt",
+      "yorubaFilePath": "/bible/Job/Job_001.txt",
+      "numberOfChapters": 42,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Job/Job_001.mp3"
+    },
+    {
+      "name": "Psalms",
+      "englishFilePath": "/bible/Psalms/Psalms_001_en.txt",
+      "yorubaFilePath": "/bible/Psalms/Psalms_001.txt",
+      "numberOfChapters": 150,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Psalms/Psalms_001.mp3"
+    },
+    {
+      "name": "Proverbs",
+      "englishFilePath": "/bible/Proverbs/Proverbs_001_en.txt",
+      "yorubaFilePath": "/bible/Proverbs/Proverbs_001.txt",
+      "numberOfChapters": 31,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Proverbs/Proverbs_001.mp3"
+    },
+    {
+      "name": "Ecclesiastes",
+      "englishFilePath": "/bible/Ecclesiastes/Ecclesiastes_001_en.txt",
+      "yorubaFilePath": "/bible/Ecclesiastes/Ecclesiastes_001.txt",
+      "numberOfChapters": 12,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Ecclesiastes/Ecclesiastes_001.mp3"
+    },
+    {
+      "name": "Songs of Solomon",
+      "englishFilePath": "/bible/Songs_of_Solomon/Songs_of_Solomon_001_en.txt",
+      "yorubaFilePath": "/bible/Songs_of_Solomon/Songs_of_Solomon_001.txt",
+      "numberOfChapters": 8,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Songs_Of_Solomon/Songs_Of_Solomon_001.mp3"
+    },
+    {
+      "name": "Isaiah",
+      "englishFilePath": "/bible/Isaiah/Isaiah_001_en.txt",
+      "yorubaFilePath": "/bible/Isaiah/Isaiah_001.txt",
+      "numberOfChapters": 66,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Isaiah/Isaiah_001.mp3"
+    },
+    {
+      "name": "Jeremiah",
+      "englishFilePath": "/bible/Jeremiah/Jeremiah_001_en.txt",
+      "yorubaFilePath": "/bible/Jeremiah/Jeremiah_001.txt",
+      "numberOfChapters": 52,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Jeremiah/Jeremiah_001.mp3"
+    },
+    {
+      "name": "Lamentations",
+      "englishFilePath": "/bible/Lamentations/Lamentations_001_en.txt",
+      "yorubaFilePath": "/bible/Lamentations/Lamentations_001.txt",
+      "numberOfChapters": 5,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Lamentations/Lamentations_001.mp3"
+    },
+    {
+      "name": "Ezekiel",
+      "englishFilePath": "/bible/Ezekiel/Ezekiel_001_en.txt",
+      "yorubaFilePath": "/bible/Ezekiel/Ezekiel_001.txt",
+      "numberOfChapters": 48,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Ezekiel/Ezekiel_001.mp3"
+    },
+    {
+      "name": "Daniel",
+      "englishFilePath": "/bible/Daniel/Daniel_001_en.txt",
+      "yorubaFilePath": "/bible/Daniel/Daniel_001.txt",
+      "numberOfChapters": 12,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Daniel/Daniel_001.mp3"
+    },
+    {
+      "name": "Hosea",
+      "englishFilePath": "/bible/Hosea/Hosea_001_en.txt",
+      "yorubaFilePath": "/bible/Hosea/Hosea_001.txt",
+      "numberOfChapters": 14,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Hosea/Hosea_001.mp3"
+    },
+    {
+      "name": "Joel",
+      "englishFilePath": "/bible/Joel/Joel_001_en.txt",
+      "yorubaFilePath": "/bible/Joel/Joel_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Joel/Joel_001.mp3"
+    },
+    {
+      "name": "Amos",
+      "englishFilePath": "/bible/Amos/Amos_001_en.txt",
+      "yorubaFilePath": "/bible/Amos/Amos_001.txt",
+      "numberOfChapters": 9,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Amos/Amos_001.mp3"
+    },
+    {
+      "name": "Obadiah",
+      "englishFilePath": "/bible/Obadiah/Obadiah_001_en.txt",
+      "yorubaFilePath": "/bible/Obadiah/Obadiah_001.txt",
+      "numberOfChapters": 1,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Obadiah/Obadiah_001.mp3"
+    },
+    {
+      "name": "Jonah",
+      "englishFilePath": "/bible/Jonah/Jonah_001_en.txt",
+      "yorubaFilePath": "/bible/Jonah/Jonah_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Jonah/Jonah_001.mp3"
+    },
+    {
+      "name": "Micah",
+      "englishFilePath": "/bible/Micah/Micah_001_en.txt",
+      "yorubaFilePath": "/bible/Micah/Micah_001.txt",
+      "numberOfChapters": 7,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Micah/Micah_001.mp3"
+    },
+    {
+      "name": "Nahum",
+      "englishFilePath": "/bible/Nahum/Nahum_001_en.txt",
+      "yorubaFilePath": "/bible/Nahum/Nahum_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Nahum/Nahum_001.mp3"
+    },
+    {
+      "name": "Habakkuk",
+      "englishFilePath": "/bible/Habakkuk/Habakkuk_001_en.txt",
+      "yorubaFilePath": "/bible/Habakkuk/Habakkuk_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Habakkuk/Habakkuk_001.mp3"
+    },
+    {
+      "name": "Zephaniah",
+      "englishFilePath": "/bible/Zephaniah/Zephaniah_001_en.txt",
+      "yorubaFilePath": "/bible/Zephaniah/Zephaniah_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Zephaniah/Zephaniah_001.mp3"
+    },
+    {
+      "name": "Haggai",
+      "englishFilePath": "/bible/Haggai/Haggai_001_en.txt",
+      "yorubaFilePath": "/bible/Haggai/Haggai_001.txt",
+      "numberOfChapters": 2,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Haggai/Haggai_001.mp3"
+    },
+    {
+      "name": "Zechariah",
+      "englishFilePath": "/bible/Zechariah/Zechariah_001_en.txt",
+      "yorubaFilePath": "/bible/Zechariah/Zechariah_001.txt",
+      "numberOfChapters": 14,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Zechariah/Zechariah_001.mp3"
+    },
+    {
+      "name": "Malachi",
+      "englishFilePath": "/bible/Malachi/Malachi_001_en.txt",
+      "yorubaFilePath": "/bible/Malachi/Malachi_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Malachi/Malachi_001.mp3"
+    },
+    {
+      "name": "Matthew",
+      "englishFilePath": "/bible/Matthew/Matthew_001_en.txt",
+      "yorubaFilePath": "/bible/Matthew/Matthew_001.txt",
+      "numberOfChapters": 28,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Matthew/Matthew_001.mp3"
+    },
+    {
+      "name": "Mark",
+      "englishFilePath": "/bible/Mark/Mark_001_en.txt",
+      "yorubaFilePath": "/bible/Mark/Mark_001.txt",
+      "numberOfChapters": 16,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Mark/Mark_001.mp3"
+    },
+    {
+      "name": "Luke",
+      "englishFilePath": "/bible/Luke/Luke_001_en.txt",
+      "yorubaFilePath": "/bible/Luke/Luke_001.txt",
+      "numberOfChapters": 24,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Luke/Luke_001.mp3"
+    },
+    {
+      "name": "John",
+      "englishFilePath": "/bible/John/John_001_en.txt",
+      "yorubaFilePath": "/bible/John/John_001.txt",
+      "numberOfChapters": 21,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/John/John_001.mp3"
+    },
+    {
+      "name": "Acts",
+      "englishFilePath": "/bible/Acts/Acts_001_en.txt",
+      "yorubaFilePath": "/bible/Acts/Acts_001.txt",
+      "numberOfChapters": 28,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Acts/Acts_001.mp3"
+    },
+    {
+      "name": "Romans",
+      "englishFilePath": "/bible/Romans/Romans_001_en.txt",
+      "yorubaFilePath": "/bible/Romans/Romans_001.txt",
+      "numberOfChapters": 16,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Romans/Romans_001.mp3"
+    },
+    {
+      "name": "1 Corinthians",
+      "englishFilePath": "/bible/1_Corinthians/1_Corinthians_001_en.txt",
+      "yorubaFilePath": "/bible/1_Corinthians/1_Corinthians_001.txt",
+      "numberOfChapters": 16,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Corinthians/1_Corinthians_001.mp3"
+    },
+    {
+      "name": "2 Corinthians",
+      "englishFilePath": "/bible/2_Corinthians/2_Corinthians_001_en.txt",
+      "yorubaFilePath": "/bible/2_Corinthians/2_Corinthians_001.txt",
+      "numberOfChapters": 13,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Corinthians/2_Corinthians_001.mp3"
+    },
+    {
+      "name": "Galatians",
+      "englishFilePath": "/bible/Galatians/Galatians_001_en.txt",
+      "yorubaFilePath": "/bible/Galatians/Galatians_001.txt",
+      "numberOfChapters": 6,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Galatians/Galatians_001.mp3"
+    },
+    {
+      "name": "Ephesians",
+      "englishFilePath": "/bible/Ephesians/Ephesians_001_en.txt",
+      "yorubaFilePath": "/bible/Ephesians/Ephesians_001.txt",
+      "numberOfChapters": 6,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Ephesians/Ephesians_001.mp3"
+    },
+    {
+      "name": "Philippians",
+      "englishFilePath": "/bible/Philippians/Philippians_001_en.txt",
+      "yorubaFilePath": "/bible/Philippians/Philippians_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Philippians/Philippians_001.mp3"
+    },
+    {
+      "name": "Colossians",
+      "englishFilePath": "/bible/Colossians/Colossians_001_en.txt",
+      "yorubaFilePath": "/bible/Colossians/Colossians_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Colossians/Colossians_001.mp3"
+    },
+    {
+      "name": "1 Thessalonians",
+      "englishFilePath": "/bible/1_Thessalonians/1_Thessalonians_001_en.txt",
+      "yorubaFilePath": "/bible/1_Thessalonians/1_Thessalonians_001.txt",
+      "numberOfChapters": 5,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Thessalonians/1_Thessalonians_001.mp3"
+    },
+    {
+      "name": "2 Thessalonians",
+      "englishFilePath": "/bible/2_Thessalonians/2_Thessalonians_001_en.txt",
+      "yorubaFilePath": "/bible/2_Thessalonians/2_Thessalonians_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Thessalonians/2_Thessalonians_001.mp3"
+    },
+    {
+      "name": "1 Timothy",
+      "englishFilePath": "/bible/1_Timothy/1_Timothy_001_en.txt",
+      "yorubaFilePath": "/bible/1_Timothy/1_Timothy_001.txt",
+      "numberOfChapters": 6,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Timothy/1_Timothy_001.mp3"
+    },
+    {
+      "name": "2 Timothy",
+      "englishFilePath": "/bible/2_Timothy/2_Timothy_001_en.txt",
+      "yorubaFilePath": "/bible/2_Timothy/2_Timothy_001.txt",
+      "numberOfChapters": 4,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Timothy/2_Timothy_001.mp3"
+    },
+    {
+      "name": "Titus",
+      "englishFilePath": "/bible/Titus/Titus_001_en.txt",
+      "yorubaFilePath": "/bible/Titus/Titus_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Titus/Titus_001.mp3"
+    },
+    {
+      "name": "Philemon",
+      "englishFilePath": "/bible/Philemon/Philemon_001_en.txt",
+      "yorubaFilePath": "/bible/Philemon/Philemon_001.txt",
+      "numberOfChapters": 1,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Philemon/Philemon_001.mp3"
+    },
+    {
+      "name": "Hebrews",
+      "englishFilePath": "/bible/Hebrews/Hebrews_001_en.txt",
+      "yorubaFilePath": "/bible/Hebrews/Hebrews_001.txt",
+      "numberOfChapters": 13,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Hebrews/Hebrews_001.mp3"
+    },
+    {
+      "name": "James",
+      "englishFilePath": "/bible/James/James_001_en.txt",
+      "yorubaFilePath": "/bible/James/James_001.txt",
+      "numberOfChapters": 5,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/James/James_001.mp3"
+    },
+    {
+      "name": "1 Peter",
+      "englishFilePath": "/bible/1_Peter/1_Peter_001_en.txt",
+      "yorubaFilePath": "/bible/1_Peter/1_Peter_001.txt",
+      "numberOfChapters": 5,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_Peter/1_Peter_001.mp3"
+    },
+    {
+      "name": "2 Peter",
+      "englishFilePath": "/bible/2_Peter/2_Peter_001_en.txt",
+      "yorubaFilePath": "/bible/2_Peter/2_Peter_001.txt",
+      "numberOfChapters": 3,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_Peter/2_Peter_001.mp3"
+    },
+    {
+      "name": "1 John",
+      "englishFilePath": "/bible/1_John/1_John_001_en.txt",
+      "yorubaFilePath": "/bible/1_John/1_John_001.txt",
+      "numberOfChapters": 5,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/1_John/1_John_001.mp3"
+    },
+    {
+      "name": "2 John",
+      "englishFilePath": "/bible/2_John/2_John_001_en.txt",
+      "yorubaFilePath": "/bible/2_John/2_John_001.txt",
+      "numberOfChapters": 1,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/2_John/2_John_001.mp3"
+    },
+    {
+      "name": "3 John",
+      "englishFilePath": "/bible/3_John/3_John_001_en.txt",
+      "yorubaFilePath": "/bible/3_John/3_John_001.txt",
+      "numberOfChapters": 1,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/3_John/3_John_001.mp3"
+    },
+    {
+      "name": "Jude",
+      "englishFilePath": "/bible/Jude/Jude_001_en.txt",
+      "yorubaFilePath": "/bible/Jude/Jude_001.txt",
+      "numberOfChapters": 1,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Jude/Jude_001.mp3"
+    },
+    {
+      "name": "Revelation",
+      "englishFilePath": "/bible/Revelation/Revelation_001_en.txt",
+      "yorubaFilePath": "/bible/Revelation/Revelation_001.txt",
+      "numberOfChapters": 22,
+      "yorubaAudioPaths": "https://developers.dabible.com/audio/yoruba/Revelation/Revelation_001.mp3"
+    }
+  ]
+}

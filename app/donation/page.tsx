@@ -1,10 +1,10 @@
 
 import Image from "next/image";
-import DonateButton from "@/components/DonateButton";
+import DonateButton from "@/components/donation/DonateButton";
 import { Progress } from "@/components/ui/progress";
 import FixedGridCarousel from "@/components/FixedGridCarousel";
-import { DonationForm } from "@/components/DonationForm";
-import DonationCard from "@/components/DonationCard";
+import { DonationForm } from "@/components/donation/DonationForm";
+import DonationCard from "@/components/donation/DonationCard";
 import StaggeredImageSection from "@/components/StaggeredGridImages";
 
 export default function DonationPage() {

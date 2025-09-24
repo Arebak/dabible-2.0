@@ -166,6 +166,13 @@
   }
 }
 
+.child-full-w-in-parallel{
+  width: 50%;
+}
+.child-full-w-in-parallel .\w-1\/2 {
+  width: 100%;
+}
+
 
 .d-container {
   max-width: 1440px;

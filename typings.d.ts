@@ -76,7 +76,14 @@ interface Product {
 }
 
   
-  interface ProductGalleryProps {
-    products: Product[] | undefined;
-  }
+interface ProductGalleryProps {
+  products: Product[] | undefined;
+}
   
+interface BibleProp {
+  name: string;
+  englishFilePath: string;
+  yorubaFilePath: string;
+  numberOfChapters: number;
+  yorubaAudioPaths: string;
+}
