@@ -2,7 +2,7 @@
 "use client";
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
-import useBible from "../../../../hooks/useBible";
+import useBible from "../../hooks/useBible";
 import BibleTab from "@/components/audio-player/AudioPlayerBibleTab";
 import { useParams } from 'next/navigation';
 
