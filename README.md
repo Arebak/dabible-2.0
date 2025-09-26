@@ -38,8 +38,8 @@ The application includes a server-built bilingual (Yoruba + English KJV) Bible s
 | File | Purpose |
 |------|---------|
 | `public/search-index-yo.json` | Search index JSON `{ generatedAt, entries: [{ b, c, v, yo, en? }] }` |
-| `scripts/build-search-index.ts` | Generates search index at build time |
-| `scripts/generate-sitemaps.ts` | Generates chapter sitemap(s) |
+| `scripts/build-search-index.mjs` | Generates search index at build time |
+| `scripts/generate-sitemaps.mjs` | Generates chapter sitemap(s) |
 
 ### Performance considerations
 
@@ -94,6 +94,60 @@ If you modify verse parsing logic in either the SSR chapter page or `build-searc
 - No persistent client-side index storage (e.g., IndexedDB) yet; page refresh requires re-fetch.
 
 ---
+
+## Roadmap
+
+See the evolving [ROADMAP](./ROADMAP.md) for prioritized upcoming improvements (performance, search, accessibility, SEO, architecture). Feel free to open issues referencing specific roadmap items.
+
+## Reading Experience Enhancements (New)
+
+The chapter reading pages (`/listen-online/[Book]/[Chapter]`) now include progressive client-side enhancements layered on top of fully SEO-friendly server-rendered content.
+
+### Features
+
+| Feature | Description | Persistence | Accessibility Notes |
+|---------|-------------|------------|---------------------|
+| Sticky Mini Navigation | Book + chapter dropdowns, prev/next links, search shortcut. | N/A | Semantic controls, labels on selects and nav buttons. |
+| Reading Preferences | Adjust font size (80%–160%) & line height (1.2–2.0). | `localStorage` | Range inputs labeled; values announced to screen readers. |
+| Parallel Toggle | Show/hide English KJV column to reduce visual load on mobile. | `localStorage` | Toggle uses native checkbox with label. |
+| Verse Hover Actions | Lazy-hydrated per-verse actions (Copy Yo, Copy Bi, Link, Share). | N/A | Appears on hover/focus; aria labels; minimized initial JS. |
+| Stable Verse IDs | Each verse has `id="Book-Chapter-Verse"` enabling consistent deep linking and future sync. | N/A | Hash navigation supported. |
+| Progressive Audio Player | Lightweight player (Yoruba audio) + sync state indicator (ready/none/loading). | N/A | Buttons labeled; slider has `aria-label`. |
+| Active Verse Highlight + Live | Highlight + polite `aria-live` announcing `Book Chapter:Verse`. | N/A | Screen readers get verse updates without interruption. |
+| Focus Reading Mode | Collapses to single centered column (removes parallel English). | `localStorage` | Toggle via preferences select; maintains verse IDs. |
+| Timestamp Template Script | `scripts/generate-timestamp-template.mjs` scaffolds verse timing JSON. | N/A | Even spacing baseline for manual refinement. |
+| Playback Speed Control | 0.75x–2.0x speed selection. | `localStorage` | Native select + labeled. |
+| Resume Playback | Prompt to resume if >5s listened previously. | `localStorage` | Non-intrusive small button. |
+| Partial Sync Indicator | Shows percentage of verses with timestamps. | N/A | Updates as timestamps added. |
+| Auto-Scroll Preference | Toggle verse auto-follow during playback. | `localStorage` | Accessible checkbox. |
+| Internal Timestamp Editor | `?editTimestamps=1` enables capture / import / export. | N/A | Table with Set/Delete controls. |
+
+### Implementation Notes
+
+1. Server component (`page.tsx`) still generates SSR bilingual content & JSON-LD for crawlers.
+2. Client enhancement layer (`ClientEnhancements.tsx`) hydrates after load; no blocking for initial HTML.
+3. Preferences context exposes CSS variables (`--reading-font-size`, `--reading-line-height`) for future theming or offline reader modes.
+4. Audio timestamps hook: looks for optional JSON under `/audio-timestamps/<Book>/<Book>_###.json` (structure: `[{ "verse": number, "time": seconds }]`). If absent, player simply functions without sync.
+5. Timestamp editor: append `?editTimestamps=1` to a chapter URL, use Set at each verse start, then Export JSON and place under `public/audio-timestamps/<Book>/`.
+6. Verse highlight is time-based and ephemeral (removed after 4s) to avoid persistent clutter.
+
+### Future Opportunities
+
+- Inline per-chapter search / filtering.
+- Worker-based timestamp alignment assistance (auto-suggest verse boundaries from audio energy).
+- Offline caching of timestamp + audio metadata (IndexedDB).
+- Waveform / energy bar visualization.
+- Multi-verse selection & export (range copy & JSON export).
+- Dark mode preference integration if theme system extended.
+- Verse selection multi-copy / export (range copy).
+- Dark mode preference integration if theme system extended.
+
+### Developer Pointers
+
+- Client code resides in `app/listen-online/[book]/[chapter]/ClientEnhancements.tsx` and `components/reading/*`.
+- Preferences: `ReadingPreferencesContext.tsx` — update defaults or version bump the storage key if schema evolves.
+- Audio: `ChapterAudioPlayer.tsx` — extend with waveform, speed controls, or timestamp ingestion.
+- Ensure any update to verse parsing logic remains consistent across: search index builder, SSR page, and potential timestamp alignment tools.
 
 ## Learn More
 
