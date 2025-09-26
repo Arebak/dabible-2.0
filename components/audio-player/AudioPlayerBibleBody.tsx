@@ -55,7 +55,7 @@ const BibleBody: React.FC<BibleTabProps> = ({
           <button
             disabled={currentChapter === 1}
             onClick={handlePreviousChapter}
-            className="w-10 h-10 cursor-pointer absolute left-6 top-[30vh] transform -translate-y-1/2 text-black  border-[#D0D5DD] border rounded-full flex justify-center items-center"
+            className="w-10 h-10 cursor-pointer focus-within:ring-2 focus-within:ring-blue-800 absolute left-6 top-[30vh] transform -translate-y-1/2 text-black  border-[#D0D5DD] border rounded-full flex justify-center items-center"
           >
             <KeyboardArrowLeftOutlined
               fontSize="medium"
@@ -65,7 +65,7 @@ const BibleBody: React.FC<BibleTabProps> = ({
           <button
             onClick={handleNextChapter}
             disabled={currentChapter === selectedBook?.numberOfChapters}
-            className="w-10 h-10 cursor-pointer absolute right-6 top-[30vh] transform -translate-y-1/2 text-black  border-[#D0D5DD] border rounded-full flex justify-center items-center"
+            className="w-10 h-10 cursor-pointer focus-within:ring-2 focus-within:ring-blue-800 absolute right-6 top-[30vh] transform -translate-y-1/2 text-black  border-[#D0D5DD] border rounded-full flex justify-center items-center"
           >
             <KeyboardArrowRightOutlined
               fontSize="medium"

@@ -47,6 +47,7 @@ const TopLangControls: React.FC<TopLanguageControlProps> = ({
           onClick={() => {
             setParallelBibleVisibility?.(false);
           }}
+          className="focus-within:ring-2 focus-within:ring-blue-800"
         >
           <CloseIcon />
         </IconButton>
@@ -88,7 +89,7 @@ const TopLangControls: React.FC<TopLanguageControlProps> = ({
           parallelBibleVisibility
             ? "xl:w-[180px] xl:text-sm hidden"
             : "w-[230px] xl:text-base"
-        } flex items-center capitalize  ${toggleState ? "z-20" : "z-30"} `}
+        } focus-within:ring-2 focus-within:ring-blue-800 flex items-center capitalize  ${toggleState ? "z-20" : "z-30"} `}
       >
         <MenuItem value="english">English</MenuItem>
         <MenuItem value="yoruba">Yoruba</MenuItem>
