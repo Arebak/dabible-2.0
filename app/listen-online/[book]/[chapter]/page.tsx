@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import ClientEnhancements from './ClientEnhancements';
+import InlineChapterSearch from './InlineChapterSearch';
 import Image from 'next/image';
 
 // Basic in-memory cache (per server runtime) for chapter text to avoid re-reading files on hot paths
@@ -239,7 +240,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="relative bg-white overflow-hidden pt-10 md:pt-[70px]">
+      <section className="relative bg-white overflow-hidden pt-10 md:pt-[70px]  min-h-[20vh]">
         {/* Faded oval background */}
         <div
           className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[300px] rounded-full"
@@ -263,8 +264,8 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
           height={200}
           className="absolute -top-10 left-0 w-32 md:w-48 lg:w-52"
         />
-        <div className="max-w-3xl mx-auto text-center px-4">
-          <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6">
+        <div className="max-w-3xl mx-auto text-center px-4 mt-12 absolute left-0 right-0 -top-3">
+          {/* <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6">
             <Image
               src="/svg/start.svg"
               alt="star icon"
@@ -272,7 +273,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
               height={16}
               className="mr-1 w-3 h-3 md:w-4 md:h-4"
             />{" "}
-            Blog{" "}
+            Listen Online {" "}
             <Image
               src="/svg/start.svg"
               alt="star icon"
@@ -280,52 +281,22 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
               height={16}
               className="ml-1 w-3 h-3 md:w-4 md:h-4"
             />
-          </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#023E8A] mb-4 md:mb-6 font-domine">
-            {params.book} {params.chapter}
-          </h1>
+          </div> */}
+          
         </div>
       </section>
-      {/* SSR Verse content for SEO crawlers (hidden from client duplicate rendering by using a visually-hidden container or integrated if client component expects to re-render)
-      <section aria-labelledby="chapter-heading" className="mb-8">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
-          <h1 id="chapter-heading" className="text-xl font-semibold">
-            {readable(initialBook)} Chapter {initialChapter} (Yoruba / English)
-          </h1>
-          <Link href="/listen-online/search" className="text-sm text-blue-600 hover:underline self-start md:self-auto">Search Bible</Link>
-        </div>
-        <nav className="flex justify-between text-sm mb-4" aria-label="Chapter navigation">
-          {prevHref ? <Link href={prevHref} rel="prev" className="text-blue-600 hover:underline">&larr; Previous</Link> : <span />}
-          {nextHref ? <Link href={nextHref} rel="next" className="text-blue-600 hover:underline">Next &rarr;</Link> : <span />}
-        </nav>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" itemScope itemType="https://schema.org/CreativeWork">
+      
 
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Yoruba</h2>
-            <ol className="space-y-2 list-none">
-              {verses.map(v => (
-                <li key={v.num} id={`v${v.num}`} className="flex items-start gap-2 group" itemProp="hasPart" itemScope itemType="https://schema.org/CreativeWork">
-                  <span className="w-8 text-right pr-1 select-none text-xs font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
-                  <p className="text-gray-900 dark:text-gray-100" lang="yo" itemProp="text">{v.yo}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-          
-          <div>
-            <h2 className="text-lg font-semibold mb-2">English (KJV)</h2>
-            <ol className="space-y-2 list-none">
-              {verses.map(v => (
-                <li key={v.num} className="flex items-start gap-2 group" aria-labelledby={`v${v.num}-en-label`}>
-                  <span className="w-8 text-right pr-1 select-none text-xs font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
-                  <p id={`v${v.num}-en-label`} className="text-gray-700 dark:text-gray-300" lang="en">{v.en || ''}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section> */}
+      {/* Add Search Bar Here */}
+      <div className="max-w-3xl mx-auto px-4 mb-4 -translate-y-28">
+        <h1 className="text-xl sm:text-2xl text-center md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-4 md:mb-6 font-domine">
+            {params.book} {params.chapter}
+        </h1>
+        <InlineChapterSearch />
+      </div>
+
       {/* Client Enhancements (hydrated on client) */}
+      <div className="-translate-y-28">
       <ClientEnhancements
           book={initialBook}
           chapter={initialChapter}
@@ -335,6 +306,9 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
           prevHref={prevHref}
           nextHref={nextHref}
       />
+      </div>
     </>
   );
 }
+
+// InlineChapterSearch moved to client component file to comply with Server Component constraints.

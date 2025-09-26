@@ -135,7 +135,7 @@ function StickyMiniNav({ book, chapter, hasPrev, hasNext, prevHref, nextHref }: 
   };
 
   return (
-    <div className="sticky top-0 z-30 backdrop-blur bg-white/70 dark:bg-neutral-900/70 border-b border-neutral-200 dark:border-neutral-700 px-3 py-2 flex flex-wrap gap-3 items-center text-xs">
+    <div className="sticky top-0 z-0 backdrop-blur bg-white/70 dark:bg-neutral-900/70 border-b border-neutral-200 dark:border-neutral-700 px-3 py-2 flex flex-wrap gap-3 items-center text-xs">
       <div className="flex items-center gap-2">
         <label className="sr-only" htmlFor="mini-book">Book</label>
         <select id="mini-book" value={selectedBook} onChange={onBookChange} className="px-1 py-0.5 rounded border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800">
