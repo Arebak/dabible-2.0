@@ -6,7 +6,6 @@ import ReadingPreferencesControls from '@/components/reading/ReadingPreferencesC
 import ChapterAudioPlayer from '@/components/reading/ChapterAudioPlayer';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useCallback } from 'react';
 
 interface VerseData { num: number; yo: string; en?: string }
 
@@ -88,70 +87,6 @@ function VersesView({ book, chapter, verses }: { book: string; chapter: number; 
   );
 }
 
-function StickyMiniNav({ book, chapter, hasPrev, prevHref }: { book: string; chapter: number; hasPrev: boolean; prevHref: string | null }) {
-  const [books, setBooks] = useState<{ name: string; numberOfChapters: number }[]>([]);
-  const [chapters, setChapters] = useState<number[]>([]);
-  const [selectedBook, setSelectedBook] = useState(book);
-  const [selectedChapter, setSelectedChapter] = useState(chapter);
-
-  useEffect(() => {
-    let cancelled = false;
-    interface RawBook { name: string; numberOfChapters: number }
-    ;(async () => {
-      try {
-        const res = await fetch('/bible_paths.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        if (cancelled) return;
-        const list = Array.isArray(data?.books) ? (data.books as RawBook[]).map(b => ({ name: b.name, numberOfChapters: b.numberOfChapters })) : [];
-        setBooks(list);
-      } catch { /* ignore */ }
-    })();
-    return () => { cancelled = true; };
-  }, []);
-
-  // Update chapter options when book changes or list loaded
-  useEffect(() => {
-    const found = books.find(b => b.name === selectedBook);
-    if (found) {
-      setChapters(Array.from({ length: found.numberOfChapters }, (_, i) => i + 1));
-      if (selectedChapter > found.numberOfChapters) setSelectedChapter(1);
-    }
-  }, [books, selectedBook, selectedChapter]);
-
-  const navigate = useCallback((b: string, c: number) => {
-    window.location.href = `/listen-online/${b}/${c}`;
-  }, []);
-
-  const onBookChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newBook = e.target.value;
-    setSelectedBook(newBook);
-    setSelectedChapter(1);
-    navigate(newBook, 1);
-  };
-  const onChapterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const ch = parseInt(e.target.value, 10) || 1;
-    setSelectedChapter(ch);
-    navigate(selectedBook, ch);
-  };
-
-  return (
-    <div className="sticky top-0 z-0 backdrop-blur bg-white/70 dark:bg-neutral-900/70 border-b border-neutral-200 dark:border-neutral-700 px-3 py-2 flex flex-wrap gap-3 items-center text-xs">
-      <div className="flex items-center gap-2">
-        <label className="sr-only" htmlFor="mini-book">Book</label>
-        <select id="mini-book" value={selectedBook} onChange={onBookChange} className="px-1 py-0.5 rounded border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800">
-          <option value={book}>{book}</option>
-          {books.filter(b => b.name !== book).map(b => <option key={b.name} value={b.name}>{b.name}</option>)}
-        </select>
-        <label className="sr-only" htmlFor="mini-chapter">Chapter</label>
-        <select id="mini-chapter" value={selectedChapter} onChange={onChapterChange} className="px-1 py-0.5 rounded border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800">
-          {chapters.length === 0 && <option value={chapter}>{chapter}</option>}
-          {chapters.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </div>
-    </div>
-  );
-}
 
 function AutoScrollHighlighter({ book, chapter, activeVerse, announce }: { book: string; chapter: number; activeVerse: number | null; announce: (s: string) => void }) {
   const { autoScroll } = useReadingPreferences();
@@ -180,11 +115,10 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
   const audioSrc = `https://developers.dabible.com/audio/yoruba/${props.book}/${props.book}_${String(props.chapter).padStart(3,'0')}.mp3`;
   const [activeVerse, setActiveVerse] = useState<number | null>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
-  return (
-    <ReadingPreferencesProvider>
-  <StickyMiniNav book={props.book} chapter={props.chapter} hasPrev={props.hasPrev} prevHref={props.prevHref} />
+   return (
+     <ReadingPreferencesProvider>
+       <ReadingPreferencesControls book={props.book} chapter={props.chapter} />
       <div className="my-4">
-        <ReadingPreferencesControls />
       </div>
       <ChapterAudioPlayer src={audioSrc} book={props.book} chapter={props.chapter} onActiveVerseChange={setActiveVerse} />
       <AutoScrollHighlighter book={props.book} chapter={props.chapter} activeVerse={activeVerse} announce={setLiveAnnouncement} />

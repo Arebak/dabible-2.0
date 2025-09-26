@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 
 interface ChapterAudioPlayerProps {
   src: string | null; // primary resolved URL (could be remote CDN)
@@ -7,12 +8,13 @@ interface ChapterAudioPlayerProps {
   chapter: number;
   onActiveVerseChange?: (verse: number) => void;
   verseCount?: number; // for tick mark distribution
+  showInlineControls?: boolean; // allow external controller to hide play button
 }
 
 // Placeholder timestamp type for future expansion
 interface VerseTimestamp { verse: number; time: number }
 
-export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onActiveVerseChange }: ChapterAudioPlayerProps) {
+export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onActiveVerseChange, showInlineControls = true }: ChapterAudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -25,6 +27,8 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
   const [resumePrompt, setResumePrompt] = useState(false);
   const [editing, setEditing] = useState<boolean>(false);
   const [dirty, setDirty] = useState(false);
+  const [volume, setVolume] = useState(1); // 0..1
+  const [lastNonZeroVolume, setLastNonZeroVolume] = useState(1);
 
   // detect editing mode from query param (client-side only)
   useEffect(() => {
@@ -36,6 +40,7 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
 
   const STORAGE_POS_KEY = `dabible_audio_pos_${book}_${chapter}`;
   const STORAGE_SPEED_KEY = 'dabible_audio_speed_v1';
+  const STORAGE_VOL_KEY = 'dabible_audio_volume_v1';
 
   useEffect(() => {
     let cancelled = false;
@@ -67,9 +72,13 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
       if (rawSpeed) {
         const s = parseFloat(rawSpeed); if (s >= 0.5 && s <= 2.0) setSpeed(s);
       }
+      const rawVol = localStorage.getItem(STORAGE_VOL_KEY);
+      if (rawVol) {
+        const v = parseFloat(rawVol); if (v >= 0 && v <= 1) { setVolume(v); if (v > 0) setLastNonZeroVolume(v); }
+      }
       const rawPos = localStorage.getItem(STORAGE_POS_KEY);
       if (rawPos) {
-        const t = parseFloat(rawPos); if (t > 5) setResumePrompt(true); // only prompt if meaningful progress
+        const t = parseFloat(rawPos); if (t > 5) setResumePrompt(true);
       }
     } catch { /* ignore */ }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -131,10 +140,46 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timestamps, activeVerse, onActiveVerseChange, speed, book, chapter]);
 
-  const togglePlay = () => {
-    const el = audioRef.current; if (!el) return;
-    if (el.paused) { el.play(); setPlaying(true); } else { el.pause(); setPlaying(false); }
+  const dispatchState = (next: boolean) => {
+    try {
+      window.dispatchEvent(new CustomEvent('dabible:audioState', { detail: { playing: next }}));
+    } catch { /* ignore */ }
   };
+
+  const togglePlay = useCallback(() => {
+    const el = audioRef.current; if (!el) return;
+    if (el.paused) { el.play(); setPlaying(true); dispatchState(true); } else { el.pause(); setPlaying(false); dispatchState(false); }
+  }, []);
+  // Apply volume changes & persist
+  useEffect(() => {
+    const el = audioRef.current; if (!el) return;
+    el.volume = volume;
+    try { localStorage.setItem(STORAGE_VOL_KEY, String(volume)); } catch { /* ignore */ }
+  }, [volume]);
+
+  const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = parseFloat(e.target.value);
+    setVolume(v);
+    if (v > 0) setLastNonZeroVolume(v);
+  };
+
+  const toggleMute = () => {
+    setVolume(prev => prev === 0 ? (lastNonZeroVolume || 1) : 0);
+  };
+  // Listen for global toggle events (from unified preferences bar)
+  useEffect(() => {
+    const handler = () => { togglePlay(); };
+    window.addEventListener('dabible:toggleAudio', handler);
+    return () => { window.removeEventListener('dabible:toggleAudio', handler); };
+  }, [togglePlay]);
+
+  // Emit state if playing changes due to other reasons (e.g., ended)
+  useEffect(() => {
+    const el = audioRef.current; if (!el) return;
+    const onEnded = () => { setPlaying(false); dispatchState(false); };
+    el.addEventListener('ended', onEnded);
+    return () => { el.removeEventListener('ended', onEnded); };
+  }, []);
   const pct = duration ? (progress / duration) * 100 : 0;
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -222,15 +267,17 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
   const activeEditingList = editing ? (verseCount ? Array.from({ length: verseCount }, (_, i) => i + 1) : timestamps.map(t => t.verse)) : [];
 
   return (
-    <div className="mt-6 mb-4 p-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
+    <div className="mt-6 mb-4 flex p-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
       <div className="flex flex-wrap items-center gap-2 mb-2">
-        <button onClick={togglePlay} className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-500" aria-label={playing ? 'Pause audio' : 'Play audio'}>
-          {playing ? 'Pause' : 'Play'}
-        </button>
+        {showInlineControls && (
+          <button onClick={togglePlay} className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-500" aria-label={playing ? 'Pause audio' : 'Play audio'}>
+            {playing ? 'Pause' : 'Play'}
+          </button>
+        )}
         <div className="flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
           <span>{fmt(progress)}</span>
-          <span aria-hidden>/</span>
-          <span>{fmt(duration)}</span>
+          {/* <span aria-hidden>/</span>
+          <span>{fmt(duration)}</span> */}
         </div>
         {activeVerse && <span className="text-[10px] italic">Verse {activeVerse}</span>}
         <div className="flex items-center gap-1 ml-2">
@@ -239,38 +286,67 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
             {[0.75,1.0,1.25,1.5,1.75,2.0].map(s => <option key={s} value={s}>{s}x</option>)}
           </select>
         </div>
+        <div className="flex items-center gap-1 ml-2 w-32">
+          <button
+            type="button"
+            onClick={toggleMute}
+            aria-label={volume === 0 ? 'Unmute audio' : 'Mute audio'}
+            className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
+            {volume === 0 ? <VolumeX className="w-4 h-4" aria-hidden="true" /> : <Volume2 className="w-4 h-4" aria-hidden="true" />}
+          </button>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={volume}
+            onChange={onVolumeChange}
+            aria-label="Volume"
+            className="flex-1 h-1.5 cursor-pointer appearance-none rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:cursor-pointer"
+          />
+        </div>
         <span className="ml-auto text-[10px] text-neutral-500 dark:text-neutral-400">
           {timestampStatus === 'ready' && `Sync: ${completionPct}%`}
           {timestampStatus === 'missing' && 'Sync: none'}
           {timestampStatus === 'loading' && 'Sync: …'}
         </span>
       </div>
-      <div className="relative group cursor-pointer select-none" onClick={onSeekBarClick} aria-label="Seek audio" role="slider" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
-        <div className="h-2 rounded bg-neutral-300 dark:bg-neutral-600 overflow-hidden">
-          <div className="h-full bg-blue-600" style={{ width: `${pct}%` }} />
+
+    <div className='flex-1'>
+        <div className="relative group cursor-pointer select-none" onClick={onSeekBarClick} aria-label="Seek audio" role="slider" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
+            <div className="h-2 rounded bg-neutral-300 dark:bg-neutral-600 overflow-hidden">
+            <div className="h-full bg-blue-600" style={{ width: `${pct}%` }} />
+            </div>
+            <div className="absolute inset-0 pointer-events-none">
+            {verseTicks.map(t => {
+                const left = duration ? (t.time / duration) * 100 : 0;
+                const isActive = activeVerse === t.verse;
+                return <div key={t.verse} className={`absolute top-0 h-2 w-[1px] ${isActive ? 'bg-orange-500' : 'bg-white/70 dark:bg-black/50'} transition-colors`} style={{ left: `${left}%` }} />;
+            })}
+            </div>
         </div>
-        <div className="absolute inset-0 pointer-events-none">
-          {verseTicks.map(t => {
-            const left = duration ? (t.time / duration) * 100 : 0;
-            const isActive = activeVerse === t.verse;
-            return <div key={t.verse} className={`absolute top-0 h-2 w-[1px] ${isActive ? 'bg-orange-500' : 'bg-white/70 dark:bg-black/50'} transition-colors`} style={{ left: `${left}%` }} />;
-          })}
+        
+        <div className="flex items-center gap-2 mt-2">
+            <input
+            type="range"
+            min={0}
+            max={100}
+            value={pct}
+            onChange={seek}
+            aria-label="Seek audio"
+            className="flex-1 h-1.5 rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-blue-600"
+            />
+            {resumePrompt && !playing && !error && <button onClick={resumePlayback} className="text-[10px] underline" type="button">Resume</button>}
         </div>
-      </div>
-      <div className="flex items-center gap-2 mt-2">
-        <input
-          type="range"
-          min={0}
-          max={100}
-          value={pct}
-          onChange={seek}
-          aria-label="Seek audio"
-          className="flex-1 h-1.5 rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-blue-600"
-        />
-        {resumePrompt && !playing && !error && <button onClick={resumePlayback} className="text-[10px] underline" type="button">Resume</button>}
-      </div>
-      {error && <div className="mt-2 text-[11px] text-red-600 dark:text-red-400">{error} – <button onClick={() => { setError(null); audioRef.current?.load(); }} className="underline">Retry</button></div>}
-      <audio ref={audioRef} src={src || undefined} preload="none" />
+        {error && <div className="mt-2 text-[11px] text-red-600 dark:text-red-400">{error} – <button onClick={() => { setError(null); audioRef.current?.load(); }} className="underline">Retry</button></div>}
+        <audio ref={audioRef} src={src || undefined} preload="none" />
+    </div>
+
+    <div className="flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
+        <span>{fmt(duration)}</span>
+    </div>
+    
       {editing && (
         <div className="mt-4 border-t pt-3 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
