@@ -104,7 +104,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             parallelBibleVisibility
               ? "xl:text-sm"
               : "xl:text-base"
-          } h-10 w-auto capitalize bg-[#f4f4f4] md:flex items-center hidden `}
+          } h-10 focus-within:ring-2 focus-within:ring-blue-800 w-auto capitalize bg-[#f4f4f4] md:flex items-center hidden `}
         >
           <MenuItem value="english">English</MenuItem>
           <MenuItem value="yoruba">Yoruba</MenuItem>
@@ -141,7 +141,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             parallelBibleVisibility
               ? "xl:text-sm"
               : "xl:text-base"
-          } capitalize w-auto flex items-center bg-[#f4f4f4] h-10 ${
+          } capitalize focus-within:ring-2 focus-within:ring-blue-800 w-auto flex items-center bg-[#f4f4f4] h-10 ${
             toggleState ? "z-20" : "z-30"
           }`}
         >
@@ -180,7 +180,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             parallelBibleVisibility
               ? "xl:text-sm"
               : "xl:text-base"
-          } capitalize w-auto flex items-center bg-[#f4f4f4] h-10  ${
+          } capitalize w-auto focus-within:ring-2 focus-within:ring-blue-800 flex items-center bg-[#f4f4f4] h-10  ${
             toggleState ? "z-20" : "z-30"
           }`}
         >
@@ -224,7 +224,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             parallelBibleVisibility
               ? "xl:text-sm"
               : "xl:text-base"
-          } capitalize w-auto bg-[#f4f4f4] h-10 flex items-center md:hidden  ${
+          } capitalize w-auto focus-within:ring-2 focus-within:ring-blue-800 bg-[#f4f4f4] h-10 flex items-center md:hidden  ${
             toggleState ? "z-20" : "z-30"
           } `}
         >
@@ -238,7 +238,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
         <button
           onClick={() => setAudioUIVisibility(!audioUIVisibility)}
           disabled={!selectedBook}
-          className={`disabled:cursor-not-allowed flex items-center justify-center space-x-1.5 bg-[#C8385E] disabled:bg-[#C8385E]/40 rounded-full  py-2.5 text-white cursor-pointer md:w-fit w-full  ${
+          className={`disabled:cursor-not-allowed flex items-center focus:outline-2 focus:outline-offset-2 focus:outline-blue-800 justify-center space-x-1.5 bg-[#C8385E] disabled:bg-[#C8385E]/40 rounded-full  py-2.5 text-white cursor-pointer md:w-fit w-full  ${
             parallelBibleVisibility ? "px-3" : "px-5"
           } `}
         >
@@ -246,7 +246,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             <>
               <StopIcon sx={{ color: "white" }} />
               <span
-                className={` ${
+                className={`  ${
                   parallelBibleVisibility
                     ? "font-normal font-xs"
                     : "font-[500] text-base"
@@ -282,6 +282,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
           <IconButton
             onClick={handlePreviousChapter}
             disabled={currentChapter === 1 || !selectedBook}
+            className="focus-within:ring-2 focus-within:ring-blue-800"
           >
             <KeyboardArrowLeftOutlined
               className={`${parallelBibleVisibility ? "text-3xl" : "text-4xl"}`}
@@ -292,6 +293,7 @@ const MiddleTabControls: React.FC<MiddleTabControlProps> = ({
             disabled={
               currentChapter === selectedBook?.numberOfChapters || !selectedBook
             }
+            className="focus-within:ring-2 focus-within:ring-blue-800"
           >
             <KeyboardArrowRightOutlined
               className={`${parallelBibleVisibility ? "text-3xl" : "text-4xl"}`}

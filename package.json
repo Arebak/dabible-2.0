@@ -4,10 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p 3015",
-    "lint": "next lint"
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start -p 3015",
+  "lint": "next lint",
+  "build:sitemaps": "node scripts/generate-sitemaps.mjs",
+  "build:search-index": "node scripts/build-search-index.mjs",
+    "postbuild": "pnpm run build:sitemaps && pnpm run build:search-index"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
@@ -59,6 +62,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "tsx": "^4.19.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
