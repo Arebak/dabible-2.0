@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Gift, Play, Star } from "lucide-react";
+import { Gift,  ArrowRight, BookType, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "animate.css";
 import DownloadButtons from "@/components/DownloadButtons";
@@ -333,6 +333,24 @@ export default function DonationPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="text-center">
+        <div className="w-full max-w-280 mx-auto md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 font-mada">
+                Listen to Bible Online
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-4 sm:mb-6 md:mb-8">
+                You can now listen to the Yoruba, Pidgin and Hausa Bible on this website without the mobile app. You can also search for any verse or chapter in the Bible and listen to it online.
+              </p>
+              <div className="flex justify-center flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link href="https://donate.dabible.com" className="cursor-pointer">
+                  <Button className="bg-[#7B0423] hover:bg-red-900 text-xl py-6 w-full sm:w-auto rounded-4xl font-mada uppercase">
+                    <span className="px-4 flex align-middle items-center"><BookType className="mr-2" /><span>Read or Listen Online Now</span><ArrowRight className="ml-2" /></span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
       </section>
 
       {/* Products Section */}

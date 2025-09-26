@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { InlineSearchTrigger } from '@/components/search/InlineSearchTrigger';
-import { ChevronDown, Heart,
+import { ChevronDown, Heart, Star,
   //  ShoppingCart, 
    Menu } from "lucide-react";
 
@@ -67,7 +67,12 @@ export default function Header() {
             >
               Home
             </button>
-
+            <button
+              onClick={() => navigate("/listen-online")}
+              className={`${pathname === "/listen-online" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
+            >
+              <span className="flex items-center"><span>Online Bible</span><Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-500 -translate-y-2" /></span>
+            </button>
             <button
               onClick={() => navigate("/about")}
               className={`${pathname === "/about" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
@@ -147,6 +152,12 @@ export default function Header() {
                   className={`${pathname === "/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
                   Home
+                </button>
+                <button
+                  onClick={() => navigate("/listen-online")}
+                  className={`${pathname === "/listen-online" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
+                >
+                  Online Bible
                 </button>
                 <button
                   onClick={() => navigate("/about")}
