@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import type { PageProps as GeneratedPageProps } from '../../../../.next/types/app/listen-online/[book]/[chapter]/page';
 import { notFound } from 'next/navigation';
-import ListenOnlineClient from './ListenOnlineClient';
+// import ListenOnlineClient from './ListenOnlineClient';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import Link from 'next/link';
+import ClientEnhancements from './ClientEnhancements';
+import Image from 'next/image';
 
 // Basic in-memory cache (per server runtime) for chapter text to avoid re-reading files on hot paths
 // This is safe because chapter files are static. Not persisted across server restarts.
@@ -238,19 +239,67 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* SSR Verse content for SEO crawlers (hidden from client duplicate rendering by using a visually-hidden container or integrated if client component expects to re-render) */}
+      <section className="relative bg-white overflow-hidden pt-10 md:pt-[70px]">
+        {/* Faded oval background */}
+        <div
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[300px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #38A9CF1C 40%, transparent 100%)",
+          }}
+        />
+
+        <Image
+          src="/png/red-circle.png"
+          alt="heart image"
+          width={200}
+          height={200}
+          className="absolute -top-10 right-0 w-32 md:w-48 lg:w-52"
+        />
+        <Image
+          src="/png/blue-circle.png"
+          alt="heart image"
+          width={200}
+          height={200}
+          className="absolute -top-10 left-0 w-32 md:w-48 lg:w-52"
+        />
+        <div className="max-w-3xl mx-auto text-center px-4">
+          <div className="inline-flex items-center bg-[#023E8A] text-white px-3 py-1 rounded-full mb-4 md:mb-6">
+            <Image
+              src="/svg/start.svg"
+              alt="star icon"
+              width={16}
+              height={16}
+              className="mr-1 w-3 h-3 md:w-4 md:h-4"
+            />{" "}
+            Blog{" "}
+            <Image
+              src="/svg/start.svg"
+              alt="star icon"
+              width={16}
+              height={16}
+              className="ml-1 w-3 h-3 md:w-4 md:h-4"
+            />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#023E8A] mb-4 md:mb-6 font-domine">
+            {params.book} {params.chapter}
+          </h1>
+        </div>
+      </section>
+      {/* SSR Verse content for SEO crawlers (hidden from client duplicate rendering by using a visually-hidden container or integrated if client component expects to re-render)
       <section aria-labelledby="chapter-heading" className="mb-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
           <h1 id="chapter-heading" className="text-xl font-semibold">
             {readable(initialBook)} Chapter {initialChapter} (Yoruba / English)
           </h1>
           <Link href="/listen-online/search" className="text-sm text-blue-600 hover:underline self-start md:self-auto">Search Bible</Link>
-  </div>
+        </div>
         <nav className="flex justify-between text-sm mb-4" aria-label="Chapter navigation">
           {prevHref ? <Link href={prevHref} rel="prev" className="text-blue-600 hover:underline">&larr; Previous</Link> : <span />}
           {nextHref ? <Link href={nextHref} rel="next" className="text-blue-600 hover:underline">Next &rarr;</Link> : <span />}
         </nav>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6" itemScope itemType="https://schema.org/CreativeWork">
+
           <div>
             <h2 className="text-lg font-semibold mb-2">Yoruba</h2>
             <ol className="space-y-2 list-none">
@@ -262,6 +311,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
               ))}
             </ol>
           </div>
+          
           <div>
             <h2 className="text-lg font-semibold mb-2">English (KJV)</h2>
             <ol className="space-y-2 list-none">
@@ -274,8 +324,17 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
             </ol>
           </div>
         </div>
-      </section>
-      <ListenOnlineClient initialBook={initialBook} initialChapter={initialChapter} />
+      </section> */}
+      {/* Client Enhancements (hydrated on client) */}
+      <ClientEnhancements
+          book={initialBook}
+          chapter={initialChapter}
+          verses={verses}
+          hasPrev={hasPrev}
+          hasNext={hasNext}
+          prevHref={prevHref}
+          nextHref={nextHref}
+      />
     </>
   );
 }

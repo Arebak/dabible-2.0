@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { InlineSearchTrigger } from '@/components/search/InlineSearchTrigger';
 import { ChevronDown, Heart,
   //  ShoppingCart, 
    Menu } from "lucide-react";
 
 import { useState, useEffect } from "react";
+// import { useThemeMode } from "@/components/theme/ThemeProvider";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
@@ -209,6 +211,8 @@ export default function Header() {
           </div>
 
           <div className="flex items-center space-x-2">
+            <InlineSearchTrigger />
+            {/* <ThemeControls /> */}
             {/* <Button
               variant="outline"
               className="flex items-center border-2 border-[#023E8A] text-[#023E8A] cursor-pointer"
@@ -238,3 +242,26 @@ export default function Header() {
     </header>
   );
 }
+
+// function ThemeControls() {
+//   const { theme, cycle, setTheme } = useThemeMode();
+//   return (
+//     <div className="flex items-center gap-1">
+//       <button
+//         onClick={cycle}
+//         aria-label={`Toggle theme (current ${theme})`}
+//         className="px-2 py-1 text-xs rounded border border-neutral-300 hover:bg-neutral-100"
+//       >{theme === 'light' ? '🌞' : theme === 'dark' ? '🌜' : '⚡'}</button>
+//       <select
+//         aria-label="Select theme"
+//         className="text-xs border border-neutral-300 rounded px-1 py-0.5 bg-white"
+//         value={theme}
+//         onChange={e => setTheme(e.target.value as 'light' | 'dark' | 'contrast')}
+//       >
+//         <option value="light">Light</option>
+//         <option value="dark">Dark</option>
+//         <option value="contrast">High Contrast</option>
+//       </select>
+//     </div>
+//   );
+// }

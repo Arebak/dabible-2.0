@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Footer from "@/components/Footer";
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
@@ -43,6 +44,7 @@ export default function RootLayout({
           `,
         }} />
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+        <ThemeProvider>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-[#023E8A] focus:text-white focus:px-4 focus:py-2 focus:rounded-md">Skip to content</a>
         {/* Google Tag Manager (noscript) */}
         <noscript>
@@ -56,6 +58,7 @@ export default function RootLayout({
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
         <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
