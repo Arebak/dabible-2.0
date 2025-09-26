@@ -288,7 +288,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
       
 
       {/* Add Search Bar Here */}
-      <div className="max-w-3xl mx-auto px-4 mb-4 -translate-y-28">
+      <div className="max-w-3xl mx-auto px-4 mb-4 -translate-y-32">
         <h1 className="text-xl sm:text-2xl text-center md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-4 md:mb-6 font-domine">
             {params.book} {params.chapter}
         </h1>
