@@ -52,6 +52,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/listen-online',
+        destination: '/listen-online/Genesis/1',
+        permanent: true,
+      },
+      {
         source: '/solar-audio-bible',
         destination: '/products/solar-audio-bible-device',
         permanent: true,

@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { ReadingPreferencesProvider, useReadingPreferences } from '@/components/reading/ReadingPreferencesContext';
 import ReadingPreferencesControls from '@/components/reading/ReadingPreferencesControls';
 import ChapterAudioPlayer from '@/components/reading/ChapterAudioPlayer';
@@ -87,7 +88,7 @@ function VersesView({ book, chapter, verses }: { book: string; chapter: number; 
   );
 }
 
-function StickyMiniNav({ book, chapter, hasPrev, hasNext, prevHref, nextHref }: { book: string; chapter: number; hasPrev: boolean; hasNext: boolean; prevHref: string | null; nextHref: string | null }) {
+function StickyMiniNav({ book, chapter, hasPrev, prevHref }: { book: string; chapter: number; hasPrev: boolean; prevHref: string | null }) {
   const [books, setBooks] = useState<{ name: string; numberOfChapters: number }[]>([]);
   const [chapters, setChapters] = useState<number[]>([]);
   const [selectedBook, setSelectedBook] = useState(book);
@@ -135,7 +136,7 @@ function StickyMiniNav({ book, chapter, hasPrev, hasNext, prevHref, nextHref }: 
   };
 
   return (
-    <div className="sticky top-0 z-30 backdrop-blur bg-white/70 dark:bg-neutral-900/70 border-b border-neutral-200 dark:border-neutral-700 px-3 py-2 flex flex-wrap gap-3 items-center text-xs">
+    <div className="sticky top-0 z-0 backdrop-blur bg-white/70 dark:bg-neutral-900/70 border-b border-neutral-200 dark:border-neutral-700 px-3 py-2 flex flex-wrap gap-3 items-center text-xs">
       <div className="flex items-center gap-2">
         <label className="sr-only" htmlFor="mini-book">Book</label>
         <select id="mini-book" value={selectedBook} onChange={onBookChange} className="px-1 py-0.5 rounded border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800">
@@ -147,11 +148,6 @@ function StickyMiniNav({ book, chapter, hasPrev, hasNext, prevHref, nextHref }: 
           {chapters.length === 0 && <option value={chapter}>{chapter}</option>}
           {chapters.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
-      </div>
-      <div className="flex items-center gap-2 ml-auto">
-        {hasPrev && prevHref && <Link prefetch={false} href={prevHref} className="px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600" aria-label="Previous chapter">Prev</Link>}
-        {hasNext && nextHref && <Link prefetch={false} href={nextHref} className="px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600" aria-label="Next chapter">Next</Link>}
-        <Link href="/listen-online/search" className="px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-500">Search</Link>
       </div>
     </div>
   );
@@ -186,7 +182,7 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
   return (
     <ReadingPreferencesProvider>
-      <StickyMiniNav book={props.book} chapter={props.chapter} hasPrev={props.hasPrev} hasNext={props.hasNext} prevHref={props.prevHref} nextHref={props.nextHref} />
+  <StickyMiniNav book={props.book} chapter={props.chapter} hasPrev={props.hasPrev} prevHref={props.prevHref} />
       <div className="my-4">
         <ReadingPreferencesControls />
       </div>
@@ -194,6 +190,52 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
       <AutoScrollHighlighter book={props.book} chapter={props.chapter} activeVerse={activeVerse} announce={setLiveAnnouncement} />
       <div aria-live="polite" className="sr-only" role="status">{liveAnnouncement}</div>
       <VersesView book={props.book} chapter={props.chapter} verses={props.verses} />
+      {props.hasPrev && props.prevHref && <FloatingPrevButton href={props.prevHref} book={props.book} chapter={props.chapter} />}
+      {props.hasNext && props.nextHref && <FloatingNextButton href={props.nextHref} book={props.book} chapter={props.chapter} />}
     </ReadingPreferencesProvider>
+  );
+}
+
+function FloatingPrevButton({ href, book, chapter }: { href: string; book: string; chapter: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return null;
+  return createPortal(
+    <div
+      className="fixed left-2 md:left-4 top-1/2 -translate-y-1/2 z-50 pointer-events-none"
+      aria-label={`${book} chapter ${chapter - 1} (previous chapter)`}
+    >
+      <Link
+        prefetch={false}
+        href={href}
+        className="pointer-events-auto rounded-full w-10 h-10 p-5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 shadow border border-neutral-200 dark:border-neutral-600 text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        aria-label="Previous chapter"
+      >
+        Prev
+      </Link>
+    </div>,
+    document.body
+  );
+}
+
+function FloatingNextButton({ href, book, chapter }: { href: string; book: string; chapter: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return null;
+  return createPortal(
+    <div
+      className="fixed right-2 md:right-4 top-1/2 -translate-y-1/2 z-50 pointer-events-none"
+      aria-label={`${book} chapter ${chapter + 1} (next chapter)`}
+    >
+      <Link
+        prefetch={false}
+        href={href}
+        className="pointer-events-auto p-5 rounded-full w-10 h-10 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 shadow border border-neutral-200 dark:border-neutral-600 text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        aria-label="Next chapter"
+      >
+        Next
+      </Link>
+    </div>,
+    document.body
   );
 }

@@ -15,7 +15,7 @@ export default function ReadingPreferencesControls() {
           id="fontSize"
           type="range"
           min={0.8}
-            max={1.6}
+          max={1.6}
           step={0.05}
           value={fontSize}
           onChange={e => setFontSize(parseFloat(e.target.value))}
