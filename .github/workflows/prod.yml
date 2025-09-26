@@ -91,6 +91,7 @@ jobs:
           ACTIVE_RELEASE_PATH: ${{ matrix.server.path }}/active
           STORAGE_PATH: ${{ matrix.server.path }}/storage
           BASE_PATH: ${{ matrix.server.path }}
+          NEXT_ENV: ${{ secrets.PRODUCTION_ENV }}
 
 
         with:
@@ -98,10 +99,9 @@ jobs:
           username: ${{ matrix.server.username }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ matrix.server.port }}
-          envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH
+          envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,NEXT_ENV
           script: |
             echo "$NEXT_ENV" >> "${RELEASE_PATH}/.env"
-
             cd $RELEASE_PATH && npm install
             cd $RELEASE_PATH && npm run build
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
@@ -136,5 +136,5 @@ jobs:
           port: ${{ matrix.server.port }}
           envs: RELEASES_PATH
           script: |
-            cd $ARTIFACTS_PATH && ls -t -1 | tail -n +2 | xargs rm -rf
-            cd $RELEASES_PATH && ls -t -1 | tail -n +2 | xargs rm -rf
+            cd $ARTIFACTS_PATH && ls -t -1 | tail -n +3 | xargs rm -rf
+            cd $RELEASES_PATH && ls -t -1 | tail -n +3 | xargs rm -rf
