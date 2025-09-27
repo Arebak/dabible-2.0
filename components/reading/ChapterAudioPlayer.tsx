@@ -31,6 +31,12 @@ export default function ChapterAudioPlayer({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  // visualProgress is animation-frame interpolated for smoother slider movement
+  const [visualProgress, setVisualProgress] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const lastRAFTimeRef = useRef<number>(0);
+  const seekingRef = useRef(false);
+  const pendingSeekPctRef = useRef<number | null>(null);
   const [duration, setDuration] = useState(0);
   const [activeVerse, setActiveVerse] = useState<number | null>(null);
   const [timestamps, setTimestamps] = useState<VerseTimestamp[]>([]);
@@ -187,51 +193,75 @@ export default function ChapterAudioPlayer({
     };
   }, [src]);
 
-  // timeupdate handling & verse detection
+  // timeupdate handling (minimal work) & metadata
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
+    let lastPersist = 0;
     const onTime = () => {
+      // Only update coarse progress state; visualProgress will animate between frames
       setProgress(el.currentTime);
       setDuration(el.duration || 0);
-      // persist position occasionally
-      try {
-        if (el.currentTime > 0) localStorage.setItem(STORAGE_POS_KEY, el.currentTime.toFixed(1));
-      } catch {
-        /* ignore */
+      const now = performance.now();
+      if (now - lastPersist > 1000) {
+        lastPersist = now;
+        try {
+          if (el.currentTime > 0) localStorage.setItem(STORAGE_POS_KEY, el.currentTime.toFixed(1));
+        } catch { /* ignore */ }
       }
-      if (timestamps.length) {
-        // naive linear search (optimize later)
-        let current = activeVerse;
-        for (let i = 0; i < timestamps.length; i++) {
-          const next = timestamps[i];
-          const nextStart = next.time;
-          const following = timestamps[i + 1];
-          const nextEnd = following ? following.time : el.duration + 1;
-          if (el.currentTime >= nextStart && el.currentTime < nextEnd) {
-            current = next.verse;
-            break;
+    };
+    const onLoaded = () => {
+      onTime();
+      el.playbackRate = speed;
+    };
+    el.addEventListener('timeupdate', onTime);
+    el.addEventListener('loadedmetadata', onLoaded);
+    return () => {
+      el.removeEventListener('timeupdate', onTime);
+      el.removeEventListener('loadedmetadata', onLoaded);
+    };
+  }, [speed, STORAGE_POS_KEY]);
+
+  // Verse detection moved to animation frame loop for smoother sync & fewer recalcs
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const run = (ts: number) => {
+      rafRef.current = requestAnimationFrame(run);
+      // animate displayed progress unless user is actively seeking
+      if (!seekingRef.current) {
+        const currentTime = el.currentTime;
+        setVisualProgress(currentTime);
+        // verse detection
+        if (timestamps.length) {
+          let current = activeVerse;
+          for (let i = 0; i < timestamps.length; i++) {
+            const next = timestamps[i];
+            const nextStart = next.time;
+            const following = timestamps[i + 1];
+            const nextEnd = following ? following.time : (el.duration || 0) + 1;
+            if (currentTime >= nextStart && currentTime < nextEnd) {
+              current = next.verse;
+              break;
+            }
+          }
+          if (current !== activeVerse) {
+            setActiveVerse(current || null);
+            if (current && onActiveVerseChange) onActiveVerseChange(current);
           }
         }
-        if (current !== activeVerse) {
-          setActiveVerse(current || null);
-          if (current && onActiveVerseChange) onActiveVerseChange(current);
-        }
+      } else if (pendingSeekPctRef.current != null && duration) {
+        // Show immediate visual response while dragging
+        const targetTime = (pendingSeekPctRef.current / 100) * duration;
+        setVisualProgress(targetTime);
       }
+      lastRAFTimeRef.current = ts;
     };
-    el.addEventListener("timeupdate", onTime);
-    el.addEventListener("loadedmetadata", onTime);
-    // apply speed after metadata
-    el.addEventListener("loadedmetadata", () => {
-      el.playbackRate = speed;
-    });
+    rafRef.current = requestAnimationFrame(run);
     return () => {
-      el.removeEventListener("timeupdate", onTime);
-      el.removeEventListener("loadedmetadata", onTime);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-    // STORAGE_POS_KEY intentionally stable (derived from current book/chapter) so not added
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timestamps, activeVerse, onActiveVerseChange, speed, book, chapter]);
+  }, [timestamps, activeVerse, onActiveVerseChange, duration]);
 
   const dispatchState = (next: boolean) => {
     try {
@@ -332,14 +362,25 @@ export default function ChapterAudioPlayer({
       el.removeEventListener("ended", onEnded);
     };
   }, [book, chapter]);
-  const pct = duration ? (progress / duration) * 100 : 0;
+  const pct = duration ? (visualProgress / duration) * 100 : 0;
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const el = audioRef.current;
     if (!el) return;
     const val = parseFloat(e.target.value);
-    el.currentTime = (val / 100) * duration;
+    seekingRef.current = true;
+    pendingSeekPctRef.current = val;
+    // Do not set currentTime every tiny increment (causes stutter); apply on pointerup
   };
+
+  const commitSeek = useCallback(() => {
+    const el = audioRef.current;
+    if (!el || pendingSeekPctRef.current == null) return;
+    const pctVal = pendingSeekPctRef.current;
+    el.currentTime = (pctVal / 100) * (duration || 0);
+    seekingRef.current = false;
+    pendingSeekPctRef.current = null;
+  }, [duration]);
 
   function fmt(t: number) {
     if (!isFinite(t)) return "0:00";
@@ -555,6 +596,8 @@ export default function ChapterAudioPlayer({
             max={100}
             value={pct}
             onChange={seek}
+            onMouseUp={commitSeek}
+            onTouchEnd={commitSeek}
             aria-label="Seek audio"
             className="flex-1 h-1.5 rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-blue-600"
           />
