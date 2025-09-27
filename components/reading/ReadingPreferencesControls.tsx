@@ -6,8 +6,16 @@ import { useThemeMode } from '@/components/theme/ThemeProvider';
 import { useRouter } from 'next/navigation';
 
 interface ReadingPreferencesControlsProps {
-  book: string;
+  book: string; // slug form possibly (underscores)
   chapter: number;
+}
+
+// Helpers to convert between display name and slug
+function toBookSlug(name: string) {
+  return name.trim().replace(/\s+/g, '_');
+}
+function fromBookSlug(slug: string) {
+  return slug.replace(/_/g, ' ');
 }
 
 
@@ -38,7 +46,8 @@ export default function ReadingPreferencesControls({ book, chapter }: ReadingPre
 
   const [books, setBooks] = useState<BookMeta[]>([]);
   const [chapters, setChapters] = useState<number[]>([]);
-  const [selectedBook, setSelectedBook] = useState(book);
+  // Internally keep display form (spaces) for the select UI
+  const [selectedBook, setSelectedBook] = useState(() => fromBookSlug(book));
   const [selectedChapter, setSelectedChapter] = useState(chapter);
   const [loadingBooks, setLoadingBooks] = useState(false);
   const [audioplaying, setAudioplaying] = useState(false);
@@ -93,15 +102,16 @@ interface BookMeta { name: string; numberOfChapters: number }
     }
   }, [books, selectedBook, selectedChapter]);
 
-  const navigate = useCallback((b: string, c: number) => {
-    router.push(`/listen-online/${b}/${c}`);
+  const navigate = useCallback((displayBook: string, c: number) => {
+    const slug = toBookSlug(displayBook);
+    router.push(`/listen-online/${slug}/${c}`);
   }, [router]);
 
   const onBookChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newBook = e.target.value;
-    setSelectedBook(newBook);
+    const newBookDisplay = e.target.value;
+    setSelectedBook(newBookDisplay);
     setSelectedChapter(1);
-    navigate(newBook, 1);
+    navigate(newBookDisplay, 1);
   };
   const onChapterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const chNum = parseInt(e.target.value, 10) || 1;
@@ -124,10 +134,13 @@ interface BookMeta { name: string; numberOfChapters: number }
             className="p-2 text-md rounded border border-gray-400 dark:border-neutral-600 bg-white dark:bg-neutral-700"
             aria-label="Select book"
             >
-            <option value={book}>{book}</option>
-            {books.filter(b => b.name !== book).map(b => (
+            {/* Ensure currently selected slug appears even if not matching fetched display names */}
+            <option value={selectedBook}>{selectedBook}</option>
+            {books
+              .filter(b => b.name !== selectedBook)
+              .map(b => (
                 <option key={b.name} value={b.name}>{b.name}</option>
-            ))}
+              ))}
             </select>
 
             <label htmlFor="navChapter" className="sr-only">Chapter</label>

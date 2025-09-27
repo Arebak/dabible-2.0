@@ -1,13 +1,13 @@
 "use client";
 import React from 'react';
 import { useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { ReadingPreferencesProvider, useReadingPreferences } from '@/components/reading/ReadingPreferencesContext';
 import ReadingPreferencesControls from '@/components/reading/ReadingPreferencesControls';
 import ChapterAudioPlayer from '@/components/reading/ChapterAudioPlayer';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowBack, ArrowBackIos, ArrowForward, ArrowForwardIos } from '@mui/icons-material';
 import { CircleArrowLeft, CircleArrowRight } from 'lucide-react';
 
 interface VerseData { num: number; yo: string; en?: string }
@@ -59,7 +59,7 @@ function VersesView({ book, chapter, verses }: { book: string; chapter: number; 
   const activate = () => { if (!enableActions) setEnableActions(true); };
   const containerClasses = readingMode === 'focus' ? 'max-w-prose mx-auto' : '';
   return (
-    <div className={`${containerClasses} mt-4 md:mt-8 grid gap-6 ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-2' : 'grid-cols-1'} w-full`} style={{ fontSize: `var(--reading-font-size)`, lineHeight: 'var(--reading-line-height)' }} onMouseMove={activate} onTouchStart={activate}>
+    <div className={`${containerClasses} mt-4 md:mt-8 flex gap-1 ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-2' : 'grid-cols-1'} w-full`} style={{ fontSize: `var(--reading-font-size)`, lineHeight: 'var(--reading-line-height)' }} onMouseMove={activate} onTouchStart={activate}>
       <div>
         {/* <h2 className="text-base font-semibold mb-2">Yoruba</h2> */}
         <ol className="space-y-2 list-none">
@@ -122,6 +122,7 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
   const [mountAudio, setMountAudio] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false); // track play state for show/hide
   const pendingToggleRef = useRef(false);
+  const router = useRouter();
 
   // Listen for global audio state (emitted by ChapterAudioPlayer) so we can hide/show without unmounting
   useEffect(() => {
@@ -134,6 +135,24 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
     window.addEventListener('dabible:audioState', stateHandler as EventListener);
     return () => window.removeEventListener('dabible:audioState', stateHandler as EventListener);
   }, []);
+
+  // Auto-advance to next chapter when audio fully ends (if a next chapter exists)
+  useEffect(() => {
+    if (!props.hasNext || !props.nextHref) return; // nothing to do
+    const onEnded = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      // Ensure event corresponds to the chapter currently displayed
+      if (detail && detail.book === props.book && detail.chapter === props.chapter) {
+        // Small delay gives a sense of completion before navigation
+        setTimeout(() => {
+          // Use Next.js router for client transition
+            router.push(props.nextHref as string);
+        }, 800);
+      }
+    };
+    window.addEventListener('dabible:audioEnded', onEnded as EventListener);
+    return () => window.removeEventListener('dabible:audioEnded', onEnded as EventListener);
+  }, [props.book, props.chapter, props.hasNext, props.nextHref, router]);
 
   // Intercept toggle requests when player isn't mounted yet
   useEffect(() => {

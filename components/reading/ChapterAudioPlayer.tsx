@@ -48,7 +48,7 @@ ChapterAudioPlayerProps) {
       const params = new URLSearchParams(window.location.search);
       if (params.get("editTimestamps") === "1") setEditing(true);
     }
-  }, []);
+  }, [book, chapter]);
 
   const STORAGE_POS_KEY = `dabible_audio_pos_${book}_${chapter}`;
   const STORAGE_SPEED_KEY = "dabible_audio_speed_v1";
@@ -238,12 +238,16 @@ ChapterAudioPlayerProps) {
     const onEnded = () => {
       setPlaying(false);
       dispatchState(false);
+      // Emit explicit ended event so parent context can auto-advance chapters
+      try {
+        window.dispatchEvent(new CustomEvent('dabible:audioEnded', { detail: { book, chapter } }));
+      } catch { /* ignore */ }
     };
     el.addEventListener("ended", onEnded);
     return () => {
       el.removeEventListener("ended", onEnded);
     };
-  }, []);
+  }, [book, chapter]);
   const pct = duration ? (progress / duration) * 100 : 0;
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -406,7 +410,7 @@ ChapterAudioPlayerProps) {
         <span>{fmt(progress)}</span>
       </div>
 
-      <div className="flex-1 items-center align-center ">
+      <div className="flex-1 items-center align-center mx-1 ">
         <div className="relative hidden group cursor-pointer select-none" onClick={onSeekBarClick} aria-label="Seek audio" role="slider" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
           <div className="h-2 rounded bg-neutral-300 dark:bg-neutral-600 overflow-hidden">
             <div className="h-full bg-blue-600" style={{ width: `${pct}%` }} />
