@@ -1,6 +1,8 @@
+/** @format */
+
 "use client";
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Clock10, Volume2, VolumeX } from "lucide-react";
 
 interface ChapterAudioPlayerProps {
   src: string | null; // primary resolved URL (could be remote CDN)
@@ -12,16 +14,26 @@ interface ChapterAudioPlayerProps {
 }
 
 // Placeholder timestamp type for future expansion
-interface VerseTimestamp { verse: number; time: number }
+interface VerseTimestamp {
+  verse: number;
+  time: number;
+}
 
-export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onActiveVerseChange, showInlineControls = true }: ChapterAudioPlayerProps) {
+export default function ChapterAudioPlayer({
+  src,
+  book,
+  chapter,
+  verseCount,
+  onActiveVerseChange,
+}: // showInlineControls = true
+ChapterAudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [activeVerse, setActiveVerse] = useState<number | null>(null);
   const [timestamps, setTimestamps] = useState<VerseTimestamp[]>([]);
-  const [timestampStatus, setTimestampStatus] = useState<'idle' | 'loading' | 'ready' | 'missing'>('idle');
+  const [timestampStatus, setTimestampStatus] = useState<"idle" | "loading" | "ready" | "missing">("idle");
   const [speed, setSpeed] = useState(1.0);
   const [error, setError] = useState<string | null>(null);
   const [resumePrompt, setResumePrompt] = useState(false);
@@ -32,37 +44,42 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
 
   // detect editing mode from query param (client-side only)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      if (params.get('editTimestamps') === '1') setEditing(true);
+      if (params.get("editTimestamps") === "1") setEditing(true);
     }
   }, []);
 
   const STORAGE_POS_KEY = `dabible_audio_pos_${book}_${chapter}`;
-  const STORAGE_SPEED_KEY = 'dabible_audio_speed_v1';
-  const STORAGE_VOL_KEY = 'dabible_audio_volume_v1';
+  const STORAGE_SPEED_KEY = "dabible_audio_speed_v1";
+  const STORAGE_VOL_KEY = "dabible_audio_volume_v1";
 
   useEffect(() => {
     let cancelled = false;
-    setTimestampStatus('loading');
+    setTimestampStatus("loading");
     setTimestamps([]);
     (async () => {
-      const url = `/audio-timestamps/${book}/${book}_${String(chapter).padStart(3,'0')}.json`;
+      const url = `/audio-timestamps/${book}/${book}_${String(chapter).padStart(3, "0")}.json`;
       try {
-        const res = await fetch(url, { cache: 'force-cache' });
-        if (!res.ok) { if (!cancelled) setTimestampStatus('missing'); return; }
+        const res = await fetch(url, { cache: "force-cache" });
+        if (!res.ok) {
+          if (!cancelled) setTimestampStatus("missing");
+          return;
+        }
         const data = await res.json();
         if (!cancelled && Array.isArray(data) && data.length) {
           setTimestamps(data);
-          setTimestampStatus('ready');
+          setTimestampStatus("ready");
         } else if (!cancelled) {
-          setTimestampStatus('missing');
+          setTimestampStatus("missing");
         }
       } catch {
-        if (!cancelled) setTimestampStatus('missing');
+        if (!cancelled) setTimestampStatus("missing");
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [book, chapter]);
 
   // Load persisted speed & position
@@ -70,34 +87,49 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
     try {
       const rawSpeed = localStorage.getItem(STORAGE_SPEED_KEY);
       if (rawSpeed) {
-        const s = parseFloat(rawSpeed); if (s >= 0.5 && s <= 2.0) setSpeed(s);
+        const s = parseFloat(rawSpeed);
+        if (s >= 0.5 && s <= 2.0) setSpeed(s);
       }
       const rawVol = localStorage.getItem(STORAGE_VOL_KEY);
       if (rawVol) {
-        const v = parseFloat(rawVol); if (v >= 0 && v <= 1) { setVolume(v); if (v > 0) setLastNonZeroVolume(v); }
+        const v = parseFloat(rawVol);
+        if (v >= 0 && v <= 1) {
+          setVolume(v);
+          if (v > 0) setLastNonZeroVolume(v);
+        }
       }
       const rawPos = localStorage.getItem(STORAGE_POS_KEY);
       if (rawPos) {
-        const t = parseFloat(rawPos); if (t > 5) setResumePrompt(true);
+        const t = parseFloat(rawPos);
+        if (t > 5) setResumePrompt(true);
       }
-    } catch { /* ignore */ }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    } catch {
+      /* ignore */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [book, chapter]);
 
   const applySpeed = useCallback((val: number) => {
     setSpeed(val);
-    try { localStorage.setItem(STORAGE_SPEED_KEY, String(val)); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_SPEED_KEY, String(val));
+    } catch {
+      /* ignore */
+    }
     if (audioRef.current) audioRef.current.playbackRate = val;
   }, []);
 
   // Attach error listener
   useEffect(() => {
-    const el = audioRef.current; if (!el) return;
+    const el = audioRef.current;
+    if (!el) return;
     const onError = () => {
-      setError('Audio unavailable');
+      setError("Audio unavailable");
     };
-    el.addEventListener('error', onError);
-    return () => { el.removeEventListener('error', onError); };
+    el.addEventListener("error", onError);
+    return () => {
+      el.removeEventListener("error", onError);
+    };
   }, [src]);
 
   // timeupdate handling & verse detection
@@ -108,14 +140,18 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
       setProgress(el.currentTime);
       setDuration(el.duration || 0);
       // persist position occasionally
-      try { if (el.currentTime > 0) localStorage.setItem(STORAGE_POS_KEY, el.currentTime.toFixed(1)); } catch { /* ignore */ }
+      try {
+        if (el.currentTime > 0) localStorage.setItem(STORAGE_POS_KEY, el.currentTime.toFixed(1));
+      } catch {
+        /* ignore */
+      }
       if (timestamps.length) {
         // naive linear search (optimize later)
         let current = activeVerse;
         for (let i = 0; i < timestamps.length; i++) {
           const next = timestamps[i];
-            const nextStart = next.time;
-          const following = timestamps[i+1];
+          const nextStart = next.time;
+          const following = timestamps[i + 1];
           const nextEnd = following ? following.time : el.duration + 1;
           if (el.currentTime >= nextStart && el.currentTime < nextEnd) {
             current = next.verse;
@@ -128,13 +164,15 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
         }
       }
     };
-    el.addEventListener('timeupdate', onTime);
-    el.addEventListener('loadedmetadata', onTime);
+    el.addEventListener("timeupdate", onTime);
+    el.addEventListener("loadedmetadata", onTime);
     // apply speed after metadata
-    el.addEventListener('loadedmetadata', () => { el.playbackRate = speed; });
+    el.addEventListener("loadedmetadata", () => {
+      el.playbackRate = speed;
+    });
     return () => {
-      el.removeEventListener('timeupdate', onTime);
-      el.removeEventListener('loadedmetadata', onTime);
+      el.removeEventListener("timeupdate", onTime);
+      el.removeEventListener("loadedmetadata", onTime);
     };
     // STORAGE_POS_KEY intentionally stable (derived from current book/chapter) so not added
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,19 +180,35 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
 
   const dispatchState = (next: boolean) => {
     try {
-      window.dispatchEvent(new CustomEvent('dabible:audioState', { detail: { playing: next }}));
-    } catch { /* ignore */ }
+      window.dispatchEvent(new CustomEvent("dabible:audioState", { detail: { playing: next } }));
+    } catch {
+      /* ignore */
+    }
   };
 
   const togglePlay = useCallback(() => {
-    const el = audioRef.current; if (!el) return;
-    if (el.paused) { el.play(); setPlaying(true); dispatchState(true); } else { el.pause(); setPlaying(false); dispatchState(false); }
+    const el = audioRef.current;
+    if (!el) return;
+    if (el.paused) {
+      el.play();
+      setPlaying(true);
+      dispatchState(true);
+    } else {
+      el.pause();
+      setPlaying(false);
+      dispatchState(false);
+    }
   }, []);
   // Apply volume changes & persist
   useEffect(() => {
-    const el = audioRef.current; if (!el) return;
+    const el = audioRef.current;
+    if (!el) return;
     el.volume = volume;
-    try { localStorage.setItem(STORAGE_VOL_KEY, String(volume)); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_VOL_KEY, String(volume));
+    } catch {
+      /* ignore */
+    }
   }, [volume]);
 
   const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,88 +218,111 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
   };
 
   const toggleMute = () => {
-    setVolume(prev => prev === 0 ? (lastNonZeroVolume || 1) : 0);
+    setVolume((prev) => (prev === 0 ? lastNonZeroVolume || 1 : 0));
   };
   // Listen for global toggle events (from unified preferences bar)
   useEffect(() => {
-    const handler = () => { togglePlay(); };
-    window.addEventListener('dabible:toggleAudio', handler);
-    return () => { window.removeEventListener('dabible:toggleAudio', handler); };
+    const handler = () => {
+      togglePlay();
+    };
+    window.addEventListener("dabible:toggleAudio", handler);
+    return () => {
+      window.removeEventListener("dabible:toggleAudio", handler);
+    };
   }, [togglePlay]);
 
   // Emit state if playing changes due to other reasons (e.g., ended)
   useEffect(() => {
-    const el = audioRef.current; if (!el) return;
-    const onEnded = () => { setPlaying(false); dispatchState(false); };
-    el.addEventListener('ended', onEnded);
-    return () => { el.removeEventListener('ended', onEnded); };
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnded = () => {
+      setPlaying(false);
+      dispatchState(false);
+    };
+    el.addEventListener("ended", onEnded);
+    return () => {
+      el.removeEventListener("ended", onEnded);
+    };
   }, []);
   const pct = duration ? (progress / duration) * 100 : 0;
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const el = audioRef.current; if (!el) return;
+    const el = audioRef.current;
+    if (!el) return;
     const val = parseFloat(e.target.value);
     el.currentTime = (val / 100) * duration;
   };
 
-  function fmt(t: number) { if (!isFinite(t)) return '0:00'; const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+  function fmt(t: number) {
+    if (!isFinite(t)) return "0:00";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${m}:${s}`;
+  }
 
   const onSeekBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = audioRef.current; if (!el || !duration) return;
+    const el = audioRef.current;
+    if (!el || !duration) return;
     const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
     const ratio = (e.clientX - rect.left) / rect.width;
     el.currentTime = Math.max(0, Math.min(duration * ratio, duration - 0.25));
   };
 
   const resumePlayback = () => {
-    const el = audioRef.current; if (!el) return;
+    const el = audioRef.current;
+    if (!el) return;
     try {
       const rawPos = localStorage.getItem(STORAGE_POS_KEY);
       if (rawPos) {
         const t = parseFloat(rawPos);
-        if (isFinite(t) && t < (el.duration - 5)) {
+        if (isFinite(t) && t < el.duration - 5) {
           el.currentTime = t;
         }
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
     setResumePrompt(false);
   };
 
   if (!src) return null; // nothing to render if no path decided
 
-  const verseTicks = (timestamps.length ? timestamps : (verseCount ? Array.from({ length: verseCount }, (_, i) => ({ verse: i+1, time: (duration/(verseCount))*i })) : [])).filter(t => t.time < duration - 0.3);
+  const verseTicks = (timestamps.length ? timestamps : verseCount ? Array.from({ length: verseCount }, (_, i) => ({ verse: i + 1, time: (duration / verseCount) * i })) : []).filter((t) => t.time < duration - 0.3);
   const completedCount = timestamps.length;
   const totalCount = verseCount || Math.max(verseTicks.length, timestamps.length);
   const completionPct = totalCount ? Math.min(100, Math.round((completedCount / totalCount) * 100)) : 0;
 
   const captureCurrent = (verse: number) => {
-    const el = audioRef.current; if (!el) return;
+    const el = audioRef.current;
+    if (!el) return;
     const time = parseFloat(el.currentTime.toFixed(2));
-    setTimestamps(prev => {
-      const without = prev.filter(t => t.verse !== verse);
-      const next = [...without, { verse, time }].sort((a,b) => a.verse - b.verse);
+    setTimestamps((prev) => {
+      const without = prev.filter((t) => t.verse !== verse);
+      const next = [...without, { verse, time }].sort((a, b) => a.verse - b.verse);
       return next;
     });
     setDirty(true);
   };
 
   const deleteTimestamp = (verse: number) => {
-    setTimestamps(prev => prev.filter(t => t.verse !== verse));
+    setTimestamps((prev) => prev.filter((t) => t.verse !== verse));
     setDirty(true);
   };
 
   const exportJson = () => {
-    const blob = new Blob([JSON.stringify(timestamps, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
+    const blob = new Blob([JSON.stringify(timestamps, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `${book}_${String(chapter).padStart(3,'0')}_timestamps.json`;
+    a.download = `${book}_${String(chapter).padStart(3, "0")}_timestamps.json`;
     a.click();
     URL.revokeObjectURL(a.href);
     setDirty(false);
   };
 
   const sortByTime = () => {
-    setTimestamps(prev => [...prev].sort((a,b) => a.time - b.time));
+    setTimestamps((prev) => [...prev].sort((a, b) => a.time - b.time));
     setDirty(true);
   };
 
@@ -255,44 +332,51 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
       try {
         const parsed = JSON.parse(String(reader.result));
         if (Array.isArray(parsed)) {
-          const clean = parsed.filter(x => typeof x?.verse === 'number' && typeof x?.time === 'number');
-          setTimestamps(clean.sort((a,b) => a.verse - b.verse));
+          const clean = parsed.filter((x) => typeof x?.verse === "number" && typeof x?.time === "number");
+          setTimestamps(clean.sort((a, b) => a.verse - b.verse));
           setDirty(true);
         }
-      } catch { /* ignore */ }
+      } catch {
+        /* ignore */
+      }
     };
     reader.readAsText(file);
   };
 
-  const activeEditingList = editing ? (verseCount ? Array.from({ length: verseCount }, (_, i) => i + 1) : timestamps.map(t => t.verse)) : [];
+  const activeEditingList = editing ? (verseCount ? Array.from({ length: verseCount }, (_, i) => i + 1) : timestamps.map((t) => t.verse)) : [];
 
   return (
-    <div className="mt-6 mb-4 flex p-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
-      <div className="flex flex-wrap items-center gap-2 mb-2">
-        {showInlineControls && (
+    <div className="flex p-1 items-center rounded-bl-md rounded-br-md bg-[#f0f8ff] dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
+      <div className="flex flex-wrap items-center gap-4">
+        {/* {showInlineControls && (
           <button onClick={togglePlay} className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-500" aria-label={playing ? 'Pause audio' : 'Play audio'}>
             {playing ? 'Pause' : 'Play'}
           </button>
-        )}
-        <div className="flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
-          <span>{fmt(progress)}</span>
-          {/* <span aria-hidden>/</span>
-          <span>{fmt(duration)}</span> */}
-        </div>
+        )} */}
+
+        <div className="hidden md:flex items-center">
         {activeVerse && <span className="text-[10px] italic">Verse {activeVerse}</span>}
-        <div className="flex items-center gap-1 ml-2">
-          <label htmlFor={`speed-${book}-${chapter}`} className="sr-only">Playback speed</label>
-          <select id={`speed-${book}-${chapter}`} value={speed} onChange={e => applySpeed(parseFloat(e.target.value))} className="border border-neutral-300 dark:border-neutral-600 rounded px-1 py-0.5 bg-white dark:bg-neutral-700">
-            {[0.75,1.0,1.25,1.5,1.75,2.0].map(s => <option key={s} value={s}>{s}x</option>)}
+        </div>
+
+        {/* SPEED CONTROLS */}
+        
+        <div className="hidden md:flex items-center">
+          <label htmlFor={`speed-${book}-${chapter}`} className="">
+            <Clock10 className="w-4 h-4" aria-hidden="true" /> 
+            <span className="sr-only">Speed:</span>
+          </label>
+          <select id={`speed-${book}-${chapter}`} value={speed} onChange={(e) => applySpeed(parseFloat(e.target.value))} className="border-0 border-neutral-300 dark:border-neutral-600 rounded px-1 py-0.5 bg-transparent dark:bg-neutral-700">
+            {[0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((s) => (
+              <option key={s} value={s}>
+                {s}x
+              </option>
+            ))}
           </select>
         </div>
-        <div className="flex items-center gap-1 ml-2 w-32">
-          <button
-            type="button"
-            onClick={toggleMute}
-            aria-label={volume === 0 ? 'Unmute audio' : 'Mute audio'}
-            className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-          >
+
+        {/* VOLUME CONTROLS */}
+        <div className="hidden md:flex items-center gap-1 ml-2 w-28">
+          <button type="button" onClick={toggleMute} aria-label={volume === 0 ? "Unmute audio" : "Mute audio"} className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
             {volume === 0 ? <VolumeX className="w-4 h-4" aria-hidden="true" /> : <Volume2 className="w-4 h-4" aria-hidden="true" />}
           </button>
           <input
@@ -303,32 +387,41 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
             value={volume}
             onChange={onVolumeChange}
             aria-label="Volume"
-            className="flex-1 h-1.5 cursor-pointer appearance-none rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:cursor-pointer"
+            className="flex h-1.5 cursor-pointer appearance-none rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:cursor-pointer w-full"
           />
         </div>
-        <span className="ml-auto text-[10px] text-neutral-500 dark:text-neutral-400">
-          {timestampStatus === 'ready' && `Sync: ${completionPct}%`}
-          {timestampStatus === 'missing' && 'Sync: none'}
-          {timestampStatus === 'loading' && 'Sync: …'}
-        </span>
-      </div>
 
-    <div className='flex-1'>
-        <div className="relative group cursor-pointer select-none" onClick={onSeekBarClick} aria-label="Seek audio" role="slider" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
-            <div className="h-2 rounded bg-neutral-300 dark:bg-neutral-600 overflow-hidden">
-            <div className="h-full bg-blue-600" style={{ width: `${pct}%` }} />
-            </div>
-            <div className="absolute inset-0 pointer-events-none">
-            {verseTicks.map(t => {
-                const left = duration ? (t.time / duration) * 100 : 0;
-                const isActive = activeVerse === t.verse;
-                return <div key={t.verse} className={`absolute top-0 h-2 w-[1px] ${isActive ? 'bg-orange-500' : 'bg-white/70 dark:bg-black/50'} transition-colors`} style={{ left: `${left}%` }} />;
-            })}
-            </div>
+        {/* SYNC STATUS */}
+        <div className="hidden md:flex">
+        <span className="ml-auto text-[10px] text-neutral-500 dark:text-neutral-400">
+          {timestampStatus === "ready" && `Sync: ${completionPct}%`}
+          {timestampStatus === "missing" && "Sync: none"}
+          {timestampStatus === "loading" && "Sync: …"}
+        </span>
         </div>
         
-        <div className="flex items-center gap-2 mt-2">
-            <input
+      </div>
+
+      <div className="flex items-center md:ml-8 text-neutral-600 dark:text-neutral-300">
+        <span>{fmt(progress)}</span>
+      </div>
+
+      <div className="flex-1 items-center align-center ">
+        <div className="relative hidden group cursor-pointer select-none" onClick={onSeekBarClick} aria-label="Seek audio" role="slider" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
+          <div className="h-2 rounded bg-neutral-300 dark:bg-neutral-600 overflow-hidden">
+            <div className="h-full bg-blue-600" style={{ width: `${pct}%` }} />
+          </div>
+          <div className="absolute inset-0 pointer-events-none">
+            {verseTicks.map((t) => {
+              const left = duration ? (t.time / duration) * 100 : 0;
+              const isActive = activeVerse === t.verse;
+              return <div key={t.verse} className={`absolute top-0 h-2 w-[1px] ${isActive ? "bg-orange-500" : "bg-white/70 dark:bg-black/50"} transition-colors`} style={{ left: `${left}%` }} />;
+            })}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
             type="range"
             min={0}
             max={100}
@@ -336,27 +429,59 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
             onChange={seek}
             aria-label="Seek audio"
             className="flex-1 h-1.5 rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-blue-600"
-            />
-            {resumePrompt && !playing && !error && <button onClick={resumePlayback} className="text-[10px] underline" type="button">Resume</button>}
+          />
+          {resumePrompt && !playing && !error && (
+            <button onClick={resumePlayback} className="text-[10px] underline" type="button">
+              Resume
+            </button>
+          )}
         </div>
-        {error && <div className="mt-2 text-[11px] text-red-600 dark:text-red-400">{error} – <button onClick={() => { setError(null); audioRef.current?.load(); }} className="underline">Retry</button></div>}
+        {error && (
+          <div className="mt-2 text-[11px] text-red-600 dark:text-red-400">
+            {error} –{" "}
+            <button
+              onClick={() => {
+                setError(null);
+                audioRef.current?.load();
+              }}
+              className="underline"
+            >
+              Retry
+            </button>
+          </div>
+        )}
         <audio ref={audioRef} src={src || undefined} preload="none" />
-    </div>
+      </div>
 
-    <div className="flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
+      <div className="flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
         <span>{fmt(duration)}</span>
-    </div>
-    
+      </div>
+
       {editing && (
         <div className="mt-4 border-t pt-3 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-semibold">Timestamp Editor</span>
-            <button onClick={exportJson} className="px-2 py-0.5 rounded bg-emerald-600 text-white hover:bg-emerald-500">Export JSON{dirty && '*'}</button>
-            <button onClick={sortByTime} className="px-2 py-0.5 rounded bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-600 hover:text-white">Sort by Time</button>
-            <label className="text-[11px] cursor-pointer">Import
-              <input type="file" accept="application/json" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) importJson(f); }} />
+            <button onClick={exportJson} className="px-2 py-0.5 rounded bg-emerald-600 text-white hover:bg-emerald-500">
+              Export JSON{dirty && "*"}
+            </button>
+            <button onClick={sortByTime} className="px-2 py-0.5 rounded bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-600 hover:text-white">
+              Sort by Time
+            </button>
+            <label className="text-[11px] cursor-pointer">
+              Import
+              <input
+                type="file"
+                accept="application/json"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) importJson(f);
+                }}
+              />
             </label>
-            <span className="text-[10px] text-neutral-500">{completedCount}/{totalCount} verses</span>
+            <span className="text-[10px] text-neutral-500">
+              {completedCount}/{totalCount} verses
+            </span>
           </div>
           <div className="max-h-60 overflow-auto pr-1">
             <table className="w-full text-[11px] border-collapse">
@@ -368,15 +493,21 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
                 </tr>
               </thead>
               <tbody>
-                {activeEditingList.map(v => {
-                  const existing = timestamps.find(t => t.verse === v);
+                {activeEditingList.map((v) => {
+                  const existing = timestamps.find((t) => t.verse === v);
                   return (
                     <tr key={v} className="odd:bg-neutral-50 dark:odd:bg-neutral-800">
                       <td className="px-1 py-0.5 font-medium">{v}</td>
-                      <td className="px-1 py-0.5">{existing ? existing.time.toFixed(2) : '—'}</td>
+                      <td className="px-1 py-0.5">{existing ? existing.time.toFixed(2) : "—"}</td>
                       <td className="px-1 py-0.5 flex gap-1">
-                        <button onClick={() => captureCurrent(v)} className="px-1 rounded bg-blue-500 text-white hover:bg-blue-400">Set</button>
-                        {existing && <button onClick={() => deleteTimestamp(v)} className="px-1 rounded bg-red-600 text-white hover:bg-red-500" aria-label="Delete timestamp">Del</button>}
+                        <button onClick={() => captureCurrent(v)} className="px-1 rounded bg-blue-500 text-white hover:bg-blue-400">
+                          Set
+                        </button>
+                        {existing && (
+                          <button onClick={() => deleteTimestamp(v)} className="px-1 rounded bg-red-600 text-white hover:bg-red-500" aria-label="Delete timestamp">
+                            Del
+                          </button>
+                        )}
                       </td>
                     </tr>
                   );
@@ -384,7 +515,13 @@ export default function ChapterAudioPlayer({ src, book, chapter, verseCount, onA
               </tbody>
             </table>
           </div>
-          <p className="text-[10px] text-neutral-500 leading-snug">Use Play then Set at each verse start. Export and replace file under <code>public/audio-timestamps/{book}/{book}_{String(chapter).padStart(3,'0')}.json</code>.</p>
+          <p className="text-[10px] text-neutral-500 leading-snug">
+            Use Play then Set at each verse start. Export and replace file under{" "}
+            <code>
+              public/audio-timestamps/{book}/{book}_{String(chapter).padStart(3, "0")}.json
+            </code>
+            .
+          </p>
         </div>
       )}
     </div>

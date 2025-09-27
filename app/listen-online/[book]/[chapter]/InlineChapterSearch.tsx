@@ -13,7 +13,7 @@ export default function InlineChapterSearch() {
     <div className="font-extralight font-sanssss">
       <div className="flex items-center justify-between mb-2">
         {/* <h2 className="text-sm font-semibold tracking-wide text-gray-700 dark:text-gray-200">Search Scripture</h2> */}
-        <span className="text-[10px] text-gray-400 dark:text-gray-500">Press / for quick search</span>
+        <span className="text-[10px] text-gray-400 dark:text-gray-500 hidden md:block">Press / for quick search</span>
       </div>
       <SearchClient />
     </div>

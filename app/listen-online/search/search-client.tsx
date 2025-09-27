@@ -170,7 +170,7 @@ export default function SearchClient() {
   return (
     <section aria-labelledby="search-heading relative">
       <h2 id="search-heading" className="sr-only">Bible Search</h2>
-      <form onSubmit={onSubmit} className="mb-4 flex-col gap-3 md:flex-row md:items-end" role="search" aria-label="Bible search form">
+      <form onSubmit={onSubmit} className="flex-col gap-3 md:flex-row md:items-end" role="search" aria-label="Bible search form">
         <div className='flex mb-2'>
         <div className="flex w-full">
           {/* <label htmlFor="bible-search" className="block text-sm font-medium mb-1">Search Query</label> */}
@@ -194,7 +194,7 @@ export default function SearchClient() {
           {loading && !loaded ? 'Loading…' : 'Search'}
         </button> */}
         </div>
-        <div className="flex items-center gap-2 text-xs">
+        <div className="flex items-center justify-center md:justify-start gap-2 text-xs">
           <fieldset className="flex gap-2" aria-label="Language scope">
             <legend className="sr-only">Language scope</legend>
             <label className="flex items-center gap-1 cursor-pointer">
@@ -249,7 +249,7 @@ export default function SearchClient() {
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">No verses matched all your terms.</p>
       )}
       {!tokens.length && (
-        <p className="text-xs text-gray-500 italic dark:text-gray-400 mt-0 absolute right-0 bottom-0">Tip: Enter multiple words to narrow results. All words must appear in a verse.</p>
+        <p className="text-xs text-gray-500 italic dark:text-gray-400 mt-0 absolute right-0 bottom-0 hidden md:block">Tip: Enter multiple words to narrow results. All words must appear in a verse.</p>
       )}
     </section>
   );
