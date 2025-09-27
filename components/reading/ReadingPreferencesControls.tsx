@@ -23,6 +23,15 @@ function AudioToggleButton({ playing, onImmediateOptimisticToggle }: { playing: 
   const toggle = () => {
     // Optimistically update parent (optional) so UI feels instant
     onImmediateOptimisticToggle?.(!playing);
+    try {
+      const KEY = 'dabible_audio_autoplay_v1';
+      // If we are about to start playing, set autoplay true; if we are stopping, clear autoplay
+      if (!playing) {
+        localStorage.setItem(KEY, 'true');
+      } else {
+        localStorage.setItem(KEY, 'false');
+      }
+    } catch { /* ignore */ }
     try { window.dispatchEvent(new Event('dabible:toggleAudio')); } catch { /* ignore */ }
   };
   return (

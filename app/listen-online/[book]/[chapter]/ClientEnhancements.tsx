@@ -166,6 +166,23 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
     return () => window.removeEventListener('dabible:toggleAudio', toggleHandler);
   }, [mountAudio]);
 
+  // On chapter change, if user previously indicated autoplay (persistent) then mount & start
+  useEffect(() => {
+    try {
+      const KEY = 'dabible_audio_autoplay_v1';
+      const shouldAuto = localStorage.getItem(KEY) === 'true';
+      if (shouldAuto) {
+        if (!mountAudio) {
+          pendingToggleRef.current = true;
+          setMountAudio(true);
+        } else {
+          // Already mounted: just trigger play
+          setTimeout(() => { window.dispatchEvent(new Event('dabible:toggleAudio')); }, 0);
+        }
+      }
+    } catch { /* ignore */ }
+  }, [props.book, props.chapter, mountAudio]);
+
   // After player mounts, if there was a pending toggle, dispatch it again so the real player handles it
   useEffect(() => {
     if (mountAudio && pendingToggleRef.current) {
