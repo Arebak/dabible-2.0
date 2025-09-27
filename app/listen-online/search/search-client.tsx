@@ -549,7 +549,7 @@ export default function SearchClient() {
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">No verses matched all your terms.</p>
       )}
   {!parsedParts.length && !referenceMode && !ambiguousRef && (
-  <p className="text-xs text-gray-500 italic dark:text-gray-400 mt-0 absolute right-4 bottom-0 hidden md:block">Tips: Use quotes for exact phrases (e.g. &quot;ikun omi&quot;). You can also type a reference like John 3:16, John 3:16-18 or John 3:16,18,20.</p>
+  <p className="text-xs text-gray-500 italic dark:text-gray-400 mt-0 absolute right-4 bottom-0 hidden md:block">Tips: Use quotes for exact phrases (e.g. &quot;ikun omi&quot;), or a reference like John 3:16, John 3:16-18.</p>
       )}
     </section>
   );

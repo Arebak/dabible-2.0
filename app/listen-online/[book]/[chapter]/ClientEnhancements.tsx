@@ -69,17 +69,15 @@ function VersesView({ book, chapter, verses, anchorHighlightSet }: { book: strin
               id={`${book}-${chapter}-${v.num}`}
               className={`group relative rounded-sm ${highlight}`}
             >
-              <div className={`grid ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-[2rem_1fr_1fr]' : 'grid-cols-[2rem_1fr]'} gap-3 items-start`}>
-                <span className="text-right select-none text-[14px] font-medium text-gray-500 dark:text-gray-400 pt-0.5" aria-hidden>{v.num}</span>
-                <div className="flex flex-col gap-1">
-                  <p className="text-gray-900 dark:text-gray-100" lang="yo">{v.yo}</p>
+              <div className={`flex ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-[2rem_1fr_1fr]' : 'grid-cols-[2rem_1fr]'} gap-3 items-start`}>
+                <div className="flex flex-1 flex-row gap-2">
+                    <span className="text-right select-none text-[80%] font-bold text-[#C8385E] dark:text-gray-400 pt-0.5" aria-hidden>{v.num}</span>
+                    <p className="text-gray-900 dark:text-gray-100" lang="yo">{v.yo}</p>
                 </div>
                 {showParallel && readingMode !== 'focus' && (
-                  <div className="flex flex-col gap-1">
-                    <p className="flex flex-row gap-3" lang="en">
-                      <span className="text-right select-none text-[14px] font-medium text-gray-500 dark:text-gray-400 pt-0.5">{v.num}</span>
-                      <span className='text-gray-900 dark:text-gray-100'>{v.en || ''}</span>
-                    </p>
+                  <div className="flex flex-1 flex-row gap-2"  lang="en">
+                      <span className="text-right select-none text-[80%] font-bold text-[#C8385E] dark:text-gray-400 pt-0.5">{v.num}</span>
+                      <p className='text-gray-900 dark:text-gray-100'>{v.en || ''}</p>
                   </div>
                 )}
               </div>
