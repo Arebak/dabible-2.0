@@ -184,7 +184,7 @@ const useBible = (initialLanguage: string, options: UseBibleOptions = {}) => {
     if (selectedBook && currentChapter < selectedBook.numberOfChapters) {
       setCurrentChapter(currentChapter + 1);
       if (options.syncUrl) {
-        window.history.pushState({}, '', `/listen-online/${selectedBook.name}/${currentChapter + 1}`);
+        window.history.pushState({}, '', `/listen-online/${selectedBook.name.replaceAll(" ", "_")}/${currentChapter + 1}`);
       }
 
     }
@@ -194,7 +194,7 @@ const useBible = (initialLanguage: string, options: UseBibleOptions = {}) => {
     if (selectedBook && currentChapter > 1) {
       setCurrentChapter(currentChapter - 1);
       if (options.syncUrl) {
-        window.history.pushState({}, '', `/listen-online/${selectedBook.name}/${currentChapter - 1}`);
+        window.history.pushState({}, '', `/listen-online/${selectedBook.name.replaceAll(" ", "_")}/${currentChapter - 1}`);
       }
     }
   };
@@ -209,7 +209,7 @@ const useBible = (initialLanguage: string, options: UseBibleOptions = {}) => {
       return;
     }
     // push current state into URL
-    window.history.replaceState({}, '', `/listen-online/${selectedBook.name}/${currentChapter}`);
+    window.history.replaceState({}, '', `/listen-online/${selectedBook.name.replaceAll(" ", "_")}/${currentChapter}`);
   }, [selectedBook, currentChapter, options.syncUrl]);
 
   // removed second effect; handled in combined effect above

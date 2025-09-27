@@ -172,6 +172,26 @@
   --sidebar-ring: #ff0;
 }
 
+.dark header.bg-white,
+.dark section.bg-white,
+.dark footer.text-white {
+  background-color: black;
+  color: white;
+}
+
+.dark button.text-gray-700{
+  color: rgb(177, 177, 177);
+}
+.dark p,
+.dark button.text-primary-foreground, 
+.dark button.text-gray-700:hover{
+  color: white;
+}
+
+.dark p.text-black{
+  color: black;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
