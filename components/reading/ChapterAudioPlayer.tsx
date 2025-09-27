@@ -40,8 +40,34 @@ export default function ChapterAudioPlayer({
   const [resumePrompt, setResumePrompt] = useState(false);
   const [editing, setEditing] = useState<boolean>(false);
   const [dirty, setDirty] = useState(false);
-  const [volume, setVolume] = useState(1); // 0..1
-  const [lastNonZeroVolume, setLastNonZeroVolume] = useState(1);
+  // Initialize volume & last non-zero volume from storage synchronously to avoid loud flash on autoplay
+  const STORAGE_VOL_KEY = "dabible_audio_volume_v1";
+  const STORAGE_VOL_LAST_KEY = "dabible_audio_volume_last_v1";
+  const initialVolume = (() => {
+    if (typeof window === 'undefined') return 1;
+    try {
+      const raw = localStorage.getItem(STORAGE_VOL_KEY);
+      if (raw) {
+        const v = parseFloat(raw);
+        if (v >= 0 && v <= 1) return v;
+      }
+    } catch { /* ignore */ }
+    return 1;
+  })();
+  const initialLastVolume = (() => {
+    if (typeof window === 'undefined') return 1;
+    try {
+      const raw = localStorage.getItem(STORAGE_VOL_LAST_KEY);
+      if (raw) {
+        const v = parseFloat(raw);
+        if (v > 0 && v <= 1) return v; // must be non-zero
+      }
+    } catch { /* ignore */ }
+    // fallback to stored current volume if non-zero else 1
+    return initialVolume > 0 ? initialVolume : 1;
+  })();
+  const [volume, setVolume] = useState(initialVolume); // 0..1
+  const [lastNonZeroVolume, setLastNonZeroVolume] = useState(initialLastVolume);
   const [autoplayEnabled, setAutoplayEnabled] = useState(false);
   const [autoAdvanceEnabled, setAutoAdvanceEnabled] = useState(true);
 
@@ -79,7 +105,7 @@ export default function ChapterAudioPlayer({
   const STORAGE_POS_KEY = `dabible_audio_pos_${book}_${chapter}`;
   const GLOBAL_SPEED_KEY = "dabible_audio_speed_v1"; // legacy global
   const STORAGE_SPEED_KEY = `dabible_audio_speed_${book}_${chapter}`; // per-chapter
-  const STORAGE_VOL_KEY = "dabible_audio_volume_v1";
+  // STORAGE_VOL_KEY defined above (moved earlier for initializer)
 
   useEffect(() => {
     let cancelled = false;
@@ -109,7 +135,7 @@ export default function ChapterAudioPlayer({
     };
   }, [book, chapter]);
 
-  // Load persisted speed & position
+  // Load persisted speed & position (volume already hydrated synchronously)
   useEffect(() => {
     try {
       // Prefer per-chapter, fallback to legacy global once, then write per-chapter
@@ -125,14 +151,7 @@ export default function ChapterAudioPlayer({
           if (s >= 0.5 && s <= 2.0) { setSpeed(s); try { localStorage.setItem(STORAGE_SPEED_KEY, String(s)); } catch {} }
         }
       }
-      const rawVol = localStorage.getItem(STORAGE_VOL_KEY);
-      if (rawVol) {
-        const v = parseFloat(rawVol);
-        if (v >= 0 && v <= 1) {
-          setVolume(v);
-          if (v > 0) setLastNonZeroVolume(v);
-        }
-      }
+      // volume already loaded in initializer; no need to reload here
       const rawPos = localStorage.getItem(STORAGE_POS_KEY);
       if (rawPos) {
         const t = parseFloat(rawPos);
@@ -235,13 +254,16 @@ export default function ChapterAudioPlayer({
       dispatchState(false);
     }
   }, []);
-  // Apply volume changes & persist
+  // Apply volume changes & persist (including last non-zero volume)
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
     el.volume = volume;
     try {
       localStorage.setItem(STORAGE_VOL_KEY, String(volume));
+      if (volume > 0) {
+        localStorage.setItem(STORAGE_VOL_LAST_KEY, String(volume));
+      }
     } catch {
       /* ignore */
     }
@@ -254,7 +276,7 @@ export default function ChapterAudioPlayer({
   };
 
   const toggleMute = () => {
-    setVolume((prev) => (prev === 0 ? lastNonZeroVolume || 1 : 0));
+    setVolume((prev) => (prev === 0 ? (lastNonZeroVolume > 0 ? lastNonZeroVolume : 1) : 0));
   };
   // Listen for global toggle events (from unified preferences bar)
   useEffect(() => {
@@ -415,14 +437,14 @@ export default function ChapterAudioPlayer({
     <div className="flex p-1 items-center rounded-bl-md rounded-br-md bg-[#f0f8ff] dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
       <div className="flex flex-wrap items-center gap-4">
         {/* Autoplay indicators & toggles */}
-        <div className="flex items-center gap-2">
+        <div className="md:flex items-center gap-2 hidden">
           {autoplayEnabled && (
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-600 text-white">Auto Play On</span>
+            <span className="text-[10px] cursor-pointer px-2 py-0.5 rounded-full bg-emerald-600 text-white">Auto Play On</span>
           )}
           <button
             type="button"
             onClick={toggleAutoplayPref}
-            className={`text-[10px] px-2 py-0.5 rounded border ${autoplayEnabled ? 'border-emerald-600 text-emerald-700 dark:text-emerald-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
+            className={`text-[10px] cursor-pointer px-2 py-0.5 rounded border ${autoplayEnabled ? 'border-emerald-600 text-emerald-700 dark:text-emerald-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
             aria-pressed={autoplayEnabled}
             aria-label="Toggle auto play preference"
           >
@@ -432,7 +454,7 @@ export default function ChapterAudioPlayer({
             <button
               type="button"
               onClick={toggleAutoAdvancePref}
-              className={`text-[10px] px-2 py-0.5 rounded border ${autoAdvanceEnabled ? 'border-blue-600 text-blue-700 dark:text-blue-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
+              className={`text-[10px] cursor-pointer px-2 py-0.5 rounded border ${autoAdvanceEnabled ? 'border-blue-600 text-blue-700 dark:text-blue-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
               aria-pressed={autoAdvanceEnabled}
               aria-label="Toggle auto advance to next chapter"
             >
@@ -444,7 +466,7 @@ export default function ChapterAudioPlayer({
             <button
               type="button"
               aria-label="Explain Auto Play vs Auto-Advance"
-              className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="p-1 rounded cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <HelpCircle className="w-4 h-4" aria-hidden="true" />
             </button>
@@ -467,11 +489,11 @@ export default function ChapterAudioPlayer({
         {/* SPEED CONTROLS */}
         
         <div className="hidden md:flex items-center">
-          <label htmlFor={`speed-${book}-${chapter}`} className="">
+          <label htmlFor={`speed-${book}-${chapter}`} className="flex gap-1">
             <Clock10 className="w-4 h-4" aria-hidden="true" /> 
-            <span className="sr-only">Speed:</span>
+            <span className="mr-1 text-[12px]">Speed:</span>
           </label>
-          <select id={`speed-${book}-${chapter}`} value={speed} onChange={(e) => applySpeed(parseFloat(e.target.value))} className="border-0 border-neutral-300 dark:border-neutral-600 rounded px-1 py-0.5 bg-transparent dark:bg-neutral-700">
+          <select id={`speed-${book}-${chapter}`} value={speed} onChange={(e) => applySpeed(parseFloat(e.target.value))} className="border-1 cursor-pointer rounded px-1 py-0.5 bg-transparent border-emerald-600 text-emerald-700 dark:text-emerald-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-[10px]" aria-label="Playback speed">
             {[0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((s) => (
               <option key={s} value={s}>
                 {s}x
@@ -493,7 +515,7 @@ export default function ChapterAudioPlayer({
             value={volume}
             onChange={onVolumeChange}
             aria-label="Volume"
-            className="flex h-1.5 cursor-pointer appearance-none rounded bg-neutral-300 dark:bg-neutral-600 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:cursor-pointer w-full"
+            className="cursor-pointer w-full"
           />
         </div>
 

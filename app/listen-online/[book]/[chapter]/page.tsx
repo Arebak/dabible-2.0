@@ -240,7 +240,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="relative bg-white overflow-hidden pt-10 md:pt-[70px]  min-h-[20vh]">
+      <section className="relative bg-white overflow-hidden pt-8 md:pt-[70px]  min-h-[20vh]">
         {/* Faded oval background */}
         <div
           className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[300px] rounded-full"
@@ -288,7 +288,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
       
 
       {/* Add Search Bar Here */}
-      <div className="max-w-3xl mx-auto px-4 md:mb-4 -translate-y-32">
+      <div className="max-w-3xl mx-auto px-4 md:mb-4 -translate-y-40 md:-translate-y-32">
         <h1 className="text-xl sm:text-2xl text-center md:text-3xl lg:text-4xl font-bold text-[#023E8A] mb-4 md:mb-6 font-domine">
             {params.book} {params.chapter}
         </h1>
@@ -296,7 +296,7 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
       </div>
 
       {/* Client Enhancements (hydrated on client) */}
-      <div className="-translate-y-28">
+      <div className="-translate-y-34 md:-translate-y-28">
       <ClientEnhancements
           book={initialBook}
           chapter={initialChapter}

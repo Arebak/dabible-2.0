@@ -65,7 +65,7 @@ function VersesView({ book, chapter, verses }: { book: string; chapter: number; 
         <ol className="space-y-2 list-none">
           {verses.map(v => (
             <li key={v.num} id={`${book}-${chapter}-${v.num}`} className="flex items-start gap-2 group relative">
-              <span className="w-8 text-right pr-1 select-none text-[11px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
+              <span className="w-8 text-right pr-1 select-none text-[14px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
               <p className="text-gray-900 dark:text-gray-100 flex-1" lang="yo">{v.yo}</p>
               {enableActions && <VerseActions verse={v} book={book} chapter={chapter} />}
             </li>
@@ -78,7 +78,7 @@ function VersesView({ book, chapter, verses }: { book: string; chapter: number; 
           <ol className="space-y-2 list-none">
             {verses.map(v => (
               <li key={v.num} id={`${book}-${chapter}-${v.num}-en`} className="flex items-start gap-2 group relative">
-                <span className="w-8 text-right pr-1 select-none text-[11px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
+                <span className="w-8 text-right pr-1 select-none text-[14px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
                 <p className="text-gray-700 dark:text-gray-300 flex-1" lang="en">{v.en || ''}</p>
                 {enableActions && <VerseActions verse={v} book={book} chapter={chapter} />}
               </li>

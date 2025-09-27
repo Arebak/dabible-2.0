@@ -40,7 +40,7 @@ function AudioToggleButton({ playing, onImmediateOptimisticToggle }: { playing: 
       onClick={toggle}
       aria-pressed={playing}
       aria-label={playing ? 'Pause audio' : 'Play audio'}
-  className={`inline-flex items-center gap-2 px-2 md:px-8 py-2 rounded-full text-white text-[14px] md:text-[13px] font-medium shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${playing ? 'bg-[#a13b3b] hover:bg-[#892d2d]' : 'bg-[#BD2F54] hover:bg-[#a52a4b]'}`}
+  className={`inline-flex items-center gap-2 px-2 md:px-8 py-2 rounded-full text-white text-[14px] md:text-[13px] cursor-pointer font-medium shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${playing ? 'bg-[#a13b3b] hover:bg-[#892d2d]' : 'bg-[#BD2F54] hover:bg-[#a52a4b]'}`}
     >
       {playing ? <Pause className="w-5 h-5" aria-hidden="true" /> : <Play className="w-5 h-5" aria-hidden="true" />}
       <span className='hidden md:block'>{playing ? 'Stop Listening' : 'Start Listening'}</span>
@@ -140,7 +140,7 @@ interface BookMeta { name: string; numberOfChapters: number }
             id="navBook"
             value={selectedBook}
             onChange={onBookChange}
-            className="p-2 text-md rounded border border-gray-400 dark:border-neutral-600 bg-white dark:bg-neutral-700"
+            className="p-2 text-md rounded cursor-pointer border border-gray-400 dark:border-neutral-600 bg-white dark:bg-neutral-700"
             aria-label="Select book"
             >
             {/* Ensure currently selected slug appears even if not matching fetched display names */}
@@ -157,7 +157,7 @@ interface BookMeta { name: string; numberOfChapters: number }
             id="navChapter"
             value={selectedChapter}
                 onChange={onChapterChange}
-            className="p-2 text-md rounded border border-gray-400 dark:border-neutral-600 bg-white dark:bg-neutral-700"
+            className="p-2 text-md rounded border cursor-pointer border-gray-400 dark:border-neutral-600 bg-white dark:bg-neutral-700"
             aria-label="Select chapter"
             >
             {chapters.length === 0 && <option value={chapter}>{chapter}</option>}
@@ -172,7 +172,7 @@ interface BookMeta { name: string; numberOfChapters: number }
             aria-label={showParallel ? 'Disable parallel Bible view' : 'Enable parallel Bible view'}
             aria-pressed={showParallel}
             onClick={() => setShowParallel(!showParallel)}
-            className={`inline-flex items-center gap-2 px-2 md:px-4 py-2 rounded-full text-[13px] md:text-[14px] font-medium shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${showParallel ? 'bg-[#242424] text-white hover:bg-[#121212]' : 'bg-white text-[#242424] border border-gray-400 hover:border-[#C8385E]'}`}
+            className={`inline-flex items-center gap-2 px-2 md:px-4 py-2 rounded-full text-[13px] md:text-[14px] font-medium shadow transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${showParallel ? 'bg-[#242424] text-white hover:bg-[#121212]' : 'bg-white text-[#242424] border border-gray-400 hover:border-[#C8385E]'}`}
             >
             {!showParallel ? 
                 <span className='flex gap-2 items-center'>
@@ -211,6 +211,7 @@ interface BookMeta { name: string; numberOfChapters: number }
                 value={fontSize}
                 onChange={e => setFontSize(parseFloat(e.target.value))}
                 aria-label="Adjust font size"
+                className='cursor-pointer'
                 />
                 {/* <span>{(fontSize * 100).toFixed(0)}%</span> */}
             </div>
@@ -225,7 +226,7 @@ interface BookMeta { name: string; numberOfChapters: number }
                 value={lineHeight}
                 onChange={e => setLineHeight(parseFloat(e.target.value))}
                 aria-label="Adjust line height"
-                className='w-24'
+                className='w-24 cursor-pointer'
                 />
                 {/* <span>{lineHeight.toFixed(2)}</span> */}
             </div>
@@ -258,7 +259,7 @@ interface BookMeta { name: string; numberOfChapters: number }
                 id="themeSelect"
                 value={theme}
                 onChange={e => setTheme(e.target.value as 'light' | 'dark' | 'contrast')}
-                className="border border-neutral-300 dark:border-neutral-600 rounded px-1 py-0.5 bg-white dark:bg-neutral-700"
+                className="border border-neutral-300 dark:border-neutral-600 cursor-pointer rounded px-1 py-0.5 bg-white dark:bg-neutral-700"
                 aria-label="Select color theme"
                 >
                 <option value="light">Light Mode</option>
@@ -269,7 +270,7 @@ interface BookMeta { name: string; numberOfChapters: number }
             <button
                 type="button"
                 onClick={reset}
-                className="px-2 py-1 h-6 hidden md:block rounded border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                className="px-2 py-1 h-6 hidden md:block cursor-pointer rounded border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
             >Reset</button>
         </div>
     </div>
