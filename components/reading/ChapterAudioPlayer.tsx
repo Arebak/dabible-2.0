@@ -2,7 +2,7 @@
 
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Clock10, Volume2, VolumeX } from "lucide-react";
+import { Clock10, Volume2, VolumeX, HelpCircle } from "lucide-react";
 
 interface ChapterAudioPlayerProps {
   src: string | null; // primary resolved URL (could be remote CDN)
@@ -11,6 +11,7 @@ interface ChapterAudioPlayerProps {
   onActiveVerseChange?: (verse: number) => void;
   verseCount?: number; // for tick mark distribution
   showInlineControls?: boolean; // allow external controller to hide play button
+  hasNext?: boolean; // whether there is a next chapter (for showing auto-advance UI)
 }
 
 // Placeholder timestamp type for future expansion
@@ -25,8 +26,8 @@ export default function ChapterAudioPlayer({
   chapter,
   verseCount,
   onActiveVerseChange,
-}: // showInlineControls = true
-ChapterAudioPlayerProps) {
+  hasNext = false,
+}: ChapterAudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -41,6 +42,8 @@ ChapterAudioPlayerProps) {
   const [dirty, setDirty] = useState(false);
   const [volume, setVolume] = useState(1); // 0..1
   const [lastNonZeroVolume, setLastNonZeroVolume] = useState(1);
+  const [autoplayEnabled, setAutoplayEnabled] = useState(false);
+  const [autoAdvanceEnabled, setAutoAdvanceEnabled] = useState(true);
 
   // detect editing mode from query param (client-side only)
   useEffect(() => {
@@ -50,8 +53,32 @@ ChapterAudioPlayerProps) {
     }
   }, [book, chapter]);
 
+  // Load autoplay & auto-advance preferences
+  useEffect(() => {
+    try {
+      setAutoplayEnabled(localStorage.getItem('dabible_audio_autoplay_v1') === 'true');
+      const aa = localStorage.getItem('dabible_audio_auto_advance_v1');
+      setAutoAdvanceEnabled(aa === null ? true : aa === 'true');
+    } catch { /* ignore */ }
+  }, [book, chapter]);
+
+  const toggleAutoplayPref = () => {
+    setAutoplayEnabled(prev => {
+      const next = !prev; try { localStorage.setItem('dabible_audio_autoplay_v1', String(next)); } catch {}
+      return next;
+    });
+  };
+
+  const toggleAutoAdvancePref = () => {
+    setAutoAdvanceEnabled(prev => {
+      const next = !prev; try { localStorage.setItem('dabible_audio_auto_advance_v1', String(next)); } catch {}
+      return next;
+    });
+  };
+
   const STORAGE_POS_KEY = `dabible_audio_pos_${book}_${chapter}`;
-  const STORAGE_SPEED_KEY = "dabible_audio_speed_v1";
+  const GLOBAL_SPEED_KEY = "dabible_audio_speed_v1"; // legacy global
+  const STORAGE_SPEED_KEY = `dabible_audio_speed_${book}_${chapter}`; // per-chapter
   const STORAGE_VOL_KEY = "dabible_audio_volume_v1";
 
   useEffect(() => {
@@ -85,10 +112,18 @@ ChapterAudioPlayerProps) {
   // Load persisted speed & position
   useEffect(() => {
     try {
-      const rawSpeed = localStorage.getItem(STORAGE_SPEED_KEY);
-      if (rawSpeed) {
-        const s = parseFloat(rawSpeed);
-        if (s >= 0.5 && s <= 2.0) setSpeed(s);
+      // Prefer per-chapter, fallback to legacy global once, then write per-chapter
+  // per-chapter speed fallback logic
+      const rawPer = localStorage.getItem(STORAGE_SPEED_KEY);
+      if (rawPer) {
+        const s = parseFloat(rawPer);
+        if (s >= 0.5 && s <= 2.0) { setSpeed(s); }
+      } else {
+        const rawGlobal = localStorage.getItem(GLOBAL_SPEED_KEY);
+        if (rawGlobal) {
+          const s = parseFloat(rawGlobal);
+          if (s >= 0.5 && s <= 2.0) { setSpeed(s); try { localStorage.setItem(STORAGE_SPEED_KEY, String(s)); } catch {} }
+        }
       }
       const rawVol = localStorage.getItem(STORAGE_VOL_KEY);
       if (rawVol) {
@@ -112,12 +147,13 @@ ChapterAudioPlayerProps) {
   const applySpeed = useCallback((val: number) => {
     setSpeed(val);
     try {
+      // Persist per-chapter speed
       localStorage.setItem(STORAGE_SPEED_KEY, String(val));
-    } catch {
-      /* ignore */
-    }
+      // Also persist a global "last used" speed so new chapters without a chapter-specific value inherit it
+      localStorage.setItem(GLOBAL_SPEED_KEY, String(val));
+    } catch { /* ignore */ }
     if (audioRef.current) audioRef.current.playbackRate = val;
-  }, []);
+  }, [STORAGE_SPEED_KEY]);
 
   // Attach error listener
   useEffect(() => {
@@ -230,6 +266,32 @@ ChapterAudioPlayerProps) {
       window.removeEventListener("dabible:toggleAudio", handler);
     };
   }, [togglePlay]);
+
+  // Fallback: if autoplay preference is enabled but external toggle dispatch was missed, try to start automatically.
+  useEffect(() => {
+    let cancelled = false;
+    const attemptAutoplay = () => {
+      if (cancelled) return;
+      try {
+        if (localStorage.getItem('dabible_audio_autoplay_v1') === 'true') {
+          const el = audioRef.current;
+          if (el && el.paused) {
+            el.play().then(() => {
+              if (!cancelled) {
+                setPlaying(true);
+                dispatchState(true);
+              }
+            }).catch(() => { /* ignore autoplay block */ });
+          }
+        }
+      } catch { /* ignore */ }
+    };
+    // Try shortly after mount to allow metadata listener setup
+    const t1 = setTimeout(attemptAutoplay, 120);
+    // And a second retry (in case of slow network metadata delay)
+    const t2 = setTimeout(attemptAutoplay, 600);
+    return () => { cancelled = true; clearTimeout(t1); clearTimeout(t2); };
+  }, [book, chapter]);
 
   // Emit state if playing changes due to other reasons (e.g., ended)
   useEffect(() => {
@@ -352,6 +414,46 @@ ChapterAudioPlayerProps) {
   return (
     <div className="flex p-1 items-center rounded-bl-md rounded-br-md bg-[#f0f8ff] dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs">
       <div className="flex flex-wrap items-center gap-4">
+        {/* Autoplay indicators & toggles */}
+        <div className="flex items-center gap-2">
+          {autoplayEnabled && (
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-600 text-white">Auto Play On</span>
+          )}
+          <button
+            type="button"
+            onClick={toggleAutoplayPref}
+            className={`text-[10px] px-2 py-0.5 rounded border ${autoplayEnabled ? 'border-emerald-600 text-emerald-700 dark:text-emerald-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
+            aria-pressed={autoplayEnabled}
+            aria-label="Toggle auto play preference"
+          >
+            {autoplayEnabled ? 'Disable Auto Play' : 'Enable Auto Play'}
+          </button>
+          {hasNext && (
+            <button
+              type="button"
+              onClick={toggleAutoAdvancePref}
+              className={`text-[10px] px-2 py-0.5 rounded border ${autoAdvanceEnabled ? 'border-blue-600 text-blue-700 dark:text-blue-400' : 'border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300'} hover:bg-neutral-100 dark:hover:bg-neutral-700`}
+              aria-pressed={autoAdvanceEnabled}
+              aria-label="Toggle auto advance to next chapter"
+            >
+              {autoAdvanceEnabled ? 'Auto-Advance On' : 'Auto-Advance Off'}
+            </button>
+          )}
+          {/* Help / tooltip */}
+          <div className="relative group">
+            <button
+              type="button"
+              aria-label="Explain Auto Play vs Auto-Advance"
+              className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            >
+              <HelpCircle className="w-4 h-4" aria-hidden="true" />
+            </button>
+            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-opacity duration-150 absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 z-50 p-2 rounded-md shadow-lg text-[11px] bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+              <p className="mb-1"><strong>Auto Play</strong>: Automatically starts the chapter audio when you arrive on a chapter (until you turn it off or it times out after inactivity).</p>
+              <p className="mb-0"><strong>Auto-Advance</strong>: After a chapter finishes playing it navigates to the next chapter. Shown only when a next chapter exists. It does not start playback by itself.</p>
+            </div>
+          </div>
+        </div>
         {/* {showInlineControls && (
           <button onClick={togglePlay} className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-500" aria-label={playing ? 'Pause audio' : 'Play audio'}>
             {playing ? 'Pause' : 'Play'}

@@ -195,6 +195,7 @@ interface BookMeta { name: string; numberOfChapters: number }
             playing={audioplaying}
             onImmediateOptimisticToggle={(next) => setAudioplaying(next)}
         />
+        {/* Autoplay & auto-advance toggles relocated into ChapterAudioPlayer */}
 
 
 

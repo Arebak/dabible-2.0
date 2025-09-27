@@ -143,6 +143,11 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
       const detail = (e as CustomEvent).detail;
       // Ensure event corresponds to the chapter currently displayed
       if (detail && detail.book === props.book && detail.chapter === props.chapter) {
+        // Respect auto-advance preference
+        try {
+          const allow = localStorage.getItem('dabible_audio_auto_advance_v1');
+          if (allow === 'false') return;
+        } catch { /* ignore */ }
         // Small delay gives a sense of completion before navigation
         setTimeout(() => {
           // Use Next.js router for client transition
@@ -183,6 +188,28 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
     } catch { /* ignore */ }
   }, [props.book, props.chapter, mountAudio]);
 
+  // Idle timeout: after N minutes inactivity, disable autoplay preference
+  useEffect(() => {
+    const IDLE_MINUTES = 15; // configurable
+    let lastActivity = Date.now();
+    const mark = () => { lastActivity = Date.now(); };
+    const interval = setInterval(() => {
+      const diffMin = (Date.now() - lastActivity) / 60000;
+      if (diffMin >= IDLE_MINUTES) {
+        try { localStorage.setItem('dabible_audio_autoplay_v1', 'false'); } catch {}
+      }
+    }, 60000);
+    window.addEventListener('mousemove', mark);
+    window.addEventListener('keydown', mark);
+    window.addEventListener('touchstart', mark);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('mousemove', mark);
+      window.removeEventListener('keydown', mark);
+      window.removeEventListener('touchstart', mark);
+    };
+  }, []);
+
   // After player mounts, if there was a pending toggle, dispatch it again so the real player handles it
   useEffect(() => {
     if (mountAudio && pendingToggleRef.current) {
@@ -202,6 +229,7 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
             src={audioSrc}
             book={props.book}
             chapter={props.chapter}
+            hasNext={props.hasNext}
             onActiveVerseChange={setActiveVerse}
           />
         </div>
