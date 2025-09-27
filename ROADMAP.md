@@ -27,7 +27,7 @@ Living roadmap of enhancements for DaBible 2.0. Use this file to prioritize, tra
 | Command palette (Cmd+K) quick jump | UX | Planned | Fuzzy navigation to book / chapter / verse. |
 | Waveform / energy visualization | UX | Planned | RMS sampling + canvas bars under scrub bar. |
 | Worker-assisted timestamp suggestions | UX | Planned | Web Worker energy peak detection feeding editor. |
-| Audio sync refinement (waveform + suggestions) | UX | In Progress | Building on editor, partial sync %, speed, resume; next: visual & automated assists. |
+| Audio sync refinement & verse highlighting | UX | In Progress | Core player stable (resume, speed per chapter, global inherit, volume persist, autoplay, auto-advance); next: waveform + worker suggestions + selection integration. |
 
 ---
 
@@ -47,7 +47,8 @@ Living roadmap of enhancements for DaBible 2.0. Use this file to prioritize, tra
 
 | Item | Priority | Status | Notes |
 |------|----------|--------|-------|
-| Phrase / exact match toggle | 1 | Planned | UX clarity for multi-word queries. |
+ | Quoted phrase & multi-word AND search | 1 | Done | Implemented diacritic-insensitive multi-word AND + quoted phrase support with highlighting. |
+ | Optional explicit match mode toggle | 2 | Planned | Potential UI control (Any / All / Exact) if user confusion arises; current behavior: All terms (AND) + quotes for exact phrase. |
 | Synonym / stemming layer (EN ↔ YO) | 2 | Planned | Improves recall. |
 | Advanced fuzzy (Damerau + diacritic weighting) | 2 | Planned | Better Yoruba orthography handling. |
 | Relevance scoring (BM25-lite) | 2 | Planned | Improves ranking beyond raw occurrence. |
@@ -64,6 +65,12 @@ Living roadmap of enhancements for DaBible 2.0. Use this file to prioritize, tra
 | Adjustable font size & line height (persist) | 2 | Done | Preferences context + CSS vars. |
 | Reading / Focus mode toggle | 2 | Done | Collapses to single column focus mode. |
 | Audio player integration (if assets) | 1 | Done | Player w/ speed, resume position, verse tick marks, timestamp editor (set/delete/import/export), partial sync %. |
+| Autoplay + auto-advance preferences (persist) | 1 | Done | Autoplay flag, auto-advance flag, idle timeout reset after inactivity, conditional next-chapter navigation. |
+| Autoplay & auto-advance controls moved into player | 2 | Done | Consolidated audio-related UI inside `ChapterAudioPlayer` for coherence. |
+| Autoplay help tooltip | 3 | Done | Tooltip explains difference between Auto Play and Auto-Advance. |
+| Conditional auto-advance visibility | 3 | Done | Auto-Advance toggle hidden when there is no next chapter. |
+| Global last speed persistence fallback | 2 | Done | Writes both per-chapter and global speed key to inherit previous choice. |
+| Volume persistence & last non-zero restore | 2 | Done | Immediate hydration + separate last non-zero key; prevents loud flashes & preserves mute toggle behavior across chapters. |
 | Auto-scroll verse sync toggle | 1 | Done | User preference (on/off) w/ persistence & accessible announcement. |
 | Partial sync completeness indicator | 2 | Done | Displays % verses with timestamps. |
 | Dark / High contrast theme system | 1 | Done | ThemeProvider + header & preferences controls (light/dark/contrast). |

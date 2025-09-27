@@ -40,7 +40,7 @@ function AudioToggleButton({ playing, onImmediateOptimisticToggle }: { playing: 
       onClick={toggle}
       aria-pressed={playing}
       aria-label={playing ? 'Pause audio' : 'Play audio'}
-  className={`inline-flex items-center gap-2 px-2 md:px-8 py-2 rounded-full text-white text-[14px] md:text-[13px] cursor-pointer font-medium shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${playing ? 'bg-[#a13b3b] hover:bg-[#892d2d]' : 'bg-[#BD2F54] hover:bg-[#a52a4b]'}`}
+  className={`inline-flex items-center gap-2 px-2 md:px-8 py-2 rounded-full text-white text-[14px] md:text-[16px] cursor-pointer font-medium shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8385E] ${playing ? 'bg-[#a13b3b] hover:bg-[#892d2d]' : 'bg-[#BD2F54] hover:bg-[#a52a4b]'}`}
     >
       {playing ? <Pause className="w-5 h-5" aria-hidden="true" /> : <Play className="w-5 h-5" aria-hidden="true" />}
       <span className='hidden md:block'>{playing ? 'Stop Listening' : 'Start Listening'}</span>

@@ -53,39 +53,39 @@ function VerseActions({ verse, book, chapter }: { verse: VerseData; book: string
   );
 }
 
-function VersesView({ book, chapter, verses }: { book: string; chapter: number; verses: VerseData[] }) {
+function VersesView({ book, chapter, verses, anchorHighlightSet }: { book: string; chapter: number; verses: VerseData[]; anchorHighlightSet: Set<number> }) {
   const { showParallel, readingMode } = useReadingPreferences();
   const [enableActions, setEnableActions] = useState(false);
   const activate = () => { if (!enableActions) setEnableActions(true); };
-  const containerClasses = readingMode === 'focus' ? 'max-w-prose mx-auto' : '';
+  const containerClasses = readingMode === 'focus' ? 'max-w-prose mx-auto' : 'w-full';
   return (
-    <div className={`${containerClasses} mt-4 md:mt-8 flex gap-1 ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-2' : 'grid-cols-1'} w-full`} style={{ fontSize: `var(--reading-font-size)`, lineHeight: 'var(--reading-line-height)' }} onMouseMove={activate} onTouchStart={activate}>
-      <div>
-        {/* <h2 className="text-base font-semibold mb-2">Yoruba</h2> */}
-        <ol className="space-y-2 list-none">
-          {verses.map(v => (
-            <li key={v.num} id={`${book}-${chapter}-${v.num}`} className="flex items-start gap-2 group relative">
-              <span className="w-8 text-right pr-1 select-none text-[14px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
-              <p className="text-gray-900 dark:text-gray-100 flex-1" lang="yo">{v.yo}</p>
-              {enableActions && <VerseActions verse={v} book={book} chapter={chapter} />}
+    <div className={`${containerClasses} mt-4 md:mt-8`} style={{ fontSize: `var(--reading-font-size)`, lineHeight: 'var(--reading-line-height)' }} onMouseMove={activate} onTouchStart={activate}>
+      <ol className="space-y-2 list-none">
+        {verses.map(v => {
+          const highlight = anchorHighlightSet.has(v.num) ? 'ring-2 ring-blue-400 bg-blue-50 dark:bg-blue-900/30' : '';
+          return (
+            <li
+              key={v.num}
+              id={`${book}-${chapter}-${v.num}`}
+              className={`group relative rounded-sm ${highlight}`}
+            >
+              <div className={`flex ${showParallel && readingMode !== 'focus' ? 'md:grid-cols-[2rem_1fr_1fr]' : 'grid-cols-[2rem_1fr]'} gap-3 items-start`}>
+                <div className="flex flex-1 flex-row gap-2">
+                    <span className="text-right select-none text-[80%] font-bold text-[#C8385E] dark:text-gray-400 pt-0.5" aria-hidden>{v.num}</span>
+                    <p className="text-gray-900 dark:text-gray-100" lang="yo">{v.yo}</p>
+                </div>
+                {showParallel && readingMode !== 'focus' && (
+                  <div className="flex flex-1 flex-row gap-2"  lang="en">
+                      <span className="text-right select-none text-[80%] font-bold text-[#C8385E] dark:text-gray-400 pt-0.5">{v.num}</span>
+                      <p className='text-gray-900 dark:text-gray-100'>{v.en || ''}</p>
+                  </div>
+                )}
+              </div>
+              {enableActions && <div className="absolute -top-2 left-1/2 -translate-x-1/2"> <VerseActions verse={v} book={book} chapter={chapter} /> </div>}
             </li>
-          ))}
-        </ol>
-      </div>
-      {showParallel && readingMode !== 'focus' && (
-        <div>
-          {/* <h2 className="text-base font-semibold mb-2">English (KJV)</h2> */}
-          <ol className="space-y-2 list-none">
-            {verses.map(v => (
-              <li key={v.num} id={`${book}-${chapter}-${v.num}-en`} className="flex items-start gap-2 group relative">
-                <span className="w-8 text-right pr-1 select-none text-[14px] font-medium text-gray-500 dark:text-gray-400" aria-hidden>{v.num}</span>
-                <p className="text-gray-700 dark:text-gray-300 flex-1" lang="en">{v.en || ''}</p>
-                {enableActions && <VerseActions verse={v} book={book} chapter={chapter} />}
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+          );
+        })}
+      </ol>
     </div>
   );
 }
@@ -99,13 +99,15 @@ function AutoScrollHighlighter({ book, chapter, activeVerse, announce }: { book:
     const el = document.getElementById(id);
     if (!el) return;
     announce(`${book} ${chapter}:${activeVerse}`);
-    el.classList.add('ring-2','ring-blue-400','bg-blue-50','dark:bg-blue-900/30');
+  // Audio-driven temporary highlight (anchor highlights handled separately via class on elements)
+  el.classList.add('ring-2','ring-blue-400','bg-blue-50','dark:bg-blue-900/30');
     if (autoScroll) {
       const rect = el.getBoundingClientRect();
       if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
         el.scrollIntoView({ block: 'center', behavior: 'smooth' });
       }
     }
+    // Keep audio highlight ephemeral
     const t = setTimeout(() => {
       el.classList.remove('ring-2','ring-blue-400','bg-blue-50','dark:bg-blue-900/30');
     }, 4000);
@@ -118,6 +120,7 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
   const audioSrc = `https://developers.dabible.com/audio/yoruba/${props.book}/${props.book}_${String(props.chapter).padStart(3,'0')}.mp3`;
   const [activeVerse, setActiveVerse] = useState<number | null>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
+  const [anchorHighlightSet, setAnchorHighlightSet] = useState<Set<number>>(new Set());
   // Manage conditional mounting of audio player
   const [mountAudio, setMountAudio] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false); // track play state for show/hide
@@ -220,6 +223,42 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
       }, 0);
     }
   }, [mountAudio]);
+
+  // On initial mount (and on hash change), if URL contains a verse anchor (#book-chapter-verse) OR range (#book-chapter-start-end) highlight & scroll.
+  useEffect(() => {
+    const highlightFromHash = () => {
+      if (typeof window === 'undefined') return;
+      const raw = window.location.hash.replace('#','');
+      if (!raw) return;
+      // Expect pattern book-chapter-verse (book already slugged with underscores)
+      const parts = raw.split('-');
+      if (parts.length < 3) return;
+      const maybeEnd = parseInt(parts[parts.length - 1], 10);
+      const maybeStart = parseInt(parts[parts.length - 2], 10);
+      const isRange = !isNaN(maybeStart) && !isNaN(maybeEnd) && parts.length >= 4;
+      const highlightSet = new Set<number>();
+      if (isRange && maybeStart <= maybeEnd) {
+        for (let v = maybeStart; v <= maybeEnd; v++) highlightSet.add(v);
+      } else if (!isNaN(maybeEnd)) {
+        highlightSet.add(maybeEnd);
+      } else {
+        return;
+      }
+      setAnchorHighlightSet(highlightSet);
+      // Scroll to first verse in set
+      const first = Math.min(...highlightSet);
+      const id = `${props.book}-${props.chapter}-${first}`;
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }, 50);
+      }
+    };
+    highlightFromHash();
+    window.addEventListener('hashchange', highlightFromHash);
+    return () => window.removeEventListener('hashchange', highlightFromHash);
+  }, [props.book, props.chapter]);
    return (
      <ReadingPreferencesProvider>
        <ReadingPreferencesControls book={props.book} chapter={props.chapter} />
@@ -236,7 +275,7 @@ export default function ClientEnhancements(props: ClientEnhancementsProps) {
       )}
       <AutoScrollHighlighter book={props.book} chapter={props.chapter} activeVerse={activeVerse} announce={setLiveAnnouncement} />
       <div aria-live="polite" className="sr-only" role="status">{liveAnnouncement}</div>
-      <VersesView book={props.book} chapter={props.chapter} verses={props.verses} />
+  <VersesView book={props.book} chapter={props.chapter} verses={props.verses} anchorHighlightSet={anchorHighlightSet} />
       {props.hasPrev && props.prevHref && <FloatingPrevButton href={props.prevHref} book={props.book} chapter={props.chapter} />}
       {props.hasNext && props.nextHref && <FloatingNextButton href={props.nextHref} book={props.book} chapter={props.chapter} />}
     </ReadingPreferencesProvider>
