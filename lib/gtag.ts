@@ -3,7 +3,7 @@
 
 // (Global Window augmentation lives in typings.d.ts to avoid duplicate declaration clashes)
 
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-V6LG0JJJXY';
 export const ADS_ID = process.env.NEXT_PUBLIC_GTAG_ADS_ID || 'AW-431305064';
 export const ADS_CONVERSION_LABEL = process.env.NEXT_PUBLIC_ADS_CONVERSION_LABEL || '_5c_CIb78YkbEOji1M0B';
 
