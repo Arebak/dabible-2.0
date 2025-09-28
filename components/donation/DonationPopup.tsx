@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { trackConversion } from '@/lib/gtag';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { DialogTitle } from "@radix-ui/react-dialog";
@@ -18,6 +19,8 @@ export function DonationPopup({
 
   useEffect(() => {
     setOpen(true);
+    // Fire conversion event (adjust value if amount known via props)
+    trackConversion();
   }, []);
 
   const handleClose = () => {

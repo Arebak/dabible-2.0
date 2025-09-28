@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import AudioPlayer from "./AudioPlayer";
-// import { BibleProp } from "@/typings";
+import { BibleProp } from "@/typings";
 // import FontSizeSelector from "../FontSizeSelector";
 
 const SelectBook = () => {
