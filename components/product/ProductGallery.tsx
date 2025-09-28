@@ -13,6 +13,17 @@ import Link from "next/link";
 
 const ITEMS_PER_PAGE = 24;
 
+type ProductGalleryProps = {
+  products?: Array<{
+    id: string;
+    title: string;
+    price: number;
+    imageSrc: string;
+    imageAlt: string;
+    // Add other product fields as needed
+  }>;
+};
+
 export function ProductGallery({ products = [] }: ProductGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const safeProducts = Array.isArray(products) ? products : [];

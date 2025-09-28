@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, useRef, useCallback } from "react";
 import { chapterCache, makeChapterCacheKey } from "@/lib/chapterCache";
-// import type { BibleProp } from "@/typings.d.ts";
+import type { BibleProp } from "@/typings.d.ts";
 import axios from "axios";
 
 

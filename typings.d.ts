@@ -76,14 +76,23 @@ interface Product {
 }
 
   
-interface ProductGalleryProps {
+export interface ProductGalleryProps {
   products: Product[] | undefined;
 }
   
-interface BibleProp {
+export interface BibleProp {
   name: string;
   englishFilePath: string;
   yorubaFilePath: string;
   numberOfChapters: number;
   yorubaAudioPaths: string;
 }
+
+declare global {
+  interface Window {
+    dataLayer?: object[]; // Google tag data layer
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+export {};
