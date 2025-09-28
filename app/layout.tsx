@@ -31,12 +31,12 @@ export default function RootLayout({
     <html lang="en">
       <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
       <meta name="google-adsense-account" content="ca-pub-5381336693439124"></meta>
-      <GoogleTagManager gtmId="GTM-5S7K5XS" />
+      <GoogleTagManager gtmId="GTM-MMX4HC4S" />
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <ThemeProvider>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-[#023E8A] focus:text-white focus:px-4 focus:py-2 focus:rounded-md">Skip to content</a>
         {/* Google Tag Manager (noscript) retains GTM container only */}
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S7K5XS" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMX4HC4S" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
         <Footer />

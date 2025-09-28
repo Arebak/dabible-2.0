@@ -24,12 +24,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw === 'light' || raw === 'dark' || raw === 'contrast') {
         setThemeState(raw);
-      } else {
-        // system preference as initial hint
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          setThemeState('dark');
-        }
       }
+      // Intentionally ignoring system preference for now so that default stays light
     } catch { /* ignore */ }
     setLoaded(true);
   }, []);
