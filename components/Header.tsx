@@ -69,7 +69,7 @@ export default function Header() {
             </button>
             <button
               onClick={() => navigate("/listen-online")}
-              className={`${pathname === "/listen-online" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
+              className={`${pathname.startsWith("/listen-online") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
             >
               <span className="flex items-center"><span>Online Bible</span><Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-500 -translate-y-2" /></span>
             </button>
@@ -155,7 +155,7 @@ export default function Header() {
                 </button>
                 <button
                   onClick={() => navigate("/listen-online")}
-                  className={`${pathname === "/listen-online" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
+                  className={`${pathname.startsWith("/listen-online") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}
                 >
                   Online Bible
                 </button>
