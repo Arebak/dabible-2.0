@@ -344,7 +344,7 @@ export default function DonationPage() {
                 You can now listen to the Yoruba, Pidgin and Hausa Bible on this website without the mobile app. You can also search for any verse or chapter in the Bible and listen to it online.
               </p>
               <div className="flex justify-center flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link href="https://donate.dabible.com" className="cursor-pointer">
+                <Link href="https://dabible.com/listen-online" className="cursor-pointer">
                   <Button className="bg-[#7B0423] hover:bg-red-900 text-xl py-6 w-full sm:w-auto rounded-4xl font-mada uppercase">
                     <span className="px-4 flex align-middle items-center"><BookType className="mr-2" /><span>Read or Listen Online Now</span><ArrowRight className="ml-2" /></span>
                   </Button>
