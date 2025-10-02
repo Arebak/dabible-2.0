@@ -208,15 +208,15 @@ export default function CountryTimeSelector() {
         )}
         {selectedZone && (
             <div className="text-lg font-bold text-gray-800 bg-green-200 rounded-sm text-center p-2">
-            Bible Study Time: {getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: selectedZone })} ({DateTime.now().setZone(selectedZone).offsetNameShort})
+              Bible Study Time: {getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: selectedZone })} ({DateTime.now().setZone(selectedZone).offsetNameShort})
             </div>
         )}
         </div>
         <div className="text-center mt-8">
-            <h4 className="text-lg font-bold text-gray-800">Other Locations</h4>
-        
-        <ul className="text-gray-800 text-sm md:text-lg mb-6 space-y-1">
-            {locations.map((loc: { label: string; zone: string }) => {
+          <h4 className="text-lg font-bold text-gray-800">Other Locations</h4>
+          <ul className="text-gray-800 text-sm md:text-lg mb-6 space-y-1">
+            {
+              locations.map((loc: { label: string; zone: string }) => {
               const zoneAbbr = DateTime.now().setZone(loc.zone).offsetNameShort;
               // Map country label to country code for flag
               const countryCodeMap: Record<string, string> = {
@@ -233,8 +233,9 @@ export default function CountryTimeSelector() {
                   {loc.label} - {getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: loc.zone })} ({zoneAbbr})
                 </li>
               );
-            })}
-        </ul>
+              })
+            }
+          </ul>
         </div>
         
     </div>
