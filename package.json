@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start -p 3015",
-  "lint": "next lint",
-  "build:sitemaps": "node scripts/generate-sitemaps.mjs",
-  "build:search-index": "node scripts/build-search-index.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3015",
+    "lint": "next lint",
+    "build:sitemaps": "node scripts/generate-sitemaps.mjs",
+    "build:search-index": "node scripts/build-search-index.mjs",
     "postbuild": "pnpm run build:sitemaps && pnpm run build:search-index"
   },
   "dependencies": {
@@ -48,6 +48,7 @@
     "swiper": "^11.2.6",
     "tailwind-merge": "^3.2.0",
     "tw-animate-css": "^1.2.5",
+    "twilio": "^5.10.2",
     "uuid": "^11.1.0",
     "zod": "^3.25.32"
   },
@@ -62,8 +63,8 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
-    "tsx": "^4.19.2",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

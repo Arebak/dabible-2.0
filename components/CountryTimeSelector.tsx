@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
 import { DateTime } from "luxon";
 import Select from 'react-select';
 import * as ct from 'countries-and-timezones';
+import BibleStudyForm from './BibleStudyForm'; // Import the form component
 
 const CST_TIME = "21:00"; // 9PM CST
 const CST_ZONE = "America/Chicago";
@@ -48,17 +50,23 @@ export default function CountryTimeSelector() {
     { label: "Nigeria", zone: "Africa/Lagos" },
     { label: "UAE", zone: "Asia/Dubai" },
   ];
-  // Get user's browser time zone
-  const userZone = typeof Intl !== "undefined" && Intl.DateTimeFormat().resolvedOptions().timeZone ? Intl.DateTimeFormat().resolvedOptions().timeZone : CST_ZONE;
   // Use shared utility for local time
-  // Import getLocalTimeForZone at top if not already
-  // const getLocalTimeForZone = ...
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { getLocalTimeForZone } = require("@/lib/getLocalTimeForZone");
-  const userLocalTime = getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: userZone });
   const countryList = Object.values(ct.getAllCountries());
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [selectedZone, setSelectedZone] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Add modal state
+  // Hydration-safe userZone and userLocalTime
+  const [userZone, setUserZone] = useState(CST_ZONE);
+  const [userLocalTime, setUserLocalTime] = useState<string>("");
+  React.useEffect(() => {
+    const zone = typeof Intl !== "undefined" && Intl.DateTimeFormat().resolvedOptions().timeZone
+      ? Intl.DateTimeFormat().resolvedOptions().timeZone
+      : CST_ZONE;
+    setUserZone(zone);
+    setUserLocalTime(getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: zone }));
+  }, []);
 
   // Helper to get flag emoji from country code
   function getFlag(countryCode: string) {
@@ -151,9 +159,11 @@ export default function CountryTimeSelector() {
             <p className="text-xl font-bold text-center mb-4">Currently, you are closest to <span className="underline text-red-500">{userZone}</span>, and the Bible Study is at <span className="underline text-red-500">{userLocalTime}</span> your time.</p>
         </div>
         <div className="my-6 p-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
-        <label htmlFor="country" className="block mb-2 font-semibold text-center">Check Bible Study Time by Country</label>
+        <label htmlFor="country" className="block mb-2 font-semibold text-center">Bible Study Time by Country</label>
         <Select
             id="country"
+            instanceId="time-selector-country"
+            inputId="time-selector-country-input"
             name="country"
             className="text-black text-sm sm:text-base mb-4"
             classNamePrefix="react-select"
@@ -207,16 +217,52 @@ export default function CountryTimeSelector() {
             </div>
         )}
         {selectedZone && (
-            <div className="text-lg font-bold text-gray-800 bg-green-200 rounded-sm text-center p-2">
+            <div 
+              className="text-lg font-bold text-gray-800 bg-green-200 rounded-sm text-center p-2 cursor-pointer hover:bg-green-300 transition-colors duration-200 border-2 border-transparent hover:border-green-400"
+              onClick={() => setIsModalOpen(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setIsModalOpen(true);
+                }
+              }}
+            >
               Bible Study Time: {getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: selectedZone })} ({DateTime.now().setZone(selectedZone).offsetNameShort})
+              <div className="text-sm mt-1 text-green-800">
+                📝 Click here to register for Bible Study
+              </div>
             </div>
         )}
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              {/* Close button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 cursor-pointer right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                aria-label="Close modal"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              
+              {/* Form */}
+              <BibleStudyForm />
+            </div>
+          </div>
+        )}
+
         </div>
         <div className="text-center mt-8">
-          <h4 className="text-lg font-bold text-gray-800">Other Locations</h4>
-          <ul className="text-gray-800 text-sm md:text-lg mb-6 space-y-1">
-            {
-              locations.map((loc: { label: string; zone: string }) => {
+            <h4 className="text-lg font-bold text-gray-800">Other Locations</h4>
+        
+        <ul className="text-gray-800 text-sm md:text-lg mb-6 space-y-1">
+            {locations.map((loc: { label: string; zone: string }) => {
               const zoneAbbr = DateTime.now().setZone(loc.zone).offsetNameShort;
               // Map country label to country code for flag
               const countryCodeMap: Record<string, string> = {
@@ -233,9 +279,8 @@ export default function CountryTimeSelector() {
                   {loc.label} - {getLocalTimeForZone({ baseZone: CST_ZONE, baseTime: CST_TIME, targetZone: loc.zone })} ({zoneAbbr})
                 </li>
               );
-              })
-            }
-          </ul>
+            })}
+        </ul>
         </div>
         
     </div>
