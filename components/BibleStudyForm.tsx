@@ -143,7 +143,7 @@ export default function BibleStudyForm() {
           otherContactDetail: ""
         });
         setRecaptchaToken(null);
-        router.push("/congratulations");
+        router.push("/antioch/congratulations");
       } else {
         setStatus("error");
       }
