@@ -2,7 +2,7 @@
     {
       "name": "digital-ocean-server",
       "ip": "137.184.20.178",
-      "username": "qadr",
+      "username": "cicd_deployer",
       "port": 22,
       "beforeHooks": "",
       "afterHooks": "",
