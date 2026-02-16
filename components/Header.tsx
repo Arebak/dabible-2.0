@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [showProductsDropdown, setShowProductsDropdown] = useState(false);
+  const [showGiveDropdown, setShowGiveDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
@@ -39,7 +40,32 @@ export default function Header() {
     if (showProductsDropdown) {
       setShowProductsDropdown(false);
     }
+    if (showGiveDropdown) {
+      setShowGiveDropdown(false);
+    }
+
     setIsMobileMenuOpen(false);
+  };
+
+  // Ensure mutual exclusivity between dropdowns
+  const toggleProductsDropdown = () => {
+    setShowProductsDropdown((prev) => {
+      const next = !prev;
+      if (next) {
+        setShowGiveDropdown(false);
+      }
+      return next;
+    });
+  };
+
+  const toggleGiveDropdown = () => {
+    setShowGiveDropdown((prev) => {
+      const next = !prev;
+      if (next) {
+        setShowProductsDropdown(false);
+      }
+      return next;
+    });
   };
 
   return (
@@ -82,7 +108,7 @@ export default function Header() {
             <div className="relative group">
               <button
                 className={`${pathname.includes("/products") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 flex items-center cursor-pointer`}
-                onClick={() => setShowProductsDropdown(!showProductsDropdown)}
+                onClick={toggleProductsDropdown}
               >
                 Products <ChevronDown className={`ml-0.5 ${pathname.includes("/products") ? "text-[#6B051F]" : ""}`} />
               </button>
@@ -129,6 +155,44 @@ export default function Header() {
             >
               Bible Study
             </button>
+            <div className="relative group">
+              <button
+                className={`${pathname.includes("https://donate.dabible.com/") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 flex items-center cursor-pointer`}
+                onClick={toggleGiveDropdown}
+              >
+                Give <ChevronDown className={`ml-0.5 ${pathname.includes("https://donate.dabible.com/") ? "text-[#6B051F]" : ""}`} />
+              </button>
+              {showGiveDropdown && (
+                <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-50">
+                  <div className="py-1">
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Our Causes
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/zam-mission-field/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/zam-mission-field/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Mission Field
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/dabible-partners/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/dabible-partners/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Become a Partner
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/donor-dashboard/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/donor-dashboard/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Donor Dashboard
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             {/* <button
               onClick={() => navigate("/shop")}
               className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 cursor-pointer`}
@@ -166,7 +230,7 @@ export default function Header() {
                   About Us
                 </button>
                 <button
-                  onClick={() => setShowProductsDropdown(!showProductsDropdown)}
+                  onClick={toggleProductsDropdown}
                   className={`${pathname.includes("/products") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 flex items-center cursor-pointer`}
                 >
                   Products <ChevronDown className={`ml-2 ${pathname.includes("/products") ? "text-[#6B051F]" : ""}`} />
@@ -211,6 +275,44 @@ export default function Header() {
                 >
                   Bible Study
                 </button>
+                <div className="relative group">
+              <button
+                className={`${pathname.includes("https://donate.dabible.com/") ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 flex items-center cursor-pointer`}
+                onClick={toggleGiveDropdown}
+              >
+                Give <ChevronDown className={`ml-0.5 ${pathname.includes("https://donate.dabible.com/") ? "text-[#6B051F]" : ""}`} />
+              </button>
+              {showGiveDropdown && (
+                <div className="absolute left-0 mt-3 w-48 bg-white border rounded-md shadow-lg z-50">
+                  <div className="py-1">
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Our Causes
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/zam-mission-field/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/zam-mission-field/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Mission Field
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/dabible-partners/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/dabible-partners/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Become a Partner
+                    </button>
+                    <button
+                      onClick={() => navigate("https://donate.dabible.com/donor-dashboard/")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${pathname === "https://donate.dabible.com/donor-dashboard/" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:bg-gray-100 cursor-pointer`}
+                    >
+                      Donor Dashboard
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
                 {/* <button
                   onClick={() => navigate("/shop")}
                   className={`${pathname === "/shop" ? "text-[#6B051F] font-semibold" : "text-gray-700"} hover:text-gray-900 py-2 cursor-pointer`}

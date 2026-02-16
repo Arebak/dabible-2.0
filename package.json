@@ -10,7 +10,7 @@
     "lint": "next lint",
     "build:sitemaps": "node scripts/generate-sitemaps.mjs",
     "build:search-index": "node scripts/build-search-index.mjs",
-    "postbuild": "pnpm run build:sitemaps && pnpm run build:search-index"
+    "postbuild": "npm run build:sitemaps && npm run build:search-index"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
