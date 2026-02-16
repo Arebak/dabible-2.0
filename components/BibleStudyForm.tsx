@@ -213,8 +213,8 @@ export default function BibleStudyForm() {
           <label htmlFor="country" className="block sr-only">Country</label>
           <Select
             id="country"
-            inputId="bible-study-country-input"          // added
-            instanceId="bible-study-country"             // added
+            inputId="bible-study-country-input"
+            instanceId="bible-study-country"
             name="country"
             className="text-black text-sm sm:text-base"
             classNamePrefix="react-select"
