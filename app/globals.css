@@ -250,12 +250,12 @@
 }
 
 .dabible-blog-content a {
-  color: var(--primary);
+  color: #c8385e;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
 .dabible-blog-content a:hover {
-  color: var(--primary-foreground);
+  color: #7B0423;
 }
 .dabible-blog-content img {
   max-width: 100%;
@@ -264,7 +264,7 @@
   margin: 1.5rem 0;
 }
 .dabible-blog-content blockquote {
-  border-left: 4px solid var(--primary);
+  border-left: 4px solid #c8385e;
   padding-left: 1rem;
   margin-left: 0;
   color: var(--muted-foreground);
