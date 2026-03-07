@@ -227,6 +227,87 @@
   width: 100%;
 }
 
+.dabible-blog-content h1{ 
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+.dabible-blog-content h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 1.25rem;
+}
+.dabible-blog-content h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.dabible-blog-content a {
+  color: #c8385e;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.dabible-blog-content a:hover {
+  color: #7B0423;
+}
+.dabible-blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+.dabible-blog-content blockquote {
+  border-left: 4px solid #c8385e;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--muted-foreground);
+  font-style: italic;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dabible-blog-content code {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+}
+
+.dabible-blog-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.dabible-blog-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.dabible-blog-content li {
+  margin-bottom: 0.5rem;
+}
+
+.dabible-blog-content pre {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+
 
 .d-container {
   max-width: 1440px;
