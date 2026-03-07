@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import type { PageProps as GeneratedPageProps } from '../../../../.next/types/app/listen-online/[book]/[chapter]/page';
 import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
+// import ListenOnlineClient from './ListenOnlineClient';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import ClientEnhancements from './ClientEnhancements';
 import InlineChapterSearch from './InlineChapterSearch';
 import Image from 'next/image';
@@ -19,13 +21,9 @@ type PagePropsLike = GeneratedPageProps;
 const readable = (slug: string) => slug.replace(/_/g, ' ').replace(/\b(\w)/g, m => m.toUpperCase());
 
 async function loadBooks() {
-  const hdrs = await headers();
-  const host = hdrs.get('host') || 'localhost:3000';
-  const protocol = process.env.VERCEL ? 'https' : 'http';
-  const url = `${protocol}://${host}/bible_paths.json`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) throw new Error('Failed to load bible_paths.json');
-  const json = (await res.json()) as { books: { name: string; numberOfChapters: number; yorubaFilePath: string; englishFilePath?: string }[] };
+  const filePath = path.join(process.cwd(), 'public', 'bible_paths.json');
+  const raw = await fs.readFile(filePath, 'utf-8');
+  const json = JSON.parse(raw) as { books: { name: string; numberOfChapters: number; yorubaFilePath: string; englishFilePath?: string }[] };
   return json.books;
 }
 
@@ -107,39 +105,41 @@ export default async function ListenOnlinePage(props: PagePropsLike) {
   const initialBook = match.name; // use canonical name
   const initialChapter = initialChapterParam;
 
-  // Derive public URL path for requested chapter by replacing the _001 pattern with padded chapter
+  // Derive file path for requested chapter by replacing the _001 pattern with padded chapter
   function chapterFilePath(basePath: string, chapter: number) {
-    // basePath example from bible_paths.json: /bible/Genesis/Genesis_001.txt
+    // basePath example: /bible/Genesis/Genesis_001.txt
     const pad = String(chapter).padStart(3, '0');
     return basePath.replace(/_001(?![0-9])/, `_${pad}`); // only first occurrence of _001
   }
 
   const yorubaPath = chapterFilePath(match.yorubaFilePath, initialChapter);
+  const absoluteYorubaPath = path.join(process.cwd(), 'public', yorubaPath);
   const englishBase = match.englishFilePath;
   const englishPath = englishBase ? chapterFilePath(englishBase, initialChapter) : null;
+  const absoluteEnglishPath = englishPath ? path.join(process.cwd(), 'public', englishPath) : null;
 
-  // Read chapter text via HTTP (cached per server instance)
-  async function readChapterFileHTTP(publicPath: string) {
-    const hdrs = await headers();
-    const host = hdrs.get('host') || 'localhost:3000';
-    const protocol = process.env.VERCEL ? 'https' : 'http';
-    const url = `${protocol}://${host}${publicPath}`;
-    if (chapterFileCache.has(url)) return chapterFileCache.get(url)!;
-    const res = await fetch(url, { next: { revalidate: 60 } });
-    if (!res.ok) return '';
-    const buf = Buffer.from(await res.arrayBuffer());
-    let text = buf.toString('utf8');
-    if (/\u0000/.test(text)) {
-      text = buf.toString('utf16le');
+  // Read Yoruba chapter text (cached per server instance)
+  async function readChapterFile(absPath: string) {
+    if (chapterFileCache.has(absPath)) return chapterFileCache.get(absPath)!;
+    try {
+      const buf = await fs.readFile(absPath);
+      // Attempt UTF-8 first; if contains lots of nulls maybe it's UTF-16LE
+      let text = buf.toString('utf8');
+      if (/\u0000/.test(text)) {
+        text = buf.toString('utf16le');
+      }
+      // Normalize CRLF -> LF
+      text = text.replace(/\r\n?/g, '\n');
+      chapterFileCache.set(absPath, text);
+      return text;
+    } catch {
+      return ''; // will handle as missing
     }
-    text = text.replace(/\r\n?/g, '\n');
-    chapterFileCache.set(url, text);
-    return text;
   }
 
   const [yorubaRaw, englishRaw] = await Promise.all([
-    readChapterFileHTTP(yorubaPath),
-    englishPath ? readChapterFileHTTP(englishPath) : Promise.resolve('')
+    readChapterFile(absoluteYorubaPath),
+    absoluteEnglishPath ? readChapterFile(absoluteEnglishPath) : Promise.resolve('')
   ]);
   if (!yorubaRaw) {
     notFound();
