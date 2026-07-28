@@ -46,17 +46,8 @@ async function getPost(id: string): Promise<SharedPost | null> {
   return "data" in payload && payload.data ? payload.data : payload;
 }
 
-function mediaUrl(file: PostFile | undefined, apiBase: string) {
-  const publicUrl = file?.stream_url ?? file?.cdn_url;
-  if (publicUrl) return publicUrl;
-
-  const legacyPath = file?.url?.trim();
-  if (!legacyPath) return undefined;
-  if (legacyPath.startsWith("http://") || legacyPath.startsWith("https://")) {
-    return legacyPath;
-  }
-
-  return `${apiBase}/api/stream?file=${encodeURIComponent(legacyPath)}`;
+function mediaUrl(file?: PostFile) {
+  return file?.stream_url ?? file?.cdn_url ?? file?.url;
 }
 
 export async function generateMetadata({
@@ -93,12 +84,10 @@ export default async function SharedPostPage({
 
   if (!post) notFound();
 
-  const host = (await headers()).get("host") ?? "";
-  const apiBase = apiBaseForHost(host);
   const image = post.files?.find((file) => file.type === "image");
   const video = post.files?.find((file) => file.type === "video");
-  const imageUrl = mediaUrl(image, apiBase);
-  const videoUrl = mediaUrl(video, apiBase);
+  const imageUrl = mediaUrl(image);
+  const videoUrl = mediaUrl(video);
   const hasTitle = Boolean(post.title?.trim());
   const publishedAt = post.created_at
     ? new Intl.DateTimeFormat("en", {
